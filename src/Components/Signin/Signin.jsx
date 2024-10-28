@@ -40,7 +40,7 @@ const Signin = () => {
         console.log("Login successful:", data);
         // Store any tokens or user info as needed
         // navigate('/bording');
-        navigate(`/bording?authtoken=${data.authtoken}&user=${data.user}`);
+        navigate(`/bording?authtoken=${data.authToken}&user=${data.Users_PK}`);
 
       } else {
         const errorData = await response.json();

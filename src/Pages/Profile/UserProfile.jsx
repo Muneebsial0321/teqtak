@@ -6,14 +6,14 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaStar, FaStarHalf } from "react-icons/fa6";
 import { PiApplePodcastsLogoThin } from "react-icons/pi";
 import { MdKeyboardArrowRight } from "react-icons/md";
-// import { FaPlus } from "react-icons/fa";
+import { IoPeopleOutline } from "react-icons/io5";
 import { fetchProfile } from "../../API";
 import PublicProfileVideos from "./PublicProfileVideos";
 import PublicProfilePodcats from "./PublicProfilePodcats";
 import PublicProfileEvents from "./PublicProfileEvents";
 import PublicProfileJobs from "./PublicProfileJobs";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
-
+import UserSub from "./UserSub";
 
 const API_BASE_URL = REACT_APP_API_BASE_URL;
 const UserProfile = () => {
@@ -245,6 +245,9 @@ const UserProfile = () => {
               className="cursor-pointer opacity-70"
               onClick={() => setActiveTab("Job")}
             />
+             <IoPeopleOutline size={30} className="cursor-pointer opacity-70"
+            onClick={() => setActiveTab("Subscribers")}
+            />
           </div>
         </div>
         <section className="h-[54%] w-full overflow-y-scroll Podcast_Top_Videos">
@@ -252,6 +255,7 @@ const UserProfile = () => {
           {activeTab === "Podcast" && <PublicProfilePodcats podcast={data_.podcast} />}
           {activeTab === "Event" && <PublicProfileEvents events={data_.events} />}
           {activeTab === "Job" && <PublicProfileJobs jobs={data_.jobs} />}
+          {activeTab === "Subscribers" && <UserSub />}
         </section>
       </div>
     </Fragment>
