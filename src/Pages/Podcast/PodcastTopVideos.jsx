@@ -120,15 +120,15 @@ useEffect(() => {
                     />
                   </div>
                   <div className="absolute bottom-1 left-1">
-                    <p className="text-sm">{elm.data.episodeTitle}</p>
-                    <Link to="/userprofile" state={{id:elm.data.userID ? elm.data.userID :"unknown"}}   onClick={(e) => {
+                    <p className="text-sm">{elm.episodeTitle}</p>
+                    <Link to="/userprofile" state={{id:elm.userID ? elm.userID :"unknown"}}   onClick={(e) => {
                       e.stopPropagation()}}  ><p className="text-sm">{elm.user ? elm.user.name : ""}</p></Link>
                     <p className="text-xs flex gap-1 items-center">
-                      <CiPlay1 /> {formatDuration(elm.data.podcastDuration)}
+                      <CiPlay1 /> {formatDuration(elm.podcastDuration)}
                     </p>
                   </div>
                 </div>
-                <img src={elm.data.picUrl ? elm.data.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg" />
+                <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg" />
               </div>
             ))}
           </div>
@@ -169,7 +169,7 @@ useEffect(() => {
             {recentdata.map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[22vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[21vw] flex-shrink-0 rounded-lg relative"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })}
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">

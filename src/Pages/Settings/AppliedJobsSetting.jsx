@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { FaAngleLeft } from "react-icons/fa";
-
 import { Link, useNavigate } from "react-router-dom";
+import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = REACT_APP_API_BASE_URL;
 function AppliedJobs() {
 const [appliedjobs ,setAppliedJobs] = useState([])
   const   getUserId = () => {

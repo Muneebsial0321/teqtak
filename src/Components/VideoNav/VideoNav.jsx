@@ -13,8 +13,8 @@ function VideoNav() {
   return (
     <Fragment>
       <div className="flex items-center bg-white h-[10%] px-3">
-        <div className="flex gap-3 w-[80%]  justify-center">
-          <div className="flex justify-center w-1/2">
+        <div className="flex gap-3 w-[100%]  justify-center">
+          <div className="flex justify-center ">
             <div className="relative w-full ">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none ">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />

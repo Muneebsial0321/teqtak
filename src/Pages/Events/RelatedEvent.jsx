@@ -77,7 +77,7 @@ const filteredData = location.state?.filteredData
     <div className="mt-3 flex flex-wrap gap-1 w-[93%] mx-auto">
       <ToastContainer /> {/* Include ToastContainer for notifications */}
       {newcard.map((data, i) => (
-        <div key={i} className="m-0 text-white md:w-[32%] w-[49.4%] h-[42vh] relative">
+        <div key={i} className="m-0 text-white md:w-[32%] w-[48.4%] h-[42vh] relative">
           <img
             src={data.eventCoverUrl ? data.eventCoverUrl : "/loading.jpg"}
             alt="Card Img2"
@@ -99,7 +99,7 @@ const filteredData = location.state?.filteredData
                 <Link
                   to="/eventdetail"
                   state={{ id: data._id }}
-                  className="me-2 md:px-5 py-2 JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full"
+                  className="me-2 md:px-5 py-2 JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full text-center"
                 >
                   Buy tickets
                 </Link>

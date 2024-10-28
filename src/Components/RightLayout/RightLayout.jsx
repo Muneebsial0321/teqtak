@@ -23,8 +23,8 @@ const RightLayout = ({state}) => {
               locationPath === "/videos" ? "Right_Side_Selected" : ""
             } transition-all duration-200 transform`}
           >
-            <CiVideoOn className="mr-2" />
-            <span className="text-sm">Videos</span>
+            <CiVideoOn className="" />
+            <span className="text-sm ml-1">Videos</span>
           </Link>
         </li>
         <li className="mb-2">
@@ -34,8 +34,8 @@ const RightLayout = ({state}) => {
               locationPath === "/podcast" ? "Right_Side_Selected" : ""
             }`}
           >
-            <FaPodcast className="mr-2" />
-            <span className="text-sm">Podcast</span>
+            <FaPodcast className="" />
+            <span className="text-sm ml-1">Podcast</span>
           </Link>
         </li>
         <li className="mb-2">
@@ -45,8 +45,8 @@ const RightLayout = ({state}) => {
               locationPath === "/events" ? "Right_Side_Selected" : ""
             }`}
           >
-            <BsCalendar4Event className="mr-2" />
-            <span className="text-sm">Events</span>
+            <BsCalendar4Event className="" />
+            <span className="text-sm ml-1">Events</span>
           </Link>
         </li>
         <li className="mb-2">
@@ -56,8 +56,8 @@ const RightLayout = ({state}) => {
               locationPath === "/jobs" ? "Right_Side_Selected" : ""
             }`}
           >
-            <BsSuitcaseLg className="mr-2" />
-            <span className="text-sm">Jobs</span>
+            <BsSuitcaseLg className="" />
+            <span className="text-sm ml-1">Jobs</span>
           </Link>
         </li>
       </ul>

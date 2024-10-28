@@ -3,8 +3,9 @@ import PassChangeSuccess from "./PassChangeSuccess";
 import { useNavigate } from "react-router-dom";
 import { FaAngleLeft } from "react-icons/fa";
 import axios from "axios";
+import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 function Changepassword() {
   const [current, setCurrent] = useState("");

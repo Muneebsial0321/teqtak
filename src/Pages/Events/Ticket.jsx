@@ -124,7 +124,7 @@ const remainingPremium = tickets.eventTicketArray
           <FontAwesomeIcon icon={faSort} /> Sort By
         </button>
 
-        <div className="flex justify-between gap-3 Podcast_Top_Videos mt-3 lg:w-[90%] w-[95%] mx-auto Ticket_Tickets">
+        <div className="flex justify-between md:flex-row gap-3 Podcast_Top_Videos mt-3 lg:w-[90%] w-[95%] mx-auto Ticket_Tickets">
           <div className="border rounded shadow-lg w-[33%] text-center px-4 py-6 ticket flex-shrink-0">
             <h5 className="text-lg font-bold">Basic Admission</h5>
             <h5 className="text-lg font-bold">
@@ -233,7 +233,7 @@ disabled = {add === 0}
           <Link
             to="/ticketbuyer"
             state={{ id: tickets._id, selectedTickets }} // Pass selected tickets
-            className="buyticket text-center py-2 block rounded-xl mx-auto mt-7 w-[30%]"
+            className="buyticket text-center py-2 block rounded-xl mx-auto mt-7 w-[100%]"
           >
             Continue
           </Link>

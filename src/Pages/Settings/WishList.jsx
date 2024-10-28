@@ -6,8 +6,9 @@ import { FaRegShareFromSquare } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 const Wishlist = () => {
   const [loading, setLoading] = useState(true);
@@ -15,13 +16,19 @@ const Wishlist = () => {
   const [wishlistevent, setWishlistEvent] = useState([]);
   const [wishlistpodcast, setWishlistPodcast] = useState([]);
 
+  const getUserId = () => {
+    const str = document.cookie;
+    const userKey = str.split('=')[1];
+    return userKey;
+  };
+
   useEffect(() => {
     const fetchWishlistItems = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/wishlist`);
-        const result = response.data;
-        console.log("wishlist result",result)
-        const info = result.data;
+        const response = await axios.get(`${API_BASE_URL}/wishlist/${getUserId()}`);
+        const info = response.data;
+        // console.log("wishlist result",result)
+        
 
         setWishlistJob(info.job);
         setWishlistEvent(info.event);

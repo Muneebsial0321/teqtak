@@ -28,19 +28,19 @@ const Setting = () => {
   };
   
   return (
-    <div className=" w-full h-full bg-white overflow-y-scroll Podcast_Top_Videos">
+    <div className=" w-full h-full bg-white overflow-y-scroll Podcast_Top_Videos ">
       <div className="flex justify-between items-center h-[11%]  py-3 w-[90%] mx-auto">
         <div className=" text-lg">
           <h1 className="">Settings</h1>
         </div>
-        <div className="bg-[#F6F6FF] rounded-xl py-2 gap-1  flex items-center px-2 w-[30%]">
+        {/* <div className="bg-[#F6F6FF] rounded-xl py-2 gap-1  flex items-center px-2 w-[30%]">
           <CiSearch />
           <input
             type="text"
             placeholder="Search"
             className="bg-transparent border-none outline-none text-sm w-full"
           />
-        </div>
+        </div> */}
       </div>
       <div className="w-[90%] h-[89%] mx-auto flex justify-between">
           <div className="sm:w-[40%] w-[45%]">

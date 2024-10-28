@@ -132,7 +132,7 @@ console.log("user id is ", isCurrentUser)
                 <Link to='/personaldetails'>view personal info</Link>
                 <MdKeyboardArrowRight className="text-xl md:text-2xl" />
               </div>
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap ">
                 {isCurrentUser ? (
                   <>
                     <button

@@ -6,8 +6,9 @@ import { CiPlay1 } from "react-icons/ci";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; 
+import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 const CardComponent = ({ title, videoUrl, videoId, navigate, videos }) => (
   <div
@@ -128,11 +129,11 @@ function WatchHistory() {
                         className="absolute right-1 top-1 text-2xl cursor-pointer"
                         onClick={(e) => {
                           e.stopPropagation(); // Prevent triggering onClick of parent div
-                          handleSaveToWishlist(elm.data._id); // Save to wishlist
+                          handleSaveToWishlist(elm._id); // Save to wishlist
                         }}
                       />
                       <div className="absolute bottom-1 left-1">
-                        <p className="text-sm">{elm.data.episodeTitle}</p>
+                        {/* <p className="text-sm">{elm.data.episodeTitle?elm.data.episodeTitle:"N/A"}</p> */}
                         <Link
                           to="/userprofile"
                           state={{ id: elm.userID ? elm.userID : "unknown" }}
@@ -141,12 +142,12 @@ function WatchHistory() {
                           <p className="text-sm">{elm.user ? elm.user.name : ""}</p>
                         </Link>
                         <p className="text-xs flex gap-1 items-center">
-                          <CiPlay1 /> {formatDuration(elm.data.podcastDuration)}
+                          <CiPlay1 /> {formatDuration(elm.podcastDuration)}
                         </p>
                       </div>
                     </div>
                     <img
-                      src={elm.data.picUrl ? elm.data.picUrl : "/loading.jpg"}
+                      src={elm.picUrl ? elm.picUrl : "/loading.jpg"}
                       alt={`Img-${ind}`}
                       className="h-full w-full rounded-lg"
                     />
