@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FaAngleLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { REACT_APP_API_BASE_URL } from "../../ENV";
 
+const API_BASE_URL = REACT_APP_API_BASE_URL;
 function Blocklist() {
   let navigate = useNavigate();
   const [blockedUsers, setBlockedUsers] = useState([]);
@@ -16,7 +18,7 @@ function Blocklist() {
   // Fetch blocked users from API
   const fetchBlockedUsers = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/block/${getUserId()}`);
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/block/${getUserId()}`);
       const data = await response.json();
       console.log("Blocked users fetched:", data.data);
       setBlockedUsers(data.data);

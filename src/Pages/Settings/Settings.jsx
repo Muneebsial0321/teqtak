@@ -33,17 +33,10 @@ const Setting = () => {
         <div className=" text-lg">
           <h1 className="">Settings</h1>
         </div>
-        {/* <div className="bg-[#F6F6FF] rounded-xl py-2 gap-1  flex items-center px-2 w-[30%]">
-          <CiSearch />
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-transparent border-none outline-none text-sm w-full"
-          />
-        </div> */}
+     
       </div>
       <div className="w-[90%] h-[89%] mx-auto flex justify-between">
-          <div className="sm:w-[40%] w-[45%]">
+          <div className="max-[425px]:w-[40%] w-[45%]">
             <p className="py-5 border-b border-gray-200 flex items-center gap-2 cursor-pointer" onClick={()=>navigate('/appliedjobs')}><BsBagCheck className="text-2xl text-gray-500"/> Applied Jobs</p>
             <p className="py-5 border-b border-gray-200 flex items-center gap-2 cursor-pointer" onClick={()=>navigate('/mytickets')}><PiBasketThin className="text-2xl text-gray-500"/> Tickets Bought</p>
             <p className="py-5 border-b border-gray-200 flex items-center gap-2 cursor-pointer" onClick={()=>navigate('/watchhistory')}><GoHistory className="text-2xl text-gray-500"/> Watch History</p>
@@ -52,7 +45,7 @@ const Setting = () => {
             <p className="py-5 border-b border-gray-200 cursor-pointer flex items-center gap-2"  onClick={()=>navigate('/blocklist')}><PiChatCircleSlashLight className="text-2xl text-gray-500"/> Blocked user list</p>
             <p className="py-5 border-b border-gray-200 flex items-center gap-2 cursor-pointer" onClick={handleLogout}><FiLogOut className="text-2xl text-gray-500"/> Logout</p>
           </div>
-          <div className="sm:w-[40%] w-[45%]">
+          <div className="max-[425px]:w-[40%] w-[45%] whitespace-nowrap">
           <p className="py-5 border-b border-gray-200 flex items-center gap-2 cursor-pointer" onClick={()=>navigate('/devicepermission')}><HiMiniDevicePhoneMobile className="text-2xl text-gray-500"/> Device Permissions</p>
           {/* <p className="py-5 border-b border-gray-200 flex items-center gap-2 cursor-pointer" onClick={()=>navigate('/paymentmethod')}><CiCreditCard1 className="text-2xl text-gray-500"/> Cards</p> */}
           <p className="py-5 border-b border-gray-200 cursor-pointer flex items-center gap-2" onClick={()=>navigate('/privacy')}><LuScrollText className="text-2xl text-gray-500"/> Privacy policy</p>

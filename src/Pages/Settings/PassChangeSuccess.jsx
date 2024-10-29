@@ -3,19 +3,13 @@ import { MdDone } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 
+function PassChangeSuccess({ setPassChange }) {
+  let navigate = useNavigate();
 
-function PassChangeSuccess({setPassChange}) {
-
-
-    let navigate = useNavigate()
-
-    const handleChange = () => {
-        setPassChange(false)
-        navigate('/settings')
-    }
-
-
-
+  const handleChange = () => {
+    setPassChange(false);
+    navigate("/settings");
+  };
 
   return (
     <Fragment>
@@ -23,7 +17,6 @@ function PassChangeSuccess({setPassChange}) {
         <RxCross2
           className="cursor-pointer  absolute top-5 left-3"
           onClick={handleChange}
-          
         />
 
         <div className="flex flex-col justify-center">

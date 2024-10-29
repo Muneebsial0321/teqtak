@@ -58,17 +58,17 @@ function Changepassword() {
           />{" "}
           Change Password
         </h4>
-        <div className="main h-[90%] sm:w-[70%] w-[90%] m-[auto] overflow-y-scroll Podcast_Top_Videos">
+        <div className="main h-[90%] sm:w-[70%] w-[90%] m-[auto] overflow-y-scroll Podcast_Top_Videos max-[425px]:flex max-[425px]:justify-center">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleChangePassword();
             }}
-            className="pt-6"
+            className="pt-6 "
           >
-            <div className="flex justify-between">
-              <div className="div sm:w-[40%] w-[45%]">
-                <label htmlFor="" className="block text-black text-sm mb-2">
+            <div className="flex justify-between max-[425px]:flex-col">
+              <div className=" sm:w-[40%] w-[45%] max-[425px]:w-[100%]">
+                <label htmlFor="" className="block text-black text-sm mb-2 max-[425px]:mb-0">
                   Current Password
                 </label>
                 <input
@@ -79,20 +79,20 @@ function Changepassword() {
                   value={current}
                   onChange={(e) => setCurrent(e.target.value)}
                 />
-                <label htmlFor=""  className="block text-black text-sm mt-12">
+                <label htmlFor=""  className="block text-black text-sm mt-12  max-[425px]:mt-3">
                   Re-type new password
                 </label>
                 <input
                   type="password"
                   required
                   placeholder="Re-type Your New Password"
-                  className= "w-[100%] p-1 border border-black rounded placeholder:text-black placeholder:text-xs mb-12"
+                  className= "w-[100%] p-1 border border-black rounded placeholder:text-black placeholder:text-xs mb-12  max-[425px]:mb-3"
                   value={retype}
                   onChange={(e) => setRetype(e.target.value)}
                 />
               </div>
-              <div className="div sm:w-[40%] w-[45%]">
-                <label htmlFor=""className="block text-black text-sm mb-2">
+              <div className=" sm:w-[40%] w-[45%] max-[425px]:w-[100%]">
+                <label htmlFor=""className="block text-black text-sm mb-2  max-[425px]:mb-0">
                   New Password
                 </label>
                 <input
@@ -105,7 +105,7 @@ function Changepassword() {
                 />
                 <button
                   type="submit"
-                  className="h-[7vh] w-[100%] rounded-full text-white buyticket mt-12"
+                  className="h-[7vh] w-auto px-4 py-1 justify-end rounded-3xl text-white linear_gradient  max-[425px]:mt-3 mt-12 max-[425px]:h-auto max-[425px]:text-[16px] max-[425px]:ml-[13rem]"
                   disabled={loading}
                 >
                   {loading ? "Changing..." : "Change Password"}

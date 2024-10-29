@@ -96,7 +96,7 @@ const truncatedDescription = isLong
             return (
               <div
               key={ind}
-              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative"
+              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-[49%] max-[425px]:p-2"
             >
               <div className="w-full">
                 <div className="flex gap-2 mt-2">
@@ -110,7 +110,7 @@ const truncatedDescription = isLong
                       opacity: 0,
                       transition: "opacity 0.3s ease",
                     }}
-                    className="rounded-full"
+                    className="rounded-full ml-3"
                     alt="Profile"
                   />
                   <div>
