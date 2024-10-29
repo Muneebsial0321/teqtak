@@ -195,7 +195,7 @@ console.log("pre msg",chatroom)
   };
   const handleDelete =async () => {
    await deleteChatroom(roomId);
-    window.location.href='http://localhost:5173/messages'
+    window.location.href='https://teqtak.vercel.app/messages'
   };
 console.log("msg recived",chatroom)
   return (
