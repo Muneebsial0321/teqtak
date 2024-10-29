@@ -104,8 +104,8 @@ console.log("user id is ", isCurrentUser)
           <p className="text-lg flex items-center px-3">Profile</p>
         </div>
         <div className="flex flex-col md:flex-row justify-center h-auto md:h-[32%] mt-4 md:mt-0">
-          <div className="flex flex-col md:flex-row gap-2 w-full md:w-[75%] lg:items-center md:items-center xl:items-center ">
-            <div className="rounded-full flex justify-center md:justify-end w-[60%] md:w-[40%] relative max-[425px]:w-[30vw]">
+          <div className="flex  md:flex-row gap-4 w-full md:w-[75%] items-center md:items-center xl:items-center justify-center">
+            <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative ">
               <input
                 type="file"
                 onChange={handleFileChange}
@@ -118,10 +118,10 @@ console.log("user id is ", isCurrentUser)
                   src={profile.picUrl ? profile.picUrl : "/placeholder.jpg"} // Fallback URL
                   alt="Profile"
                 />
-                <FaPlus className="absolute lg:bottom-2 -bottom-3 md:bottom-1 text-white text-xl p-1 bg-blue-700 rounded-full" />
+                <FaPlus className="absolute lg:bottom-2 bottom-2 md:bottom-1 text-white text-xl p-1 bg-blue-700 rounded-full" />
               </label>
             </div>
-            <div className="py-3 px-4 md:px-6 w-full md:w-[60%] max-[425px]:w-[50vw]">
+            <div className="py-3 px-4 md:px-6  w-[50%] ">
               <h1 className="text-lg md:text-xl">{profile.name || profile.userName}</h1>
               <div className="flex py-1 space-x-2">
               {renderStars(data_.rating?.globalrating || 0)} {/* Render the stars */}
@@ -132,7 +132,7 @@ console.log("user id is ", isCurrentUser)
                 <Link to='/personaldetails'>view personal info</Link>
                 <MdKeyboardArrowRight className="text-xl md:text-2xl" />
               </div>
-              <div className="flex gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap ">
+              <div className="flex  gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[425px]:hidden">
                 {isCurrentUser ? (
                   <>
                     <button
@@ -167,9 +167,42 @@ console.log("user id is ", isCurrentUser)
               </div>
             </div>
           </div>
+            <div className="hidden mt-5 mb-2 gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[425px]:flex justify-center">
+                {isCurrentUser ? (
+                  <>
+                    <button
+                      className={`px-6 py-2 rounded-2xl text-lg ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
+                      onClick={handleSubmit}
+                      disabled={loading}
+                    >
+                      {loading ? 'Uploading...' : 'Save Changes'}
+                    </button>
+                    <button
+                      onClick={() => navigate('/personaldetail2')}
+                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                    >
+                      Edit Profile 
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="px-6 py-2 rounded-2xl text-lg bg-[#F6F6FF]"
+                      onClick={createChatRoom}
+                    >
+                      Message
+                    </button>
+                    <button
+                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                    >
+                      Subscribe
+                    </button>
+                  </>
+                )}
+              </div>
         </div>
         <div className="flex text-[25px] items-center justify-center border-t-[2px] h-[8%]">
-          <div className="w-[50%] flex justify-between py-2 max-[425px]:bg-black">
+          <div className="w-[50%] flex justify-between py-2 max-[425px]:w-[80%]">
             <CiVideoOn
               className="cursor-pointer opacity-70"
               onClick={() => setActiveTab("Video")}

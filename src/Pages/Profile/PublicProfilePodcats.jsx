@@ -114,7 +114,7 @@ const ApplePodcast = (props) => {
 
   return (
     <Fragment>
-      <div className="overflow-y-scroll Podcast_Top_Videos h-full">
+      <div className="overflow-y-scroll Podcast_Top_Videos h-[100%]">
         {loading ? (
           <div className="text-center">Loading...</div>
         ) : (
@@ -154,9 +154,9 @@ const ApplePodcast = (props) => {
                       </div>
                     </div>
                     <img
-                      src={elm.picUrl || "/placeholder.jpg"}
+                      src={elm.picUrl || "placeholder.jpg"}
                       alt={`Img-${ind}`}
-                      className="h-full w-full rounded-lg"
+                      className="h-full w-full rounded-lg object-cover"
                     />
                     {visibleId === elm._id &&   elm.userId === currentUserId && (
                       <div className="absolute top-14 right-2 flex flex-col space-y-2">

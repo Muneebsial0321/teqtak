@@ -159,14 +159,14 @@ const UserProfile = () => {
   };
   return (
     <Fragment>
-      <div className="bg-white h-full w-full">
+      <div className="bg-white h-full w-full overflow-y-hidden">
         <div className="w-full md:w-[25%] h-auto md:h-[6%] flex items-center gap- ps-3">
         <FaChevronLeft className="text-ms cursor-pointer"onClick={() => navigate(-1)}  />
           <p className="text-lg flex items-center px-1">Profile</p>
         </div>
         <div className="flex flex-col md:flex-row justify-center h-auto md:h-[32%] mt-4 md:mt-0">
-          <div className="flex flex-col md:flex-row gap-2 w-full md:w-[75%] items-center">
-            <div className="rounded-full flex justify-center md:justify-end w-[60%] md:w-[40%] relative">
+          <div className="flex  md:flex-row gap-4 w-full md:w-[75%] items-center md:items-center xl:items-center justify-center">
+            <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative ">
              
               <label htmlFor="fileInput"  aria-label="Upload Profile Picture">
                 <img
@@ -177,7 +177,7 @@ const UserProfile = () => {
                
               </label>
             </div>
-            <div className="py-3 px-4 md:px-6 w-full md:w-[60%]">
+            <div className="py-3 px-4 md:px-6  w-[50%] ">
               <h1 className="text-lg md:text-xl">{profile.name || profile.userName}</h1>
               <div className="flex py-1 space-x-2">
                 {renderStars(data_.rating?.globalrating || 0)} {/* Render the stars */}
@@ -185,10 +185,10 @@ const UserProfile = () => {
               </div>
               <p className="text-xs md:text-sm opacity-65">{data_.rating?.totalRatings || 0} global ratings</p>
               <div className="flex text-blue-600 text-xs md:text-sm py-2">
-                <Link to='/personaldetails'>view personal info</Link>
+                {/* <Link to='/personaldetails'>view personal info</Link> */}
                 <MdKeyboardArrowRight className="text-xl md:text-2xl" />
               </div>
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex  gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[425px]:hidden">
                 {isCurrentUser ? (
                   <>
                     <button
@@ -225,9 +225,42 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
+          <div className="hidden mt-5 mb-2 gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[425px]:flex justify-center">
+                {isCurrentUser ? (
+                  <>
+                    <button
+                      className={`px-6 py-2 rounded-2xl text-lg ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
+                      onClick={handleSubmit}
+                      disabled={loading}
+                    >
+                      {loading ? 'Uploading...' : 'Save Changes'}
+                    </button>
+                    <button
+                      onClick={() => navigate('/personaldetail2')}
+                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                    >
+                      Edit Profile 
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="px-6 py-2 rounded-2xl text-lg bg-[#F6F6FF]"
+                      onClick={() => __message__(profile.Users_PK)}
+                    >
+                      Message
+                    </button>
+                    <button
+                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                    >
+                      Subscribe
+                    </button>
+                  </>
+                )}
+              </div>
         </div>
         <div className="flex text-[25px] items-center justify-center border-t-[2px] h-[8%]">
-          <div className="w-[50%] flex justify-between py-2">
+          <div className="w-[50%] flex justify-between py-2 max-[425px]:w-[80%]">
             <CiVideoOn
               className="cursor-pointer opacity-70"
               onClick={() => setActiveTab("Video")}

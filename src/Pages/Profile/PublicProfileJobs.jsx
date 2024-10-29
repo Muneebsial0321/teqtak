@@ -88,7 +88,7 @@ const currentUser = getUserId()
             jobs.map((elm, i) => (
               <div
                 key={i}
-                className="h-[37vh] w-[32.4%] flex-shrink-0 shadow rounded-lg border relative PPJob"
+                className="h-[37vh] w-[32.4%] flex-shrink-0 shadow rounded-lg border relative PPJob max-[425px]:h-auto"
                 onMouseEnter={() => setVisibleId(elm._id)}
                 onMouseLeave={() => setVisibleId(null)}
               >
@@ -129,7 +129,7 @@ const currentUser = getUserId()
                       <Link
                         to={"/jobdetail"}
                         state={{ id: elm._id }}
-                        className="w-[90%] mx-auto flex text-xl mt-7 justify-center items-center bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
+                        className="w-[90%] mx-auto flex text-xl mt-7 justify-center items-center bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[425px]:mb-2"
                       >
                         Apply job
                       </Link>

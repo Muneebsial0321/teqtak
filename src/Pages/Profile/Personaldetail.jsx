@@ -98,7 +98,7 @@ function Personaldetail() {
           </div>
           <Link to='/personaldetail2' className="text-[#9595f5]">Edit Detail</Link>
           <p className="text-lg font-semibold mt-5">Total Subscriber</p>
-          <p className="text-[gray]">53,324 Subscribers</p>
+          <p className="text-[gray]">0 Subscribers</p>
           <p className="text-xl font-semibold mt-5">Description</p>
           <p className="text-[gray]">
             {detail.description || 'No description available.'}
@@ -106,7 +106,7 @@ function Personaldetail() {
           </p>
           <p className="text-xl font-semibold mt-5">Personal info</p>
           <div className="p-5">
-  <div className="flex flex-wrap gap-4 mt-5">
+  <div className="flex flex-wrap gap-4 mt-5 md:grid-cols-2">
     {/* Name field */}
     <div className="w-full sm:w-[48%] md:w-[31%] lg:w-[50%]">
       <div className="flex justify-between items-center mb-2">

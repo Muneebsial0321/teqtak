@@ -140,7 +140,7 @@ const user_Id = getUserId()
               <img
                 src={elm.eventCoverUrl}
                 alt={`Img-${elm.id}`}
-                className="h-full w-full rounded-lg"
+                className="h-full w-full rounded-lg object-cover"
               />
             </div>
           ))
