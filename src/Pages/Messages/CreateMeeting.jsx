@@ -11,7 +11,7 @@ function Zoommeeting() {
             <Link to='/messages/user1'> 
               <FaArrowLeftLong size={30} className='border-2 border-black p-2 rounded-md'/>
             </Link>
-            <h1 className='text-xl md:text-3xl font-bold'>Create a Zoom Meeting</h1>
+            <h1 className='text-xl md:text-3xl font-bold whitespace-nowrap'>Create a Zoom Meeting</h1>
           </div>
 
           <p className="text-lg md:text-xl font-semibold">To:</p>
@@ -65,7 +65,7 @@ function Zoommeeting() {
                   <option value=""></option>
                 </select>
 
-                <div className="flex gap-4">
+                <div className="flex gap-4 max-[425px]:flex-col">
                   <div className="flex-1">
                     <label htmlFor="" className="block text-lg md:text-xl font-medium">
                       Start time *

@@ -6,7 +6,7 @@ function Hello() {
     <div className="h-screen w-full p-5 relative flex flex-col items-center bg-white shadow-lg rounded-lg border overflow-hidden">
       {/* Image */}
       <img
-        src={'MsgDefault.jpg'}
+        src={"MsgDefault.jpg"}
         alt="TeqTak Web"
         className="h-[30vh] w-auto max-w-full object-cover"
       />

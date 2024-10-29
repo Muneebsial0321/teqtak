@@ -200,7 +200,7 @@ console.log("pre msg",chatroom)
 console.log("msg recived",chatroom)
   return (
     <div className="main h-full w-[100%] ">
-      <div className="div h-full w-[100%] bg-[#f5f3f3] p-5 relative">
+      <div className="div h-full w-[100%]  bg-[#f5f3f3] p-5 relative">
         <div className="flex justify-between items-center mb-8">
           <div className="flex gap-2">
           <img src={sender.picUrl || 'placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/>

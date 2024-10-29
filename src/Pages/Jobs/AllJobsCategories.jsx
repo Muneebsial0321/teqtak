@@ -95,7 +95,7 @@ const currentUser = getUserId()
             return (
               <div
                 key={ind}
-                className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative"
+                className="h-[40vh] max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative"
               >
                 <div className="w-full">
                   <div className="flex gap-2 mt-2">
@@ -109,7 +109,7 @@ const currentUser = getUserId()
                         opacity: 0,
                         transition: "opacity 0.3s ease",
                       }}
-                      className="rounded-full"
+                      className="rounded-full ml-3"
                       alt="Profile"
                     />
                     <div>
@@ -128,7 +128,7 @@ const currentUser = getUserId()
                       </p>
                     </div>
                   </div>
-                  <p className="mt-7 ps-4 text-md opacity-65 max-[425px]:text-[16px]">{elm.location}({elm.workplaceType})</p>
+                  <p className="mt-7 ps-4 text-md opacity-65">{elm.location}({elm.workplaceType})</p>
                   <p className="ps-4 text-sm opacity-65 mt-3">
                     {elm.salaryRange}
                   </p>
@@ -177,7 +177,7 @@ const currentUser = getUserId()
           return (
             <div
               key={ind}
-              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative"
+              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2"
             >
               <div className="w-full">
                 <div className="flex gap-2 mt-2">
@@ -192,7 +192,7 @@ const currentUser = getUserId()
                       opacity: 0,
                       transition: "opacity 0.3s ease",
                     }}
-                    className="rounded-full"
+                    className="rounded-full ml-3"
                     alt="Profile"
                   />
                   <div>
@@ -253,7 +253,7 @@ const currentUser = getUserId()
           return (
             <div
               key={ind}
-              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative"
+              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2"
             >
               <div className="w-full">
                 <div className="flex gap-2 mt-2">
@@ -268,7 +268,7 @@ const currentUser = getUserId()
                       opacity: 0,
                       transition: "opacity 0.3s ease",
                     }}
-                    className="rounded-full"
+                    className="rounded-full ml-3"
                     alt="Profile"
                   />
                   <div>

@@ -2,10 +2,7 @@
 
 import React, { Fragment, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
-import {
-  RiArrowDropDownLine,
-  RiArrowDropUpLine,
-} from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 let categData = [
@@ -78,10 +75,15 @@ function JobFilters() {
   return (
     <Fragment>
       <div className="flex items-center  overflow-y-visible  JobFilScr bg-white w-full h-[10%] px-3">
-        <Link to='/filterjob' className="m-0 flex gap-2 items-center">
-        <LuSettings2/> |{" "}
+        <Link to="/filterjob" className="m-0 flex gap-2 items-center">
+          <LuSettings2 /> |{" "}
         </Link>
-        <Link to='/filterjob' className="px-4 py-1 ms-2 m-0 rounded-3xl cursor-pointer Video_Nav_Filters">All</Link>
+        <Link
+          to="/filterjob"
+          className="px-4 py-1 ms-2 m-0 rounded-3xl cursor-pointer Video_Nav_Filters"
+        >
+          All
+        </Link>
         <div
           className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center  cursor-pointer Video_Nav_Filters text-sm relative"
           onMouseOver={() => setCatDrop(true)}

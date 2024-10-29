@@ -72,12 +72,12 @@ function Apply() {
   };
 
   return (
-    <div className="h-full bg-white w-full">
+    <div className="h-full max-[425px]:h-auto bg-white w-full">
       <h4 className="flex items-center gap-3 ms-4 h-[10%]">
         <FaAngleLeft className="cursor-pointer" onClick={() => navigate("/jobdetail", { state: { id: jobId } })} />
         Apply to Tangent
       </h4>
-      <div className="w-[80%] h-[90%] mx-auto overflow-x-scroll Podcast_Top_Videos md:pb-0 pb-4">
+      <div className="w-[80%] h-[90%]   Podcast_Top_Videos md:pb-0 pb-4">
         <form onSubmit={handleApply} className="flex justify-between md:flex-nowrap flex-wrap">
           <div className="md:w-[40%] w-[80%] mx-auto sm:mx-0">
             <label className="block text-sm mb-2">Name</label>
@@ -94,7 +94,7 @@ function Apply() {
               country={"eg"}
               value={phone}
               onChange={(phone) => setPhone(phone)}
-              inputClass="placeholder:text-xs ms-3 ps-3 border rounded-md w-full py-2"
+              inputClass="placeholder:text-xs ms-3 ps-3  border rounded-md w-full py-2 max-[425px]:py-0  max-[425px]:w-[40%]"
             />
             <p className="mt-5 text-sm">Upload resume*</p>
             <div className="h-[7vh] w-[70%] flex justify-center items-center px-5 rounded-3xl bg-[#e7e7f5] text-[blue] mt-2 relative text-xs ms-3">

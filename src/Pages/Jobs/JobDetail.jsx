@@ -7,8 +7,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import JobAppliedSuccess from "./JobAppliedSuccess";
 import { myContext } from "../../Context/CreateContext";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify'; // Import toast components
-import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import { ToastContainer, toast } from "react-toastify"; // Import toast components
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const API_BASE_URL = REACT_APP_API_BASE_URL;
@@ -41,10 +41,9 @@ function Jobdetail() {
   }, [loc.state]);
 
   const getJob = async (id) => {
-    const req = await fetch(
-      `${REACT_APP_API_BASE_URL}/jobs/${id}`,
-      { method: "GET" }
-    );
+    const req = await fetch(`${REACT_APP_API_BASE_URL}/jobs/${id}`, {
+      method: "GET",
+    });
 
     if (!req.ok) {
       throw new Error(`HTTP error! status: ${req.status}`);
@@ -87,7 +86,9 @@ function Jobdetail() {
         date.getMonth() === month &&
         date.getFullYear() === parseInt(year)
       ) {
-        return `${("0" + day).slice(-2)}/${("0" + (month + 1)).slice(-2)}/${year}`;
+        return `${("0" + day).slice(-2)}/${("0" + (month + 1)).slice(
+          -2
+        )}/${year}`;
       }
     }
 
@@ -96,25 +97,25 @@ function Jobdetail() {
 
   const getUserId = () => {
     const str = document.cookie;
-    const userKey = str.split('=')[1];
+    const userKey = str.split("=")[1];
     return userKey;
   };
 
   const user_id = getUserId();
-  
+
   const handleSaveToWishlist = async (jobId) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/wishlist`, {
-        wishItemType: 'job',
+        wishItemType: "job",
         wishItemId: jobId,
         userId: user_id,
       });
-      
-      console.log('Wishlist item saved:', response.data);
-      toast.success('Job saved to wishlist!'); // Use toast for success notification
+
+      console.log("Wishlist item saved:", response.data);
+      toast.success("Job saved to wishlist!"); // Use toast for success notification
     } catch (error) {
-      console.error('Error saving to wishlist:', error);
-      toast.error('Could not save to wishlist. Please try again.'); // Use toast for error notification
+      console.error("Error saving to wishlist:", error);
+      toast.error("Could not save to wishlist. Please try again."); // Use toast for error notification
     }
   };
 
@@ -194,22 +195,22 @@ function Jobdetail() {
                     <p>shared with the employer.</p>
                   </div>
                 </div>
-                <Link to="/userprofile"
-                    state={{id:job.userId ? job.userId : "unkown"}}
+                <Link
+                  to="/userprofile"
+                  state={{ id: job.userId ? job.userId : "unkown" }}
                 >
                   <div className="flex items-center gap-1 mt-2">
-                  <img
-                    src={poster.picUrl ? poster.picUrl : "/placeholder.jpg"}
-                    alt=""
-                    className="h-[30px] w-[30px] rounded-full"
-                  />
-                  <p className="text-[gray]">Posted by:</p>
-                  <p className="text-lg font-semibold">
-                    {poster.name ? poster.name : "Unknown"}
-                  </p>
-                </div>
+                    <img
+                      src={poster.picUrl ? poster.picUrl : "/placeholder.jpg"}
+                      alt=""
+                      className="h-[30px] w-[30px] rounded-full"
+                    />
+                    <p className="text-[gray]">Posted by:</p>
+                    <p className="text-lg font-semibold">
+                      {poster.name ? poster.name : "Unknown"}
+                    </p>
+                  </div>
                 </Link>
-              
               </div>
             </div>
           </div>

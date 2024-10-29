@@ -4,23 +4,19 @@ import { RxCross2 } from "react-icons/rx";
 import { myContext } from "../../Context/CreateContext";
 import { useNavigate } from "react-router-dom";
 
-
 function JobAppliedSuccess(props) {
-const navigate = useNavigate()
+  const navigate = useNavigate();
   // let { JobAppliedStates } = useContext(myContext)
-
 
   return (
     <Fragment>
       <div className="h-full w-full absolute top-0 left-0 bg-white flex flex-col justify-center  items-center">
         <RxCross2
           className="cursor-pointer  absolute top-5 left-3"
-          
-          onClick={() => 
-          navigate("/appliedjobs")
-      // JobAppliedStates.setJobAppliedSuccess(false)
-}
-          
+          onClick={
+            () => navigate("/appliedjobs")
+            // JobAppliedStates.setJobAppliedSuccess(false)
+          }
         />
 
         <div className="flex flex-col justify-center">

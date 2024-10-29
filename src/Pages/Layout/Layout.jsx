@@ -12,8 +12,8 @@ import JobSuccess from "../JobCreation/JobSuccess";
 import Search from "../../Components/Navbar/Saerch";
 
 const Layout = () => {
-  let { CreationStates, PodcastStates, EventStates, JobStates } = useContext(myContext);
-
+  let { CreationStates, PodcastStates, EventStates, JobStates } =
+    useContext(myContext);
 
   const [rightSidebar, setRightSidebar] = useState(false);
 
@@ -21,7 +21,7 @@ const Layout = () => {
     <div className="flex flex-col h-[100vh] w-[100vw]   bg-gray-200">
       {/* Header */}
       <header className="bg-white h-[7%] w-full ">
-        <Navbar state={{setRightSidebar,rightSidebar}}/>
+        <Navbar state={{ setRightSidebar, rightSidebar }} />
         {/* <Search/> */}
       </header>
 
@@ -50,7 +50,6 @@ const Layout = () => {
             </div>
           )}
 
-
           {JobStates.jobSubmitted && (
             <div className="absolute z-20 px-1 w-full h-full top-0 left-0 ">
               <JobSuccess />
@@ -61,8 +60,13 @@ const Layout = () => {
         </main>
 
         {/* Right Sidebar */}
-        <aside className={`lg:w-[13%] sm:w-[20%] w-[30%] lg:block ${rightSidebar === true ? 'left-0' : 'left-[-40%]'} bg-red-900  h-full lg:static absolute top-0 z-50`} style={{transition:'.5s'}}>
-            <RightLayout state={{setRightSidebar}}/>
+        <aside
+          className={`lg:w-[13%] sm:w-[20%] w-[30%] lg:block ${
+            rightSidebar === true ? "left-0" : "left-[-40%]"
+          } bg-red-900  h-full lg:static absolute top-0 z-50`}
+          style={{ transition: ".5s" }}
+        >
+          <RightLayout state={{ setRightSidebar }} />
         </aside>
       </div>
     </div>

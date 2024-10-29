@@ -65,7 +65,7 @@ function Calendar2() {
               return (
                 <div
                   key={ind}
-                  className="h-[40vh] sm:w-[32.4%] w-[49.3%] gap-1 flex-shrink-0 shadow rounded-lg border relative"
+                  className="h-[40vh] sm:w-[32.4%] w-[49.3%] gap-1 flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:p-2 "
                 >
                   <div className="w-full">
                     <div className="flex gap-2 mt-2">
@@ -74,7 +74,7 @@ function Calendar2() {
                         onLoad={(e) => (e.target.style.opacity = 1)}
                         onError={(e) => (e.target.src = "/placeholder.png")}
                         style={{ height: "40px", width: "40px", opacity: 0, transition: "opacity 0.3s ease" }}
-                        className="rounded-full"
+                        className="rounded-full ml-3"
                         alt="Profile"
                       />
                       <div>
@@ -82,10 +82,10 @@ function Calendar2() {
                         <p className="font-light text-md">{formatDate(elm.applicationDeadline)}</p>
                       </div>
                     </div>
-                    <p className="mt-7 ps-4 text-md opacity-65">{elm.location}({elm.workplaceType})</p>
+                    <p className="mt-7 ps-4 text-md opacity-65  max-[425px]:w-[100%]">{elm.location}({elm.workplaceType})</p>
                     <p className="ps-4 text-sm opacity-65 mt-3">{elm.salaryRange}</p>
                     <button
-  className="w-[90%] mx-auto block text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
+  className="w-[90%] mx-auto flex justify-center items-center text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
   onClick={() => navigate("/jobdetail", { state: { id: elm._id, title: elm.jobTitle } })}
 >
   {elm.jobType === " " ? "Apply Now" : "Apply Now"}

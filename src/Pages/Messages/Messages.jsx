@@ -3,7 +3,6 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import MessageDefault from "./MessageDefault";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-
 const getUserId = () => {
   const str = document.cookie;
   const userKey = str.split("=")[1];
@@ -42,7 +41,7 @@ function Message() {
 
   // Sort chats by the updatedAt timestamp in descending order
   const sortedChats = chats
-    .filter(e => e?.messages) // Only include chats with messages
+    .filter((e) => e?.messages) // Only include chats with messages
     .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
   return (
@@ -73,7 +72,9 @@ function Message() {
           >
             {/* message lists */}
             {sortedChats.length === 0 ? (
-              <p className="p-4 text-center text-gray-500">No messages found.</p>
+              <p className="p-4 text-center text-gray-500">
+                No messages found.
+              </p>
             ) : (
               sortedChats.map((e, ind) => (
                 <Link to={`user1`} key={ind} state={{ id: e._id }}>
@@ -81,9 +82,7 @@ function Message() {
                     <div className="flex items-center gap-2">
                       <img
                         src={
-                          e.sender?.picUrl
-                            ? e.sender.picUrl
-                            : "placeholder.jpg"
+                          e.sender?.picUrl ? e.sender.picUrl : "placeholder.jpg"
                         }
                         alt="sender"
                         className="h-[50px] w-[50px] rounded-full"
