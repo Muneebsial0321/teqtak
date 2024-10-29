@@ -203,7 +203,7 @@ console.log("msg recived",chatroom)
       <div className="div h-full w-[100%] bg-[#f5f3f3] p-5 relative">
         <div className="flex justify-between items-center mb-8">
           <div className="flex gap-2">
-          <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/>
+          <img src={sender.picUrl || 'placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/>
             <p className="text-base font-medium whitespace-nowrap">{sender.name}</p>
           </div>
           <div className="flex gap-5">
@@ -267,7 +267,7 @@ console.log("msg recived",chatroom)
             <div key={i} className="flex items-end justify-between py-2">
               <div className="flex gap-2">
               <img
-  src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || '/placeholder.jpg' : '/placeholder.jpg'}
+  src={getUserId() !== e.sender ? sender.picUrl || 'placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : 'placeholder.jpg'}
   alt="profile"
   className="h-[40px] w-[40px] rounded-full"
 />
