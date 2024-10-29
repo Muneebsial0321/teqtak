@@ -117,7 +117,7 @@ const Signin = () => {
             className="flex justify-center items-center bg-[#f1f1f1] w-[4rem] h-[4rem] px-2 py-2 rounded-full cursor-pointer"
             onClick={() => window.open(`${REACT_APP_API_BASE_URL}/auth/google/callback`)}
           >
-            <img className="w-10 h-10" src="/google.png" alt="Google" />
+            <img className="w-10 h-10" src="google.png" alt="Google" />
           </div>
           <div
             className="flex justify-center items-center bg-[#f1f1f1] p-[.3rem] w-[4rem] h-[4rem] rounded-full cursor-pointer"
