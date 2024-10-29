@@ -195,9 +195,9 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
             </div>
           </div>
 
-          <div className="sm:w-[40%] w-[45%]">
-            <div className="flex justify-between">
-              <div className="w-[49%] py-3">
+          <div className="sm:w-[40%] w-[45%] ">
+            <div className="flex justify-between max-[425px]:flex-col ">
+              <div className="w-[49%] py-3 max-[425px]:w-[100%]">
                 <label className="block text-gray-600 text-sm font-bold" htmlFor="seasonNumber">
                   Season#
                 </label>
@@ -210,7 +210,7 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
                   placeholder="Enter Season Number"
                 />
               </div>
-              <div className="w-[49%] py-3">
+              <div className="w-[49%] py-3 max-[425px]:w-[100%]">
                 <label className="block text-gray-600 text-sm font-bold" htmlFor="episodeNumber">
                   Episode#
                 </label>

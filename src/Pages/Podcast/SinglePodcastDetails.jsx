@@ -126,8 +126,8 @@ function SinglePodcastDetails() {
         </div>
         <div className="flex w-full PCS_Flex sm:ps-6 gap-6">
           <img
-            src={result.picUrl ? result.picUrl : "/loading.jpg"}
-            className="md:h-[35vh] h-[39vh] md:w-[33%] w-[40%] sm:mx-auto rounded-xl"
+            src={result.picUrl ? result.picUrl : "loading.jpg"}
+            className="md:h-[35vh] h-[39vh] md:w-[33%] w-[40%] sm:mx-auto rounded-xl object-cover "
             alt=""
           />
           <div className="w-[60%] mx-auto PCS_Child1">
@@ -188,8 +188,8 @@ function SinglePodcastDetails() {
                 className="flex items-center justify-center flex-shrink-0 gap-3 py-2 px-2 my-2 rounded w-auto bg-gray-200"
               >
                 <img
-                  src={elm.picUrl ? elm.picUrl : "/placeholder.jpg"}
-                  className="rounded-full h-[35px] w-[35px]"
+                  src={elm.picUrl ? elm.picUrl : "placeholder.jpg"}
+                  className="rounded-full h-[35px] object-cover w-[35px] "
                   alt=""
                 />
                 <h1 className="text-md">{elm.name || elm.userName}</h1>

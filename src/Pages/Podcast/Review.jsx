@@ -165,14 +165,14 @@ console.log("coment",comments)
         />
       </section>
 
-      <div className="flex flex-wrap md:flex-nowrap md:w-[67%] w-[50%] md:h-[75%] h-[90%] bg-white relative shadow-lg">
+      <div className="flex flex-wrap md:flex-nowrap md:w-[67%] w-[50%] md:h-[75%] h-[90%] bg-white relative shadow-lg max-[425px]:w-[90%]">
         <RiCloseLine
           className="absolute right-2 top-2 cursor-pointer"
           onClick={() => props.setRevModOpen(false)}
           aria-label="Close"
         />  
         <img
-          className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover"
+          className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[425px]:w-[90%]"
           src={picUrl || "/loading.jpg"}
           alt="Video Thumbnail"
         />

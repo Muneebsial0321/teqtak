@@ -147,7 +147,7 @@ function Subscribed() {
                   />
                   {able === subsc._id && (
                     <div
-                      className="absolute right-0 w-[200px] md:w-[250px] lg:w-[200px] xl:w-[200px] cursor-pointer px-3 py-2 z-30 bg-white shadow-lg border"
+                      className="absolute right-0 w-[200px] md:w-[250px] lg:w-[200px] xl:w-[200px] cursor-pointer px-3 py-2 z-30 bg-white shadow-lg border max-[425px]:w-[150px]"
                       onClick={() => setAble(able === subsc._id ? null : subsc._id)}
                     >
                       <p
