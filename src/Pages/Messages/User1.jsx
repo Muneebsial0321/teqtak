@@ -262,7 +262,7 @@ console.log("msg recived",chatroom)
             )}
           </div>
         </div>
-        <div className="h-[70%] overflow-y-scroll Podcast_Top_Videos">
+        <div className="lg:h-[70%] h-[50vh] overflow-y-scroll Podcast_Top_Videos">
           {chatroom && chatroom.map((e, i) => (
             <div key={i} className="flex items-end justify-between py-2">
               <div className="flex gap-2">
