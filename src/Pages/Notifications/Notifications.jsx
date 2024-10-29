@@ -6,7 +6,7 @@ import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const getUserId = () => {
   const str = document.cookie;
-  const userKey = str.split('=')[1];
+  const userKey = str.split("=")[1];
   return userKey;
 };
 
@@ -19,11 +19,13 @@ function Notification() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get(`${API_URL}/notifications/${getUserId()}`); 
+        const response = await axios.get(
+          `${API_URL}/notifications/${getUserId()}`
+        );
         setNotifications(response.data.data);
         console.log("notifications is ", response.data.data);
       } catch (error) {
-        console.error('Error fetching notifications:', error);
+        console.error("Error fetching notifications:", error);
       }
     };
 
@@ -37,11 +39,11 @@ function Notification() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API_URL}/notifications/${id}`); // Ensure you delete the specific notification
-      setNotifications(prevNotifications => 
-        prevNotifications.filter(notification => notification._id !== id)
+      setNotifications((prevNotifications) =>
+        prevNotifications.filter((notification) => notification._id !== id)
       );
     } catch (error) {
-      console.error('Error deleting notification:', error);
+      console.error("Error deleting notification:", error);
     }
   };
 
@@ -58,7 +60,7 @@ function Notification() {
                   className="flex justify-between py-3 mt-2 border-b"
                 >
                   <div className="flex gap-2">
-                    <Link to='/profile'>
+                    <Link to="/profile">
                       <img
                         src={notification.imgSrc || "/placeholder.jpg"} // Fallback image URL
                         alt={`Notification from user ${notification._id}`}
@@ -66,9 +68,14 @@ function Notification() {
                       />
                     </Link>
                     <div>
-                      <p className="text-[15px] opacity-75">{notification.notiTitle}</p>
+                      <p className="text-[15px] opacity-75">
+                        {notification.notiTitle}
+                      </p>
                       <p>
-                        <Link to="#" className="text-[blue] underline text-[13px] opacity-75">
+                        <Link
+                          to="#"
+                          className="text-[blue] underline text-[13px] opacity-75"
+                        >
                           {notification.notiDesc}
                         </Link>
                       </p>
@@ -84,14 +91,21 @@ function Notification() {
                     />
                     {visibleId === notification._id && (
                       <div className="absolute w-[200px] cursor-pointer right-0 px-3 py-2 z-30 bg-white shadow-lg border">
-                        <p className="text-[15px] opacity-75 text-[red]" onClick={() => handleDelete(notification._id)}>Delete</p>
+                        <p
+                          className="text-[15px] opacity-75 text-[red]"
+                          onClick={() => handleDelete(notification._id)}
+                        >
+                          Delete
+                        </p>
                       </div>
                     )}
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-500">No Notifications Available</p>
+              <p className="text-center text-gray-500">
+                No Notifications Available
+              </p>
             )}
           </div>
         </div>

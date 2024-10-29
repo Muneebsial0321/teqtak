@@ -106,7 +106,7 @@ useEffect(() => {
             {recentview.map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[22vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] max-[425px]:w-[50vw] w-[22vw] flex-shrink-0 rounded-lg relative"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm.data._id } })}
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">
@@ -128,17 +128,17 @@ useEffect(() => {
                     </p>
                   </div>
                 </div>
-                <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg" />
+                <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg object-cover" />
               </div>
             ))}
           </div>
 <h1 className="ps-3 text-xl font-bold my-3 text-black">Related Podcasts</h1>
           
-          <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2">
+          <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 ">
             {recentdata.slice(0, 3).map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw] sm:w-[33.33vw] w-[33.33vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw] max-[425px]:w-[45.33vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })} // Handle navigation
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">
@@ -158,7 +158,7 @@ useEffect(() => {
                     </p>
                   </div>
                 </div>
-                <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg" />
+                <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg object-cover" />
               </div>
             ))}
           </div>
@@ -169,7 +169,7 @@ useEffect(() => {
             {recentdata.map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[21vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] max-[425px]:w-[50vw] w-[21vw] flex-shrink-0 rounded-lg relative"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })}
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">

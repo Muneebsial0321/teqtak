@@ -16,8 +16,54 @@ const FilterPodcast = () => {
   const subscirbe = ["All", "Subscribe", "Popular", "Latest Podcast", "Other"];
   const review = ["ALL", "Top Reviews", "Others"];
   const duration = ["15min", "30min", "1hour", "+1hour"];
-  const entrepreneurs = ["All","Tech Entrepreneur","Art","Tech & Investor","Teamwork",
-    "Finance","Networking","Government","Charity","Investors","Language learning","Politics","Fashion","History","Hobbies","Career & Business","Travel & Outdoor","News","Technology","True Crime","Comedy","Music & dancing","Sports","Science","Leadership","Education","Sustainability","Fiction","Interviews","Business and Finance ","Health ,and Wellness","Self - Imporvement","Music","Religion &Spirituality","Pop Culture","Environment","Parenting","Gaming","Food and Cooking","Pet & Animal","Relationship & Books","Personal Stories","TV & Film","Social Activities","Subscribes","Language","Others",
+  const entrepreneurs = [
+    "All",
+    "Tech Entrepreneur",
+    "Art",
+    "Tech & Investor",
+    "Teamwork",
+    "Finance",
+    "Networking",
+    "Government",
+    "Charity",
+    "Investors",
+    "Language learning",
+    "Politics",
+    "Fashion",
+    "History",
+    "Hobbies",
+    "Career & Business",
+    "Travel & Outdoor",
+    "News",
+    "Technology",
+    "True Crime",
+    "Comedy",
+    "Music & dancing",
+    "Sports",
+    "Science",
+    "Leadership",
+    "Education",
+    "Sustainability",
+    "Fiction",
+    "Interviews",
+    "Business and Finance ",
+    "Health ,and Wellness",
+    "Self - Imporvement",
+    "Music",
+    "Religion &Spirituality",
+    "Pop Culture",
+    "Environment",
+    "Parenting",
+    "Gaming",
+    "Food and Cooking",
+    "Pet & Animal",
+    "Relationship & Books",
+    "Personal Stories",
+    "TV & Film",
+    "Social Activities",
+    "Subscribes",
+    "Language",
+    "Others",
   ];
 
   useEffect(() => {
@@ -57,9 +103,9 @@ const FilterPodcast = () => {
     navigate("/podcast", { state: { filteredData } });
   };
 
-  const resetFilter = ()=>{
-    navigate('/podcast')
-  }
+  const resetFilter = () => {
+    navigate("/podcast");
+  };
   return (
     <Fragment>
       <PodcastFilterNav
@@ -172,7 +218,10 @@ const FilterPodcast = () => {
           </div>
         </div>
         <div className="flex justify-end mb-8">
-          <button className="px-4 py-2 md:px-8 md:py-3 flex-shrink-0 w-auto ms-2 my-2 mr-2 md:mr-4 flex items-center relative cursor-pointer border-2 text-sm md:text-[18px] linear_gradient_text rounded-lg md:rounded-2xl" onClick={resetFilter}>
+          <button
+            className="px-4 py-2 md:px-8 md:py-3 flex-shrink-0 w-auto ms-2 my-2 mr-2 md:mr-4 flex items-center relative cursor-pointer border-2 text-sm md:text-[18px] linear_gradient_text rounded-lg md:rounded-2xl"
+            onClick={resetFilter}
+          >
             Reset Filters
           </button>
           <button

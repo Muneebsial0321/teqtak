@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment } from "react";
 
 const FilterName = ({ activeFilter, name }) => {
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -58,9 +58,34 @@ const FilterName = ({ activeFilter, name }) => {
   ];
 
   const filteredEntrepreneurs = entrepreneurs.filter((entrepreneur) => {
-    if (activeFilter === 'All') return true;
-    if (activeFilter === 'Entrepreneur') return !['Reviews', 'Videos', 'Duration', 'Funds', 'Experience', 'Strategy', 'Exit', 'Results', 'Market', 'Product', 'Team', 'Timeline'].includes(entrepreneur.name);
-    if (activeFilter === 'Investor') return ['Reviews', 'Funds', 'Experience', 'Strategy', 'Exit', 'Results', 'Market', 'Team', 'Timeline'].includes(entrepreneur.name);
+    if (activeFilter === "All") return true;
+    if (activeFilter === "Entrepreneur")
+      return ![
+        "Reviews",
+        "Videos",
+        "Duration",
+        "Funds",
+        "Experience",
+        "Strategy",
+        "Exit",
+        "Results",
+        "Market",
+        "Product",
+        "Team",
+        "Timeline",
+      ].includes(entrepreneur.name);
+    if (activeFilter === "Investor")
+      return [
+        "Reviews",
+        "Funds",
+        "Experience",
+        "Strategy",
+        "Exit",
+        "Results",
+        "Market",
+        "Team",
+        "Timeline",
+      ].includes(entrepreneur.name);
     return true;
   });
 
@@ -70,24 +95,38 @@ const FilterName = ({ activeFilter, name }) => {
 
   return (
     <Fragment>
-      <div className="bg-white h-[62%] px-3 mt-2 overflow-y-auto" style={{
-        'WebkitOverflowScrolling': 'touch',
-        'WebkitScrollbar': {
-          display: 'none'
-        },
-        '-msOverflowStyle': 'none',
-        'scrollbarWidth': 'none'
-      }}>
-        <h1 className='text-xl sm:text-2xl font-bold ml-4 sm:ml-10 my-3'>{name}</h1>
+      <div
+        className="bg-white h-[62%] px-3 mt-2 overflow-y-auto"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          WebkitScrollbar: {
+            display: "none",
+          },
+          "-msOverflowStyle": "none",
+          scrollbarWidth: "none",
+        }}
+      >
+        <h1 className="text-xl sm:text-2xl font-bold ml-4 sm:ml-10 my-3">
+          {name}
+        </h1>
         <div className="flex flex-wrap my-3 mr-4 sm:mr-18 ml-4 sm:ml-10">
           {filteredEntrepreneurs.map((entrepreneur, index) => (
             <div
               key={index}
               className={`${selectedIndex === index}`}
-              style={{ margin: '5px', cursor: 'pointer' }}
+              style={{ margin: "5px", cursor: "pointer" }}
             >
-              <div className="flex items-center justify-between" onClick={() => handleShow(index)}>
-                <p className={`text-sm sm:text-lg font-semibold px-2 sm:px-3 rounded-full py-1 bg-[#F1F1F1] ${selectedIndex === index ? 'linear_gradient' : 'hover:linear_gradient'}`}>
+              <div
+                className="flex items-center justify-between"
+                onClick={() => handleShow(index)}
+              >
+                <p
+                  className={`text-sm sm:text-lg font-semibold px-2 sm:px-3 rounded-full py-1 bg-[#F1F1F1] ${
+                    selectedIndex === index
+                      ? "linear_gradient"
+                      : "hover:linear_gradient"
+                  }`}
+                >
                   {entrepreneur.name}
                 </p>
               </div>
@@ -96,7 +135,7 @@ const FilterName = ({ activeFilter, name }) => {
         </div>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
 export default FilterName;
