@@ -83,7 +83,7 @@ function Message() {
                         src={
                           e.sender?.picUrl
                             ? e.sender.picUrl
-                            : "/placeholder.jpg"
+                            : "placeholder.jpg"
                         }
                         alt="sender"
                         className="h-[50px] w-[50px] rounded-full"
