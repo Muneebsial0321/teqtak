@@ -88,7 +88,7 @@ function Ticketdetail() {
                 <div className="flex justify-between mt-5">
                   <div className="name h-[10vh] w-[20%]">
                     <p className="text-xs font-semibold text-[gray]">Name</p>
-                    <p className="text-sm font-medium opacity-70">
+                    <p className="text-sm font-medium opacity-70 whitespace-nowrap">
                       {user ? user.name : "Unknown"}
                     </p>
                   </div>

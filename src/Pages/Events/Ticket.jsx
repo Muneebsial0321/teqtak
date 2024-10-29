@@ -124,7 +124,7 @@ const remainingPremium = tickets.eventTicketArray
           <FontAwesomeIcon icon={faSort} /> Sort By
         </button>
 
-        <div className="flex justify-between md:flex-row gap-3 Podcast_Top_Videos mt-3 lg:w-[90%] w-[95%] mx-auto Ticket_Tickets">
+        <div className="flex justify-between max-[425px]:flex-col max-[425px]:items-center gap-3 Podcast_Top_Videos mt-3 lg:w-[90%] w-[95%] mx-auto Ticket_Tickets">
           <div className="border rounded shadow-lg w-[33%] text-center px-4 py-6 ticket flex-shrink-0">
             <h5 className="text-lg font-bold">Basic Admission</h5>
             <h5 className="text-lg font-bold">

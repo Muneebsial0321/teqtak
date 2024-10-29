@@ -40,7 +40,7 @@ const Signin = () => {
         console.log("Login successful:", data);
         // Store any tokens or user info as needed
         // navigate('/bording');
-        navigate(`/bording?authtoken=${data.authToken}&user=${data.Users_PK}`);
+        navigate(`/bording?authtoken=${data.authToken}&user=${data.user.Users_PK}`);
 
       } else {
         const errorData = await response.json();
@@ -60,13 +60,13 @@ const Signin = () => {
           <div className="flex justify-center items-center border-[1px] border-gray-300 rounded w-full">
             <button
               onClick={() => navigate("/signup")}
-              className="text-black w-full py-[10px] text-xs font-semibold rounded"
+              className="text-black w-full py-[10px] text-[16px] font-semibold rounded"
             >
               Sign up
             </button>
             <button
               onClick={() => navigate("/signin")}
-              className="linear_gradient w-full py-[10px] text-xs font-semibold rounded"
+              className="linear_gradient text-white w-full py-[10px] text-[16px] font-semibold rounded"
             >
               Sign in
             </button>
@@ -98,7 +98,7 @@ const Signin = () => {
             <section className="flex items-center mt-6 justify-center">
               <button
                 type="submit"
-                 className="w-full mb-4  py-3 rounded-3xl font-semibold linear_gradient text-black"
+                 className="w-full mb-4  py-3 rounded-3xl font-semibold linear_gradient text-white"
                  disabled={loading}
               >
                 {loading ? "Loading..." : "Sign In"}

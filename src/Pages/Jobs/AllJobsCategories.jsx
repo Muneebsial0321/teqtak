@@ -128,7 +128,7 @@ const currentUser = getUserId()
                       </p>
                     </div>
                   </div>
-                  <p className="mt-7 ps-4 text-md opacity-65">{elm.location}({elm.workplaceType})</p>
+                  <p className="mt-7 ps-4 text-md opacity-65 max-[425px]:text-[16px]">{elm.location}({elm.workplaceType})</p>
                   <p className="ps-4 text-sm opacity-65 mt-3">
                     {elm.salaryRange}
                   </p>

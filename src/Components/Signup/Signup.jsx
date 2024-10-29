@@ -76,18 +76,18 @@ const Signup = () => {
   return (
     <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200">
       <ToastContainer />
-      <div className="w-full h-full md:h-[95vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-4">
+      <div className="w-full h-full md:h-[95vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-2">
         <section className="flex flex-col gap-2 items-center py-[1px] w-[19rem]">
           <div className="flex justify-center items-center border-[1px] border-gray-300 rounded w-full">
             <button
               onClick={() => navigate("/signup")}
-              className="linear_gradient w-full py-[10px] text-xs font-semibold rounded"
+              className="linear_gradient text-white w-full py-[10px] text-[16px] font-semibold rounded"
             >
               Sign up
             </button>
             <button
               onClick={() => navigate("/signin")}
-              className="text-black w-full py-[10px] text-xs font-semibold rounded"
+              className="text-black w-full py-[10px] text-[16px] font-semibold rounded"
             >
               Sign in
             </button>
@@ -129,7 +129,7 @@ const Signup = () => {
                 <button
                   key={role}
                   type="button"
-                  className={`${selectedRole === role ? "linear_gradient" : "bg-[#f1f1f1]"} rounded text-xs text-black px-2 py-2 font-semibold`}
+                  className={`${selectedRole === role ? "linear_gradient text-white" : "bg-[#f1f1f1] "} rounded text-xs text-black px-2 py-2 font-semibold`}
                   onClick={() => handleRoleSelect(role)}
                 >
                   {role.charAt(0).toUpperCase() + role.slice(1)}
@@ -140,7 +140,7 @@ const Signup = () => {
             <section className="flex items-center mt-6 justify-center">
               <button
                 type="submit"
-                className="w-full mb-4 bg-purple-800 py-3 rounded-3xl font-semibold linear_gradient text-black"
+                className="w-full mb-4 bg-purple-800 py-3 rounded-3xl font-semibold linear_gradient text-white"
                 disabled={loading}
               >
                 {loading ? "Loading..." : "Sign up"}
@@ -201,7 +201,7 @@ const Signup = () => {
           </p>
         </section>
 
-        <p className="text-sm text-center w-full pt-8">
+        <p className="text-sm text-center w-full pt-">
           Already have an account?{" "}
           <Link to="/signin" className="text-blue-400">
             Log in

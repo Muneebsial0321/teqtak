@@ -10,14 +10,14 @@ import { FaAngleLeft } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
-// import img from "./Img2.png";
+
 
 import RelatedEvent from "./RelatedEvent";
 
 function Eventdetails() {
   const loc = useLocation();
   const navigate = useNavigate();
-  // const [newcard, setNewCard] = useState([]);
+  
   const [result, setResult] = useState({});
   const [event, setEvent] = useState({});
 
@@ -55,10 +55,10 @@ function Eventdetails() {
     setResult(d);
     return d;
   };
-  // console.log("evnetPrice",event.eventTicketArray)
+  
   return (
     <>
-      <div className="main h-full w-full bg-white">
+      <div className="main h-[98%] max-[425px]:h-auto w-full bg-white" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
         <div className="flex justify-between">
           <h4 className="flex items-center gap-3 mt-4 ms-4 text-2xl h-[10%]">
             <FaAngleLeft

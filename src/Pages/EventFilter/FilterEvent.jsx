@@ -157,7 +157,7 @@ const FilterEvent = () => {
         setActiveFilter={setActiveFilter}
       />
       <div
-        className="h-[77%] bg-white overflow-y-auto"
+        className="h-[74%] bg-white overflow-y-auto "
         style={{
           WebkitOverflowScrolling: "touch",
           WebkitScrollbar: {
@@ -354,7 +354,7 @@ const FilterEvent = () => {
           </div>
           <div className="my-3 w-full sm:w-1/2">
             <h1 className="text-2xl font-bold mb-2">Event Duration</h1>
-            <div className="flex flex-wrap whitespace-nowrap gap-2">
+            <div className="flex flex-wrap whitespace-nowrap gap-2 max-[425px]:mb-20">
               {dur.map((half) => (
                 <p
                   key={half}
@@ -371,12 +371,12 @@ const FilterEvent = () => {
             </div>
           </div>
         </div>
-        <div className="fixed lg:bottom-0 bottom-[3rem] right-2 lg:right-[11rem] p-4 w-full flex justify-end gap-4">
-          <button className="px-8 py-3 flex-shrink-0 w-auto rounded-2xl border-2 text-[16px] md:text-[18px] linear_gradient_text" onClick={resetFilter}>
+        <div className="fixed lg:bottom-0 bottom-[3rem] bg-white  lg:right-[11rem] p-4 w-auto flex lg:justify-end gap-4 md:justify-center md:bottom-[4rem] max-[425px]:justify-center max-[425px]:w-full">
+          <button className="px-6 py-3 flex-shrink-0   w-auto rounded-3xl border-2 text-[16px] md:text-[18px] linear_gradient_text" onClick={resetFilter}>
             Reset Filters
           </button>
           <button
-            className="px-8 py-3 flex-shrink-0 w-auto rounded-3xl text-white text-[16px] md:text-[18px] linear_gradient"
+            className="px-6 py-3 flex-shrink-0 w-auto rounded-3xl text-white text-[16px] md:text-[18px] linear_gradient "
             onClick={handleSearch}
           >
             Apply Filters

@@ -74,7 +74,7 @@ function JobFilters() {
 
   return (
     <Fragment>
-      <div className="flex items-center  overflow-y-visible JobFilScr bg-white w-full h-full px-3">
+      <div className="flex items-center  overflow-y-visible JobFilScr bg-white w-full h-full px-3 overflow-x-auto">
         <Link to="/filterevent" className="m-0 flex gap-2 items-center">
           <LuSettings2 /> |{" "}
         </Link>

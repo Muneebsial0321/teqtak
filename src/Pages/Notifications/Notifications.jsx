@@ -66,10 +66,10 @@ function Notification() {
                       />
                     </Link>
                     <div>
-                      <p className="text-[15px] opacity-75">{notification.notiDesc}</p>
+                      <p className="text-[15px] opacity-75">{notification.notiTitle}</p>
                       <p>
                         <Link to="#" className="text-[blue] underline text-[13px] opacity-75">
-                          {notification.notiTitle}
+                          {notification.notiDesc}
                         </Link>
                       </p>
                     </div>
