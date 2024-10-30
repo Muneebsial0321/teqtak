@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaAngleLeft } from "react-icons/fa";
 import { LuImagePlus } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
-import Form from './Form';
+import Form from "./Form";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const PodcastForm = () => {
@@ -14,7 +14,7 @@ const PodcastForm = () => {
 
   const getUserId = () => {
     const str = document.cookie;
-    const userKey = str.split('=')[1];
+    const userKey = str.split("=")[1];
     return userKey;
   };
 
@@ -34,12 +34,12 @@ const PodcastForm = () => {
     const formData = new FormData();
 
     if (audioFile) {
-      formData.append('audio', audioFile);
-      formData.append('podcastDuration', audioDuration); // Append audio duration
+      formData.append("audio", audioFile);
+      formData.append("podcastDuration", audioDuration); // Append audio duration
     }
 
     if (coverImage) {
-      formData.append('image', coverImage);
+      formData.append("image", coverImage);
     }
 
     for (const [key, value] of Object.entries(formState)) {
@@ -47,7 +47,7 @@ const PodcastForm = () => {
     }
 
     try {
-      formData.append('userID', getUserId());
+      formData.append("userID", getUserId());
       const response = await fetch(`${REACT_APP_API_BASE_URL}/podcasts/`, {
         credentials: "include",
         method: "POST",
@@ -62,7 +62,7 @@ const PodcastForm = () => {
         console.error("Failed to submit podcast");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -77,7 +77,7 @@ const PodcastForm = () => {
       setCoverImage(files[0]);
     }
 
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -106,7 +106,10 @@ const PodcastForm = () => {
               />
               {audioFile ? (
                 <audio controls className="w-full h-full">
-                  <source src={URL.createObjectURL(audioFile)} type="audio/mpeg" />
+                  <source
+                    src={URL.createObjectURL(audioFile)}
+                    type="audio/mpeg"
+                  />
                   Your browser does not support the audio element.
                 </audio>
               ) : (
@@ -140,11 +143,11 @@ const PodcastForm = () => {
               </div>
             </div>
           </div>
-          <Form 
-            audioFile={audioFile} 
-            coverImage={coverImage} 
-            formState={formState} 
-            setFormState={setFormState} 
+          <Form
+            audioFile={audioFile}
+            coverImage={coverImage}
+            formState={formState}
+            setFormState={setFormState}
             audioDuration={audioDuration} // Pass the audio duration prop
           />
         </div>

@@ -96,8 +96,8 @@ const DevicePermissions = () => {
         />
         <h1 className="text-xl font-semibold ml-10">Device Permissions</h1>
       </div>
-      <h1 className='text-2xl font-semibold ml-52 mt-6'>Your Preference</h1>
-      <div className="w-96 ml-96 mt-6">
+      <h1 className='text-2xl font-semibold text-center mt-6'>Your Preference</h1>
+      <div className="w-96 flex justify-center flex-col mx-auto mt-6">
         {Object.keys(permissions).map((permission) => (
           <div key={permission} className="flex justify-between mb-6 items-center border-b-2 p-1">
             <span className="text-xl font-bold capitalize">{permission}</span>

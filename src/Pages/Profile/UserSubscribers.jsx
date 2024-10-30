@@ -10,19 +10,21 @@ function UserSubscribers() {
   const [able, setAble] = useState(null);
 
   // Get userId from location state
-  const userId = location.state?.id; 
+  const userId = location.state?.id;
   console.log("User ID:", userId);
 
   const getUserId = () => {
     const str = document.cookie;
-    const userKey = str.split('=')[1];
+    const userKey = str.split("=")[1];
     return userKey;
   };
 
   const fetchSubscribers = async () => {
     if (!userId) return; // Ensure userId is available
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${userId}`);
+      const response = await fetch(
+        `${REACT_APP_API_BASE_URL}/subscribe/my/${userId}`
+      );
       const data = await response.json();
       console.log("Fetched subscribers for user:", data);
       setSubscriber(data);
@@ -33,7 +35,9 @@ function UserSubscribers() {
 
   const fetchBlockedUsers = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`);
+      const response = await fetch(
+        `${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`
+      );
       const data = await response.json();
       console.log("Blocked users:", data);
       setBlockedUsers(Array.isArray(data) ? data : []);
@@ -46,9 +50,9 @@ function UserSubscribers() {
   const blockSubscriber = async (blockedId) => {
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/block`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: getUserId(),
@@ -60,10 +64,10 @@ function UserSubscribers() {
         console.log("Post for block:", result);
         setBlockedUsers((prev) => [...prev, { blockedId }]);
       } else {
-        console.error('Failed to block user');
+        console.error("Failed to block user");
       }
     } catch (error) {
-      console.error('Error blocking user:', error);
+      console.error("Error blocking user:", error);
     }
   };
 
@@ -74,19 +78,24 @@ function UserSubscribers() {
   const deleteSubscriber = async (subscriberId) => {
     console.log("Delete subscriber ID:", subscriberId);
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
         console.log("Subscriber deleted:", result);
-        setSubscriber(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
+        setSubscriber((prevSubscribers) =>
+          prevSubscribers.filter((sub) => sub._id !== subscriberId)
+        );
       } else {
-        console.error('Failed to delete subscriber');
+        console.error("Failed to delete subscriber");
       }
     } catch (error) {
-      console.error('Error deleting subscriber:', error);
+      console.error("Error deleting subscriber:", error);
     }
   };
 
@@ -108,21 +117,31 @@ function UserSubscribers() {
           </div>
           <div className="overflow-y-auto h-[550px]">
             {subscriber.map((subsc) => (
-              <div key={subsc._id} className="flex items-center justify-between py-3 mt-2 border-b">
+              <div
+                key={subsc._id}
+                className="flex items-center justify-between py-3 mt-2 border-b"
+              >
                 <div className="flex items-center gap-3">
                   <Link to="/userprofile">
                     <img
-                      src={subsc.user?.picUrl ? subsc.user.picUrl : '/placeholder.jpg'}
+                      src={
+                        subsc.user?.picUrl
+                          ? subsc.user.picUrl
+                          : "/placeholder.jpg"
+                      }
                       alt=""
                       className="h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] rounded-full"
                     />
                   </Link>
                   <div>
                     <p className="text-sm md:text-base lg:text-lg xl:text-xl opacity-75">
-                      {subsc.user?.name || 'Unknown'}
+                      {subsc.user?.name || "Unknown"}
                     </p>
                     <p>
-                      <Link to="##" className="text-xs md:text-sm lg:text-base xl:text-lg opacity-75">
+                      <Link
+                        to="##"
+                        className="text-xs md:text-sm lg:text-base xl:text-lg opacity-75"
+                      >
                         {subsc.linkText}
                       </Link>
                     </p>
@@ -131,7 +150,9 @@ function UserSubscribers() {
                 <div className="relative">
                   <CiMenuKebab
                     className="text-base md:text-lg lg:text-xl xl:text-2xl cursor-pointer"
-                    onClick={() => setAble(able === subsc._id ? null : subsc._id)}
+                    onClick={() =>
+                      setAble(able === subsc._id ? null : subsc._id)
+                    }
                   />
                   {able === subsc._id && (
                     <div className="absolute right-0 w-[200px] md:w-[250px] lg:w-[200px] xl:w-[200px] cursor-pointer px-3 py-2 z-30 bg-white shadow-lg border">

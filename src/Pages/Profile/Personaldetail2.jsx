@@ -50,7 +50,7 @@ const navigate = useNavigate()
         {/* <Link className="text-[#9595f5] mb-5 block">Edit Detail</Link> */}
 
         <p className="text-lg font-semibold mt-5">Total Subscriber</p>
-        <p className="text-[gray]">53,324 Subscribers</p>
+        <p className="text-[gray]">0 Subscribers</p>
 
         <p className="text-xl font-semibold mt-5">Description</p>
         <input

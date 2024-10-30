@@ -112,14 +112,14 @@ const Model = (props) => {
         />
       </section>
       {!isReportModalOpen && (
-        <div className="flex relative shadow-lg items-center md:h-[74%] h-[90%] md:w-[67%] w-[50%] md:pb-0 pb-3 bg-white">
+        <div className="flex relative shadow-lg items-center md:h-[74%] h-[90%] md:w-[67%] w-[50%] md:pb-0 pb-3 bg-white max-[425px]:w-[90%]">
           <RiCloseLine
             className="absolute z-20 right-2 top-2 cursor-pointer"
             onClick={() => props.setRepModOpen(false)}
           />
-          <section className="flex md:flex-nowrap flex-wrap relative items-center w-full h-[100%] font-[450] text-xs">
+          <section className="flex md:flex-nowrap flex-wrap relative items-center w-full h-[100%] font-[450] text-xs ">
             <img
-              className="md:w-[50%] w-full md:h-full h-[50%] relative"
+              className="md:w-[50%] w-full md:h-full h-[50%] relative object-cover max-[425px]:h-[40%]"
               src={props.picUrl || "/loading.jpg"}
               alt="Img-1"
             />
@@ -161,14 +161,14 @@ const Model = (props) => {
       </section>
 
       {isReportModalOpen && (
-        <div className="relative shadow-lg md:h-[74%] h-[90%] md:w-[67%] w-[50%] overflow-y-scroll Podcast_Top_Videos flex items-center bg-white">
+        <div className="relative shadow-lg md:h-[74%] h-[90%] md:w-[67%] w-[50%] overflow-y-scroll Podcast_Top_Videos flex items-center  max-[425px]:w-[90%] bg-white">
           <RiCloseLine
             className="absolute right-2 top-2 cursor-pointer"
             onClick={() => props.setRepModOpen(false)}
           />
 
           <section className="flex md:flex-nowrap flex-wrap md:items-center w-full h-[100%] font-[450] text-xs">
-            <img className="md:w-[45%] w-full md:h-full h-[45%]" src={props.picUrl || "/loading.jpg"} alt="user picture" />
+            <img className="md:w-[45%] w-full md:h-full h-[45%] object-cover max-[425px]:h-[40%]" src={props.picUrl || "/loading.jpg"} alt="user picture" />
             <div className="flex flex-col md:w-[50%] md:h-full h-[50%] w-full md:p-4">
               <div className="flex items-center justify-center py-4">
                 <h1>{""}</h1>
@@ -192,7 +192,7 @@ const Model = (props) => {
                 ></textarea>
               </div>
               <button
-                className="mt-4 p-2 linear_gradient w-1/2 self-center text-white rounded-2xl"
+                className="mt-4 p-2 linear_gradient w-1/2 self-center text-white rounded-2xl "
                 onClick={handleReportSubmit}
               >
                 Submit

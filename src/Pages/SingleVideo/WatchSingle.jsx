@@ -279,7 +279,7 @@ const WatchSingle = () => {
           <video
             src={video && video.data ? video.data.videoUrl : ''}
             autoPlay
-            className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-fill"
+            className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover"
            
           ></video>
         </div>

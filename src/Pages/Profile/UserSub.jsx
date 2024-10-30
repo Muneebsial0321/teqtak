@@ -6,7 +6,7 @@ const UserSub = () => {
   return (
     <Fragment>
       <div
-        className="flex flex-wrap bg-white mt-1 h-[99%] overflow-y-auto"
+        className="flex flex-wrap bg-white mt-1 h-[99%] "
         style={{
           WebkitOverflowScrolling: "touch",
           WebkitScrollbar: {

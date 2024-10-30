@@ -8,15 +8,15 @@ import { TiGroupOutline } from "react-icons/ti";
 import { PiEyeClosed } from "react-icons/pi";
 import { IoIosLink } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import CSS for toast notifications
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import CSS for toast notifications
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const Video = () => {
   const [inputData, setInpData] = useState("");
   const [inpType, setInpType] = useState("");
   const [step, setStep] = useState("upload");
-  const [videoDesc, setDesc] = useState('');
+  const [videoDesc, setDesc] = useState("");
   const [videoTags, setTags] = useState([]);
   const [postPriv, setPostPriv] = useState("Anyone");
   const [postPrivShow, setPostPrivShow] = useState(false);
@@ -65,11 +65,15 @@ const Video = () => {
     formData.append("videoVisibility", postPriv);
 
     try {
-      const response = await axios.post(`${REACT_APP_API_BASE_URL}/upload/${getUserId()}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${REACT_APP_API_BASE_URL}/upload/${getUserId()}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log({ response });
       setVidPostSucc(true);
       toast.success("Video uploaded successfully!"); // Show success toast
@@ -84,7 +88,7 @@ const Video = () => {
 
   const getUserId = () => {
     const str = document.cookie;
-    const userKey = str.split('=')[1];
+    const userKey = str.split("=")[1];
     return userKey;
   };
 
@@ -94,7 +98,7 @@ const Video = () => {
 
   const tagOnChange = (e) => {
     const value = e.target.value;
-    const tagsArray = value.split('#').filter(tag => tag.trim() !== '');
+    const tagsArray = value.split("#").filter((tag) => tag.trim() !== "");
 
     if (tagsArray.length <= 6) {
       setTags(tagsArray);
@@ -110,17 +114,17 @@ const Video = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: videoDesc || 'Check out this video!',
-          text: 'Watch this video I just uploaded!',
+          title: videoDesc || "Check out this video!",
+          text: "Watch this video I just uploaded!",
           url: window.location.href,
         });
-        toast.success('Share successful!'); // Show success toast
+        toast.success("Share successful!"); // Show success toast
       } catch (error) {
-        toast.error('Error sharing the video.'); // Show error toast
-        console.error('Error sharing:', error);
+        toast.error("Error sharing the video."); // Show error toast
+        console.error("Error sharing:", error);
       }
     } else {
-      toast.error('Web Share API is not supported in your browser.'); // Show error toast
+      toast.error("Web Share API is not supported in your browser."); // Show error toast
     }
   };
 
@@ -161,7 +165,10 @@ const Video = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-center gap-2 PodcastSuccessGradient rounded-3xl w-40 h-10 " onClick={shareContent}>
+              <div
+                className="flex items-center justify-center gap-2 PodcastSuccessGradient rounded-3xl w-40 h-10 "
+                onClick={shareContent}
+              >
                 <FaShareFromSquare size={20} className="text-white" />
                 <p className="text-white">Share</p>
               </div>

@@ -60,11 +60,13 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
   const filterUsers = (searchTerm) => {
     const lowerCaseTerm = searchTerm.toLowerCase();
     const filtered = allUsers.filter(
-      (user) =>   user && 
-      (user.name && user.name.toLowerCase().includes(lowerCaseTerm) || 
-       user.userName && user.userName.toLowerCase().includes(lowerCaseTerm))
-    )
-    
+      (user) =>
+        user &&
+        ((user.name && user.name.toLowerCase().includes(lowerCaseTerm)) ||
+          (user.userName &&
+            user.userName.toLowerCase().includes(lowerCaseTerm)))
+    );
+
     setFilteredUsers(filtered);
   };
 
@@ -72,20 +74,20 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
     const newSpeaker = {
       id: user.Users_PK, // User ID
       name: user.name || user.userName || "unknown", // Display name
-      picUrl: user.picUrl || "/placeholder.jpg", 
+      picUrl: user.picUrl || "/placeholder.jpg",
     };
 
     const updatedSpeakers = [...speakers, newSpeaker];
-    console.log("updated speaker",updatedSpeakers)
-    console.log("speakers are",speakers)
+    console.log("updated speaker", updatedSpeakers);
+    console.log("speakers are", speakers);
 
     setSpeakers(updatedSpeakers);
-    console.log("speakers are",speakers)
+    console.log("speakers are", speakers);
     setInputValue("");
     setFilteredUsers([]);
     setShowAdditionalForms(false);
 
-    const eventArray = updatedSpeakers.map(speaker => speaker.id);
+    const eventArray = updatedSpeakers.map((speaker) => speaker.id);
     updateSpeakerData(eventArray); // Send only the IDs
   };
 
@@ -98,8 +100,8 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
 
     const updatedSpeakers = [...speakers, nonTaggedSpeaker];
     setSpeakers(updatedSpeakers);
-    
-    const eventArray = updatedSpeakers.map(speaker => speaker.id);
+
+    const eventArray = updatedSpeakers.map((speaker) => speaker.id);
     updateSpeakerData(eventArray); // Send only the IDs
   };
 
@@ -114,8 +116,8 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
   const handleRemoveSpeaker = (index) => {
     const updatedSpeakers = speakers.filter((_, i) => i !== index);
     setSpeakers(updatedSpeakers);
-    
-    const eventArray = updatedSpeakers.map(speaker => speaker.id);
+
+    const eventArray = updatedSpeakers.map((speaker) => speaker.id);
     updateSpeakerData(eventArray); // Send updated IDs to server
   };
 
@@ -140,10 +142,10 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
               className="p-2 cursor-pointer hover:bg-gray-200 flex items-center"
               onClick={() => handleUserSelect(user)}
             >
-              <img 
-                src={user.picUrl || "/placeholder.jpg"} 
-                alt={user.name} 
-                className="inline-block w-8 h-8 rounded-full mr-2" 
+              <img
+                src={user.picUrl || "/placeholder.jpg"}
+                alt={user.name}
+                className="inline-block w-8 h-8 rounded-full mr-2"
               />
               {user.name || user.userName}
             </li>
@@ -184,7 +186,6 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
               className="w-full border py-2 ps-3 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"
             />
           </label>
-       
         </div>
       )}
 
@@ -192,10 +193,10 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
         {speakers.map((speaker, index) => (
           <div key={index} className="flex items-center gap-3 my-2">
             {speaker.picUrl && (
-              <img 
-                src={speaker.picUrl || "/placeholder.jpg"} 
-                alt={speaker.name} 
-                className="w-8 h-8 rounded-full " 
+              <img
+                src={speaker.picUrl || "/placeholder.jpg"}
+                alt={speaker.name}
+                className="w-8 h-8 rounded-full "
               />
             )}
             <span className="bg-blue-100 text-blue-800 rounded-full px-3 py-1">

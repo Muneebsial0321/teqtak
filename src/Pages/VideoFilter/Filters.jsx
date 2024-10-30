@@ -74,7 +74,7 @@ const Filters = () => {
   return (
     <Fragment>
       <FilterNav activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-      <div className="bg-white px-2 md:px-4 mt-2 overflow-y-auto h-[21.5rem]" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
+      <div className="bg-white px-2 md:px-4 mt-2 overflow-y-auto h-[23.5rem]" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
         <div className="flex flex-wrap gap-4 justify-between">
           {filteredEntrepreneurs.map((entrepreneur, index) => (
             <div
@@ -102,14 +102,14 @@ const Filters = () => {
           ))}
         </div>
       </div>
-      <div className='flex flex-col md:flex-row justify-between bg-white px-2 md:px-4 py-2'>
-        <button className="px-4 py-2 md:px-6 md:py-3 flex-shrink-0 w-full md:w-auto ms-2 my-2 mr-4 flex items-center justify-center border-2 text-sm md:text-lg linear_gradient_text rounded-xl">
-          Reset Filters
-        </button>
-        <button className="px-4 py-2 md:px-6 md:py-3 flex-shrink-0 w-full md:w-auto ms-2 my-2 mr-4 flex items-center justify-center linear_gradient text-white text-sm md:text-lg rounded-xl">
-          Apply Filters
-        </button>
-      </div>
+      <div className="fixed lg:bottom-0 bottom-[3rem] right-2 lg:right-[12rem] p-4  w-full flex justify-end gap-4 max-[425px]:justify-center max-[425px]:bg-white mb-6">
+          <button className="px-8 py-3 flex-shrink-0 w-auto rounded-2xl border-2 text-[16px] md:text-[18px] linear_gradient_text">
+            Reset Filters
+          </button>
+          <button className="px-8 py-3 flex-shrink-0 w-auto rounded-3xl text-white text-[16px] md:text-[18px] linear_gradient">
+            Apply Filters
+          </button>
+        </div>
     </Fragment>
   );
 };

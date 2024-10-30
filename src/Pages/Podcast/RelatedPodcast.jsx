@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchPodcast } from "../../API";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import img from "./img2.jpeg";
 import { CiPlay1 } from "react-icons/ci";
 import { IoBookmarkOutline } from "react-icons/io5";
 import axios from "axios";
@@ -64,11 +63,11 @@ const filteredData = location.state?.filteredData
   return (
     <>
       <ToastContainer /> {/* Include the ToastContainer here */}
-      <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2">
+      <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 text-white">
         {recentdata.map((elm, ind) => (
           <div
             key={ind}
-            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw] sm:w-[33.33vw] w-[33.33vw] flex-shrink-0 rounded-lg relative"
+            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw]  max-[425px]:w-[40vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
             onClick={() =>
               navigate(`/podcastdetails`, { state: { id: elm._id } })
             } // Navigate on click
@@ -96,9 +95,9 @@ const filteredData = location.state?.filteredData
               </div>
             </div>
             <img
-              src={elm.picUrl ? elm.picUrl : "/loading.jpg"}
+              src={elm.picUrl ? elm.picUrl : "loading.jpg"}
               alt={`Img-${ind}`}
-              className="h-full w-full rounded-lg"
+              className="h-full w-full rounded-lg object-cover"
             />
           </div>
         ))}

@@ -89,7 +89,7 @@ const AllVideos = (props) => {
               >
                 <video
                   src={videoItem.data.videoUrl}
-                  className="w-[100%] h-[100%] overflow-y-hidden object-cover"
+                  className="w-[100%] h-[100%] overflow-y-hidden object-cover "
                   // controls
                 ></video>
                 <CiPlay1 className="absolute text-2xl text-white" />

@@ -12,7 +12,7 @@ const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 const CardComponent = ({ title, videoUrl, videoId, navigate, videos }) => (
   <div
-    className="lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[25vw] relative m-0 text-white cursor-pointer"
+    className="lg:h-[30vh] h-[20vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[25vw] relative m-0 text-white cursor-pointer"
     onClick={() => navigate(`/watchhistory/${encodeURIComponent(videoId)}`, { state: { id: videos } })}
   >
     <video className="h-full w-full rounded-lg object-cover" src={videoUrl} muted  />
@@ -103,7 +103,7 @@ function WatchHistory() {
                   See all
                 </Link>
               </div>
-              <div className="mt-3 flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos">
+              <div className="mt-3 flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos  ">
                 {videos.map((elm) => (
                   <div key={elm._id}>
                     <CardComponent
@@ -117,11 +117,11 @@ function WatchHistory() {
                 ))}
               </div>
               <h1 className="my-2 text-2xl">Podcasts</h1>
-              <div className="flex justify-start text-white ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2">
+              <div className="flex justify-start text-white ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 ">
                 {recentdata.map((elm, ind) => (
                   <div
                     key={ind}
-                    className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw] sm:w-[33.33vw] w-[33.33vw] flex-shrink-0 rounded-lg relative"
+                    className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[30.33vw] max-[425px]:w-[43.33vw] w-[42.33vw] flex-shrink-0 rounded-lg relative"
                     onClick={() => navigate(`/podcastdetails`, { state: { id: elm.data._id } })}
                   >
                     <div className="absolute h-full w-full ShadedBG rounded-lg">
@@ -133,7 +133,7 @@ function WatchHistory() {
                         }}
                       />
                       <div className="absolute bottom-1 left-1">
-                        {/* <p className="text-sm">{elm.data.episodeTitle?elm.data.episodeTitle:"N/A"}</p> */}
+                        <p className="text-sm">{elm.episodeTitle?elm.episodeTitle:"N/A"}</p>
                         <Link
                           to="/userprofile"
                           state={{ id: elm.userID ? elm.userID : "unknown" }}
@@ -149,7 +149,7 @@ function WatchHistory() {
                     <img
                       src={elm.picUrl ? elm.picUrl : "/loading.jpg"}
                       alt={`Img-${ind}`}
-                      className="h-full w-full rounded-lg"
+                      className="h-full w-full rounded-lg object-cover"
                     />
                   </div>
                 ))}
