@@ -25,7 +25,7 @@ const Second = () => {
     },
   ];
   return (
-    <div className='bg-gradient-to-b from-[#e4efff] to-[#ffffff] pb-6'>
+    <div className='bg-gradient-to-b relative lg:top-[-10rem] from-[#e4efff] to-[#ffffff] pb-6'>
       <div className="relative sm:pt-20 ">
         <img
           src="Images/RectangleLeft.png"
