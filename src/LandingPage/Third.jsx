@@ -3,8 +3,8 @@ function Third() {
   return (
     <>
       <section>
-        <div className="relative h-auto mt-9 lg:h-screen ">
-          <div className="flex lg:flex-nowrap flex-wrap   lg:w-[95%] w-[90%] mx-auto mt-20">
+        <div className="relative h-auto lg:h-screen lg:top-[-5rem] ">
+          <div className="flex lg:flex-nowrap flex-wrap   lg:w-[95%] w-[90%] mx-auto">
 
             <div className="w-full px-3 mx-auto lg:w-1/2 xl:w-1/2 md:w-2/3 sm:w-full">
               <h3 className="text-2xl xl:text-3xl lg:text-3xl font-sans leading-[44px] font-medium md:text-2xl sm:text-xl text-[#142746] w-full xl:w-4/5 lg:w-4/5 md:w-3/4 sm:w-full">

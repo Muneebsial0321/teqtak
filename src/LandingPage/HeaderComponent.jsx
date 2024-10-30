@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 const HeaderComponent = () => {
   return (
-    <div className="bg-[#e4efff] pb-20 flex w-[100vw] justify-between flex-col  lg:flex-row ">
+    <div className="bg-[#e4efff] max-md:pb-20 flex w-[100vw] justify-between flex-col  lg:flex-row ">
       {/* Content Section */}
-      <div className="pt-10 mx-4 md:ml-16 md:w-full md:pt-16 lg:w-1/2 ">
+      <div className="mx-4 md:ml-16 md:w-full md:pt-16 lg:w-1/2 ">
         <p className="text-[#1a3766]">
           <span className="text-[36px] sm:text-[40px] md:text-[50px] leading-tight">
             Revolutionizing social <br /> media for
@@ -28,11 +28,10 @@ const HeaderComponent = () => {
           >
             <LuDownload className='text-2xl'/> Download Now
           </button>
-          <Link to={'/signup'}>
-          <button 
+          <Link to={'/signup'}
            className="py-3 sm:py-4 px-5 flex items-center gap-2 rounded bg-[#C6DBFF] text-[#6165F3]">
-            <LuPlayCircle className='text-2xl' /> See in Action
-          </button>
+            <LuPlayCircle className='text-2xl' /> Signup now
+          {/* </button> */}
           </Link>
         </div>
       </div>
@@ -40,10 +39,6 @@ const HeaderComponent = () => {
 <div className='relative -z-0'>
   <img src="Images/HeroFigma.png" className='h-[50rem] max-lg:hidden -z-20 relative top-[-10rem] right-[-1.5rem]' alt="" />
 </div>
-      {/* Image Section ### it is in beta use the above implmentation*/}
-      {/* <div className="flex justify-center w-full mt-8 md:mt-0 lg:w-1/2 md:justify-center lg:justify-end">
-        <Images />
-      </div>  */}
     </div>
   );
 };
