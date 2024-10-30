@@ -34,7 +34,7 @@ function PodcastFilters() {
 
   return (
     <Fragment>
-      <div className="flex items-center bg-white h-[10%] px-3 ">
+      <div className="flex items-center bg-white h-[10%] px-3 py-3 ">
         <Link
           to="/filterpodcast"
           className="px-4 py-1 ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer "

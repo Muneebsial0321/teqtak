@@ -112,7 +112,7 @@ const Model = (props) => {
         />
       </section>
       {!isReportModalOpen && (
-        <div className="flex relative shadow-lg items-center md:h-[74%] h-[90%] md:w-[67%] w-[50%] md:pb-0 pb-3 bg-white max-[425px]:w-[90%]">
+        <div className="flex relative shadow-lg items-center md:h-[74%] h-[90%] md:w-[67%] w-[50%] md:pb-0 pb-3 bg-white max-[425px]:w-[80%]">
           <RiCloseLine
             className="absolute z-20 right-2 top-2 cursor-pointer"
             onClick={() => props.setRepModOpen(false)}
@@ -161,7 +161,7 @@ const Model = (props) => {
       </section>
 
       {isReportModalOpen && (
-        <div className="relative shadow-lg md:h-[74%] h-[90%] md:w-[67%] w-[50%] overflow-y-scroll Podcast_Top_Videos flex items-center  max-[425px]:w-[90%] bg-white">
+        <div className="relative shadow-lg md:h-[74%] h-[90%] md:w-[67%] w-[50%] overflow-y-scroll Podcast_Top_Videos flex items-center  max-[425px]:w-[80%] bg-white">
           <RiCloseLine
             className="absolute right-2 top-2 cursor-pointer"
             onClick={() => props.setRepModOpen(false)}
@@ -185,7 +185,7 @@ const Model = (props) => {
               </h1>
               <div className="px-4 flex flex-col justify-between h-full">
                 <textarea
-                  className="w-full outline-none h-[300px] p-2 border-none bg-gray-100 rounded"
+                  className="w-full outline-none h-[300px] max-[425px]:h-[150px] p-2 border-none bg-gray-100 rounded"
                   placeholder="The person is..."
                   value={reportMessage}
                   onChange={(e) => setReportMessage(e.target.value)}

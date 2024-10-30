@@ -106,9 +106,9 @@ function Personaldetail() {
           </p>
           <p className="text-xl font-semibold mt-5">Personal info</p>
           <div className="p-5">
-  <div className="flex flex-wrap gap-4 mt-5 md:grid-cols-2">
+  <div className="flex flex-wrap gap-4 mt-5 ">
     {/* Name field */}
-    <div className="w-full sm:w-[48%] md:w-[31%] lg:w-[50%]">
+    <div className="w-full sm:w-[48%] md:w-[48%] lg:w-[50%]">
       <div className="flex justify-between items-center mb-2">
         <p className="text-base font-medium">Name</p>
       </div>
@@ -118,17 +118,17 @@ function Personaldetail() {
     </div>
     
     {/* Work field */}
-    <div className="w-full sm:w-[48%] md:w-[31%] lg:w-[45%]">
+    <div className="w-full sm:w-[48%] md:w-[48%] lg:w-[45%]">
       <div className="flex justify-between items-center mb-2">
         <p className="text-base font-medium">Work</p>
       </div>
-      <div className="border p-2 rounded-md">
+      <div className="border p-2 rounded-md md:whitespace-nowrap">
         <span>{detail.work_experience || 'No work experience available.'}</span>
       </div>
     </div>
     
     {/* Education field */}
-    <div className="w-full sm:w-[48%] md:w-[31%] lg:w-[50%]">
+    <div className="w-full sm:w-[48%] md:w-[48%] lg:w-[50%]">
       <div className="flex justify-between items-center mb-2">
         <p className="text-base font-medium">Education</p>
       </div>
@@ -138,11 +138,11 @@ function Personaldetail() {
     </div>
     
     {/* Location field */}
-    <div className="w-full sm:w-[48%] md:w-[31%] lg:w-[45%]">
+    <div className="w-full sm:w-[48%] md:w-[48%] lg:w-[45%]">
       <div className="flex justify-between items-center mb-2">
         <p className="text-base font-medium">Location</p>
       </div>
-      <div className="border p-2 rounded-md">
+      <div className="border p-2 rounded-md whitespace-nowrap">
         <span>{detail.location || 'No location information available.'}</span>
       </div>
     </div>

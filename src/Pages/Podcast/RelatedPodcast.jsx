@@ -63,11 +63,11 @@ const filteredData = location.state?.filteredData
   return (
     <>
       <ToastContainer /> {/* Include the ToastContainer here */}
-      <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 text-white">
+      <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 text-white max-[425px]:mb-3">
         {recentdata.map((elm, ind) => (
           <div
             key={ind}
-            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw]  max-[425px]:w-[40vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
+            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[33.33vw]  max-[425px]:w-[43vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
             onClick={() =>
               navigate(`/podcastdetails`, { state: { id: elm._id } })
             } // Navigate on click

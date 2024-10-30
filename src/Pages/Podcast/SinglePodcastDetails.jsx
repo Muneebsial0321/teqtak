@@ -6,6 +6,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import Model from "../ModalReport/Model";
 import RelatedPodcast from "./RelatedPodcast";
+import PodcastFilters from "./PodcastFilters"
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 function SinglePodcastDetails() {
@@ -93,9 +94,15 @@ function SinglePodcastDetails() {
     }
   };
 
+  
+
   return (
     <Fragment>
-      <section className="bg-white h-full w-full relative px-6 overflow-y-scroll Podcast_Top_Videos">
+<div className="">
+<PodcastFilters />
+
+</div>
+      <section className="bg-white h-[88%] w-full relative px- overflow-y-scroll Podcast_Top_Videos mt-1">
         {revModOpen && (
           <div className="h-full  left-0 w-full absolute top-0 z-20 flex justify-center items-center">
             <Review
@@ -124,23 +131,23 @@ function SinglePodcastDetails() {
             Podcast
           </h4>
         </div>
-        <div className="flex w-full PCS_Flex sm:ps-6 gap-6">
+        <div className="flex w-full px-6 lg:ps-2 md:ps-6 gap-6 max-[425px]:flex-col">
           <img
             src={result.picUrl ? result.picUrl : "loading.jpg"}
-            className="md:h-[35vh] h-[39vh] md:w-[33%] w-[40%] sm:mx-auto rounded-xl object-cover "
+            className="md:h-[35vh] lg:h-[50vh] md:w-[33%] lg:w-[50%] sm:mx-auto rounded-xl object-cover "
             alt=""
           />
-          <div className="w-[60%] mx-auto PCS_Child1">
+          <div className="w-[60%] lg:mx-auto xl:mx-auto max-[425px]:w-full">
             <h1 className="text-xl font-semibold">
               {result.episodeTitle || "N/A"}
             </h1>
-            <h2>Podcast Type:</h2>
+            {/* <h2>Podcast Type:</h2> */}
             <p className="py-1 opacity-65">{result.podcastType || "N/A"}</p>
             <p className="">
               Season Number = {result.seasonNumber || "N/A"} <br /> Episode
               Number = {result.episodeNumber || "N/A"}
             </p>
-            <p>Audio Name:</p>
+            {/* <p>Audio Name:</p> */}
             <p className="opacity-50">
               {result.audioName &&
               result.audioName.replace(/[0-9]/g, "").length > 30
@@ -150,16 +157,16 @@ function SinglePodcastDetails() {
 
             {/* Audio player */}
             {result.audioUrl ? (
-              <audio controls>
-                <source src={result.audioUrl} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
-            ) : (
-              <p className="text-red-500">Audio not available</p>
-            )}
-          </div>
-        </div>
-        <div className="flex items-center gap-4 ml-8 mt-1">
+  <div className="flex  items-center p-4 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
+    <audio controls className="w-full max-w-full">
+      <source src={result.audioUrl} type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+) : (
+  <p className="text-red-500 text-center p-4">Audio not available</p>
+)}
+              <div className="flex items-center gap-4 ml-8 ">
           <CiSquareInfo
             className="text-2xl cursor-pointer"
             onClick={() => setRepModOpen(true)}
@@ -173,12 +180,15 @@ function SinglePodcastDetails() {
             onClick={() => setRevModOpen(true)}
           />
         </div>
-        <p>Podcast Description:</p>
+        {/* <p className="text-xl">Podcast Description:</p> */}
         <p className="lg:w-[75%] w-full opacity-50 text-[15px]">
           {result.episodeDescription}
         </p>
-        <p>Speakers:</p>
-        <div className="flex gap-2 md:ps-6 mt-3 w-full overflow-x-scroll Podcast_Top_Videos">
+          </div>
+        </div>
+      
+        <p className="text-xl px-6">Speakers:</p>
+        <div className="flex gap-2 px-6 md:ps-6 mt-3 w-full overflow-x-scroll Podcast_Top_Videos">
           {result.speakers &&
             result.speakers.map((elm, ind) => (
               <Link
@@ -197,7 +207,7 @@ function SinglePodcastDetails() {
             ))}
         </div>
 
-        <p className="md:ps-6">Similar podcasts</p>
+        <p className="md:ps-6 text-xl font-semibold ps-6">Similar podcasts</p>
         <RelatedPodcast />
       </section>
     </Fragment>

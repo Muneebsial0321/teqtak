@@ -91,12 +91,12 @@ const AllVideos = () => {
       <h1 className="text-xl font-bold my-3 sm:w-[90%] lg:w-[80%] mx-auto">
         Entrepreneur & Investor Videos
       </h1>
-      <div className="flex flex-wrap justify-start gap-1 sm:w-[90%] lg:w-[80%] mx-auto">
+      <div className="flex flex-wrap justify-start gap-1 sm:w-[90%] lg:w-[90%] mx-auto">
         {videos.slice(0, Math.min(videos.length, page * 20)).map((video, i) => (
           <div
             key={video._id} // Use unique ID instead of index
             ref={i === videos.length - 1 ? lastVideoRef : null}
-            className="w-[32%] cursor-pointer grid place-items-center relative h-[30vh] sm:h-[40vh]"
+            className="w-[32%] lg:w-[21vw] cursor-pointer grid place-items-center relative lg:h-[48vh] sm:h-[40vh]"
             onClick={() => handleVideoClick(i)}
           >
             <video

@@ -151,8 +151,8 @@ const UserProfile = () => {
     );
     const data = await req.json();
     console.log("mess resp",data)
-    if (data.message) { 
-      navigate('/messages');
+    if (data) { 
+      navigate('/messages/user1',{state:{id:data._id}});
   } else {
       console.error("Failed to create chat room:", data.error);
   }

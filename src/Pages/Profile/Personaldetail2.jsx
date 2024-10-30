@@ -40,7 +40,7 @@ const navigate = useNavigate()
 
   return (
     <Fragment>
-      <div className="h-full bg-white w-full px-6">
+      <div className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto">
         <div className="flex items-center gap-4 pt-2">
           <Link to='/personaldetails'>
             <FaArrowLeftLong size={30} className='border-2 border-black p-1 rounded-md' />
@@ -92,7 +92,7 @@ const navigate = useNavigate()
            
           </div>
 
-          <div className="w-full md:w-[50%]">
+          <div className="w-full md:w-[50%] ">
           
             <label htmlFor="study" className="block text-base font-medium">
               Education

@@ -102,11 +102,11 @@ useEffect(() => {
       <section className="w-full h-[89%] bg-white mt-1 text-white overflow-y-scroll Podcast_Top_Videos">
         <h1 className="flex items-center text-xl font-bold my-3 ps-3 text-black">Recently Played</h1>
         <section className="h-[90%] w-full">
-          <div className="flex gap-1 w-full overflow-x-scroll Podcast_Top_Videos ps-5">
+          <div className="flex gap-2 w-full overflow-x-scroll Podcast_Top_Videos ps-5">
             {recentview.map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] max-[425px]:w-[50vw] w-[22vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[11vw] md:w-[15vw] max-[425px]:w-[46vw] w-[22vw] flex-shrink-0 rounded-lg relative"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm.data._id } })}
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">
@@ -135,10 +135,10 @@ useEffect(() => {
 <h1 className="ps-3 text-xl font-bold my-3 text-black">Related Podcasts</h1>
           
           <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 ">
-            {recentdata.slice(0, 3).map((elm, ind) => (
+            {recentdata.slice(0, 4).map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw] max-[425px]:w-[45.33vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[33.33vw] max-[425px]:w-[45.33vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })} // Handle navigation
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">
@@ -165,11 +165,11 @@ useEffect(() => {
 
           <h1 className="ps-3 text-xl font-bold my-3 text-black">Suggested Podcast</h1>
 
-          <div className="flex gap-1 w-full overflow-x-scroll Podcast_Top_Videos ps-5">
+          <div className="flex gap-2 w-full overflow-x-scroll Podcast_Top_Videos ps-5">
             {recentdata.map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] max-[425px]:w-[50vw] w-[21vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[11vw] md:w-[15vw] max-[425px]:w-[46vw] w-[21vw] flex-shrink-0 rounded-lg relative"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })}
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">

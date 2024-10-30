@@ -98,8 +98,8 @@ const Video = () => {
     return debouncedCallback;
   };
 
-  const handleScroll = (e) => {
-    if (e.deltaY > 0) {
+  const handleScroll = (direction) => {
+    if (direction === "down") {
       if (videoIndex < videos.length - 1) {
         const nextVideoId = videos[videoIndex + 1]._id;
         navigate(`/video/${encodeURIComponent(nextVideoId)}`, { state: { videos } });
@@ -111,13 +111,35 @@ const Video = () => {
       }
     }
   };
-
-  const debouncedHandleScroll = useDebounce(handleScroll, 200);
-
+  
+  const debouncedHandleScroll = useDebounce(handleScroll, 300);
+  
+  // Event handler for mouse wheel (desktop)
+  const handleWheel = (e) => {
+    debouncedHandleScroll(e.deltaY > 0 ? "down" : "up");
+  };
+  
+  // Event handlers for touch (mobile)
+  let touchStartY = 0;
+  const handleTouchStart = (e) => {
+    touchStartY = e.touches[0].clientY;
+  };
+  
+  const handleTouchEnd = (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    const direction = touchEndY < touchStartY ? "down" : "up";
+    debouncedHandleScroll(direction);
+  };
+  
   useEffect(() => {
-    window.addEventListener('wheel', debouncedHandleScroll, { passive: false });
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd, { passive: false });
+  
     return () => {
-      window.removeEventListener('wheel', debouncedHandleScroll);
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [debouncedHandleScroll]);
 

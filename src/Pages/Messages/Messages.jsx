@@ -82,7 +82,7 @@ function Message() {
                     <div className="flex items-center gap-2">
                       <img
                         src={
-                          e.sender?.picUrl ? e.sender.picUrl : "placeholder.jpg"
+                          e.sender?.picUrl ? e.sender.picUrl : "/placeholder.jpg"
                         }
                         alt="sender"
                         className="h-[50px] w-[50px] rounded-full"

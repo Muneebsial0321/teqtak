@@ -82,32 +82,48 @@ const WatchSingle = () => {
     return debouncedCallback;
   };
 
-  const handleScroll = (e) => {
-
-   
-    if (e.deltaY > 0) {
-      // Scroll down
-      if (videoIndex < watch.length - 1) {
-        const nextVideoId = watch[videoIndex + 1]._id;
-        console.log("next video id",nextVideoId)
-        console.log("index number",videoIndex)
-        navigate(`/watchhistory/${encodeURIComponent(nextVideoId)}`, { state: { id :location.state.id } }, { replace: true });
+  const handleScroll = (direction) => {
+    if (direction === "down") {
+      if (videoIndex < videos.length - 1) {
+        const nextVideoId = videos[videoIndex + 1]._id;
+        navigate(`/video/${encodeURIComponent(nextVideoId)}`, { state: { videos } });
       }
     } else {
-      // Scroll up
       if (videoIndex > 0) {
-        const prevVideoId = watch[videoIndex - 1]._id;
-        navigate(`/watchhistory/${encodeURIComponent(prevVideoId)}`, { state: { id:location.state.id } }, { replace: true });
+        const prevVideoId = videos[videoIndex - 1]._id;
+        navigate(`/video/${encodeURIComponent(prevVideoId)}`, { state: { videos } });
       }
     }
   };
-
-  const debouncedHandleScroll = useDebounce(handleScroll, 200); // Adjust the delay as needed
-
+  
+  const debouncedHandleScroll = useDebounce(handleScroll, 200);
+  
+  // Event handler for mouse wheel (desktop)
+  const handleWheel = (e) => {
+    debouncedHandleScroll(e.deltaY > 0 ? "down" : "up");
+  };
+  
+  // Event handlers for touch (mobile)
+  let touchStartY = 0;
+  const handleTouchStart = (e) => {
+    touchStartY = e.touches[0].clientY;
+  };
+  
+  const handleTouchEnd = (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    const direction = touchEndY < touchStartY ? "down" : "up";
+    debouncedHandleScroll(direction);
+  };
+  
   useEffect(() => {
-    window.addEventListener('wheel', debouncedHandleScroll, { passive: false });
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd, { passive: false });
+  
     return () => {
-      window.removeEventListener('wheel', debouncedHandleScroll);
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [debouncedHandleScroll]);
 

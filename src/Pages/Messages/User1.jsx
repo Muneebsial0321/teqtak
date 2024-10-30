@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { CiMenuKebab, CiVideoOn, CiCalendar } from "react-icons/ci";
 import { GrGallery } from "react-icons/gr";
+import { FaAngleLeft } from "react-icons/fa";
 import { FaMicrophone, FaPaperPlane } from "react-icons/fa";
 import { FaCamera, FaPaperclip, FaSmile } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -184,14 +185,14 @@ console.log("pre msg",chatroom)
 
   const handleCalendar = () => {
     setShowCalendar(!showCalendar);
-    setSchedule(false); // Hide schedule card if visible
+    // setSchedule(false); // Hide schedule card if visible
   };
 
   const toggleCard = () => {
     setShowCard(!showCard);
-    setSchedule(!schedule);
-    setMeeting(!meeting); 
-    setShowCalendar(!showCalendar);
+    // setSchedule(!schedule);
+    // setMeeting(!meeting); 
+   
   };
   const handleDelete =async () => {
    await deleteChatroom(roomId);
@@ -200,11 +201,18 @@ console.log("pre msg",chatroom)
 console.log("msg recived",chatroom)
   return (
     <div className="main h-full w-[100%] ">
+      
       <div className="div h-full w-[100%]  bg-[#f5f3f3] p-5 relative">
+     
         <div className="flex justify-between items-center mb-8">
+        
           <div className="flex gap-2">
-          <img src={sender.picUrl || 'placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/>
-            <p className="text-base font-medium whitespace-nowrap">{sender.name}</p>
+          <FaAngleLeft
+            className="cursor-pointer mt-1"
+            onClick={() => navigate("/messages")}
+        />
+          {/* <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/> */}
+            <p className="text-xl font-medium whitespace-nowrap">{sender.name || "Unknown"}</p>
           </div>
           <div className="flex gap-5">
             <CiMenuKebab
@@ -216,18 +224,22 @@ console.log("msg recived",chatroom)
                 className="absolute w-[200px] cursor-pointer right-4 top-14 px-3 py-2 z-30 bg-white shadow-lg border"
                 onClick={() => setAble(false)}
               >
-                <p className="text-[15px] opacity-75 mb-5">Details</p>
-                <p className="text-[15px] opacity-75 mb-5">Hide</p>
+                {/* <p className="text-[15px] opacity-75 mb-5">Details</p>
+                <p className="text-[15px] opacity-75 mb-5">Hide</p> */}
                 <p className="text-[15px] opacity-75 mb-5">Block and report</p>
                 <p className="text-[15px] opacity-75 text-[red]" onClick={handleDelete}>Delete</p>
               </div>
             )}
             <CiVideoOn className="text-2xl cursor-pointer" onClick={handleSchedule} />
-            <CiVideoOn className="text-2xl cursor-pointer" onClick={meeting_} />
+            {/* <CiVideoOn className="text-2xl cursor-pointer" onClick={meeting_} /> */}
             {schedule && (
               <div
                 className="absolute w-[200px] cursor-pointer right-4 top-14 px-3 py-1 z-30 bg-white shadow-lg border"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) =>{
+                  e.stopPropagation();
+                  // setSchedule(false);
+                }
+                }
               >
                 <p ref={cardRef}  className="text-lg opacity-75" onClick={handleMeeting}>
                   Schedule a meeting
@@ -237,22 +249,22 @@ console.log("msg recived",chatroom)
                     className="absolute w-[200px] cursor-pointer right-0 top-12 px-3 py-1 text-md z-30 bg-white shadow-lg border"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setMeeting(false);
+                      // setMeeting(false);
                     }}
                   >
-                    <Link to="/createmeeting">Zoom Meeting</Link>
-                    <p>Recorded Zoom Meeting</p>
+                    <Link to="/createmeeting">Create Zoom Meeting</Link>
+                    <p ref={cardRef}  onClick={handleCalendar}>Schedule Zoom Meeting</p>
                     <p>Dial into Zoom Meeting</p>
                   </div>
                 )}
               </div>
             )}
-            <CiCalendar ref={cardRef} 
+            {/* <CiCalendar ref={cardRef} 
               className="text-2xl cursor-pointer"
               onClick={handleCalendar}
-            />
+            /> */}
             {showCalendar && (
-              <div className="absolute right-4 top-14 z-30 bg-white shadow-lg border p-2">
+              <div ref={cardRef} className="absolute right-4 top-14 z-30 bg-white shadow-lg border p-2">
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
@@ -267,7 +279,7 @@ console.log("msg recived",chatroom)
             <div key={i} className="flex items-end justify-between py-2">
               <div className="flex gap-2">
               <img
-  src={getUserId() !== e.sender ? sender.picUrl || 'placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : 'placeholder.jpg'}
+  src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : '/placeholder.jpg'}
   alt="profile"
   className="h-[40px] w-[40px] rounded-full"
 />
