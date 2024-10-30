@@ -103,7 +103,7 @@ const Signup = () => {
               value={state.name || ""}
               onChange={_onChange_}
               required
-              className="py-2 px-4 w-full rounded outline-none border-[1px] border-gray-200 placeholder:text-xs"
+              className="py-2 px-4 w-full rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:py-1"
             />
             <input
               type="text"
@@ -112,7 +112,7 @@ const Signup = () => {
               value={state.email || ""}
               onChange={_onChange_}
               required
-              className="py-2 px-4 rounded outline-none border-[1px] border-gray-200 placeholder:text-xs"
+              className="py-2 px-4 rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:py-1"
             />
             <input
               type="password"
@@ -121,7 +121,7 @@ const Signup = () => {
               value={state.password || ""}
               onChange={_onChange_}
               required
-              className="py-2 px-4 w-auto rounded outline-none border-[1px] border-gray-200 placeholder:text-xs"
+              className="py-2 px-4 w-auto rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:py-1"
             />
             <h2 className="font-semibold text-center">Select your Role</h2>
             <section className="flex justify-center gap-4">
