@@ -98,7 +98,7 @@ const Signin = () => {
             <section className="flex items-center mt-6 justify-center">
               <button
                 type="submit"
-                 className="w-full mb-4  py-3 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[90%]"
+                 className="w-full mb-4  py-3 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[80%]"
                  disabled={loading}
               >
                 {loading ? "Loading..." : "Sign In"}
