@@ -54,8 +54,8 @@ const Signin = () => {
   };
   
   return (
-    <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200">
-      <div className="w-full h-full md:h-[95vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-4">
+    <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200 overflow-x-hidden">
+      <div className="w-full h-full md:h-[95vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-4 max-[525px]:h-[100vh]">
         <section className="flex flex-col gap-2 items-center py-[1px] w-[19rem]">
           <div className="flex justify-center items-center border-[1px] border-gray-300 rounded w-full">
             <button
@@ -92,13 +92,13 @@ const Signin = () => {
               id="password"
               value={state.password}
               onChange={handleChange}
-              className="py-2 px-4 rounded outline-none border-[1px] border-gray-200 placeholder:text-xs"
+              className="py-2 px-4 rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:w-[90%]"
               required
             />
             <section className="flex items-center mt-6 justify-center">
               <button
                 type="submit"
-                 className="w-full mb-4  py-3 rounded-3xl font-semibold linear_gradient text-white"
+                 className="w-full mb-4  py-3 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[90%]"
                  disabled={loading}
               >
                 {loading ? "Loading..." : "Sign In"}
@@ -117,7 +117,7 @@ const Signin = () => {
             className="flex justify-center items-center bg-[#f1f1f1] w-[4rem] h-[4rem] px-2 py-2 rounded-full cursor-pointer"
             onClick={() => window.open(`${REACT_APP_API_BASE_URL}/auth/google/callback`)}
           >
-            <img className="w-10 h-10" src="google.png" alt="Google" />
+            <img className="w-10 h-10" src="/google.png" alt="Google" />
           </div>
           <div
             className="flex justify-center items-center bg-[#f1f1f1] p-[.3rem] w-[4rem] h-[4rem] rounded-full cursor-pointer"
