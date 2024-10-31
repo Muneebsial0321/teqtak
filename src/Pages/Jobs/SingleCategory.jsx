@@ -59,13 +59,13 @@ function Calendar2() {
             {data.map((elm, ind) => {
               const isLong = elm.jobTitle && elm.jobTitle.length > 20;
               const truncatedDescription = isLong
-                ? elm.jobTitle.substring(0, 25) + "..."
+                ? elm.jobTitle.substring(0, 15) + "..."
                 : elm.jobTitle;
 
               return (
                 <div
                   key={ind}
-                  className="h-[40vh] sm:w-[32.4%] w-[49.3%] gap-1 flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:p-2 "
+                  className="h-[40vh] sm:w-[32.4%] w-[49.3%] gap-1 flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:p-2 max-[425px]:w-[100%] max-[967px]:h-[40vh]"
                 >
                   <div className="w-full">
                     <div className="flex gap-2 mt-2">
@@ -74,18 +74,18 @@ function Calendar2() {
                         onLoad={(e) => (e.target.style.opacity = 1)}
                         onError={(e) => (e.target.src = "/placeholder.png")}
                         style={{ height: "40px", width: "40px", opacity: 0, transition: "opacity 0.3s ease" }}
-                        className="rounded-full ml-3"
+                        className="rounded-full ml-3 max-[967px]:ml-1"
                         alt="Profile"
                       />
                       <div>
-                        <h1 className="font-semibold">{truncatedDescription}</h1>
+                        <h1 className="font-semibold max-[767px]:font-normal whitespace-nowrap">{truncatedDescription}</h1>
                         <p className="font-light text-md">{formatDate(elm.applicationDeadline)}</p>
                       </div>
                     </div>
-                    <p className="mt-7 ps-4 text-md opacity-65  max-[425px]:w-[100%]">{elm.location}({elm.workplaceType})</p>
+                    <p className="mt-7 ps-4 text-md opacity-65  max-[425px]:w-[100%] max-[767px]:mt-2">{elm.location}({elm.workplaceType})</p>
                     <p className="ps-4 text-sm opacity-65 mt-3">{elm.salaryRange}</p>
                     <button
-  className="w-[90%] mx-auto flex justify-center items-center text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
+  className="w-[90%] mx-auto flex justify-center items-center text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[767px]:mt-3"
   onClick={() => navigate("/jobdetail", { state: { id: elm._id, title: elm.jobTitle } })}
 >
   {elm.jobType === " " ? "Apply Now" : "Apply Now"}

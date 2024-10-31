@@ -76,7 +76,7 @@ const currentUser = getUserId()
   return (
     <div className="ps-6 overflow-y-scroll Podcast_Top_Videos mt-1 h-[84%] bg-white">
       <div className="flex items-center justify-between">
-        <p className="text-xl font-bold my-3">Jobs</p>
+        <p className="text-xl font-bold my-3 max-[425px]:font-normal">Jobs</p>
         <button
           className="p-2 text-[blue] me-5"
           onClick={() => handleSeeAllClick("Jobs")}
@@ -95,7 +95,7 @@ const currentUser = getUserId()
             return (
               <div
                 key={ind}
-                className="h-[38vh] max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative  lg:w-[32.43%]"
+                className="h-[38vh] max-[766px]:h-auto max-[766px]:w-auto max-[766px]:p-2  md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative  lg:w-[32.43%]"
               >
                 <div className="w-full  ">
                   <div className="flex gap-2 mt-2">
@@ -159,9 +159,9 @@ const currentUser = getUserId()
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="text-xl font-bold my-3">Related to your interest</p>
+        <p className="text-xl font-bold my-3 whitespace-nowrap max-[425px]:font-normal">Related to your interest</p>
         <button
-          className="p-2 text-[blue] me-5"
+          className="p-2 text-[blue] me-5 whitespace-nowrap"
           onClick={() => handleSeeAllClick("Related to your interest")}
         >
           See all
@@ -177,7 +177,7 @@ const currentUser = getUserId()
           return (
             <div
               key={ind}
-              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 lg:w-[32.43%]"
+              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[766px]:h-auto max-[766px]:w-auto max-[766px]:p-2 lg:w-[32.43%]"
             >
               <div className="w-full">
                 <div className="flex gap-2 mt-2">
@@ -235,9 +235,9 @@ const currentUser = getUserId()
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="text-xl font-bold my-3">Recommended Jobs</p>
+        <p className="text-xl font-bold my-3 whitespace-nowrap max-[425px]:font-normal">Recommended Jobs</p>
         <button
-          className="p-2 text-[blue] me-5"
+          className="p-2 text-[blue] me-5 whitespace-nowrap"
           onClick={() => handleSeeAllClick("Recommended Jobs")}
         >
           See all
@@ -253,7 +253,7 @@ const currentUser = getUserId()
           return (
             <div
               key={ind}
-              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 lg:w-[32.43%]"
+              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[766px]:h-auto max-[766px]:w-auto max-[766px]:p-2 lg:w-[32.43%]"
             >
               <div className="w-full">
                 <div className="flex gap-2 mt-2">
