@@ -55,18 +55,18 @@ const Signin = () => {
   
   return (
     <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200 overflow-x-hidden scroll-smooth">
-      <div className="w-full h-full md:h-[95vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-4 max-[525px]:h-[100vh]">
-        <section className="flex flex-col gap-2 items-center py-[1px] w-[19rem]">
-          <div className="flex justify-center items-center border-[1px] border-gray-300 rounded w-full max-[425px]:w-[90%]">
+      <div className="w-full h-full md:h-[100vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-2 max-[766px]:h-[100vh] ">
+        <section className="flex flex-col gap-2 items-center py-[1px] w-auto">
+          <div className="flex justify-center items-center border-[1px] border-gray-300 rounded w-full">
             <button
               onClick={() => navigate("/signup")}
-              className="text-black w-full py-[10px] text-[16px] font-semibold rounded"
+              className="text-black   w-full py-[10px] text-[16px] font-semibold rounded max-[425px]:font-normal max-[425px]:py-1"
             >
               Sign up
             </button>
             <button
               onClick={() => navigate("/signin")}
-              className="linear_gradient text-white w-full py-[10px] text-[16px] font-semibold rounded"
+              className="linear_gradient text-white w-full py-[10px] text-[16px] font-semibold rounded max-[425px]:font-normal max-[425px]:py-1"
             >
               Sign in
             </button>
@@ -74,7 +74,7 @@ const Signin = () => {
 
           <h1 className="font-bold text-start my-4">Welcome Back!</h1>
 
-          <form className="flex flex-col w-[22rem] gap-2" onSubmit={handleSubmit}>
+          <form className="flex flex-col w-auto gap-2 justify-center" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Email"
@@ -98,7 +98,7 @@ const Signin = () => {
             <section className="flex items-center mt-6 justify-center">
               <button
                 type="submit"
-                 className="w-full mb-4  py-3 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[80%]"
+                 className="w-full mb-4 bg-purple-800 py-3 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[100%] max-[425px]:py-1 max-[425px]:font-normal"
                  disabled={loading}
               >
                 {loading ? "Loading..." : "Sign In"}
@@ -112,25 +112,25 @@ const Signin = () => {
           <div className="w-full h-[1px] bg-black"></div>
         </div>
 
-        <section className="flex items-center justify-between w-full md:my-2">
+        <section className="flex items-center justify-between w-auto md:my-2">
           <div
-            className="flex justify-center items-center bg-[#f1f1f1] w-[4rem] h-[4rem] px-2 py-2 rounded-full cursor-pointer"
+            className="flex justify-center items-center bg-[#f1f1f1] w-auto h-auto px-2 py-2 rounded-full cursor-pointer mx-1 max-[425px]:px-1 max-[425px]:py-1"
             onClick={() => window.open(`${REACT_APP_API_BASE_URL}/auth/google/callback`)}
           >
-            <img className="w-10 h-10" src="/google.png" alt="Google" />
+            <img className="w-10 h-10" src="google.png" alt="Google" />
           </div>
           <div
-            className="flex justify-center items-center bg-[#f1f1f1] p-[.3rem] w-[4rem] h-[4rem] rounded-full cursor-pointer"
+            className="flex justify-center items-center bg-[#f1f1f1] p-[.3rem] px-3 py-3 w-auto h-auto rounded-full cursor-pointer mx-1 max-[425px]:px-2 max-[425px]:py-2"
             onClick={() => window.open(`${REACT_APP_API_BASE_URL}/auth/github/callback`)}
           >
             <FaGithub className="text- w-8 h-8"/>
           </div>
-          <div className="flex justify-center items-center bg-[#f1f1f1] w-[4rem] h-[4rem] px-2 py-2 rounded-full cursor-pointer"
+          <div className="flex justify-center items-center bg-[#f1f1f1] w-auto h-auto px-2 py-2 rounded-full cursor-pointer mx-1 max-[425px]:px-2 max-[425px]:py-2"
               onClick={() => window.open(`${REACT_APP_API_BASE_URL}/auth/facebook/callback`)}
           >
             <FaFacebookF className="text-blue-800 w-8 h-8"/>
           </div>
-          <div className="flex justify-center items-center bg-[#f1f1f1] w-[4rem] h-[4rem] px-2 py-2 rounded-full cursor-pointer">
+          <div className="flex justify-center items-center bg-[#f1f1f1] w-auto h-auto px-3 py-3 rounded-full cursor-pointer m">
             <svg
               width="28"
               height="28"
@@ -149,17 +149,17 @@ const Signin = () => {
           </div>
         </section>
 
-        <section className="w-full flex flex-col items-center">
-          <p className="text-sm text-center md:w-[15vw] font-[450]">
+        <section className="w-full flex flex-col items-center justify-center whitespace-nowrap">
+          <p className="text-sm  md:w-[15vw] font-[450]">
             By proceeding you agree to investors{" "}
           </p>
 
-          <p className="text-sm text-center md:w-[15vw] text-blue-400">
+          <p className="text-sm  md:w-[15vw] justify-center text-blue-400 whitespace-nowrap">
             Terms of use <span className="text-black">&</span> Privacy policy
           </p>
         </section>
 
-        <p className="text-sm text-center w-full pt-8">
+        <p className="text-sm text-center w-full pt-8 max-[425px]:pt-1">
           If you don't have an account?{" "}
           <Link to="/signup" className="text-blue-400">
             Sign up
