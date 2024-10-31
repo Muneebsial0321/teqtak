@@ -54,7 +54,7 @@ const Signin = () => {
   };
   
   return (
-    <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200 overflow-x-hidden">
+    <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200 overflow-x-hidden scroll-smooth">
       <div className="w-full h-full md:h-[95vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-4 max-[525px]:h-[100vh]">
         <section className="flex flex-col gap-2 items-center py-[1px] w-[19rem]">
           <div className="flex justify-center items-center border-[1px] border-gray-300 rounded w-full max-[425px]:w-[90%]">
