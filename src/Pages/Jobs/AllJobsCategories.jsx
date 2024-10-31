@@ -74,7 +74,7 @@ const currentUser = getUserId()
   };
 
   return (
-    <div className="ps-6 overflow-y-scroll Podcast_Top_Videos mt-1 h-[89%] bg-white">
+    <div className="ps-6 overflow-y-scroll Podcast_Top_Videos mt-1 h-[84%] bg-white">
       <div className="flex items-center justify-between">
         <p className="text-xl font-bold my-3">Jobs</p>
         <button
@@ -95,9 +95,9 @@ const currentUser = getUserId()
             return (
               <div
                 key={ind}
-                className="h-[40vh] max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative"
+                className="h-[38vh] max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative  lg:w-[32.43%]"
               >
-                <div className="w-full">
+                <div className="w-full  ">
                   <div className="flex gap-2 mt-2">
                     <img
                       src={elm.logoUrl ? elm.logoUrl : "/placeholder.jpg"}
@@ -177,7 +177,7 @@ const currentUser = getUserId()
           return (
             <div
               key={ind}
-              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2"
+              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 lg:w-[32.43%]"
             >
               <div className="w-full">
                 <div className="flex gap-2 mt-2">
@@ -253,7 +253,7 @@ const currentUser = getUserId()
           return (
             <div
               key={ind}
-              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2"
+              className="h-[40vh] md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-auto max-[425px]:w-auto max-[425px]:p-2 lg:w-[32.43%]"
             >
               <div className="w-full">
                 <div className="flex gap-2 mt-2">

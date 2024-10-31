@@ -84,30 +84,30 @@ const filteredData = location.state?.filteredData
             className="h-full w-full rounded-lg cursor-pointer"
           />
           <IoBookmarkOutline 
-            className="absolute right-2 top-4 text-2xl cursor-pointer" 
+            className="absolute lg:right-2 lg:top-4 lg:text-2xl cursor-pointer top-2 right-1" 
             onClick={(e) => {
               e.stopPropagation(); // Prevent triggering on parent elements
               handleSaveToWishlist(data._id); // Pass the event ID
             }} 
           />
-          <div className="w-full absolute bottom-1">
-            <div className="SVTBottom w-[95%] mx-auto px-3 py-2 rounded-lg">
-              <small className="block text-xl">{data.eventTitle}</small>
-              <p className="text-xs py-2">{data.eventCatagory}</p>
-              <p className="text-sm pb-2">{data.eventLocation}</p>
-              <div className="flex items-center">
+          <div className="w-full absolute bottom-1 ">
+            <div className="SVTBottom w-[95%] mx-auto lg:px-3 lg:py-2 rounded-lg px-1 ">
+              <small className="block lg:text-xl ">{data.eventTitle}</small>
+              <p className="text-xs py-2">{data.eventDate}</p>
+              {/* <p className="text-sm lg:pb-2">{data.eventLocation}</p> */}
+              <div className="flex items-center mb-1">
                 <Link
                   to="/eventdetail"
                   state={{ id: data._id }}
-                  className="me-2 md:px-5 py-2 JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full text-center"
+                  className="me-2 md:px-5 lg:py-2 py-[3px] JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full text-center"
                 >
                   Buy tickets
                 </Link>
                 <button 
-                  className="md:px-7 py-2 flex justify-center w-[30%] md:w-auto JobButtonBgBlur text-xs text-white rounded-full" 
+                  className="md:px-7 lg:py-2 py-[3px] flex justify-center w-[30%] md:w-auto JobButtonBgBlur text-xs text-white rounded-full" 
                   onClick={handleShare}
                 >
-                  <FaRegShareFromSquare className="text-lg" />
+                  <FaRegShareFromSquare className=" text-lg " />
                 </button>
               </div>
             </div>

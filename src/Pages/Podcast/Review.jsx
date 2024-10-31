@@ -172,7 +172,7 @@ console.log("coment",comments)
           aria-label="Close"
         />  
         <img
-          className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[425px]:w-[100%]"
+          className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[765px]:w-[100%]"
           src={picUrl || "/loading.jpg"}
           alt="Video Thumbnail"
         />

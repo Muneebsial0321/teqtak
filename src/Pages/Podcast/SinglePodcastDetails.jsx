@@ -131,7 +131,7 @@ function SinglePodcastDetails() {
             Podcast
           </h4>
         </div>
-        <div className="flex w-full px-6 lg:ps-2 md:ps-6 gap-6 max-[425px]:flex-col">
+        <div className="flex w-auto px-6 lg:ps-2 md:ps-6 gap-6 max-[766px]:flex-col">
           <img
             src={result.picUrl ? result.picUrl : "loading.jpg"}
             className="md:h-[35vh] lg:h-[50vh] md:w-[33%] lg:w-[50%] sm:mx-auto rounded-xl object-cover "

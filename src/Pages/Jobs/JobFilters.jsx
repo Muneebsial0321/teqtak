@@ -74,7 +74,7 @@ function JobFilters() {
 
   return (
     <Fragment>
-      <div className="flex items-center  overflow-y-visible  JobFilScr bg-white w-full h-[10%] px-3">
+      <div className="flex items-center  overflow-y-visible  JobFilScr bg-white w-full h-[15%] px-3">
         <Link to="/filterjob" className="m-0 flex gap-2 items-center">
           <LuSettings2 /> |{" "}
         </Link>
@@ -85,7 +85,7 @@ function JobFilters() {
           All
         </Link>
         <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center  cursor-pointer Video_Nav_Filters text-sm relative"
+          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center  cursor-pointer Video_Nav_Filters text-sm relative"
           onMouseOver={() => setCatDrop(true)}
           onMouseLeave={() => setCatDrop(false)}
         >
@@ -113,7 +113,7 @@ function JobFilters() {
           )}
         </div>
         <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center  cursor-pointer Video_Nav_Filters text-sm relative"
+          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center  cursor-pointer Video_Nav_Filters text-sm relative"
           onMouseOver={() => setLocDrop(true)}
           onMouseLeave={() => setLocDrop(false)}
         >
@@ -141,7 +141,7 @@ function JobFilters() {
           )}
         </div>
         <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
+          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
           onMouseOver={() => setJobTypeDrop(true)}
           onMouseLeave={() => setJobTypeDrop(false)}
         >
@@ -169,7 +169,7 @@ function JobFilters() {
           )}
         </div>
         <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
+          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
           onMouseOver={() => setexpDrop(true)}
           onMouseLeave={() => setexpDrop(false)}
         >
@@ -197,7 +197,7 @@ function JobFilters() {
           )}
         </div>
         <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center cursor-pointer Video_Nav_Filters text-sm"
+          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center cursor-pointer Video_Nav_Filters text-sm"
           onMouseOver={() => setsalRangeDrop(true)}
           onMouseLeave={() => setsalRangeDrop(false)}
         >
@@ -226,7 +226,7 @@ function JobFilters() {
         </div>
 
         <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
+          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
           onMouseOver={() => setEduDrop(true)}
           onMouseLeave={() => setEduDrop(false)}
         >
@@ -255,7 +255,7 @@ function JobFilters() {
         </div>
 
         <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
+          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
           onMouseOver={() => setCompDrop(true)}
           onMouseLeave={() => setCompDrop(false)}
         >

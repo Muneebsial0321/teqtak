@@ -138,7 +138,7 @@ useEffect(() => {
             {recentdata.slice(0, 4).map((elm, ind) => (
               <div
                 key={ind}
-                className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[33.33vw] max-[425px]:w-[45.33vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
+                className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] max-[998px]:w-[23vw] max-[425px]:w-[45.33vw] w-[45.33vw] flex-shrink-0 rounded-lg relative max-[766px]:h-[26.3vh]"
                 onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })} // Handle navigation
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">

@@ -12,7 +12,7 @@ import { REACT_APP_API_BASE_URL } from "../../ENV";
 const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 const CardComponent = ({ title, imgSrc, onSave }) => (
-  <div className="h-[30vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[25vw] relative cursor-pointer m-0 text-white">
+  <div className="h-[30vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[50%] relative cursor-pointer m-0 text-white  max-[375px]:w-[48.4%] max-[320px]:w-[65.4%]">
     <img
       className="h-full w-full rounded-lg object-cover"
       src={imgSrc ? imgSrc : "/loading.jpg"}
@@ -21,7 +21,7 @@ const CardComponent = ({ title, imgSrc, onSave }) => (
     <div className="absolute inset-0 flex justify-between ShadedBG rounded-lg">
       <h5 className="text-sm ps-3 absolute bottom-2">{title}</h5>
       <IoBookmarkOutline 
-        className="absolute right-2 top-4 text-2xl cursor-pointer" 
+        className="absolute lg:right-2 lg:top-4 lg:text-2xl cursor-pointer top-2 right-1" 
         onClick={onSave} // Call the save function passed as prop
       />
     </div>

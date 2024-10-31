@@ -256,7 +256,7 @@ const Video = () => {
               <Link to="/userprofile"
                 state={{ id: video?.user?.Users_PK || " " }}
               >
-                <p className="text-xl font-semibold">
+                <p className="text-xl font-semibold max-[525px]:font-normal whitespace-nowrap">
                   {video?.user?.name || video?.user?.userName || 'NO_NAME'}
                 </p>
               </Link>
