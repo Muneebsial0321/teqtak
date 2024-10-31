@@ -8,7 +8,7 @@ import { REACT_APP_API_BASE_URL } from "../../ENV";
 function Personaldetail() {
   const { id } = useParams(); // Get ID from URL parameters
   const [selectedindex, setSelectedindex] = useState(null);
-  const [openDropdown, setOpenDropdown] = useState(null); // State to manage which dropdown is open
+  const [subscriber, setSubscriber] = useState([]); // State to manage which dropdown is open
   const [detail, setDetail] = useState({});
 
   // Define arrays here
@@ -81,10 +81,23 @@ function Personaldetail() {
     return userKey
   }
 
+  const fetchSubscribers = async () => {
+    try {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`);
+      const data = await response.json();
+      console.log("Fetched subscribers:", data);
+      setSubscriber(data);
+    } catch (error) {
+      console.error("Error fetching subscribers:", error);
+    }
+  };
+console.log("subs",subscriber)
   useEffect(() => {
     console.log("fetching user pernsal info")
+    fetchSubscribers();
       getprofileDetail();
   }, []);
+
 
   return (
     <Fragment>
@@ -98,7 +111,7 @@ function Personaldetail() {
           </div>
           <Link to='/personaldetail2' className="text-[#9595f5]">Edit Detail</Link>
           <p className="text-lg font-semibold mt-5">Total Subscriber</p>
-          <p className="text-[gray]">0 Subscribers</p>
+          <p className="text-[gray]">{subscriber.length } Subscribers</p>
           <p className="text-xl font-semibold mt-5">Description</p>
           <p className="text-[gray]">
             {detail.description || 'No description available.'}

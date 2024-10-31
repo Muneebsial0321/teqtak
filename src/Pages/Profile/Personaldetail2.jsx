@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 function Personaldetail2() {
   const [user, setUser] = useState({});
+  const [subscriber, setSubscriber] = useState([]);
 
   const getUserId = () => {
     const str = document.cookie
@@ -38,9 +39,26 @@ const navigate = useNavigate()
     }));
   };
 
+  const fetchSubscribers = async () => {
+    try {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`);
+      const data = await response.json();
+      console.log("Fetched subscribers:", data);
+      setSubscriber(data);
+    } catch (error) {
+      console.error("Error fetching subscribers:", error);
+    }
+  };
+  console.log("subs",subscriber)
+  useEffect(() => {
+    console.log("fetching user pernsal info")
+    fetchSubscribers();
+    
+  }, []);
+
   return (
     <Fragment>
-      <div className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto">
+      <div className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto lg:h-[99%]">
         <div className="flex items-center gap-4 pt-2">
           <Link to='/personaldetails'>
             <FaArrowLeftLong size={30} className='border-2 border-black p-1 rounded-md' />
@@ -50,7 +68,7 @@ const navigate = useNavigate()
         {/* <Link className="text-[#9595f5] mb-5 block">Edit Detail</Link> */}
 
         <p className="text-lg font-semibold mt-5">Total Subscriber</p>
-        <p className="text-[gray]">0 Subscribers</p>
+        <p className="text-[gray]">{subscriber.length } Subscribers</p>
 
         <p className="text-xl font-semibold mt-5">Description</p>
         <input
