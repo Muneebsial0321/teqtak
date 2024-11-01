@@ -149,7 +149,7 @@ const ApplePodcast = (props) => {
                         <p className="text-sm">{elm.user ? elm.user.name : ""}</p>
                         <div className="flex justify-between">
                           <p className="flex items-center gap-1 text-md">
-                            <CiPlay1 className="lg:text-lg text-sm" />
+                            <CiPlay1 size={25} className="lg:text-lg text-sm" />
                             {formatDuration(elm.podcastDuration)}
                           </p>
                           <p onClick={handleShare}>

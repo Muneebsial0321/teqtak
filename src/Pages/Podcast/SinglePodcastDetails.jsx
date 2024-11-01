@@ -9,6 +9,7 @@ import RelatedPodcast from "./RelatedPodcast";
 import PodcastFilters from "./PodcastFilters"
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
+
 function SinglePodcastDetails() {
   let navigate = useNavigate();
   const loc = useLocation();
@@ -94,7 +95,16 @@ function SinglePodcastDetails() {
     }
   };
 
-  
+  const formatDuration = (duration) => {
+    const seconds = Math.floor(duration / 1000);
+    
+    if (seconds < 60) {
+      return `${seconds} seconds`;
+    } else {
+      const minutes = Math.floor(seconds / 60);
+      return `${minutes} min${minutes > 1 ? 's' : ''}`;
+    }
+  };
 
   return (
     <Fragment>
@@ -141,19 +151,8 @@ function SinglePodcastDetails() {
             <h1 className="text-xl font-semibold">
               {result.episodeTitle || "N/A"}
             </h1>
-            {/* <h2>Podcast Type:</h2> */}
-            <p className="py-1 opacity-65">{result.podcastType || "N/A"}</p>
-            <p className="">
-              Season Number = {result.seasonNumber || "N/A"} <br /> Episode
-              Number = {result.episodeNumber || "N/A"}
-            </p>
-            {/* <p>Audio Name:</p> */}
-            <p className="opacity-50">
-              {result.audioName &&
-              result.audioName.replace(/[0-9]/g, "").length > 30
-                ? result.audioName.replace(/[0-9]/g, "").slice(0, 30) + "..."
-                : result.audioName && result.audioName.replace(/[0-9]/g, "")}
-            </p>
+            <h2 className="mt-2">{formatDuration(result.podcastDuration)}</h2>
+          
 
             {/* Audio player */}
             {result.audioUrl ? (
@@ -178,7 +177,7 @@ function SinglePodcastDetails() {
           <CiStar
             className="text-2xl cursor-pointer"
             onClick={() => setRevModOpen(true)}
-          />
+          /> <p>4.7(15)</p>
         </div>
         {/* <p className="text-xl">Podcast Description:</p> */}
         <p className="lg:w-[75%] w-full opacity-50 text-[15px]">
