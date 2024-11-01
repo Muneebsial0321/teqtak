@@ -164,7 +164,7 @@ const UserProfile = () => {
         <FaChevronLeft className="text-ms cursor-pointer"onClick={() => navigate(-1)}  />
           <p className="text-lg flex items-center px-1">Profile</p>
         </div>
-        <div className="flex flex-col md:flex-row justify-center h-auto md:h-[32%] mt-4 md:mt-0">
+        <div className="flex flex-col md:flex-row justify-center h-auto  mt-4 md:mt-0">
           <div className="flex  md:flex-row gap-4 w-full md:w-[75%] items-center md:items-center xl:items-center justify-center">
             <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative ">
              
@@ -188,7 +188,7 @@ const UserProfile = () => {
                 {/* <Link to='/personaldetails'>view personal info</Link> */}
                 <MdKeyboardArrowRight className="text-xl md:text-2xl" />
               </div>
-              <div className="flex  gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[425px]:hidden">
+              <div className="flex  gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[600px]:hidden">
                 {isCurrentUser ? (
                   <>
                     <button
@@ -225,7 +225,7 @@ const UserProfile = () => {
               </div>
             </div>
           </div>
-          <div className="hidden mt-5 mb-2 gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[425px]:flex justify-center">
+          <div className="hidden mt-5 mb-2 gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[600px]:flex justify-center">
                 {isCurrentUser ? (
                   <>
                     <button

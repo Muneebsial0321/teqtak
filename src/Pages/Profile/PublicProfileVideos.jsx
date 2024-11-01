@@ -72,15 +72,15 @@ const AllVideos = (props) => {
   const currentUserId = getUserId();
   return (
     <React.Fragment>
-      <div className="bg-white px-2 h-full w-full">
-        <div className="flex flex-wrap gap-1 bg-white w-[95%] mx-auto">
+      <div className="bg-white px-2 h-full   w-full">
+        <div className="flex flex-wrap gap-2  bg-white w-auto h-auto  mx-auto ">
           {loading ? (
             <p className="text-center w-full">Loading...</p>
           ) : videosList.length > 0 ? (
             videosList.map((videoItem, index) => (
               <div
                 key={index}
-                className="w-[32%] cursor-pointer grid place-items-center relative h-[30vh] sm:h-[40vh]"
+                className="w-[48%] lg:w-[32%]  cursor-pointer grid place-items-center relative h-[50vh] sm:h-[40vh]"
                 onClick={() => navigate(`/profilevideos/${encodeURIComponent(videosList[index].data._id)}`, { state: { videos: videosList } })} // Simplified navigation
                 // onClick={()=>console.log("video id",videosList[index].data._id)}
                 
@@ -92,7 +92,7 @@ const AllVideos = (props) => {
                   className="w-[100%] h-[100%] overflow-y-hidden object-cover "
                   // controls
                 ></video>
-                <CiPlay1 className="absolute text-2xl text-white" />
+                <CiPlay1 className="absolute text-4xl text-white" />
 
                 {visibleId === videoItem.data._id &&  videoItem.data.userId === currentUserId &&  (
                   <div className="absolute top-2 right-2 flex flex-col space-y-2">

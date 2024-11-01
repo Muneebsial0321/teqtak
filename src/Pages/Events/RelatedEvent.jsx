@@ -90,9 +90,9 @@ const filteredData = location.state?.filteredData
               handleSaveToWishlist(data._id); // Pass the event ID
             }} 
           />
-          <div className="w-full absolute bottom-1 ">
-            <div className="SVTBottom w-[95%] mx-auto lg:px-3 lg:py-2 rounded-lg px-1 ">
-              <small className="block lg:text-xl ">{data.eventTitle}</small>
+          <div className="w-full absolute bottom-1">
+            <div className="SVTBottom w-[95%] mx-auto lg:px-3 lg:py-2 rounded-lg px-1">
+              <small className="block lg:text-xl">{data.eventTitle}</small>
               <p className="text-xs py-2">{data.eventDate}</p>
               {/* <p className="text-sm lg:pb-2">{data.eventLocation}</p> */}
               <div className="flex items-center mb-1">

@@ -78,21 +78,24 @@ const currentUser = getUserId()
     return "Invalid date format";
   };
 
+
+  
   return (
     <Fragment>
-      <div className="ps-6 overflow-y-scroll Podcast_Top_Videos h-full w-full">
-        <div className="flex gap-1 flex-wrap w-full Podcast_Top_Videos">
+      <div className="px-6 overflow-y-auto Podcast_Top_Videos h-full w-full ">
+        <div className="flex gap-2 flex-wrap w-full lg:h-auto  Podcast_Top_Videos overflow-y-scroll ">
           {loading ? (
             <p className="text-center w-full">Loading...</p>
           ) : jobs && jobs.length > 0 ? (
             jobs.map((elm, i) => (
               <div
                 key={i}
-                className="h-[37vh] w-[32.4%] flex-shrink-0 shadow rounded-lg border relative PPJob max-[425px]:h-auto"
+                // className="h-auto w-[32.4%] flex-shrink-0 shadow rounded-lg border relative PPJob max-[425px]:h-auto"
+                  className="h-auto md:w-[48%]   flex-shrink-0 shadow rounded-lg border relative max-[766px]:w-[40vw] max-[500px]:w-full  max-[766px]:p-2 lg:w-[32.43%]  flex flex-col"
                 onMouseEnter={() => setVisibleId(elm._id)}
                 onMouseLeave={() => setVisibleId(null)}
               >
-                <div className="w-full">
+                <div className="w-full flex-grow">
                   <div className="flex gap-2 mt-2">
                     <img
                       src={elm.logoUrl ? elm.logoUrl : "/placeholder.jpg"}
@@ -104,7 +107,7 @@ const currentUser = getUserId()
                         opacity: 0,
                         transition: "opacity 0.3s ease",
                       }}
-                      className="rounded-full"
+                      className="rounded-full ml-3"
                       alt="Profile"
                     />
                     <div>
@@ -114,27 +117,27 @@ const currentUser = getUserId()
                       </p>
                     </div>
                   </div>
-                  <p className="mt-7 ps-4 text-md opacity-65">{elm.location} ({elm.workplaceType})</p>
+                  <p className="mt-3 ps-4 text-md opacity-65 max-[768px]:mt-2 h-12">{elm.location} ({elm.workplaceType})</p>
                   <p className="ps-4 text-sm opacity-65 mt-3">{elm.salaryRange}</p>
-                  {elm.userId === currentUser ? (
-                    <Link
-                      to={"/mycreatedjob"}
-                      state={{ id: elm._id }}
-                      className="w-[90%] flex justify-center items-center mx-auto  text-xl mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
-                    >
-                      View Details
-                    </Link>
-                  ) : (
-                    <div className="text-center flex items-center">
+                  <div className="mt-auto lg:mb-3 md:mb-3 text-center">
+                    {elm.userId === currentUser ? (
+                      <Link
+                        to={"/mycreatedjob"}
+                        state={{ id: elm._id, title: elm.jobTitle }}
+                        className="w-[90%] mx-auto block text-xs pt-3 mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3"
+                      >
+                        View Details
+                      </Link>
+                    ) : (
                       <Link
                         to={"/jobdetail"}
-                        state={{ id: elm._id }}
-                        className="w-[90%] mx-auto flex text-xl mt-7 justify-center items-center bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[425px]:mb-2"
+                        state={{ id: elm._id, title: elm.jobTitle }}
+                        className="w-[90%] mx-auto block text-xs pt-3 mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
                       >
-                        Apply job
+                        Apply Now
                       </Link>
-                    </div>
-                  )}
+                    )}
+                  </div>
                   {elm.userId === currentUser && (
                   <button
                     className="absolute top-2 right-2 text-red-600 text-xl cursor-pointer"

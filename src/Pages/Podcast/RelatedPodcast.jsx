@@ -67,7 +67,7 @@ const filteredData = location.state?.filteredData
         {recentdata.map((elm, ind) => (
           <div
             key={ind}
-            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[33.33vw]  max-[425px]:w-[43vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
+            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[31.33vw]  max-[425px]:w-[43vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
             onClick={() =>
               navigate(`/podcastdetails`, { state: { id: elm._id } })
             } // Navigate on click

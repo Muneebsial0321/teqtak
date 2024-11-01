@@ -92,14 +92,14 @@ const user_Id = getUserId()
 
   return (
     <div className="overflow-y-scroll Podcast_Top_Videos w-full h-full">
-      <div className="flex flex-wrap text-white gap-1 w-[95%] mx-auto Podcast_Top_Videos pt-2">
+      <div className="flex flex-wrap text-white gap-1 w-[95%] mx-auto Podcast_Top_Videos pt-2 ">
         {loading ? (
           <p className="text-center w-full">Loading...</p>
         ) : events && events.length > 0 ? (
           events.map((elm) => (
             <div
               key={elm._id}
-              className="md:h-[45vh] h-[37vh] w-[32.4%] rounded-lg border relative PPEvent"
+              className="m-0 text-white md:w-[32%] w-[48.4%] h-[42vh] relative"
               onMouseEnter={() => setVisibleId(elm._id)}
               onMouseLeave={() => setVisibleId(null)}
             >
@@ -115,24 +115,24 @@ const user_Id = getUserId()
                   <IoTrashOutline />
                 </button>
               )}
-              <div className="absolute bottom-1 w-full">
-                <div className="SVTBottom w-[95%] mx-auto px-3 py-2 rounded-lg">
-                  <small className="block text-xl">{elm.eventTitle}</small>
+              <div className="w-full absolute bottom-1">
+                <div className="SVTBottom w-[95%] mx-auto lg:px-3 lg:py-2 rounded-lg px-1">
+                  <small className="block lg:text-xl">{elm.eventTitle}</small>
                   <p className="text-xs py-2">{elm.eventDate}</p>
-                  <p className="text-sm pb-2">{elm.eventDescription}</p>
-                  <div className='flex justify-between'>
+                  {/* <p className="text-sm pb-2">{elm.eventDescription}</p> */}
+                  <div className='flex  items-center mb-1'>
                     <Link
                       to="/eventdetail"
                       state={{ id: elm._id }}
-                      className="me-2 md:px-5 py-2 JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full"
+                      className="me-2 md:px-5 lg:py-2 py-[3px] JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full text-center"
                     >
                       Buy tickets
                     </Link>
                     <button
-                      className="md:px-7 py-2 flex justify-center w-[30%] md:w-auto JobButtonBgBlur text-xs text-white rounded-full"
+                      className="md:px-7 lg:py-2 py-[3px] flex justify-center w-[30%] md:w-auto JobButtonBgBlur text-xs text-white rounded-full" 
                       onClick={handleShare}
                     >
-                      <FaRegShareFromSquare className='text-sm' />
+                      <FaRegShareFromSquare className='text-lg' />
                     </button>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ const user_Id = getUserId()
               <img
                 src={elm.eventCoverUrl}
                 alt={`Img-${elm.id}`}
-                className="h-full w-full rounded-lg object-cover"
+                className="h-full w-full rounded-lg object-cover cursor-pointer"
               />
             </div>
           ))

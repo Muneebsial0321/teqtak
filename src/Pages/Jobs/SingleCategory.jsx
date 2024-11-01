@@ -108,7 +108,7 @@ function Calendar2() {
                         </p>
                       </div>
                     </div>
-                    <p className="mt-3 ps-4 text-md opacity-65 max-[768px]:mt-2 h-12 ">
+                    <p className="mt-3 ps-4 text-md opacity-65 max-[768px]:mt-2 h-12">
                       {elm.location} ({elm.workplaceType})
                     </p>
                     <p className="ps-4 text-sm opacity-65 mt-3">

@@ -126,29 +126,34 @@ const ApplePodcast = (props) => {
                 {podcast.map((elm, ind) => (
                   <div
                     key={ind}
-                    className="md:h-[45vh] h-[37vh] w-[32.4%] rounded-lg border relative text-white PPPodcast"
+                    // className="md:h-[45vh] h-[37vh] w-[32.4%] rounded-lg border relative text-white PPPodcast"
+                       className="cursor-pointer text-white lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[31.33vw]  max-[425px]:w-[43vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
                     onMouseEnter={() => setVisibleId(elm._id)}
                     onMouseLeave={() => setVisibleId(null)}
                     onClick={() => navigate(`/mypodcasts`, { state: { id: elm._id } })}
                   >
+                    <div className="absolute h-full w-full ShadedBG rounded-lg">
                     <IoBookmarkOutline
-                      className="absolute right-2 top-4 text-2xl cursor-pointer"
+                      className="absolute right-1 top-1 text-2xl md:text-lg cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleSaveToWishlist(elm._id);
                       }}
                     />
+                    </div>
+                    
+                  
                     <div className="absolute bottom-1 px-2 w-full">
                       <div className="VideosBgBlured rounded-lg px-3 pt-5">
-                        <p className="text-2xl font-medium">{elm.episodeTitle}</p>
+                        <p className="lg:text-2xl font-medium text-sm">{elm.episodeTitle}</p>
                         <p className="text-sm">{elm.user ? elm.user.name : ""}</p>
                         <div className="flex justify-between">
                           <p className="flex items-center gap-1 text-md">
-                            <CiPlay1 className="text-lg" />
+                            <CiPlay1 className="lg:text-lg text-sm" />
                             {formatDuration(elm.podcastDuration)}
                           </p>
                           <p onClick={handleShare}>
-                            <FaRegShareFromSquare className="text-2xl -mt-3 cursor-pointer" />
+                            <FaRegShareFromSquare className="lg:text-2xl -mt-3 cursor-pointer text-xl" />
                           </p>
                         </div>
                       </div>
