@@ -54,7 +54,7 @@ function Message() {
           <input
             type="text"
             placeholder="Search"
-            className="h-[6vh] w-full sm:w-[30%] md:w-[25%] p-3 rounded-lg outline-none bg-[#f7f5f5]"
+            className="h-[6vh] w-full sm:w-[30%] md:w-[25%] p-3 rounded-lg outline-none bg-[#f7f5f5] hidden lg:block"
           />
         </div>
         <div className="flex flex-col lg:flex-row h-[80%]">
