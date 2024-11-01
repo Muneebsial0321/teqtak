@@ -177,7 +177,7 @@ function SinglePodcastDetails() {
           <CiStar
             className="text-2xl cursor-pointer"
             onClick={() => setRevModOpen(true)}
-          /> <p>4.7(15)</p>
+          /> <p>{result.avgRating || 0}({result.totalComments || 0})</p>
         </div>
         {/* <p className="text-xl">Podcast Description:</p> */}
         <p className="lg:w-[75%] w-full opacity-50 text-[15px]">

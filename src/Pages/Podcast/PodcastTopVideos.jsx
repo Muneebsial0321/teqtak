@@ -119,11 +119,11 @@ useEffect(() => {
                       }}
                     />
                   </div>
-                  <div className="absolute bottom-1 left-1 ">
-                    <p className="text-xl">{elm.episodeTitle}</p>
+                  <div className="absolute bottom-1 left-1 w-[93%]">
+                    <p className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
                   
                     <p className="text-xs flex gap-1 items-center lg:text-[20px]">
-                      <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}
+                      <CiPlay1 size={15}/> {formatDuration(elm.podcastDuration)}
                     </p>
                   </div>
                 </div>
@@ -149,11 +149,11 @@ useEffect(() => {
                     }}
                   />
                   <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
-                    <p className="text-lg lg:py-1">{elm.episodeTitle}</p>
+                    <p className="text-lg lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
                     <Link to="/userprofile" state={{id:elm.userID ? elm.userID :""}}   onClick={(e) => {
-                      e.stopPropagation()}}  ><p className="text-[16px] text-[#B4B6B7] ">{elm.user ? elm.user.name : ""}</p></Link>
-                    <p className="text-xs flex gap-1 items-center lg:text-lg">
-                      <CiPlay1 size={25}/> {formatDuration(elm.podcastDuration)}
+                      e.stopPropagation()}}  ><p className="text-[16px] text-[#B4B6B7] whitespace-nowrap text-ellipsis overflow-hidden">{elm.user ? elm.user.name : ""}</p></Link>
+                    <p className="text-xs flex gap-1 items-center lg:text-lg whitespace-nowrap text-ellipsis">
+                      <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}
                     </p>
                   </div>
                 </div>
@@ -179,13 +179,13 @@ useEffect(() => {
                       handleSaveToWishlist(elm._id);
                     }}
                   />
-                  <div className="absolute bottom-1 left-1 ">
-                    <p className="text-lg lg:py-1">{elm.episodeTitle}</p>
+                  <div className="absolute bottom-1 left-1  w-[93%] rounded-lg ps-3">
+                    <p className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis lg:py-1">{elm.episodeTitle}</p>
                     {/* <Link to="/userprofile" state={{id:elm.userID ? elm.userID :""}}  onClick={(e) => {
                       e.stopPropagation(); // Prevent triggering onClick of parent div
                     }}><p className="text-sm text-[#B4B6B7]">{elm.user ? elm.user.name : ""}</p></Link>
                     <p className="text-xs  lg:text-lg flex gap-1 items-center">
-                      <CiPlay1 size={25}/> {formatDuration(elm.podcastDuration)}
+                      <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}
                     </p> */}
                   </div>
                 </div>

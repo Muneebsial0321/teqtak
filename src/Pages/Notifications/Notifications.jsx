@@ -64,7 +64,7 @@ function Notification() {
                       <img
                         src={notification.imgSrc || "/placeholder.jpg"} // Fallback image URL
                         alt={`Notification from user ${notification._id}`}
-                        className="h-[50px] w-[50px] rounded-full"
+                        className="lg:h-[50px] lg:w-[50px] rounded-full h-[30px] w-[30px]"
                       />
                     </Link>
                     <div>
@@ -74,7 +74,7 @@ function Notification() {
                       <p>
                         <Link
                           to="#"
-                          className="text-[blue] underline text-[13px] opacity-75"
+                          className="text-[blue] underline text-[13px] opacity-75 "
                         >
                           {notification.notiDesc}
                         </Link>

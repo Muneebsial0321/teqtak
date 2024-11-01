@@ -77,7 +77,7 @@ const filteredData = location.state?.filteredData
     <div className="mt-3 flex flex-wrap gap-1 w-[93%] mx-auto">
       <ToastContainer /> {/* Include ToastContainer for notifications */}
       {newcard.map((data, i) => (
-        <div key={i} className="m-0 text-white md:w-[32%] w-[48.4%] h-[42vh] relative rounded-2xl">
+        <div key={i} className="m-0 text-white md:w-[32%] w-[48.4%] lg:h-[42vh] h-[37vh] relative rounded-2xl">
           <img
             src={data.eventCoverUrl ? data.eventCoverUrl : "/loading.jpg"}
             alt="Card Img2"
@@ -92,9 +92,9 @@ const filteredData = location.state?.filteredData
           />
           <div className="w-full absolute bottom-1">
             <div className="SVTBottom w-[95%] mx-auto lg:px-3 lg:py-2 rounded-lg px-1">
-              <small className="block lg:text-xl">{data.eventTitle}</small>
+              <small className="block lg:text-xl  w-[93%] overflow-hidden whitespace-nowrap text-ellipsis">{data.eventTitle}</small>
               <p className="text-xs py-2">{data.eventDate}</p>
-              <p className="text-sm lg:pb-2">{data.eventLocation}</p>
+              <p className="text-sm lg:pb-2  w-[93%] overflow-hidden whitespace-nowrap text-ellipsis">{data.eventLocation}</p>
               <div className="flex items-center mb-1">
                 <Link
                   to="/eventdetail"

@@ -83,9 +83,9 @@ function Eventdetails() {
             <img
               src={event.eventCoverUrl ? event.eventCoverUrl : "/loading.jpg"}
               alt=""
-              className="eventimg1"
+              className="eventimg1 h-[45vh] lg:w-[60%] w-[100%] object-cover"
             />
-            <div className="flex flex-row-reverse justify-between  w-[38%]">
+            <div className="hidden lg:flex flex-row-reverse justify-between  w-[38%]">
               <div className="w-full   pt-5 ml-6 my-6">
                 <div className="ticketstarting py-3 rounded w-full">
                   <small className="text-gray-500">Tickets starting at</small>
@@ -115,8 +115,8 @@ function Eventdetails() {
               </div>
             </div>
           </div>
-          <div className="sm:flex mt-2">
-            <div className="risk sm:w-[60%]">
+          <div className="flex-nowrap mt-2">
+            <div className="risk w-auto">
               <h3 className="text-xl font-bold">{event.eventTitle}</h3>
               <p className="flex items-center gap-2 py-2 text-sm">
                 <CiLocationOn className="me-1" />
@@ -129,6 +129,35 @@ function Eventdetails() {
               <p className="sm:w-[80%] opacity-80 text-[16px] mt-3">
                 {event.eventCatagory}
               </p>
+            </div>
+            <div className="lg:hidden flex  justify-between  w-auto">
+              <div className="w-full">
+                <div className="ticketstarting py-3 rounded w-full">
+                  <small className="text-gray-500">Tickets starting at</small>
+                  <h5 className="text-lg pb-2 font-bold">
+                    {event.eventTicketArray &&
+                    event.eventTicketArray.length > 0 ? (
+                      event.eventTicketArray
+                        .filter((ticket) => ticket.ticketType === "basicTicket")
+                        .map((ticket, index) => (
+                          <div key={index}>
+                            <p>${ticket.price}</p>
+                          </div>
+                        ))
+                    ) : (
+                      <p>empty</p>
+                    )}
+                  </h5>
+                  <button
+                    className="buyticket  text-white rounded-lg px-4 py-2 mt-2"
+                    onClick={() =>
+                      navigate("/ticket", { state: { id: event._id } })
+                    }
+                  >
+                    <small>Buy Tickets</small>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 

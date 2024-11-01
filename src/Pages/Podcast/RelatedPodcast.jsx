@@ -81,13 +81,13 @@ const filteredData = location.state?.filteredData
                 }}
               />
               <div className="absolute bottom-1 left-1 w-[93%] SVTBottom rounded-lg ps-3">
-                <p className="text-xl lg:py-1">{elm.episodeTitle}</p>
+                <p className="text-xl lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
                 <Link
                   to="/userprofile"
                   state={{ id: elm.userID ? elm.userID : "unknown" }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <p className="text-sm text-[#B4B6B7]">{elm.user ? elm.user.name : ""}</p>
+                  <p className="text-sm text-[#B4B6B7] whitespace-nowrap overflow-hidden text-ellipsis">{elm.user ? elm.user.name : ""}</p>
                 </Link>
                 <p className="text-xs lg:text-xl  flex gap-1 items-center">
                   <CiPlay1 size={25}/> {formatDuration(elm.podcastDuration)}

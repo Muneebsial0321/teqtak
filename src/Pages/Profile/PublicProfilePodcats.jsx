@@ -141,23 +141,15 @@ const ApplePodcast = (props) => {
                       }}
                     />
                     </div>
-                    
+                    <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
+                    <p className="text-lg lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
+                
+                    <p className="text-xs flex gap-1 items-center lg:text-lg whitespace-nowrap text-ellipsis">
+                      <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}
+                    </p>
+                  </div>
                   
-                    <div className="absolute bottom-1 px-2 w-full">
-                      <div className="VideosBgBlured rounded-lg px-3 pt-5">
-                        <p className="lg:text-2xl font-medium text-sm">{elm.episodeTitle}</p>
-                        <p className="text-sm">{elm.user ? elm.user.name : ""}</p>
-                        <div className="flex justify-between">
-                          <p className="flex items-center gap-1 text-md">
-                            <CiPlay1 size={25} className="lg:text-lg text-sm" />
-                            {formatDuration(elm.podcastDuration)}
-                          </p>
-                          <p onClick={handleShare}>
-                            <FaRegShareFromSquare className="lg:text-2xl -mt-3 cursor-pointer text-xl" />
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                 
                     <img
                       src={elm.picUrl || "placeholder.jpg"}
                       alt={`Img-${ind}`}

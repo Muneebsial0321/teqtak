@@ -96,7 +96,7 @@ const AllVideos = () => {
           <div
             key={video._id} // Use unique ID instead of index
             ref={i === videos.length - 1 ? lastVideoRef : null}
-            className="w-[32%] lg:w-[21vw] cursor-pointer grid place-items-center relative lg:h-[48vh] sm:h-[40vh]"
+            className="w-[32%] lg:w-[21vw] cursor-pointer grid place-items-center relative lg:h-[48vh] sm:h-[34vh]"
             onClick={() => handleVideoClick(i)}
           >
             <video

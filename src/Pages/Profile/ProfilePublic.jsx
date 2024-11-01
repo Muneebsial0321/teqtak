@@ -99,7 +99,7 @@ const ProfilePublic = ({ userId }) => {
 console.log("user id is ", isCurrentUser)
   return (
     <Fragment>
-      <div className="bg-white h-full w-full">
+      <div className="bg-white h-[100vh] w-full">
         <div className="w-full md:w-[25%] h-auto md:h-[6%] flex items-center gap-3 ps-3">
           <p className="text-lg flex items-center px-3">Profile</p>
         </div>
@@ -171,7 +171,7 @@ console.log("user id is ", isCurrentUser)
                 {isCurrentUser ? (
                   <>
                     <button
-                      className={`px-6 py-2 rounded-2xl text-lg ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
+                      className={`px-5 py-2 rounded-2xl text-[16px] ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
                       onClick={handleSubmit}
                       disabled={loading}
                     >
@@ -179,7 +179,7 @@ console.log("user id is ", isCurrentUser)
                     </button>
                     <button
                       onClick={() => navigate('/personaldetail2')}
-                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                      className="px-5 py-2 rounded-2xl text-[16px] text-white bg-[#6165F3]"
                     >
                       Edit Profile 
                     </button>

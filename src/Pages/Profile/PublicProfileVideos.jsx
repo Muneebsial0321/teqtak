@@ -80,7 +80,7 @@ const AllVideos = (props) => {
             videosList.map((videoItem, index) => (
               <div
                 key={index}
-                className="w-[48%] lg:w-[32%]  cursor-pointer grid place-items-center relative h-[50vh] sm:h-[40vh]"
+                className="w-[48%] lg:w-[32%]  cursor-pointer grid place-items-center relative h-[35vh] lg:h-[50vh] sm:h-[40vh]"
                 onClick={() => navigate(`/profilevideos/${encodeURIComponent(videosList[index].data._id)}`, { state: { videos: videosList } })} // Simplified navigation
                 // onClick={()=>console.log("video id",videosList[index].data._id)}
                 
