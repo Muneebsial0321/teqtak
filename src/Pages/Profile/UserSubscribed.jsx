@@ -109,10 +109,10 @@ function UserSubscribed() {
       <div className="h-full w-full bg-white md:h-screen lg:h-screen xl:h-screen">
         <div className="main h-full w-[90%] mx-4 md:w-[80%] lg:w-[60%] xl:w-[70%]">
           <p className="text-lg h-[10%] bg-white font-bold w-full z-10 flex items-center md:text-xl lg:text-xl xl:text-2xl">
-            My Subscribers
+             Subscribed
           </p>
-          <div className="flex flex-col justify-between md:flex-row lg:flex-row xl:flex-row text-lg md:text-xl lg:text-lg xl:text-xl font-bold">
-            <h1>Total Subscribers </h1>
+          <div className="flex  justify-between md:flex-row lg:flex-row xl:flex-row text-sm md:text-xl lg:text-lg xl:text-xl font-bold whitespace-nowrap max-[766px]:font-normal">
+            <h1>Total Subscribed </h1>
             <h2>{subscriber.length}</h2>
           </div>
           <div className="overflow-y-auto h-[550px]">
@@ -130,7 +130,7 @@ function UserSubscribed() {
                           : "/placeholder.jpg"
                       }
                       alt=""
-                      className="h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] rounded-full"
+                      className="h-[30px] w-[30px] lg:h-[50px] lg:w-[50px] rounded-full"
                     />
                   </Link>
                   <div>
@@ -154,27 +154,7 @@ function UserSubscribed() {
                       setAble(able === subsc._id ? null : subsc._id)
                     }
                   />
-                  {/* {able === subsc._id && (
-                    <div className="absolute right-0 w-[200px] md:w-[250px] lg:w-[200px] xl:w-[200px] cursor-pointer px-3 py-2 z-30 bg-white shadow-lg border">
-                      <p
-                        className="text-sm md:text-base lg:text-lg xl:text-xl opacity-75 mb-5 cursor-pointer"
-                        onClick={() => {
-                          const blockedId = subsc.subscribedToId;
-                          if (!isBlocked(blockedId)) {
-                            blockSubscriber(blockedId);
-                          }
-                        }}
-                      >
-                        {isBlocked(subsc.subscribedToId) ? "Blocked" : "Block"}
-                      </p>
-                      <p
-                        className="text-sm md:text-base lg:text-lg xl:text-xl text-red-500 mb-5 cursor-pointer"
-                        onClick={() => deleteSubscriber(subsc._id)}
-                      >
-                        Remove
-                      </p>
-                    </div>
-                  )} */}
+                 
                 </div>
               </div>
             ))}

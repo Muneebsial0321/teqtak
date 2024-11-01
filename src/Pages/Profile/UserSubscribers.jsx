@@ -111,7 +111,7 @@ function UserSubscribers() {
           <p className="text-lg h-[10%] bg-white font-bold w-full z-10 flex items-center md:text-xl lg:text-xl xl:text-2xl">
             My Subscribers
           </p>
-          <div className="flex flex-col justify-between md:flex-row lg:flex-row xl:flex-row text-lg md:text-xl lg:text-lg xl:text-xl font-bold">
+          <div className="flex  justify-between md:flex-row lg:flex-row xl:flex-row text-sm md:text-xl lg:text-lg xl:text-xl font-bold whitespace-nowrap max-[766px]:font-normal">
             <h1>Total Subscribers </h1>
             <h2>{subscriber.length}</h2>
           </div>
@@ -154,27 +154,7 @@ function UserSubscribers() {
                       setAble(able === subsc._id ? null : subsc._id)
                     }
                   />
-                  {able === subsc._id && (
-                    <div className="absolute right-0 w-[200px] md:w-[250px] lg:w-[200px] xl:w-[200px] cursor-pointer px-3 py-2 z-30 bg-white shadow-lg border">
-                      <p
-                        className="text-sm md:text-base lg:text-lg xl:text-xl opacity-75 mb-5 cursor-pointer"
-                        onClick={() => {
-                          const blockedId = subsc.subscribedToId;
-                          if (!isBlocked(blockedId)) {
-                            blockSubscriber(blockedId);
-                          }
-                        }}
-                      >
-                        {isBlocked(subsc.subscribedToId) ? "Blocked" : "Block"}
-                      </p>
-                      <p
-                        className="text-sm md:text-base lg:text-lg xl:text-xl text-red-500 mb-5 cursor-pointer"
-                        onClick={() => deleteSubscriber(subsc._id)}
-                      >
-                        Remove
-                      </p>
-                    </div>
-                  )}
+                
                 </div>
               </div>
             ))}
