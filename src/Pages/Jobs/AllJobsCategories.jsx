@@ -136,7 +136,7 @@ const currentUser = getUserId()
                 <Link
                 to={"/mycreatedjob"}
                 state={{ id: elm._id }}
-                  className="w-[90%] mx-auto block  text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3 "
+                  className="w-[90%] mx-auto block pt-3  text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3 "
                   
                 >
                   View Details
