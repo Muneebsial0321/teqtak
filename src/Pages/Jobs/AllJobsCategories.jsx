@@ -131,21 +131,25 @@ const currentUser = getUserId()
                 {elm.salaryRange}
               </p>
             </div>
-            <div className="mt-auto lg:mb-3 md:mb-3">
+            <div className="mt-auto lg:mb-3 md:mb-3 text-center ">
               {elm.userId === currentUser ? (
-                <button
-                  className="w-[90%] mx-auto block text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3 "
-                  onClick={() => navigate("/mycreatedjob")}
+                <Link
+                to={"/mycreatedjob"}
+                state={{ id: elm._id }}
+                  className="w-[90%] mx-auto block  text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3 "
+                  
                 >
                   View Details
-                </button>
+                </Link>
               ) : (
-                <button
-                  className="w-[90%] mx-auto block text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
-                  onClick={() => navigate("/jobdetail")}
+                <Link
+                to={"/jobdetail"}
+                state={{ id: elm._id }}
+                  className="w-[90%] mx-auto block text-xs mt-7 pt-3 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
+                 
                 >
                   Apply Now
-                </button>
+                </Link>
               )}
             </div>
           </div>
@@ -209,21 +213,24 @@ const currentUser = getUserId()
                 {elm.salaryRange}
               </p>
             </div>
-            <div className="mt-auto lg:mb-3 md:mb-3">
+            <div className="mt-auto lg:mb-3 md:mb-3 text-center">
               {elm.userId === currentUser ? (
-                <button
-                  className="w-[90%] mx-auto block text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3 "
-                  onClick={() => navigate("/mycreatedjob")}
+                <Link    to={"/mycreatedjob"}
+                state={{ id: elm._id }}
+                  className="w-[90%] mx-auto block text-xs pt-3 mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3"
+                  
                 >
                   View Details
-                </button>
+                </Link>
               ) : (
-                <button
-                  className="w-[90%] mx-auto block text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
-                  onClick={() => navigate("/jobdetail")}
+                <Link 
+                to={"/jobdetail"}
+                state={{ id: elm._id }}
+                  className="w-[90%] mx-auto block text-xs pt-3 mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
+                  
                 >
                   Apply Now
-                </button>
+                </Link>
               )}
             </div>
           </div>
