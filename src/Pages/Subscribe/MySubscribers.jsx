@@ -25,17 +25,7 @@ function MySubscribers() {
     }
   };
 
-  const  fetchBlockedUsers= async () => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`);
-      const data = await response.json();
-      console.log("Blocked users", data);
-      setBlockedUsers(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error("Error fetching blocked users:", error);
-      setBlockedUsers([]);
-    }
-  };
+ 
 
   const blockSubscriber = async (blockedId) => {
     try {
@@ -92,7 +82,7 @@ function MySubscribers() {
 
   return (
     <Fragment>
-      <div className="h-full w-full bg-white md:h-screen lg:h-screen xl:h-screen">
+      <div className="h-[80%] w-full bg-white md:h-screen lg:h-[90vh] xl:h-[90vh]">
         <div className="main h-full w-[90%] mx-4 md:w-[80%] lg:w-[60%] xl:w-[70%]">
           <p className="text-lg h-[10%] bg-white font-bold w-full z-10 flex items-center md:text-xl lg:text-xl xl:text-2xl">
             My Subscribers

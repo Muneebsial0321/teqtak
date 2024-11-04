@@ -10,7 +10,7 @@ function Personaldetail() {
   const [selectedindex, setSelectedindex] = useState(null);
   const [subscriber, setSubscriber] = useState([]); // State to manage which dropdown is open
   const [detail, setDetail] = useState({});
-
+const [filter, setFilter] = useState();
   // Define arrays here
   const entrepreneurs = [
     { name: "Tech Entrepreneur" },
@@ -97,8 +97,28 @@ console.log("subs",subscriber)
     fetchSubscribers();
       getprofileDetail();
   }, []);
+const profileFilters = async ()=>{
+try{
+  const response = await fetch(`${REACT_APP_API_BASE_URL}/info`,{
+    method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({...filter,userId:getUserId()}),
+      })
+      const d = response.json()
+      console.log("response",d)
+}catch{
 
-
+}
+}
+console.log("post req for filters",filter)
+const _onChange_ = (e) => {
+  setFilter((prev) => ({
+    ...prev,
+    [e.target.name]: e.target.value
+  }));
+};
   return (
     <Fragment>
       <div className="h-full overflow-y-auto bg-white w-full px-3" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
@@ -168,6 +188,7 @@ console.log("subs",subscriber)
             {entrepreneurs.map((entrepreneur, index) => (
               <div
                 key={index}
+                onChange={_onChange_}
                 className={`relative w-full sm:w-[48%] md:w-[31%] lg:w-[23%]`}
                 style={{ margin: '10px', padding: '10px', cursor: 'pointer' }}
               >
@@ -190,6 +211,15 @@ console.log("subs",subscriber)
               </div>
             ))}
           </div>
+          <div className="my-8">
+           <button
+              type="button"
+              className="text-white w-[100px] rounded-md linear_gradient p-1"
+              onClick={profileFilters}
+            >
+              Save
+            </button>
+           </div>
         </div>
       </div>
     </Fragment>

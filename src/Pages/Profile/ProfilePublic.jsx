@@ -99,8 +99,8 @@ const ProfilePublic = ({ userId }) => {
 console.log("user id is ", isCurrentUser)
   return (
     <Fragment>
-      <div className="bg-white h-[100vh] w-full">
-        <div className="w-full md:w-[25%] h-auto md:h-[6%] flex items-center gap-3 ps-3">
+      <div className="bg-white h-[90vh] w-full " >
+        <div className="w-full md:w-[25%] h-auto md:h-[6%] flex items-center gap-3 ps-3" >
           <p className="text-lg flex items-center px-3">Profile</p>
         </div>
         <div className="flex flex-col md:flex-row justify-center h-auto  mt-4 md:mt-0">
@@ -201,30 +201,33 @@ console.log("user id is ", isCurrentUser)
                 )}
               </div>
         </div>
-        <div className="flex text-[25px] items-center justify-center border-t-[2px] h-[8%]">
+        <div className="flex text-[25px] items-center justify-center border-t-[2px] h-[13%]">
           <div className="w-[50%] flex justify-between py-2 max-[425px]:w-[80%]">
             <CiVideoOn
               className="cursor-pointer opacity-70"
               onClick={() => setActiveTab("Video")}
+              size={35}
             />
             <PiApplePodcastsLogoThin
-              size={30}
-              className="cursor-pointer opacity-70"
+              size={39}
+              className="cursor-pointer opacity-90"
               onClick={() => setActiveTab("Podcast")}
             />
             <BsCalendar4Event
-              className="cursor-pointer opacity-70"
+              className="cursor-pointer opacity-60"
               onClick={() => setActiveTab("Event")}
+              size={30}
             />
             <BsSuitcaseLg
-              className="cursor-pointer opacity-70"
+              className="cursor-pointer opacity-60"
               onClick={() => setActiveTab("Job")}
+              size={32}
             />
           </div>
         </div>
-        <section className="h-[54%] w-full overflow-y-scroll Podcast_Top_Videos">
+        <section className="h-[50%] w-full overflow-y-scroll Podcast_Top_Videos mb-4">
           {activeTab === "Video" && <PublicProfileVideos videos={data_.videos} />}
-          {activeTab === "Podcast" && <PublicProfilePodcats podcast={data_.podcast} />}
+          {activeTab === "Podcast" && <PublicProfilePodcats podcast={data_.podcast} user ={profile} />}
           {activeTab === "Event" && <PublicProfileEvents events={data_.events} />}
           {activeTab === "Job" && <PublicProfileJobs jobs={data_.jobs} />}
         </section>

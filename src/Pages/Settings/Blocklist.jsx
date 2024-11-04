@@ -18,7 +18,7 @@ function Blocklist() {
   // Fetch blocked users from API
   const fetchBlockedUsers = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/block/${getUserId()}`);
+      const response = await fetch(`${API_BASE_URL}/block/${getUserId()}`);
       const data = await response.json();
       console.log("Blocked users fetched:", data.data);
       setBlockedUsers(data.data);
@@ -32,7 +32,7 @@ function Blocklist() {
     try {
       console.log('Attempting to unblock user with ID:', userId);
   
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/block/${userId}`, {
+      const response = await fetch(`${API_BASE_URL}/block/${userId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

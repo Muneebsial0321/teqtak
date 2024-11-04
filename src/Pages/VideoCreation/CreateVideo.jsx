@@ -12,6 +12,29 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import CSS for toast notifications
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
+const entrepreneurs2 = [
+  'Software development', 'Hardware innovation', 'Artificial intelligence', 'Cybersecurity', 'Internet of Things',
+  'Drug development', 'Medical devices', 'Genetic engineering', 'Bioinformatics', 
+  'Restaurants', 'Food manufacturing', 'Catering services', 'Specialty foods', 'Health-focused foods', 
+  'Clothing design', 'Accessories', 'Sustainable fashion', 'Apparel manufacturing', 'Online retail',
+  'Consulting', 'Marketing services', 'Event planning', 'Financial services',
+  'Nonprofit organizations', 'Social enterprises', 'Community development', 'Environmental conservation', 'Ethical business practices', 
+  'Online retail', 'Dropshipping', 'Subscription-based services', 'Digital products', 'Marketplace platforms', 
+  'Property development', 'Real estate investment', 'Property management', 'Real estate technology', 'Commercial real estate',
+  'Online courses', 'Educational technology', 'Tutoring services', 'Language schools', 'Educational consulting', 
+  'All', 'Top Reviews', 'Investor', 'Entrepreneur', 'Viewer', 
+  '15 Mins', '30 Mins', '1 hour', '+1 hour',
+  '$ 1M', '$ 5M', '$ 15M', '$ 20M',
+  '1 year', '3 year', '5 year', '7 year', '10+ year',
+  'Expansion', 'Marketing', 'R&D', 'Operations', 'Debt repayment',
+  'IPO', 'Strategic partnership', 'Merger', 'No specific exit plan', 
+  'Acquisition', 'IPO', 'Merger', 'Strategic partnership', 'No specific exit plan',
+  'Local', 'Regional', 'National', 'International', 'Global',
+  'Software', 'Hardware', 'Services', 'Subscription-Based', 'Consumer goods',
+  'Small', 'Medium', 'Large', 'Experienced', 'Specialized','other'
+]
+
+
 const Video = () => {
   const [inputData, setInpData] = useState("");
   const [inpType, setInpType] = useState("");
@@ -25,6 +48,8 @@ const Video = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [tagInput, setTagInput] = useState("");
+  // const [suggestions, setSuggestions] = useState([]);
+  const [selectedTag, setSelectedTag] = useState('');
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -96,20 +121,17 @@ const Video = () => {
     setDesc(e.target.value);
   };
 
-  const tagOnChange = (e) => {
+  const handleTagSelect = (e) => {
     const value = e.target.value;
-    const tagsArray = value.split("#").filter((tag) => tag.trim() !== "");
 
-    if (tagsArray.length <= 6) {
-      setTags(tagsArray);
-      setTagInput(value);
-      setErrorMessage("");
+    if (value && !videoTags.includes(value) && videoTags.length < 6) {
+      setTags((prev) => [...prev, value]);
+      setSelectedTag('');
     } else {
-      setErrorMessage("You can add a maximum of 6 tags.");
-      toast.error("You can add a maximum of 6 tags."); // Show toast
+      toast.error("This tag has already been added or is invalid.");
     }
   };
-
+console.log("tag console",)
   const shareContent = async () => {
     if (navigator.share) {
       try {
@@ -132,7 +154,7 @@ const Video = () => {
     if (vidPostSucc) {
       const timer = setTimeout(() => {
         navigate("/videos");
-      }, 3000);
+      }, 8000);
       return () => clearTimeout(timer);
     }
   }, [vidPostSucc, navigate]);
@@ -140,7 +162,7 @@ const Video = () => {
   return (
     <>
       <ToastContainer /> {/* Include the ToastContainer here */}
-      <div className="h-full flex items-center bg-white w-full relative overflow-y-scroll Podcast_Top_Videos">
+      <div className="lg:h-full h-[100vh] flex items-center bg-white w-full relative overflow-y-scroll Podcast_Top_Videos">
         {vidPostSucc && (
           <div className="h-full w-full bg-white z-40 flex flex-col top-0 left-0 justify-center absolute items-center">
             <RxCross2
@@ -237,7 +259,7 @@ const Video = () => {
             )}
           </div>
         ) : step === "post" ? (
-          <div className="md:w-[40%] sm:w-[50%] w-[60%] h-full flex flex-col justify-center mx-auto">
+          <div className="md:w-[40%] sm:w-[50%] w-[60%] h-auto flex flex-col justify-center mx-auto overflow-y-auto">
             <div className="w-full flex justify-between items-center pb-4">
               <div className="flex gap-2 items-center font-normal">
                 <FaCaretLeft
@@ -265,14 +287,27 @@ const Video = () => {
               className="mb-2 py-1 text-gray-400 ps-3 text-sm outline-none border-none"
               placeholder="Add Description ........"
             />
-            <input
-              value={tagInput}
-              onChange={tagOnChange}
-              type="text"
-              className="mb-2 py-1 text-gray-400 ps-3 text-sm outline-none border-none"
-              placeholder="Add Tags (use # to separate) ........"
-              disabled={videoTags.length >= 6}
-            />
+          
+   <div className="my-1">
+        <select
+          className="w-full border py-1 ps-3 mb-2 rounded-lg text-gray-600 leading-tight focus:outline-none"
+          onChange={handleTagSelect}
+          value={selectedTag}
+          disabled={videoTags.length >= 6}
+        >
+          <option value="">Select a Tag</option>
+          {entrepreneurs2.map((tag, index) => (
+            <option key={index} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+      <div>
+        <strong>Selected Tags:</strong> #{videoTags.join("#")}
+      </div>
             <div className="w-full flex items-center justify-center h-[80%] rounded-lg relative">
               {postPrivShow && (
                 <div
@@ -304,7 +339,7 @@ const Video = () => {
               )}
               <video
                 controls
-                className="w-full h-full rounded-lg bg-gray-200 object-fill"
+                className="w-full h-[59vh] rounded-lg bg-gray-200 object-fill"
                 src={inputData}
                 alt=""
               />

@@ -99,9 +99,9 @@ const DevicePermissions = () => {
       <h1 className='text-2xl font-semibold text-center mt-6'>Your Preference</h1>
       <div className="w-96 flex justify-center flex-col mx-auto mt-6">
         {Object.keys(permissions).map((permission) => (
-          <div key={permission} className="flex justify-between mb-6 items-center border-b-2 p-1">
+          <div key={permission} className="flex lg:justify-between  mb-6 items-center border-b-2 p-1">
             <span className="text-xl font-bold capitalize">{permission}</span>
-            <label className="relative inline-flex items-center cursor-pointer">
+            <label className="relative inline-flex ml-16 items-center cursor-pointer">
               <input
                 type="checkbox"
                 checked={permissions[permission]}

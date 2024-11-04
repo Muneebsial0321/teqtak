@@ -99,9 +99,9 @@ function WatchHistory() {
             <>
               <div className="flex items-center justify-between">
                 <h1 className="my-2 text-2xl">Videos</h1>
-                <Link to="/videos" className="text-blue-400 text-sm">
+                {/* <Link to="/videos" className="text-blue-400 text-sm">
                   See all
-                </Link>
+                </Link> */}
               </div>
               <div className="mt-3 flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos  ">
                 {videos.map((elm) => (
@@ -121,7 +121,7 @@ function WatchHistory() {
                 {recentdata.map((elm, ind) => (
                   <div
                     key={ind}
-                    className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[30.33vw] max-[425px]:w-[43.33vw] w-[42.33vw] flex-shrink-0 rounded-lg relative"
+                    className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[29.33vw] max-[425px]:w-[41.33vw] w-[41.33vw] flex-shrink-0 rounded-lg relative"
                     onClick={() => navigate(`/podcastdetails`, { state: { id: elm.data._id } })}
                   >
                     <div className="absolute h-full w-full ShadedBG rounded-lg">

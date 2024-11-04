@@ -6,7 +6,7 @@ const Subscribe = () => {
   return (
     <Fragment>
       <div
-        className="flex flex-wrap bg-white mt-1 h-[99%] "
+        className="flex flex-wrap bg-white mt-1 h-[99%] overflow-y-hidden"
         style={{
           WebkitOverflowScrolling: "touch",
           WebkitScrollbar: {
@@ -17,7 +17,7 @@ const Subscribe = () => {
         }}
       >
         <div
-          className="w-[48%] h-[600px] overflow-y-auto ml-1"
+          className="w-[48%] h-[600px] overflow-y-auto ml-1 lg:mb-3"
           style={{
             WebkitOverflowScrolling: "touch",
             WebkitScrollbar: {

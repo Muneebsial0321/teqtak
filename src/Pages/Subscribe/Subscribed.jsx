@@ -100,7 +100,7 @@ function Subscribed() {
 
   return (
     <Fragment>
-      <div className="h-full w-full bg-white md:h-screen lg:h-screen xl:h-screen">
+      <div className="h-[80%] w-full bg-white md:h-screen lg:h-[90vh] xl:h-[90vh]">
         <div className="main h-full w-[90%] mx-4 md:w-[80%] lg:w-[60%] xl:w-[70%]">
           <p className="text-lg h-[10%] bg-white font-bold w-full z-10 flex items-center md:text-xl lg:text-xl xl:text-2xl">
             Subscribed
@@ -110,7 +110,7 @@ function Subscribed() {
             <h2>{subscriber.length}</h2>
           </div>
           <div
-            className="overflow-y-auto h-[550px]"
+            className="overflow-y-auto h-[550px] "
             style={{
               WebkitOverflowScrolling: "touch",
               WebkitScrollbar: {
@@ -121,7 +121,7 @@ function Subscribed() {
             }}
           >
             {subscriber.map((subsc) => (
-              <div key={subsc._id} className="flex items-center justify-between py-3 mt-2 border-b">
+              <div key={subsc._id} className="flex items-center justify-between py-3 mt-2 border-b mb-5">
                 <div className="flex items-center gap-3">
                   <Link to="/userprofile">
                     <img

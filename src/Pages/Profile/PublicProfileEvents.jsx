@@ -95,7 +95,7 @@ const user_Id = getUserId()
       <div className="flex flex-wrap text-white gap-1 w-[95%] mx-auto Podcast_Top_Videos pt-2 ">
         {loading ? (
           <p className="text-center w-full">Loading...</p>
-        ) : events && events.length > 0 ? (
+        ) : events && (events.length > 0) ? (
           events.map((elm) => (
             <div
               key={elm._id}

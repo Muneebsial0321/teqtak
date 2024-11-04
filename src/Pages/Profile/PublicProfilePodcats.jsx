@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { CiPlay1, CiTrash } from "react-icons/ci";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { IoBookmarkOutline } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deletePodcast } from "../../DeleteAPI";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -56,8 +56,8 @@ const ApplePodcast = (props) => {
   useEffect(() => {
     console.log("podcasts single user section");
     console.log(props.podcast);
+console.log("user prop",props.user)
 
-    // Ensure props.podcast is always an array
     const fetchedPodcasts = Array.isArray(props.podcast) ? props.podcast : [];
     setLoading(true);
     setTimeout(() => {
@@ -133,7 +133,7 @@ const ApplePodcast = (props) => {
                     onClick={() => navigate(`/mypodcasts`, { state: { id: elm._id } })}
                   >
                     <div className="absolute h-full w-full ShadedBG rounded-lg">
-                    <IoBookmarkOutline
+                    <IoBookmarkOutline size={30}
                       className="absolute right-1 top-1 text-2xl md:text-lg cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -143,7 +143,8 @@ const ApplePodcast = (props) => {
                     </div>
                     <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                     <p className="text-lg lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
-                
+                    <Link to="/userprofile" state={{id:props.user.userID ? props.user.userID :""}}   onClick={(e) => {
+                      e.stopPropagation()}}  ><p className="text-[16px] text-[#B4B6B7] whitespace-nowrap text-ellipsis overflow-hidden">{props.user ? props.user.name : ""}</p></Link>
                     <p className="text-xs flex gap-1 items-center lg:text-lg whitespace-nowrap text-ellipsis">
                       <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}
                     </p>
@@ -156,7 +157,7 @@ const ApplePodcast = (props) => {
                       className="h-full w-full rounded-lg object-cover"
                     />
                     {visibleId === elm._id &&   elm.userId === currentUserId && (
-                      <div className="absolute top-14 right-2 flex flex-col space-y-2">
+                      <div className="absolute top-14 right-2 flex flex-col space-y-2 z-10">
                         <CiTrash
                           className="text-red-600 text-3xl cursor-pointer hover:text-red-600"
                           onClick={(e) => handleDeleteClick(e, elm._id)}

@@ -123,9 +123,12 @@ const Wishlist = () => {
     wishlistevent.length > 0 ||
     wishlistpodcast.length > 0;
 
+ 
+  const currentUser = getUserId()
+
   return (
     <Fragment>
-      <div className="overflow-y-scroll h-full w-full p-4 bg-white">
+      <div className="overflow-y-scroll h-full w-full p-4 bg-white" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
         {loading ? (
           <div className="text-center">Loading...</div>
         ) : (
@@ -151,101 +154,48 @@ const Wishlist = () => {
                   Wish List
                 </h4>
                 <div className="flex flex-wrap gap-4 w-full">
-                  {/* Render podcasts */}
-                  {wishlistpodcast.map((elm, index) => (
+                  <h1>Saved Podcasts</h1>
+               <div className="overflow-x-scroll h-auto w-full flex gap-2"  style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
+                   {/* Render podcasts */}
+                   {wishlistpodcast.map((elm, index) => (
                     <div
                       key={index}
-                      className="cursor-pointer text-white lg:h-[40vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw] sm:w-[33.33vw] w-[33.33vw] flex-shrink-0 rounded-lg relative max-[425px]:h-[25%]"
+                   className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[31.33vw]  max-[425px]:w-[43vw] w-[45.33vw] flex-shrink-0 rounded-lg relative text-white"
                       onClick={() =>
                         navigate(`/podcastdetails`, { state: { id: elm._id } })
                       }
                     >
-                      <div className="absolute h-full w-full ShadedBG rounded-lg">
-                        <div className="absolute bottom-1 left-1">
-                          <p className="text-sm text-white">
-                            {elm.episodeTitle}
-                          </p>
-                          <Link
-                            to="/userprofile"
-                            state={{ id: elm.userID ? elm.userID : "" }}
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <p className="text-sm">
-                              {elm.user ? elm.user.name : ""}
-                            </p>
-                          </Link>
-                          <p className="text-xs flex gap-1 items-center">
-                            <CiPlay1 size={20} />{" "}
-                            {formatDuration(elm.podcastDuration)}
-                          </p>
-                        </div>
-                      </div>
-                      <img
-                        src={elm.picUrl ? elm.picUrl : "/loading.jpg"}
-                        alt={`Img-${index}`}
-                        className="h-full w-full rounded-lg"
-                      />
+                        <div className="absolute h-full w-full ShadedBG rounded-lg">
+            
+              <div className="absolute bottom-1 left-1 w-[93%] SVTBottom rounded-lg ps-3">
+                <p className="text-xl lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
+                <Link
+                  to="/userprofile"
+                  state={{ id: elm.userID ? elm.userID : "unknown" }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <p className="text-sm text-[#B4B6B7] whitespace-nowrap overflow-hidden text-ellipsis">{elm.user ? elm.user.name : ""}</p>
+                </Link>
+                <p className="text-xs lg:text-xl  flex gap-1 items-center">
+                  <CiPlay1 size={25}/> {formatDuration(elm.podcastDuration)}
+                </p>
+              </div>
+            </div>
+            <img
+              src={elm.picUrl ? elm.picUrl : "loading.jpg"}
+              alt={`Img-${elm.user.name}`}
+              className="h-full w-full rounded-lg object-cover"
+            />
                     </div>
                   ))}
-
-                  {/* Render jobs */}
-                  {wishlistjob.map((elm, ind) => (
-                    <div
-                      key={ind}
-                      className="lg:h-[40vh] lg:w-[20vw] md:w-[31vw] sm:w-[40vw] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[425px]:h-[25%]"
-                    >
-                      <div className="w-full">
-                        <div className="flex gap-2 ml-2 mt-2">
-                          <img
-                            src={elm.logoUrl ? elm.logoUrl : "/placeholder.jpg"}
-                            alt="Profile"
-                            className="rounded-full  h-10 w-10"
-                          />
-                          <div>
-                            <h1 className="font-semibold">
-                              {elm.jobTitle.length > 25
-                                ? `${elm.jobTitle.substring(0, 25)}...`
-                                : elm.jobTitle}
-                            </h1>
-                            <p className="font-light text-md">
-                              {formatDate(elm.applicationDeadline)}
-                            </p>
-                          </div>
-                        </div>
-                        <p className="mt-7 ps-4 text-md opacity-65">
-                          {elm.location} ({elm.workplaceType})
-                        </p>
-                        <p className="ps-4 text-sm opacity-65 mt-3">
-                          {elm.salaryRange}
-                        </p>
-                        {elm.jobType === " " ? (
-                          <Link
-                            to={"/jobdetail"}
-                            state={{ id: elm._id }}
-                            className="w-[90%] mx-auto block text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
-                          >
-                            Apply Now
-                          </Link>
-                        ) : (
-                          <div className="text-center flex items-center">
-                            <Link
-                              to={"/jobdetail"}
-                              state={{ id: elm._id }}
-                              className="w-[90%] mx-auto flex text-xs mt-7 justify-center items-center bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
-                            >
-                              Apply Now
-                            </Link>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Render events */}
-                  {wishlistevent.map((data, i) => (
+               </div>
+               <h1>Saved Events</h1>
+                <div className="overflow-x-scroll h-auto w-full flex gap-2"  style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
+                    {/* Render events */}
+                    {wishlistevent.map((data, i) => (
                     <div
                       key={i}
-                      className="m-0 text-white md:w-[30%] w-[46.4%] h-[35vh] relative md:h-[30vh] max-[425px]:h-[30vh]"
+                      className="m-0 text-white md:w-[32%] w-[48.4%] lg:h-[42vh] h-[37vh] relative rounded-2xl"
                     >
                       <img
                         src={
@@ -254,34 +204,100 @@ const Wishlist = () => {
                             : "/loading.jpg"
                         }
                         alt="Card Img2"
-                        className="h-full w-full rounded-lg cursor-pointer"
+                          className="h-full w-full rounded-lg cursor-pointer"
                       />
-                      <div className="w-full absolute bottom-1">
-                        <div className="SVTBottom w-[95%] mx-auto px-3 py-2 rounded-lg">
-                          <small className="block text-xl">
-                            {data.eventTitle}
-                          </small>
-                          <p className="text-xs py-2">{data.eventCatagory}</p>
-                          <p className="text-sm pb-2">{data.eventLocation}</p>
-                          <div className="flex items-center">
-                            <Link
-                              to="/eventdetail"
-                              state={{ id: data._id }}
-                              className="me-2 md:px-5 py-2 JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full"
-                            >
-                              Buy tickets
-                            </Link>
-                            <button
-                              className="md:px-7 py-2 flex justify-center w-[30%] md:w-auto JobButtonBgBlur text-xs text-white rounded-full"
-                              onClick={handleShare}
-                            >
-                              <FaRegShareFromSquare className="text-lg" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                    <div className="w-full absolute bottom-1">
+            <div className="SVTBottom w-[95%] mx-auto lg:px-3 lg:py-2 rounded-lg px-1">
+              <small className="block lg:text-xl  w-[93%] overflow-hidden whitespace-nowrap text-ellipsis">{data.eventTitle}</small>
+              <p className="text-xs py-2">{data.eventDate}</p>
+              <p className="text-sm lg:pb-2  w-[93%] overflow-hidden whitespace-nowrap text-ellipsis">{data.eventLocation}</p>
+              <div className="flex items-center mb-1">
+                <Link
+                  to="/eventdetail"
+                  state={{ id: data._id }}
+                  className="me-2 md:px-5 lg:py-2 py-[3px] JobButtonBgBlur md:w-auto w-[70%] text-sm text-white rounded-full text-center"
+                >
+                  Buy tickets
+                </Link>
+                <button 
+                  className="md:px-7 lg:py-2 py-[3px] flex justify-center w-[30%] md:w-auto JobButtonBgBlur text-xs text-white rounded-full" 
+                  onClick={handleShare}
+                >
+                  <FaRegShareFromSquare className=" text-lg " />
+                </button>
+              </div>
+            </div>
+          </div>
                     </div>
                   ))}
+                </div>
+               <h1>Saved Jobs</h1>
+             <div className="overflow-x-scroll h-auto w-full flex gap-2"  style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
+                   {/* Render jobs */}
+                   {wishlistjob.map((elm, ind) => (
+                    <div
+                      key={ind}
+                          className="h-auto md:w-[33%] sm:w-[40%] w-[50%] flex-shrink-0 shadow rounded-lg border relative max-[766px]:h-auto max-[766px]:w-auto max-[766px]:p-2 lg:w-[32.43%]  flex flex-col"
+                    >
+                       <div className="w-full flex-grow">
+              <div className="flex gap-2 mt-2">
+                <img
+                  src={elm.logoUrl ? elm.logoUrl : "/placeholder.jpg"}
+                  onLoad={(e) => (e.target.style.opacity = 1)}
+                  onError={(e) => (e.target.src = "/placeholder.jpg")}
+                  style={{
+                    height: "40px",
+                    width: "40px",
+                    opacity: 0,
+                    transition: "opacity 0.3s ease",
+                  }}
+                  className="rounded-full ml-3"
+                  alt="Profile"
+                />
+                <div>
+                  <div className="relative inline-block group">
+                    <h1 className="font-semibold">{elm.jobTitle}</h1>
+                    {/* {isLong && (
+                      <span className="hidden group-hover:block absolute top-full left-0 bg-white p-2 border border-gray-300 z-10">
+                        {elm.jobTitle}
+                      </span>
+                    )} */}
+                  </div>
+                  <p className="font-light text-md">
+                    {formatDate(elm.applicationDeadline)}
+                  </p>
+                </div>
+              </div>
+              <p className="mt-3 ps-4 text-md opacity-65 max-[768px]:mt-2 h-12 ">{elm.location} ({elm.workplaceType})</p>
+              <p className="ps-4 text-sm opacity-65 mt-3">
+                {elm.salaryRange}
+              </p>
+            </div>
+            <div className="mt-auto lg:mb-3 md:mb-3 text-center ">
+              {elm.userId === currentUser ? (
+                <Link
+                to={"/mycreatedjob"}
+                state={{ id: elm._id }}
+                  className="w-[90%] mx-auto block pt-3  text-xs mt-7 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3] max-[768px]:mb-3 "
+                  
+                >
+                  View Details
+                </Link>
+              ) : (
+                <Link
+                to={"/jobdetail"}
+                state={{ id: elm._id }}
+                  className="w-[90%] mx-auto block text-xs mt-7 pt-3 bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
+                 
+                >
+                  Apply Now
+                </Link>
+              )}
+            </div>
+                    </div>
+                  ))}
+             </div>
+            
                 </div>
               </div>
             )}

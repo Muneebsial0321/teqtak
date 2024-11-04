@@ -18,11 +18,7 @@ const location = useLocation()
 const filteredData = location.state?.filteredData;
 console.log("podcast filter state",filteredData)
 
-useEffect(() => {
- 
 
-  
-}, []);
 
   useEffect(() => {
     const fetchViews = async () => {
@@ -40,7 +36,7 @@ useEffect(() => {
     const getData = async () => {
       try {
         const result = await fetchPodcast();
-        console.log({ result });
+        console.log("fetch podcast result",{ result });
         setRecentData(result.data);
       } catch (error) {
         console.error("Fetching data error", error);
