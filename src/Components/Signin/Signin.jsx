@@ -38,9 +38,14 @@ const Signin = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Login successful:", data);
+        localStorage.setItem('authtoken', data.authtoken); 
+
+        
+        console.log("authToken", data.authtoken);
+        localStorage.setItem('userId', data.user.Users_PK);
         // Store any tokens or user info as needed
         // navigate('/bording');
-        navigate(`/bording?authtoken=${data.authToken}&user=${data.user.Users_PK}`);
+        navigate(`/bording?authtoken=${data.authtoken}&user=${data.user.Users_PK}`);
 
       } else {
         const errorData = await response.json();

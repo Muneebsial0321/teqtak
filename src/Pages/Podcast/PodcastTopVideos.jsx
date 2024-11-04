@@ -18,7 +18,8 @@ const location = useLocation()
 const filteredData = location.state?.filteredData;
 console.log("podcast filter state",filteredData)
 
-
+const token = localStorage.getItem('authtoken'); 
+console.log("podcast token",token)
 
   useEffect(() => {
     const fetchViews = async () => {
