@@ -88,7 +88,7 @@ function Blocklist() {
                   </div>
                 </div>
                 <button
-                  className='h-[7vh] md:w-[10%] w-[20%] bg-gray-100 rounded-lg'
+                  className='h-[7vh] md:w-[10%] w-[20%] bg-gray-100 rounded-lg max-[375px]:w-[25%]'
                   onClick={() => unblockUser(block._id)}
                 >
                   Unblock

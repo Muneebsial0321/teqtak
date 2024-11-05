@@ -8,14 +8,18 @@ const getUserId = () => {
   const userKey = str.split("=")[1];
   return userKey;
 };
-
+ const token = localStorage.getItem('authtoken')
 function Message() {
   const [chats, setChats] = useState([]);
   const [rooms, setRooms] = useState([]);
 
   const fetchAllChatrooms = async () => {
     const req = await fetch(
-      `${REACT_APP_API_BASE_URL}/chatrooms/${getUserId()}`
+      `${REACT_APP_API_BASE_URL}/chatrooms/${getUserId()}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }
     );
     const info = await req.json();
 

@@ -9,7 +9,7 @@ export const getUserId = () => {
   return userKey;
 };
 const token = localStorage.getItem('authtoken')
-
+axios.defaults.headers.common['Authorization'] =`Bearer ${token}`
 // Function to fetch data (if needed)
 export const fetchData = async () => {
   try {
@@ -53,11 +53,8 @@ export const fetchDetail = async () => {
 
 export const fetchPodcast = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/podcasts/`,{
-      headers:{
-        Authorization:`Bearer ${token}`
-      }
-    });
+    const response = await axios.get(`${API_BASE_URL}/podcasts/`);
+    console.log("responsed data",response.data)
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);

@@ -23,8 +23,8 @@ const RightLayout = ({state}) => {
               locationPath === "/videos" ? "Right_Side_Selected" : ""
             } transition-all duration-200 transform`}
           >
-            <CiVideoOn className="" />
-            <span className="text-sm ml-1">Videos</span>
+            <CiVideoOn size={25} />
+            <span className="text-xl ml-1">Videos</span>
           </Link>
         </li>
         <li className="mb-2">
@@ -34,8 +34,8 @@ const RightLayout = ({state}) => {
               locationPath === "/podcast" ? "Right_Side_Selected" : ""
             }`}
           >
-            <FaPodcast className="" />
-            <span className="text-sm ml-1">Podcast</span>
+            <FaPodcast size={25} />
+            <span className="text-xl ml-1">Podcast</span>
           </Link>
         </li>
         <li className="mb-2">
@@ -45,19 +45,19 @@ const RightLayout = ({state}) => {
               locationPath === "/events" ? "Right_Side_Selected" : ""
             }`}
           >
-            <BsCalendar4Event className="" />
-            <span className="text-sm ml-1">Events</span>
+            <BsCalendar4Event size={25} />
+            <span className="text-xl ml-1">Events</span>
           </Link>
         </li>
         <li className="mb-2">
           <Link
             to="/jobs"
-            className={`flex items-center py-2 ms-2 px-4 rounded-lg transition-all duration-200 transform ${
+            className={`flex items-center gap-1 py-2 ms-2 px-4 rounded-lg transition-all duration-200 transform ${
               locationPath === "/jobs" ? "Right_Side_Selected" : ""
             }`}
           >
-            <BsSuitcaseLg className="" />
-            <span className="text-sm ml-1">Jobs</span>
+            <BsSuitcaseLg size={25} />
+            <span className="text-xl ml-1">Jobs</span>
           </Link>
         </li>
       </ul>

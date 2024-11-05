@@ -28,7 +28,7 @@ function Message2() {
   const [acessToken, setToken] = useState(''); // Access token for Zoom
 
   const cardRef = useRef(null);
- 
+ const token = localStorage.getItem('authtoken')
   const navigate = useNavigate()
   const messagesEndRef = useRef(null); // Reference for scrolling to bottom
 
@@ -73,7 +73,11 @@ function Message2() {
   // Fetch chatroom data based on ID
   const fetchChatroom = async (id) => {
     let url = `${REACT_APP_API_BASE_URL}/chatrooms/room/${id}`;
-    const req = await fetch(url);
+    const req = await fetch(url,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    });
     const d = await req.json();
     console.log("schma",d)
     let sender = d.users.filter((e) => e !== getUserId());
@@ -83,7 +87,11 @@ function Message2() {
 
   // Get sender's name
   const getSenderName = async (id) => {
-    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${id}`);
+    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${id}`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    });
     const d = await req.json();
     setSender(d.user);
     getReceiver();
@@ -91,7 +99,11 @@ function Message2() {
 
   // Get receiver's details
   const getReceiver = async () => {
-    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`);
+    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    });
     const d = await req.json();
     setReceiver(d.user);
   };

@@ -1,13 +1,12 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { CiPlay1 } from "react-icons/ci";
 import { IoBookmarkOutline } from "react-icons/io5";
-// import img from './img2.jpeg';
 import RelatedPodcast from './RelatedPodcast';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fetchPodcast } from "../../API";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify'; // Import toast components
-import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 function PodcastTopVideos() {

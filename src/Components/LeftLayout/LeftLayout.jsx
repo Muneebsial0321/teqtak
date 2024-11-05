@@ -79,7 +79,7 @@ getProfilePic()
         <li className="mb-2">
           <Link to="/map" className={`flex items-center opacity-70 ${locationPath === '/map' ? 'Left_Side_Selected' : ''} py-2 px-2 rounded-lg  transition-all duration-200 transform` }
          >
-            <CiLocationOn className="md:mr-2 text-2xl" />
+            <CiLocationOn className="md:mr-2 text-2xl" size={25} />
             <span className="text-sm md:block hidden">Map</span>
           </Link>
         </li>

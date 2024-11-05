@@ -16,7 +16,7 @@ function Changepassword() {
   const [loading, setLoading] = useState(false);
 
   let navigate = useNavigate();
-
+const token = localStorage.getItem('authtoken')
   const getUserId = () => {
     const str = document.cookie;
     console.log("cookies",str)
@@ -67,7 +67,7 @@ function Changepassword() {
             className="pt-6 "
           >
             <div className="flex justify-between max-[425px]:flex-col">
-              <div className=" sm:w-[40%] w-[45%] max-[425px]:w-[100%]">
+              <div className=" sm:w-[40%] w-[45%] max-[425px]:w-[90%] max-[375px]:w-[80%]">
                 <label htmlFor="" className="block text-black text-sm mb-2 max-[425px]:mb-0">
                   Current Password
                 </label>
@@ -91,7 +91,7 @@ function Changepassword() {
                   onChange={(e) => setRetype(e.target.value)}
                 />
               </div>
-              <div className=" sm:w-[40%] w-[45%] max-[425px]:w-[100%]">
+              <div className=" sm:w-[40%] w-[45%] max-[425px]:w-[90%] max-[375px]:w-[80%]">
                 <label htmlFor=""className="block text-black text-sm mb-2  max-[425px]:mb-0">
                   New Password
                 </label>
@@ -105,7 +105,7 @@ function Changepassword() {
                 />
                 <button
                   type="submit"
-                  className="h-[7vh] w-auto px-4 py-1 justify-end rounded-3xl text-white linear_gradient  max-[425px]:mt-3 mt-12 max-[425px]:h-auto max-[425px]:text-[16px] max-[425px]:ml-[13rem]"
+                  className="h-[7vh] w-auto px-4 py-1 justify-end rounded-3xl text-white linear_gradient  max-[425px]:mt-3 mt-12 max-[425px]:h-auto max-[425px]:text-[16px] max-[425px]:ml-[10rem] whitespace-nowrap max-[375px]:ml-[1rem]"
                   disabled={loading}
                 >
                   {loading ? "Changing..." : "Change Password"}

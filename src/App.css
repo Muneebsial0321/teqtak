@@ -15,6 +15,9 @@
 .Left_Side_Selected{
   background-color: #CCCCCC;
 }
+.Right_Side_Selected{
+background-color: #606375;
+}
 .Video_Nav_Filters{
   background: #EFF0FE;
 }
