@@ -3,8 +3,8 @@ import { CiMenuKebab } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-function MySubscribers() {
-  const [subscriber, setSubscriber] = useState([]);
+function MySubscribers() { 
+  const [subscribers, setSubscribers] = useState([]);
   const [blockedUsers, setBlockedUsers] = useState([]);
   const [able, setAble] = useState(null);
 
@@ -14,19 +14,33 @@ function MySubscribers() {
     return userKey;
   };
 
+  // Fetch the list of users who have subscribed to you (your followers)
   const fetchSubscribers = async () => {
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`);
       const data = await response.json();
-      console.log("Fetched my subscribers:", data); // Log the data
-      setSubscriber(data);
+      console.log("Fetched subscribers:", data); 
+      setSubscribers(data);
     } catch (error) {
       console.error("Error fetching subscribers:", error);
     }
   };
 
- 
+  // Fetch the list of blocked users
+  const fetchBlockedUsers = async () => {
+    try {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`);
+      const data = await response.json();
+      console.log("Blocked users", data);
 
+      setBlockedUsers(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Error fetching blocked users:", error);
+      setBlockedUsers([]);
+    }
+  };
+
+ 
   const blockSubscriber = async (blockedId) => {
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/block`, {
@@ -41,8 +55,15 @@ function MySubscribers() {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Post for block", result);
-        setBlockedUsers((prev) => [...prev, { blockedId }]); // Update blocked users list
+        console.log("Block post req", result);
+        
+        
+        setSubscribers(prevSubscribers => 
+          prevSubscribers.filter(sub => sub.subscriberId !== blockedId)
+        );
+
+       
+        setBlockedUsers(prev => [...prev, { blockedId }]);
       } else {
         console.error('Failed to block user');
       }
@@ -51,12 +72,13 @@ function MySubscribers() {
     }
   };
 
+  
   const isBlocked = (userId) => {
     return blockedUsers.some((blockedUser) => blockedUser.blockedId === userId);
   };
 
+  
   const deleteSubscriber = async (subscriberId) => {
-    console.log("delte sub id",subscriberId)
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`, {
         method: 'DELETE',
@@ -64,20 +86,21 @@ function MySubscribers() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Subscriber deleted:", result);
-        // Update the subscribers list
-        setSubscriber(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
+        console.log("Subscriber removed:", result);
+        
+        setSubscribers(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
       } else {
-        console.error('Failed to delete subscriber');
+        console.error('Failed to remove subscriber');
       }
     } catch (error) {
-      console.error('Error deleting subscriber:', error);
+      console.error('Error removing subscriber:', error);
     }
   };
 
+  
   useEffect(() => {
     fetchSubscribers();
-
+    fetchBlockedUsers();
   }, []);
 
   return (
@@ -88,22 +111,20 @@ function MySubscribers() {
             My Subscribers
           </p>
           <div className="flex flex-col justify-between md:flex-row lg:flex-row xl:flex-row text-lg md:text-xl lg:text-lg xl:text-xl font-bold">
-            <h1>Total Subscribers </h1>
-            <h2>{subscriber.length}</h2>
+            <h1>Total Subscribers</h1>
+            <h2>{subscribers.length}</h2>
           </div>
           <div
-            className="overflow-y-auto h-[550px]"
+            className="overflow-y-auto h-[550px] "
             style={{
               WebkitOverflowScrolling: "touch",
-              WebkitScrollbar: {
-                display: "none",
-              },
+              WebkitScrollbar: { display: "none" },
               msOverflowStyle: "none",
               scrollbarWidth: "none",
             }}
           >
-            {subscriber.map((subsc) => (
-              <div key={subsc._id} className="flex items-center justify-between py-3 mt-2 border-b">
+            {subscribers.map((subsc) => (
+              <div key={subsc._id} className="flex items-center justify-between py-3 mt-2 border-b mb-5">
                 <div className="flex items-center gap-3">
                   <Link to="/userprofile">
                     <img
@@ -136,19 +157,19 @@ function MySubscribers() {
                       <p
                         className="text-sm md:text-base lg:text-lg xl:text-xl opacity-75 mb-5 cursor-pointer"
                         onClick={() => {
-                          const blockedId = subsc.subscribedToId;
+                          const blockedId = subsc.user.Users_PK; 
                           if (!isBlocked(blockedId)) {
                             blockSubscriber(blockedId);
                           }
                         }}
                       >
-                        {isBlocked(subsc.subscribedToId) ? "Blocked" : "Block"}
+                        {isBlocked(subsc.user.Users_PK) ? "Blocked" : "Block"}
                       </p>
                       <p
                         className="text-sm md:text-base lg:text-lg xl:text-xl text-red-500 mb-5 cursor-pointer"
                         onClick={() => deleteSubscriber(subsc._id)} // Call deleteSubscriber with the subscriber's ID
                       >
-                        Remove
+                        Unsubscribe
                       </p>
                     </div>
                   )}

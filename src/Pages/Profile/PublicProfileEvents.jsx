@@ -73,7 +73,7 @@ const user_Id = getUserId()
     }
   };
 
-  const user_id = getUserId();
+  
 
   const handleSaveToWishlist = async (eventId) => {
     try {

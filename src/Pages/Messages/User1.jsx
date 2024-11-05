@@ -44,7 +44,7 @@ function Message2() {
 
   // Handle click outside the card to close it
   const handleClickOutside = (event) => {
-    console.log("resd",cardRef.current)
+    
     if (cardRef.current && !cardRef.current.contains(event.target)) {
 
       setShowCard(false);
@@ -123,11 +123,11 @@ function Message2() {
       setMessage(''); // Clear the message after sending
     }
   };
-  const deleteMessage = (id) => {
-      console.log("deleting message")
-      socket.emit('sendMessage', { roomId, sender: getUserId(), messageId:id });
+  // const deleteMessage = (id) => {
+  //     console.log("deleting message")
+  //     socket.emit('sendMessage', { roomId, sender: getUserId(), messageId:id });
     
-    }
+  //   }
   
 
   useEffect(() => {
@@ -210,7 +210,9 @@ console.log("pre msg",chatroom)
    await deleteChatroom(roomId);
     window.location.href='https://teqtak.vercel.app/messages'
   };
-console.log("msg recived",chatroom)
+
+  
+
   return (
     <div className="main h-full w-[100%] ">
       

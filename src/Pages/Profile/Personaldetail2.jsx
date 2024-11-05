@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 function Personaldetail2() {
   const [user, setUser] = useState({});
   const [subscriber, setSubscriber] = useState([]);
-
+const location = useLocation()
+const info = location.state?.id
+// console.log("state id ",info)
   const getUserId = () => {
     const str = document.cookie
     const userKey = str.split('=')[1];
@@ -60,7 +62,7 @@ const navigate = useNavigate()
     <Fragment>
       <div className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto lg:h-[99%]">
         <div className="flex items-center gap-4 pt-2">
-          <Link to='/personaldetails'>
+          <Link to='/personaldetails' state={{id:info}}>
             <FaArrowLeftLong size={30} className='border-2 border-black p-1 rounded-md' />
           </Link>
           <p className="text-2xl font-semibold pl-4">Personal Details</p>

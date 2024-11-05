@@ -129,7 +129,7 @@ console.log("user id is ", isCurrentUser)
               </div>
               <p className="text-xs md:text-sm opacity-65">{data_.rating?.totalRatings || 0} global ratings</p>
               <div className="flex text-blue-600 text-xs md:text-sm py-2">
-                <Link to='/personaldetails'>view personal info</Link>
+                <Link to='/personaldetails'state={{id:profile.Users_PK}}>view personal info</Link>
                 <MdKeyboardArrowRight className="text-xl md:text-2xl" />
               </div>
               <div className="flex  gap-2   sm:flex-nowrap text-nowrap max-[600px]:hidden">

@@ -143,7 +143,7 @@ console.log("user prop",props.user)
                     </div>
                     <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                     <p className="text-lg lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
-                    <Link to="/userprofile" state={{id:props.user.userID ? props.user.userID :""}}   onClick={(e) => {
+                    <Link to="/userprofile" state={{id:props.user ? props.user.Users_PK :"unknown"}}   onClick={(e) => {
                       e.stopPropagation()}}  ><p className="text-[16px] text-[#B4B6B7] whitespace-nowrap text-ellipsis overflow-hidden">{props.user ? props.user.name : ""}</p></Link>
                     <p className="text-xs flex gap-1 items-center lg:text-lg whitespace-nowrap text-ellipsis">
                       <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}

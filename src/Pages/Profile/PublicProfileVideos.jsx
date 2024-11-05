@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteVideo } from '../../DeleteAPI';
 
 const AllVideos = (props) => {
-  const [videosList, setVideosList] = useState([]); // Renamed state to avoid conflict
+  const [videosList, setVideosList] = useState([]); 
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [visibleId, setVisibleId] = useState(null);
@@ -47,9 +47,9 @@ const AllVideos = (props) => {
   useEffect(() => {
     setLoading(true);
     const fetchVideos = () => {
-      // Check if props.videos is defined and is an array
+     
       if (Array.isArray(props.videos)) {
-        setVideosList(props.videos); // Updated to use renamed state
+        setVideosList(props.videos); 
       } else {
         console.warn("Expected props.videos to be an array, received:", props.videos);
         setVideosList([]);

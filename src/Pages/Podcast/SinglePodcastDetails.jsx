@@ -19,6 +19,8 @@ function SinglePodcastDetails() {
   const [recentdata, setRecentData] = useState([]);
   const [result, setResult] = useState({});
   const [viewRecorded, setViewRecorded] = useState(false); // Flag for recording view
+  const [isPlaying, setIsPlaying] = useState(false); // State to track play/pause
+  const [audio] = useState(new Audio());
 
   useEffect(() => {
     const getData = async () => {
@@ -34,13 +36,28 @@ function SinglePodcastDetails() {
             recordView(result._id); // Call record view function
             setViewRecorded(true); // Set the flag to true
           }
+          audio.src = result.audioUrl || "";
         }
       } catch (error) {
         console.error("Fetching data error", error);
       }
     };
     getData();
+    return () => {
+      audio.pause(); // Clean up audio on unmount
+    };
   }, [loc.state, viewRecorded]); // Add viewRecorded as a dependency
+
+  const handleAudioPlayPause = () => {
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying); // Toggle play/pause state
+  };
+
+  audio.onended = () => setIsPlaying(false);
 
   const getPodcast = async (id) => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/podcasts/${id}`, {
@@ -156,15 +173,32 @@ function SinglePodcastDetails() {
 
             {/* Audio player */}
             {result.audioUrl ? (
-  <div className="flex  items-center p-4 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
-    <audio controls className="w-full max-w-full">
-      <source src={result.audioUrl} type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-  </div>
+ <div className="flex items-center py-2 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
+ <button
+   onClick={handleAudioPlayPause}
+   className="flex items-center space-x-2 px-4 py-2 border border-gray-400 rounded-full"
+ >
+   <span className="w-6 h-6 rounded-full border border-black flex items-center justify-center">
+     {/* Play/Pause icon based on state */}
+     {isPlaying ? (
+       <svg className="w-4 h-4 text-black fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path d="M6 4h4v16H6zM14 4h4v16h-4z" /> {/* Pause icon */}
+       </svg>
+     ) : (
+       <svg className="w-4 h-4 text-black fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path d="M8 5v14l11-7z" /> {/* Play icon */}
+       </svg>
+     )}
+   </span>
+   <span className="text-sm font-medium text-gray-800">
+    {isPlaying ? "Pause" :"Play"}
+   </span>
+ </button>
+</div>
 ) : (
   <p className="text-red-500 text-center p-4">Audio not available</p>
 )}
+
               <div className="flex items-center gap-4 ml-8 ">
           <CiSquareInfo
             className="text-2xl cursor-pointer"

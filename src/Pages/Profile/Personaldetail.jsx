@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { FaAngleDown } from "react-icons/fa";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { fetchDetail } from "../../API";
@@ -11,6 +11,9 @@ function Personaldetail() {
   const [subscriber, setSubscriber] = useState([]); // State to manage which dropdown is open
   const [detail, setDetail] = useState({});
 const [filter, setFilter] = useState();
+const location = useLocation()
+const userID = location.state?.id
+console.log("id from userprofile",userID )
   // Define arrays here
   const entrepreneurs = [
     { name: "Tech Entrepreneur" },
@@ -58,16 +61,14 @@ const [filter, setFilter] = useState();
     ['Small', 'Medium', 'Large', 'Experienced', 'Specialized'],
   ];
 
-  // const toggleDropdown = (field) => {
-  //   setOpenDropdown(openDropdown === field ? null : field);
-  // };
+ 
 
   const handleShow = (index) => {
     setSelectedindex(selectedindex === index ? null : index);
   };
   const getprofileDetail = async () => {
       try {
-        const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`) 
+        const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${userID}`) 
         const data = await req.json() 
         console.log("personal data is",data)
         setDetail(data.user);
@@ -83,7 +84,7 @@ const [filter, setFilter] = useState();
 
   const fetchSubscribers = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`);
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${userID}`);
       const data = await response.json();
       console.log("Fetched subscribers:", data);
       setSubscriber(data);
@@ -119,6 +120,7 @@ const _onChange_ = (e) => {
     [e.target.name]: e.target.value
   }));
 };
+const saveButton = getUserId() === userID
   return (
     <Fragment>
       <div className="h-full overflow-y-auto bg-white w-full px-3" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
@@ -129,12 +131,12 @@ const _onChange_ = (e) => {
             </Link>
             <p className="text-2xl font-semibold pl-4">Personal Details</p>
           </div>
-          <Link to='/personaldetail2' className="text-[#9595f5]">Edit Detail</Link>
+         {saveButton &&  <Link to='/personaldetail2'state={{id:detail.Users_PK}} className="text-[#9595f5]">Edit Detail</Link>}
           <p className="text-lg font-semibold mt-5">Total Subscriber</p>
           <p className="text-[gray]">{subscriber.length } Subscribers</p>
           <p className="text-xl font-semibold mt-5">Description</p>
           <p className="text-[gray]">
-            {detail.description || 'No description available.'}
+            {detail.description ? detail.description : 'No description available.'}
           
           </p>
           <p className="text-xl font-semibold mt-5">Personal info</p>
@@ -211,6 +213,8 @@ const _onChange_ = (e) => {
               </div>
             ))}
           </div>
+          {saveButton &&
+          
           <div className="my-8">
            <button
               type="button"
@@ -220,6 +224,7 @@ const _onChange_ = (e) => {
               Save
             </button>
            </div>
+          }
         </div>
       </div>
     </Fragment>
