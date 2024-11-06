@@ -80,7 +80,7 @@ function Apply() {
       <div className="w-[80%] h-[90%]   Podcast_Top_Videos md:pb-0 pb-4">
         <form onSubmit={handleApply} className="flex justify-between md:flex-nowrap flex-wrap">
           <div className="md:w-[40%] w-[80%] mx-auto sm:mx-0">
-            <label className="block text-sm mb-2">Name</label>
+            <label className="block text-sm mb-2 pl-5">Name</label>
             <input
               type="text"
               required
@@ -89,14 +89,14 @@ function Apply() {
               value={fname}
               onChange={(e) => setFname(e.target.value)}
             />
-            <label className="block text-sm mt-5 mb-2">Phone Number</label>
+            <label className="block text-sm mt-5 mb-2 pl-5">Phone Number</label>
             <PhoneInput
               country={"eg"}
               value={phone}
               onChange={(phone) => setPhone(phone)}
               inputClass="placeholder:text-xs ms-3 ps-3  border rounded-md w-full py-2 max-[425px]:py-0  max-[425px]:w-[40%]"
             />
-            <p className="mt-5 text-sm">Upload resume*</p>
+            <p className="mt-5 text-sm pl-5">Upload resume*</p>
             <div className="h-[7vh] w-[70%] flex justify-center items-center px-5 rounded-3xl bg-[#e7e7f5] text-[blue] mt-2 relative text-xs ms-3">
               <label>
                 Upload resume
@@ -112,7 +112,7 @@ function Apply() {
           </div>
 
           <div className="second md:w-[45%] w-[80%] mx-auto sm:mx-0">
-            <label className="block text-sm mt- mb-2">Email Address</label>
+            <label className="block text-sm mt- mb-2 pl-5">Email Address</label>
             <input
               type="email"
               required
@@ -121,7 +121,7 @@ function Apply() {
               value={mail}
               onChange={(e) => setMail(e.target.value)}
             />
-            <p className="block text-sm mt-5 mb-2">Additional Info</p>
+            <p className="block text-sm mt-5 mb-2 pl-5">Additional Info</p>
             <input
               type="text"
               className="placeholder:text-xs border-b w-full outline-none ms-3 ps-3 mb-10"

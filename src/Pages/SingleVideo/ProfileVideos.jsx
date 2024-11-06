@@ -4,8 +4,6 @@ import { BsInfoSquare } from "react-icons/bs";
 import { FaChevronLeft } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { FaRegShareFromSquare } from "react-icons/fa6";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Model from "../ModalReport/Model";
 import Review from "../Podcast/Review";
 import { ToastContainer, toast } from 'react-toastify'; // Importing Toastify
