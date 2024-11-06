@@ -115,7 +115,7 @@ console.log("podcast token",token)
                       }}
                     />
                   </div>
-                  <div className="absolute bottom-1 left-1 w-[93%]">
+                  <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                     <p className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
                   
                     <p className="text-xs flex gap-1 items-center lg:text-[20px]">
@@ -175,7 +175,7 @@ console.log("podcast token",token)
                       handleSaveToWishlist(elm._id);
                     }}
                   />
-                  <div className="absolute bottom-1 left-1  w-[93%] rounded-lg ps-3">
+                  <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                     <p className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis lg:py-1">{elm.episodeTitle}</p>
                     {/* <Link to="/userprofile" state={{id:elm.userID ? elm.userID :""}}  onClick={(e) => {
                       e.stopPropagation(); // Prevent triggering onClick of parent div

@@ -114,7 +114,7 @@ const FilterEvent = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const result = await fetchEvent(); // Use the function from api.js
+        const result = await fetchEvent(); 
         console.log("events results", result);
         setNewCard(result.data);
       } catch (error) {

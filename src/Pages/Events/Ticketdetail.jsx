@@ -3,6 +3,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import Barcode from "react-barcode";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
+import { fetchProfile } from "../../API";
 
 function Ticketdetail() {
   const [tickets, setTickets] = useState([]);
@@ -11,6 +12,22 @@ function Ticketdetail() {
   const loc = useLocation();
   const navigate = useNavigate();
 
+  const getUserId = () => {
+    const str = document.cookie;
+    const userKey = str.split('=')[1];
+    return userKey;
+  };
+
+  const fetchProfileData = async () => {
+    try {
+      const data = await fetchProfile(getUserId());
+      setUser(data.user);
+    ;
+    } catch (error) {
+      console.error("Fetching profile data error:", error);
+    }
+  };
+console.log("user",user)
   const fetchTickets = async (eventId) => {
     try {
       const response = await fetch(
@@ -22,7 +39,7 @@ function Ticketdetail() {
       const data = await response.json();
       console.log("Fetched ticketPayment:", data);
       setTickets(data.event);
-      setUser(data.user);
+      
     } catch (error) {
       console.error("Error fetching tickets:", error);
     } finally {
@@ -40,6 +57,7 @@ function Ticketdetail() {
 
     if (eventId) {
       fetchTickets(eventId);
+      fetchProfileData()
     } else {
       console.error("No event ID found in URL.");
     }

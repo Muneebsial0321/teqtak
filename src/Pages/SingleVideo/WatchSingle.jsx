@@ -218,12 +218,12 @@ const WatchSingle = () => {
       <section className="h-full w-full relative flex items-center bg-white">
         {revModOpen && (
           <div className="h-[95%] left-0 w-full absolute top-0 z-20 flex justify-center items-center">
-            <Review videoId={videoId} setRevModOpen={setRevModOpen} />
+            <Review videoId={videoId} setRevModOpen={setRevModOpen}  comp={'video'} videoUrl={video?.data?.videoUrl}/>
           </div>
         )}
         {repModOpen && (
           <div className="h-full w-full absolute top-0 z-20 flex justify-center items-center">
-            <Model setRepModOpen={setRepModOpen} />
+            <Model setRepModOpen={setRepModOpen}  comp={'video'} videoUrl={video?.data?.videoUrl}/>
           </div>
         )}
         <div className="w-[80%] sm:w-[65%] md:w-[55%] lg:h-[95%] h-[90%] mx-auto rounded-xl relative">
