@@ -23,10 +23,8 @@ const Video = () => {
   const [videos, setVideos] = useState([]);
   const [videoIndex, setVideoIndex] = useState(0);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [thumbnailUrl, setThumbnailUrl] = useState(null);
+  
   const API_BASE_URL = REACT_APP_API_BASE_URL;
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
 
   const handleProfile = (userId) => {
     navigate(`/profile/${userId}`);
@@ -47,40 +45,6 @@ const Video = () => {
     return str.split("=")[1]; 
   };
 
-  const captureThumbnail = () => {
-    const videoElement = videoRef.current;
-    const canvasElement = canvasRef.current;
-    
-    if (videoElement && canvasElement) {
-      const context = canvasElement.getContext('2d');
-      canvasElement.width = videoElement.videoWidth;
-      canvasElement.height = videoElement.videoHeight;
-      context.drawImage(videoElement, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
-  
-      
-      const imageUrl = canvasElement.toDataURL('image/png');
-      setThumbnailUrl(imageUrl); 
-      console.log('Thumbnail captured:', imageUrl); 
-    }
-  };
-
-  const handleVideoPlay = () => {
-    captureThumbnail(); 
-  };
-  
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.addEventListener('play', handleVideoPlay); 
-    }
-  
-    
-    return () => {
-      if (videoRef.current) {
-        videoRef.current.removeEventListener('play', handleVideoPlay);
-      }
-    };
-  }, [videoRef.current]);
-
   const recordView = async () => {
     try {
       const userId = getUserId();
@@ -90,7 +54,7 @@ const Video = () => {
         viewerId: userId,
       };
   
-      
+      // Log the data being sent
       console.log('Posting view data:', viewData);
   
       await axios.post(`${API_BASE_URL}/views`, viewData);
@@ -99,9 +63,6 @@ const Video = () => {
       console.error('Error recording view:', error);
     }
   };
-
-
-
   console.log("location state",location.state)
   useEffect(() => {
     if (location.state && location.state.videos) {
@@ -110,7 +71,7 @@ const Video = () => {
       if (currentVideo) {
         setVideo(currentVideo);
         setVideoIndex(location.state.videos.findIndex(v => v._id === videoId));
-        recordView(); 
+        recordView(); // Record the view when the video is loaded
       }
     }
     getVideo();
@@ -153,12 +114,12 @@ const Video = () => {
   
   const debouncedHandleScroll = useDebounce(handleScroll, 300);
   
-  
+  // Event handler for mouse wheel (desktop)
   const handleWheel = (e) => {
     debouncedHandleScroll(e.deltaY > 0 ? "down" : "up");
   };
   
-  
+  // Event handlers for touch (mobile)
   let touchStartY = 0;
   const handleTouchStart = (e) => {
     touchStartY = e.touches[0].clientY;
@@ -248,7 +209,7 @@ const Video = () => {
     getVideo();
   }, [videoId]);
 
-  
+  // Check if the user is already subscribed when the component mounts
   useEffect(() => {
     const checkSubscriptionStatus = async () => {
       try {
@@ -268,18 +229,18 @@ const Video = () => {
       checkSubscriptionStatus();
     }
   }, [video]);
-console.log("thumbnail",thumbnailUrl)
+
   return (
     <Fragment>
       <section className="h-full w-full relative flex items-center bg-white">
         {revModOpen && (
           <div className="h-[95%] left-0 w-full absolute top-0 z-20 flex justify-center items-center">
-            <Review videoId={videoId} setRevModOpen={setRevModOpen}  thumbnailUrl={thumbnailUrl}  />
+            <Review comp={"video"} videoId={videoId} setRevModOpen={setRevModOpen} videoUrl={video?.data?.videoUrl} />
           </div>
         )}
         {repModOpen && (
           <div className="h-full w-full absolute top-0 z-20 flex justify-center items-center">
-            <Model setRepModOpen={setRepModOpen} />
+            <Model setRepModOpen={setRepModOpen}  comp={"video"}   videoUrl={video?.data?.videoUrl}/>
           </div>
         )}
         <div className="w-[80%] sm:w-[65%] md:w-[55%] lg:h-[95%] h-[90%] mx-auto rounded-xl relative">

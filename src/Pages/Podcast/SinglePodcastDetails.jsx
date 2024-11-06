@@ -136,6 +136,7 @@ function SinglePodcastDetails() {
               videoId={result._id}
               picUrl={result.picUrl}
               setRevModOpen={setRevModOpen}
+              comp={'podcast'}
             />
           </div>
         )}

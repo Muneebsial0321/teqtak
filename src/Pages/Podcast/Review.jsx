@@ -171,11 +171,17 @@ console.log("coment",comments)
           onClick={() => props.setRevModOpen(false)}
           aria-label="Close"
         />  
-        <img
+    {props.comp =='podcast' && <img
           className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[765px]:w-[100%]"
-          src={picUrl || props.thumbnailUrl || "/loading.jpg"}
+          src={picUrl ||  "/loading.jpg"}
           alt="Video Thumbnail"
-        />
+        />}
+     { props.comp =='video' &&   <video
+            src={props.videoUrl}
+          
+            className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[765px]:w-[100%]"
+            
+          ></video>}
         <section className="flex flex-col py-4 md:w-[55%] w-full h-[60%] md:h-full overflow-y-scroll revOverFlow font-[450] text-xs px-4">
           <h1 className="font-semibold text-center">Reviews</h1>
           <div className="flex items-center justify-between py-2">
