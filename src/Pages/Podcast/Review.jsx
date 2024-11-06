@@ -103,8 +103,8 @@ console.log("coment",comments)
       );
 
       const data = await response.json();
-      console.log("data",response)
-      setComments(data);
+      console.log("data for comments",response)
+      setComments(data.reviews);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
@@ -173,7 +173,7 @@ console.log("coment",comments)
         />  
         <img
           className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[765px]:w-[100%]"
-          src={picUrl || "/loading.jpg"}
+          src={picUrl || props.thumbnailUrl || "/loading.jpg"}
           alt="Video Thumbnail"
         />
         <section className="flex flex-col py-4 md:w-[55%] w-full h-[60%] md:h-full overflow-y-scroll revOverFlow font-[450] text-xs px-4">
