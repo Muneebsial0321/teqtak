@@ -132,7 +132,7 @@ function WatchHistory() {
                           handleSaveToWishlist(elm._id); // Save to wishlist
                         }}
                       />
-                      <div className="absolute bottom-1 left-1">
+                      <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                         <p className="text-sm">{elm.episodeTitle?elm.episodeTitle:"N/A"}</p>
                         <Link
                           to="/userprofile"
