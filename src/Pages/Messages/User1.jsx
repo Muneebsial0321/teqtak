@@ -7,6 +7,7 @@ import { FaCamera, FaPaperclip, FaSmile } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import FileUploadModal from './FileUploadModel.jsx'; 
 import io from 'socket.io-client';
 import {deleteChatroom} from '../../DeleteAPI.js' 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
@@ -26,6 +27,11 @@ function Message2() {
   const [sender, setSender] = useState({}); // Sender user state
   const [roomId, setRoomId] = useState({}); // Chat room ID state
   const [acessToken, setToken] = useState(''); // Access token for Zoom
+  const [selectedFile, setSelectedFile] = useState(null); // Store selected file (image/video)
+  const [selectedEmoji, setSelectedEmoji] = useState(''); // Store selected emoji
+  const [showFileUploadModal, setShowFileUploadModal] = useState(false);
+  const fileInputRef = useRef(null);
+
 
   const cardRef = useRef(null);
  const token = localStorage.getItem('authtoken')
@@ -117,10 +123,25 @@ function Message2() {
   };
 
   // Send a message to the chat room
+  // const sendMessage = () => {
+  //   if (message.trim()) {
+  //     socket.emit('sendMessage', { roomId, sender: getUserId(), message });
+  //     setMessage(''); // Clear the message after sending
+  //   }
+  // };
   const sendMessage = () => {
     if (message.trim()) {
       socket.emit('sendMessage', { roomId, sender: getUserId(), message });
-      setMessage(''); // Clear the message after sending
+      console.log('Sending message:', message);
+      setMessage(''); // Clear message input
+    } else if (selectedFile) {
+      // Send the selected file (image/video)
+      console.log('Sending file:', selectedFile);
+      setSelectedFile(null); // Clear selected file after sending
+    } else if (selectedEmoji) {
+      // Send emoji if selected
+      console.log('Sending emoji:', selectedEmoji);
+      setSelectedEmoji(''); // Clear emoji after sending
     }
   };
   // const deleteMessage = (id) => {
@@ -167,13 +188,15 @@ console.log("pre msg",chatroom)
     }
   };
 
+
+
   // Zoom authentication function
-  const zoomAUth = () => {
-    socket.emit('zoomAuth');
-    socket.on('receiveAuthUrl', (url) => {
-      window.location.href = url;
-    });
-  };
+  // const zoomAUth = () => {
+  //   socket.emit('zoomAuth');
+  //   socket.on('receiveAuthUrl', (url) => {
+  //     window.location.href = url;
+  //   });
+  // };
 
   const meeting_ = () => {
     socket.emit('sendMeetingUrl', acessToken);
@@ -185,7 +208,7 @@ console.log("pre msg",chatroom)
   };
 
   const handleSchedule = () => {
-    zoomAUth();
+    // zoomAUth();
     setSchedule(!schedule);
     setMeeting(false); // Reset meeting state when schedule is toggled
     setShowCalendar(false); // Hide calendar if visible
@@ -202,16 +225,34 @@ console.log("pre msg",chatroom)
 
   const toggleCard = () => {
     setShowCard(!showCard);
-    // setSchedule(!schedule);
-    // setMeeting(!meeting); 
-   
   };
   const handleDelete =async () => {
    await deleteChatroom(roomId);
     window.location.href='https://teqtak.vercel.app/messages'
   };
 
-  
+  const handleFileClick = () => {
+    document.getElementById('file-input').click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setShowFileUploadModal(true); 
+      setShowCard(false); 
+     
+    }
+  };
+  const handleEmojiSelect = (emoji) => {
+    setSelectedEmoji(emoji);
+    setShowCard(false); 
+  };
+
+  const closeModal = () => {
+    setShowFileUploadModal(false);
+    setSelectedFile(null);
+  };
 
   return (
     <div className="main h-full w-[100%] ">
@@ -251,7 +292,7 @@ console.log("pre msg",chatroom)
                 className="absolute w-[200px] cursor-pointer right-4 top-14 px-3 py-1 z-30 bg-white shadow-lg border"
                 onClick={(e) =>{
                   e.stopPropagation();
-                  // setSchedule(false);
+                  
                 }
                 }
               >
@@ -266,9 +307,9 @@ console.log("pre msg",chatroom)
                       // setMeeting(false);
                     }}
                   >
-                    <Link to="/createmeeting">Create Zoom Meeting</Link>
+                    <Link to="/createmeeting" >Create Zoom Meeting</Link>
                     <p ref={cardRef}  onClick={handleCalendar}>Schedule Zoom Meeting</p>
-                    <p>Dial into Zoom Meeting</p>
+                    <p onClick={meeting_}>Dial into Zoom Meeting</p>
                   </div>
                 )}
               </div>
@@ -312,8 +353,11 @@ console.log("pre msg",chatroom)
           {/* Scroll reference */}
           <div ref={messagesEndRef} />
         </div>
-        <div className="flex items-center justify-center w-[95%] relative top-4">
-          <GrGallery className="text-[#7979ec] text-xl mr-3 cursor-pointer" onClick={toggleCard} />
+    
+
+<div className="flex items-center justify-center w-[95%] relative top-4">
+          <GrGallery className="text-[#7979ec] text-xl mr-3 cursor-pointer"  onClick={toggleCard} />
+          
           <div className="flex-grow">
             <input
               type="text"
@@ -321,33 +365,58 @@ console.log("pre msg",chatroom)
               onChange={handleInputChange}
               onKeyDown={handleKeyDown} // Add onKeyDown handler
               placeholder="Write a message"
-              className="h-[5vh] w-full outline-none rounded p-4 bg-transparent border"
+             className="h-[5vh] w-full outline-none rounded p-4 bg-transparent border"
             />
           </div>
-          {message.trim() ? (
-            <FaPaperPlane 
-              onClick={sendMessage} 
+
+          {message.trim() || selectedFile || selectedEmoji ? (
+            <FaPaperPlane
+              onClick={sendMessage}
               className="text-xl text-[gray] ml-3 cursor-pointer" 
             />
           ) : (
             <FaMicrophone className="text-xl text-[gray] ml-3" />
           )}
         </div>
+
         {showCard && (
-          <div ref={cardRef} className="absolute bottom-[8vh] left-5 w-[10vw] p-3 bg-white shadow-lg rounded">
+          <div ref={cardRef}  className="absolute bottom-[8vh] left-5 w-[10vw] p-3 bg-white shadow-lg rounded">
             <ul className="space-y-3">
-              <li className="flex items-center">
+            <li className="flex items-center">
                 <span className=""><FaCamera className="text-[gray] cursor-pointer" /></span>
               </li>
               <li className="flex items-center">
-                <span className="icon"><FaPaperclip className="text-[gray] cursor-pointer" /></span>
+                <span onClick={() => handleEmojiSelect('😊')}>
+                  <FaSmile className="text-[gray] cursor-pointer" />
+                </span>
               </li>
+
+              {/* Paperclip icon that triggers file input */}
               <li className="flex items-center">
-                <span className="icon"><FaSmile className="text-[gray] cursor-pointer" /></span>
+                <span className="icon" onClick={handleFileClick}>
+                  <FaPaperclip className="text-[gray] cursor-pointer" />
+                </span>
+                <input
+                  id="file-input"
+                  type="file"
+                  accept="image/*,video/*"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
               </li>
             </ul>
           </div>
         )}
+
+        {/* Display the selected file preview */}
+        {showFileUploadModal && selectedFile && (
+          <FileUploadModal
+            isOpen={showFileUploadModal}
+            onClose={closeModal}
+            selectedFiles={[selectedFile]}
+          />
+        )}
+
       </div>
     </div>
   );

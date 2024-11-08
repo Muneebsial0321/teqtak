@@ -12,28 +12,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import CSS for toast notifications
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-const entrepreneurs2 = [
-  'Software development', 'Hardware innovation', 'Artificial intelligence', 'Cybersecurity', 'Internet of Things',
-  'Drug development', 'Medical devices', 'Genetic engineering', 'Bioinformatics', 
-  'Restaurants', 'Food manufacturing', 'Catering services', 'Specialty foods', 'Health-focused foods', 
-  'Clothing design', 'Accessories', 'Sustainable fashion', 'Apparel manufacturing', 'Online retail',
-  'Consulting', 'Marketing services', 'Event planning', 'Financial services',
-  'Nonprofit organizations', 'Social enterprises', 'Community development', 'Environmental conservation', 'Ethical business practices', 
-  'Online retail', 'Dropshipping', 'Subscription-based services', 'Digital products', 'Marketplace platforms', 
-  'Property development', 'Real estate investment', 'Property management', 'Real estate technology', 'Commercial real estate',
-  'Online courses', 'Educational technology', 'Tutoring services', 'Language schools', 'Educational consulting', 
-  'All', 'Top Reviews', 'Investor', 'Entrepreneur', 'Viewer', 
-  '15 Mins', '30 Mins', '1 hour', '+1 hour',
-  '$ 1M', '$ 5M', '$ 15M', '$ 20M',
-  '1 year', '3 year', '5 year', '7 year', '10+ year',
-  'Expansion', 'Marketing', 'R&D', 'Operations', 'Debt repayment',
-  'IPO', 'Strategic partnership', 'Merger', 'No specific exit plan', 
-  'Acquisition', 'IPO', 'Merger', 'Strategic partnership', 'No specific exit plan',
-  'Local', 'Regional', 'National', 'International', 'Global',
-  'Software', 'Hardware', 'Services', 'Subscription-Based', 'Consumer goods',
-  'Small', 'Medium', 'Large', 'Experienced', 'Specialized','other'
-]
-
 
 const Video = () => {
   const [inputData, setInpData] = useState("");
@@ -48,8 +26,7 @@ const Video = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [tagInput, setTagInput] = useState("");
-  // const [suggestions, setSuggestions] = useState([]);
-  const [selectedTag, setSelectedTag] = useState('');
+ 
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -121,14 +98,17 @@ const Video = () => {
     setDesc(e.target.value);
   };
 
-  const handleTagSelect = (e) => {
+  const tagOnChange = (e) => {
     const value = e.target.value;
+    const tagsArray = value.split('#').filter(tag => tag.trim() !== '');
 
-    if (value && !videoTags.includes(value) && videoTags.length < 6) {
-      setTags((prev) => [...prev, value]);
-      setSelectedTag('');
+    if (tagsArray.length <= 6) {
+      setTags(tagsArray);
+      setTagInput(value);
+      setErrorMessage("");
     } else {
-      toast.error("This tag has already been added or is invalid.");
+      setErrorMessage("You can add a maximum of 6 tags.");
+      toast.error("You can add a maximum of 6 tags."); // Show toast
     }
   };
 console.log("tag console",)
@@ -288,26 +268,16 @@ console.log("tag console",)
               placeholder="Add Description ........"
             />
           
-   <div className="my-1">
-        <select
-          className="w-full border py-1 ps-3 mb-2 rounded-lg text-gray-600 leading-tight focus:outline-none"
-          onChange={handleTagSelect}
-          value={selectedTag}
-          disabled={videoTags.length >= 6}
-        >
-          <option value="">Select a Tag</option>
-          {entrepreneurs2.map((tag, index) => (
-            <option key={index} value={tag}>
-              {tag}
-            </option>
-          ))}
-        </select>
-      </div>
+          <input
+              value={tagInput}
+              onChange={tagOnChange}
+              type="text"
+              className="mb-2 py-1 text-gray-400 ps-3 text-sm outline-none border-none"
+              placeholder="Add Tags (use # to separate) ........"
+              disabled={videoTags.length >= 6}
+            />
 
-      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-      <div>
-        <strong>Selected Tags:</strong> #{videoTags.join("#")}
-      </div>
+     
             <div className="w-full flex items-center justify-center h-[80%] rounded-lg relative">
               {postPrivShow && (
                 <div

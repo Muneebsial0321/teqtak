@@ -31,10 +31,10 @@ function SinglePodcastDetails() {
           console.log("single podcast details data is ", result);
           setRecentData([result]);
 
-          // Record the view only once when data is fetched
+          
           if (!viewRecorded) {
-            recordView(result._id); // Call record view function
-            setViewRecorded(true); // Set the flag to true
+            recordView(result._id); 
+            setViewRecorded(true); 
           }
           audio.src = result.audioUrl || "";
         }
@@ -44,9 +44,9 @@ function SinglePodcastDetails() {
     };
     getData();
     return () => {
-      audio.pause(); // Clean up audio on unmount
+      audio.pause(); 
     };
-  }, [loc.state, viewRecorded]); // Add viewRecorded as a dependency
+  }, [loc.state, viewRecorded]); 
 
   const handleAudioPlayPause = () => {
     if (isPlaying) {
@@ -54,7 +54,7 @@ function SinglePodcastDetails() {
     } else {
       audio.play();
     }
-    setIsPlaying(!isPlaying); // Toggle play/pause state
+    setIsPlaying(!isPlaying); 
   };
 
   audio.onended = () => setIsPlaying(false);
@@ -180,7 +180,7 @@ function SinglePodcastDetails() {
    className="flex items-center space-x-2 px-4 py-2 border border-gray-400 rounded-full"
  >
    <span className="w-6 h-6 rounded-full border border-black flex items-center justify-center">
-     {/* Play/Pause icon based on state */}
+   
      {isPlaying ? (
        <svg className="w-4 h-4 text-black fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
          <path d="M6 4h4v16H6zM14 4h4v16h-4z" /> {/* Pause icon */}
