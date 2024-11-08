@@ -2,20 +2,70 @@ import React, { useContext, useState } from "react";
 import { FaAngleLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { myContext } from "../../Context/CreateContext";
-import { LuImagePlus } from "react-icons/lu"; // Make sure to import the icon
+import { LuImagePlus } from "react-icons/lu"; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
+
+
+const jobCategory = [
+ 
+  "Tech Entrepreneur",
+  "Art",
+  "Tech & Investor",
+  "Teamwork",
+  "Finance",
+  "Networking",
+  "Government",
+  "Charity",
+  "Investors",
+  "Language learning",
+  "Politics",
+  "Fashion",
+  "History",
+  "Hobbies",
+  "Career ,& Business",
+  "Travel & Outdoor",
+  "News",
+  "Technology",
+  "True Crime",
+  "Comedy",
+  "Music & dancing",
+  "Sports",
+  "Science",
+  "Leadership",
+  "Education",
+  "Sustainability",
+  "Fiction",
+  "Interviews",
+  "Business and Finance ",
+  "Health ,and Wellness",
+  "Self - Imporvement",
+  "Music",
+  "Religion & Spirituality",
+  "Pop Culture",
+  "Environment",
+  "Parenting",
+  "Gaming",
+  "Food and Cooking",
+  "Pet & Animal",
+  "Relationship & Books",
+  "Personal Stories",
+  "TV & Film",
+  "Social Activities",
+  "Subscribes",
+  "Language",
+  "Others",
+];;
 
 const JobCreationForm = () => {
   const navigate = useNavigate();
   const { JobStates } = useContext(myContext);
   const [state, setState] = useState({
     skills: [],
-    singleLang: "", // Initialize singleLang
+    singleLang: "", 
   });
   const [loading, setLoading] = useState(false);
   const [coverImage, setCoverImage] = useState(null);
-  const [coverImageFile, setCoverImageFile] = useState(null); // State to hold file object
-
+  const [coverImageFile, setCoverImageFile] = useState(null);  
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split('=')[1];
@@ -211,7 +261,26 @@ const JobCreationForm = () => {
             <option value="Any-Size">Any Size</option>
           </select>
         </div>
-
+{/* job catagories */}
+<div className="sm:w-[40%] w-[45%]">
+          <label className="block text-gray-600 text-sm font-bold mt-4" htmlFor="workplace">
+            Job Catagory *
+          </label>
+          <select
+            onChange={_onChange_}
+            id="jobCategory"
+            name="jobCategory"
+            className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none text-xs focus:shadow-outline"
+            required
+          >
+             <option value="">Select a Job Catagory</option>
+                {jobCategory.map((type, index) => (
+                  <option key={index} value={type}>
+                    {type}
+                  </option>
+                ))}
+          </select>
+        </div>
         {/* Workplace Type */}
         <div className="sm:w-[40%] w-[45%]">
           <label className="block text-gray-600 text-sm font-bold mt-4" htmlFor="workplace">
