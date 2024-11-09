@@ -1,15 +1,16 @@
-import React, {useState, Fragment } from 'react'
+import React, {useState, Fragment, useEffect } from 'react'
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-
+import { fetchData } from '../../API';
 import { FaAngleDown } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import JobFilterName from './JobFilterName';
+// import JobFilterName from './JobFilterName';
 
 const FilterJob = () => {
   const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [activeFilter,setActiveFilter] = useState("All")
+  const [data ,setData] = useState([]);
   const handleShow = (index) => {
     setSelectedIndex(selectedIndex === index ? null : index);
   };
@@ -60,16 +61,81 @@ const FilterJob = () => {
     ['Small', 'Medium', 'Large','Experienced','Specialized'],
     ['6Months', '1year', '2years', '3years', 'ongoing', 'other(please specify)']
  ];
- const filteredEntrepreneurs = entrepreneurs.filter((entrepreneur) => {
-  if (activeFilter === 'All') return true;
-  if (activeFilter === 'Entrepreneur') return !['Reviews', 'Videos', 'Duration', 'Funds', 'Experience', 'Strategy', 'Exit', 'Results', 'Market', 'Product', 'Team', 'Timeline'].includes(entrepreneur.name);
-  if (activeFilter === 'Investor') return ['Reviews', 'Funds', 'Experience', 'Strategy', 'Exit', 'Results', 'Market', 'Team', 'Timeline'].includes(entrepreneur.name);
-  if(activeFilter === 'Subscribed') return (
-      navigate('/videos')
-  )
-  
-  return true;
-});
+ const entrepreneur = [
+  "All",
+  "Tech Entrepreneur",
+  "Art",
+  "Tech & Investor",
+  "Teamwork",
+  "Finance",
+  "Networking",
+  "Government",
+  "Charity",
+  "Investors",
+  "Language learning",
+  "Politics",
+  "Fashion",
+  "History",
+  "Hobbies",
+  "Career ,& Business",
+  "Travel & Outdoor",
+  "News",
+  "Technology",
+  "True Crime",
+  "Comedy",
+  "Music & dancing",
+  "Sports",
+  "Science",
+  "Leadership",
+  "Education",
+  "Sustainability",
+  "Fiction",
+  "Interviews",
+  "Business and Finance ",
+  "Health ,and Wellness",
+  "Self - Imporvement",
+  "Music",
+  "Religion & Spirituality",
+  "Pop Culture",
+  "Environment",
+  "Parenting",
+  "Gaming",
+  "Food and Cooking",
+  "Pet & Animal",
+  "Relationship & Books",
+  "Personal Stories",
+  "TV & Film",
+  "Social Activities",
+  "Subscribes",
+  "Language",
+  "Others",
+];
+
+useEffect(() => {
+  const getData = async () => {
+    try {
+      const result = await fetchData(); 
+      console.log(result);
+      setData(result.data);
+    } catch (error) {
+      console.error("Fetching data error", error);
+    }
+  };
+  getData();
+}, []);
+const applyFilters = () => {
+  return data.filter((item) => item.jobCategory === activeFilter);
+}
+
+const handleSearch = () => {
+  const filteredData = applyFilters();
+  console.log("filteredjobs", filteredData);
+  navigate('/jobs', { state: { filteredData } });
+}
+
+const handleReset = () => {
+  navigate(-1);
+}
  
   return (
     <Fragment>
@@ -89,10 +155,29 @@ const FilterJob = () => {
     '-msOverflowStyle': 'none',
     'scrollbarWidth': 'none'
   }}>
-  <JobFilterName  activeFilter={activeFilter} setActiveFilter={setActiveFilter} name="Catagories"/>
+ <div className="p-4">
+        <h1 className="text-xl md:text-2xl font-bold mb-4 ml-4 md:ml-6">
+          Catagories
+        </h1>
+        <div className="flex flex-wrap gap-2 md:gap-4">
+          {entrepreneur.map((filter) => (
+            <p
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`text-sm sm:text-lg cursor-pointer text-nowrap px-2 text-black sm:px-3 rounded-full py-1 bg-[#F1F1F1] w-auto ${
+                activeFilter === filter
+                  ? "linear_gradient text-white"
+                  : "hover:linear_gradient "
+              }`}
+            >
+              {filter}
+            </p>
+          ))}
+        </div>
+      </div>
   <div className=" px-3 mt-2 ">
         <div className="flex flex-wrap gap-4 justify-between">
-          {filteredEntrepreneurs.map((entrepreneur, index) => (
+          {entrepreneurs.map((entrepreneur, index) => (
             <div
               key={index}
               className={`relative w-full sm:w-[48%] md:w-[31%] lg:w-[23%] ${selectedIndex === index ? '' : ''}`}
@@ -118,10 +203,10 @@ const FilterJob = () => {
         </div>
       </div>
       <div className="fixed lg:bottom-0 bottom-[3rem] right-2 lg:right-[12rem] p-4  w-full flex justify-end gap-4 max-[425px]:justify-center max-[425px]:bg-white">
-          <button className="px-8 py-3 flex-shrink-0 w-auto rounded-2xl border-2 text-[16px] md:text-[18px] linear_gradient_text">
+          <button className="px-8 py-3 flex-shrink-0 w-auto rounded-2xl border-2 text-[16px] md:text-[18px] linear_gradient_text" onClick={handleReset}>
             Reset Filters
           </button>
-          <button className="px-8 py-3 flex-shrink-0 w-auto rounded-3xl text-white text-[16px] md:text-[18px] linear_gradient">
+          <button className="px-8 py-3 flex-shrink-0 w-auto rounded-3xl text-white text-[16px] md:text-[18px] linear_gradient" onClick={handleSearch}>
             Apply Filters
           </button>
         </div>

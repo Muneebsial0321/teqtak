@@ -1,36 +1,82 @@
 // All Videos Header Filters
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-let categData = [
-  "Tech & Enterpreneurship",
-  "Finance",
-  "Tech & Investor",
-  "Teamwork",
-];
-let durData = ["15 min", "30 min", "1 hour", "3 hour"];
-let revData = ["All", "Finance", "Tech & Investor", "Teamwork"];
-let subData = ["All", "Top", "Popular", "Subscribers"];
-let lanData = ["English", "Hindi", "French", "Spanish"];
+import { fetchPodcast } from "../../API";
 
-function PodcastFilters() {
+let categData = ["All","Tech & Entrepreneurship","Finance","Tech & Investor","Teamwork",];
+let durData = ["15 min", "30 min", "1 hour",];
+let revData = ["All", "Top Revies", "Other"];
+let subData = ["All",  "Popular Podcast", "Subscribed","Others"];
+
+
+function PodcastFilters({data}) {
+
+  let {recentdata, setFilterLoopData} = data;
+
   // States for Selected Filter Data
 
   const [catSelectData, setCatSelectData] = useState("Select Categories");
   const [durSelectData, setDurSelectData] = useState("Select Duration");
-  const [revSelectData, setRevSelectData] = useState("Select Rebiews");
+  const [revSelectData, setRevSelectData] = useState("Select Reviews");
   const [subSelectData, setSubSelectData] = useState("Select Subscribe");
-  const [lanSelectData, setLanSelectData] = useState("Select Language");
 
+  const [da,s] = useState(null)
+
+// const [recentdata, setRecentData] = useState([]);
+const [filteredData,setFilteredData] = useState([]);
   // States for Open Filter
 
   const [catDrop, setCatDrop] = useState(false);
   const [durDrop, setDurDrop] = useState(false);
   const [revDrop, setRevDrop] = useState(false);
   const [subDrop, setSubDrop] = useState(false);
-  const [lanDrop, setLanDrop] = useState(false);
+ 
+
+ 
+  // console.log("applyFilters Amannnn", recentdata);
+//   const filterByCategory = () => {
+//   const podcastFilter = applyFilters()
+// // console.log("filterByCategory",recentdata);
+
+  useEffect(()=>{
+
+    if (catSelectData !== "Select Categories") {      
+          let filtered = recentdata.filter(item => item.podcastType === catSelectData);
+          setFilterLoopData(filtered)
+          console.log(filtered);  
+    }
+     if (catSelectData == "All") {
+
+      setFilterLoopData(recentdata);
+    }
+  if (durSelectData!== "Select Duration") {      
+   let filtered= recentdata.filter((item) => {
+      const durationInMinutes = item.podcastDuration / 60000;
+      const durationLabel =
+        durationInMinutes < 15
+          ? "15min"
+          : durationInMinutes < 30
+          ? "30min"
+          : durationInMinutes < 60
+          ? "1hour"
+          : "+1hour";
+          return durationLabel === durSelectData;
+   });
+   setFilterLoopData(filtered);
+  }
+
+
+  },  [catSelectData,durSelectData])
+
+
+
+  const handleFilterClick = (e) => {
+      setCatSelectData(e);
+  }
+
 
   return (
     <Fragment>
@@ -61,12 +107,12 @@ function PodcastFilters() {
               <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
                 {catSelectData} <RiArrowDropUpLine />
               </p>
-              <div className="bg-white p-3 shadow-lg rounded-lg mt-2">
+              <div className="bg-white p-3 shadow-lg rounded-lg mt-2"  >
                 {categData.map((elm, ind) => (
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setCatSelectData(e.target.textContent)}
+                    onClick={()=>{handleFilterClick(elm)}}
                   >
                     {elm}
                   </p>
@@ -159,34 +205,7 @@ function PodcastFilters() {
             </div>
           )}
         </p>
-        <p
-          className="px-4 py-1 ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters"
-          onMouseOver={() => setLanDrop(true)}
-          onMouseLeave={() => setLanDrop(false)}
-        >
-          Language <RiArrowDropDownLine />
-          {lanDrop && (
-            <div className="absolute w-[40vh] top-6 z-10 ">
-              <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
-                {lanSelectData} <RiArrowDropUpLine />
-              </p>
-              <div
-                className="bg-white p-3 shadow-lg rounded-lg mt-2"
-                onClick={() => setLanDrop(false)}
-              >
-                {lanData.map((elm, ind) => (
-                  <p
-                    key={ind}
-                    className="py-2"
-                    onClick={(e) => setLanSelectData(e.target.textContent)}
-                  >
-                    {elm}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-        </p>
+       
       </div>
     </Fragment>
   );

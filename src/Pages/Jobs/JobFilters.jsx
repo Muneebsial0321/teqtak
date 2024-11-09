@@ -58,7 +58,7 @@ function JobFilters() {
     "Select Salary Range"
   );
   const [eduSelectData, setEduSelectData] = useState("Select Education");
-  const [compSelectData, setCompSelectData] = useState("Select Company");
+  
 
   // States for Open Filter
 
@@ -68,7 +68,7 @@ function JobFilters() {
   const [expDrop, setexpDrop] = useState(false);
   const [salRangeDrop, setsalRangeDrop] = useState(false);
   const [eduDrop, setEduDrop] = useState(false);
-  const [compDrop, setCompDrop] = useState(false);
+ 
 
   // All Videos Header Filters
 
@@ -254,121 +254,8 @@ function JobFilters() {
           )}
         </div>
 
-        <div
-          className="px-4 py-2 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
-          onMouseOver={() => setCompDrop(true)}
-          onMouseLeave={() => setCompDrop(false)}
-        >
-          Company <RiArrowDropDownLine />
-          {compDrop && (
-            <div className="absolute w-[40vh] top-6 z-10 ">
-              <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
-                {compSelectData} <RiArrowDropUpLine />
-              </p>
-              <div
-                className="bg-white p-3 shadow-lg rounded-lg mt-2"
-                onClick={() => setCompDrop(false)}
-              >
-                {compData.map((elm, ind) => (
-                  <p
-                    key={ind}
-                    className="py-2"
-                    onClick={(e) => setCompSelectData(e.target.textContent)}
-                  >
-                    {elm}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
 
-        {/* <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
-          onMouseOver={() => setCompDrop(true)}
-          onMouseLeave={() => setCompDrop(false)}
-        >
-          Company <RiArrowDropDownLine />
-          {compDrop && (
-            <div className="absolute w-[40vh] top-6 z-10 ">
-              <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
-                {compSelectData} <RiArrowDropUpLine />
-              </p>
-              <div
-                className="bg-white p-3 shadow-lg rounded-lg mt-2"
-                onClick={() => setCompDrop(false)}
-              >
-                {compData.map((elm, ind) => (
-                  <p
-                    key={ind}
-                    className="py-2"
-                    onClick={(e) => setCompSelectData(e.target.textContent)}
-                  >
-                    {elm}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
-          onMouseOver={() => setCompDrop(true)}
-          onMouseLeave={() => setCompDrop(false)}
-        >
-          Company <RiArrowDropDownLine />
-          {compDrop && (
-            <div className="absolute w-[40vh] top-6 z-10 ">
-              <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
-                {compSelectData} <RiArrowDropUpLine />
-              </p>
-              <div
-                className="bg-white p-3 shadow-lg rounded-lg mt-2"
-                onClick={() => setCompDrop(false)}
-              >
-                {compData.map((elm, ind) => (
-                  <p
-                    key={ind}
-                    className="py-2"
-                    onClick={(e) => setCompSelectData(e.target.textContent)}
-                  >
-                    {elm}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
-          onMouseOver={() => setCompDrop(true)}
-          onMouseLeave={() => setCompDrop(false)}
-        >
-          Company <RiArrowDropDownLine />
-          {compDrop && (
-            <div className="absolute w-[40vh] top-6 z-10 ">
-              <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
-                {compSelectData} <RiArrowDropUpLine />
-              </p>
-              <div
-                className="bg-white p-3 shadow-lg rounded-lg mt-2"
-                onClick={() => setCompDrop(false)}
-              >
-                {compData.map((elm, ind) => (
-                  <p
-                    key={ind}
-                    className="py-2"
-                    onClick={(e) => setCompSelectData(e.target.textContent)}
-                  >
-                    {elm}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-        </div> */}
+       
       </div>
     </Fragment>
   );

@@ -9,9 +9,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-function PodcastTopVideos() {
+function PodcastTopVideos({data}) {
+
+  let {recentdata, setRecentData,filterLoopData, setFilterLoopData} = data;
   const API_BASE_URL = REACT_APP_API_BASE_URL;
-  const [recentdata, setRecentData] = useState([]);
+  // const [recentdata, setRecentData] = useState([]);
+
 const [recentview,setRecentView] = useState([])
 const location = useLocation()
 const filteredData = location.state?.filteredData;
@@ -38,6 +41,7 @@ console.log("podcast token",token)
         const result = await fetchPodcast();
         console.log("fetch podcast result",{ result });
         setRecentData(result.data);
+        setFilterLoopData(result.data);
       } catch (error) {
         console.error("Fetching data error", error);
       }
@@ -130,7 +134,7 @@ console.log("podcast token",token)
 <h1 className="ps-3 text-xl font-bold my-3 text-black">Related Podcasts</h1>
           
           <div className="flex justify-start ps-5 gap-1 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 ">
-            {recentdata.slice(0, 3).map((elm, ind) => (
+            {filterLoopData.slice(0, 3).map((elm, ind) => (
               <div
                 key={ind}
                 className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] max-[998px]:w-[23vw] max-[425px]:w-[45.33vw] w-[45.33vw] flex-shrink-0 rounded-2xl relative max-[766px]:h-[26.3vh]"
