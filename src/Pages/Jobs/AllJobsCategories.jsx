@@ -3,8 +3,18 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { fetchData } from "../../API";
 
-const CalendarSearch = () => {
-  const [data, setData] = useState([]);
+const CalendarSearch = ({job}) => {
+  const {data,setData,filterLoopData,setFilterLoopData} = job;
+
+
+
+  useEffect(()=>{
+
+    console.log('Dataaaaaaaaaaa Amannnnnn: ', filterLoopData)
+
+  },[filterLoopData])
+  // console.log('Amannnnnn',filterLoopData)
+  // const [data, setData] = useState([]);
   const location = useLocation();
   const filteredData = location.state?.filteredData;
   const getUserId = () => {
@@ -18,6 +28,7 @@ const CalendarSearch = () => {
       const result = await fetchData();
       console.log(result);
       setData(result.data);
+      setFilterLoopData(result.data);
     } catch (error) {
       console.error("Fetching data error", error);
     }
@@ -83,7 +94,7 @@ const CalendarSearch = () => {
       </div>
       <div>
         <div className="flex gap-4 overflow-x-scroll w-full Podcast_Top_Videos px-4">
-          {data.slice(0, 4).map((elm, ind) => {
+          {filterLoopData.slice(0, 4).map((elm, ind) => {
             const isLong = elm.jobTitle && elm.jobTitle.length > 25;
             const truncatedDescription = isLong
               ? elm.jobTitle.substring(0, 25) + "..."
@@ -169,7 +180,7 @@ const CalendarSearch = () => {
         </button>
       </div>
       <div className="flex gap-4 overflow-x-scroll w-full Podcast_Top_Videos px-4">
-        {data.slice(0, 4).map((elm, ind) => {
+        {filterLoopData.slice(0, 4).map((elm, ind) => {
           const isLong = elm.jobTitle && elm.jobTitle.length > 20;
           const truncatedDescription = isLong
             ? elm.jobTitle.substring(0, 25) + "..."
@@ -252,7 +263,7 @@ const CalendarSearch = () => {
         </button>
       </div>
       <div className="flex gap-4 overflow-x-scroll w-full Podcast_Top_Videos p-4">
-        {data.slice(0, 4).map((elm, ind) => {
+        {filterLoopData.slice(0, 4).map((elm, ind) => {
           const isLong = elm.jobTitle && elm.jobTitle.length > 20;
           const truncatedDescription = isLong
             ? elm.jobTitle.substring(0, 25) + "..."

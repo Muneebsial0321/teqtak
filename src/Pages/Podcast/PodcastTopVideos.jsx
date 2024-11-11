@@ -165,7 +165,7 @@ console.log("podcast token",token)
           <h1 className="ps-3 text-xl font-bold my-3 text-black">Suggested Podcast</h1>
 
           <div className="flex gap-1 w-full overflow-x-scroll Podcast_Top_Videos ps-5">
-            {recentdata.map((elm, ind) => (
+            {filterLoopData.map((elm, ind) => (
               <div
                 key={ind}
                 className="cursor-pointer lg:h-[30vh] h-[25vh] lg:w-[11vw] md:w-[15vw] max-[425px]:w-[46vw] w-[21vw] flex-shrink-0 rounded-2xl relative"
@@ -194,7 +194,7 @@ console.log("podcast token",token)
             ))}
           </div>
 
-          <RelatedPodcast />
+          <RelatedPodcast data={{recentdata,setRecentData,filterLoopData,setFilterLoopData}}/>
         </section>
       </section>
     </Fragment>

@@ -1,12 +1,13 @@
 // All Videos Header Filters
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 let categData = [
-  "Tech & Enterpreneurship",
+  "All",
+  "Tech Entrepreneur",
   "Finance",
   "Tech & Investor",
   "Teamwork",
@@ -30,24 +31,23 @@ let expData = [
   "Other (Please Specify)",
 ];
 let salRangeData = [
-  "$30,000 - $50,000",
-  "$50,000 - $50,000",
-  "$50,000 - $120,000",
+  "$300000 - below",
+  "$50,000 - $80,000",
+  "$80,000 - $120,000",
   "$120,000 and above",
-  "Other (Please Specify)",
 ];
 let eduData = [
-  "High School",
-  "Bachelor's Degree",
-  "Associate Degree",
-  "Master's Degree",
+  "High-School",
+  "Bachelor's-Degree",
+  "Associate-Degree",
+  "Master-Degree",
   "Ph.D or Doctorate",
   "Professional Certification",
-  "Other (Please Specify)",
 ];
-let compData = ["English", "Hindi", "French", "Spanish"];
+// let compData = ["English", "Hindi", "French", "Spanish"];
 
-function JobFilters() {
+function JobFilters({ jobFilter }) {
+  const { data, setFilterLoopData } = jobFilter;
   // States for Selected Filter Data
 
   const [catSelectData, setCatSelectData] = useState("Select Categories");
@@ -58,19 +58,67 @@ function JobFilters() {
     "Select Salary Range"
   );
   const [eduSelectData, setEduSelectData] = useState("Select Education");
-  
-
   // States for Open Filter
-
   const [catDrop, setCatDrop] = useState(false);
   const [locDrop, setLocDrop] = useState(false);
   const [JobTypeDrop, setJobTypeDrop] = useState(false);
   const [expDrop, setexpDrop] = useState(false);
   const [salRangeDrop, setsalRangeDrop] = useState(false);
   const [eduDrop, setEduDrop] = useState(false);
- 
+  useEffect(() => {
+    console.log("job data", data);
+    console.log("catSelectData", catSelectData);
+    if (catSelectData !== "Select Categories") {
+      let filtered = data.filter((item) => item.jobCategory === catSelectData);
+      setFilterLoopData(filtered);
+      console.log("job filtered", filtered);
+    }
+    if (catSelectData == "All") {
+      setFilterLoopData(data);
+    }
+    if (JobTypeSelectData !== "Select JobType") {
+      const filtered = data.filter(
+        (item) => item.jobType === JobTypeSelectData
+      );
+      setFilterLoopData(filtered);
+      console.log("job filtered hello", filtered);
+    }
+    if (expSelectData !== "Select Experience") {
+      const filtered = data.filter(
+        (item) => item.experienceLevel === expSelectData
+      );
+      setFilterLoopData(filtered);
+    }
+    
+    if (salRangeSelectData !== "Select Salary Range") {
+      const filtered = data.filter(
+        (item) => item.salaryRange === salRangeSelectData
+      );
+      setFilterLoopData(filtered);
+    }
+    if (eduSelectData !== "Select Education") {
+      const filtered = data.filter(
+        (item) => item.educationLevel === eduSelectData
+      );
+      setFilterLoopData(filtered);
+    }
+  }, [
+    catSelectData,
+    JobTypeSelectData,
+    expSelectData,
+    salRangeSelectData,
+    eduSelectData,
+  ]);
 
-  // All Videos Header Filters
+  const handleFilterClick = (e) => {
+    setCatSelectData(e);
+    setexpSelectData(e);
+    setsalRangeSelectData(e);
+    setEduSelectData(e);
+    setLocSelectData(e);
+    setJobTypeSelectData(e);
+    
+  };
 
   return (
     <Fragment>
@@ -103,7 +151,9 @@ function JobFilters() {
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setCatSelectData(e.target.textContent)}
+                    onClick={() => {
+                      handleFilterClick(elm);
+                    }}
                   >
                     {elm}
                   </p>
@@ -131,7 +181,9 @@ function JobFilters() {
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setLocSelectData(e.target.textContent)}
+                    onClick={() => {
+                      handleFilterClick(elm);
+                    }}
                   >
                     {elm}
                   </p>
@@ -159,7 +211,9 @@ function JobFilters() {
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setJobTypeSelectData(e.target.textContent)}
+                    onClick={() => {
+                      handleFilterClick(elm);
+                    }}
                   >
                     {elm}
                   </p>
@@ -187,7 +241,9 @@ function JobFilters() {
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setexpSelectData(e.target.textContent)}
+                    onClick={() => {
+                      handleFilterClick(elm);
+                    }}
                   >
                     {elm}
                   </p>
@@ -215,7 +271,9 @@ function JobFilters() {
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setsalRangeSelectData(e.target.textContent)}
+                    onClick={() => {
+                      handleFilterClick(elm);
+                    }}
                   >
                     {elm}
                   </p>
@@ -244,7 +302,9 @@ function JobFilters() {
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setEduSelectData(e.target.textContent)}
+                    onClick={() => {
+                      handleFilterClick(elm);
+                    }}
                   >
                     {elm}
                   </p>
@@ -253,9 +313,6 @@ function JobFilters() {
             </div>
           )}
         </div>
-
-
-       
       </div>
     </Fragment>
   );

@@ -34,9 +34,9 @@ const Signup = () => {
       console.log("Response data:", data);
   
       if (req.ok) {
-        if (data.Users_PK) {
-          document.cookie = `userId=${data.Users_PK}`
-
+        if (data.user.Users_PK) {
+          document.cookie = `userId=${data.user.Users_PK}`
+          localStorage.setItem('authtoken', data.authtoken); 
           setState({});
           setSelectedRole("viewer");
           toast.success("Sign up successful! Navigating to videos...");

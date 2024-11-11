@@ -11,8 +11,9 @@ import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const API_BASE_URL = REACT_APP_API_BASE_URL;
 
-const RelatedEvent = () => {
-  const [newcard, setNewCard] = useState([]);
+const RelatedEvent = ({data}) => {
+  const {setNewCard, filterLoopData, setFilterLoopData} = data;
+  // const [newcard, setNewCard] = useState([]);
 const location = useLocation()
 const filteredData = location.state?.filteredData
   useEffect(() => {
@@ -21,6 +22,7 @@ const filteredData = location.state?.filteredData
         const result = await fetchEvent(); // Use the function from api.js
         console.log(result);
         setNewCard(result.data);
+        setFilterLoopData(result.data);
       } catch (error) {
         console.error("Fetching data error", error);
       }
@@ -76,7 +78,7 @@ const filteredData = location.state?.filteredData
   return (
     <div className="mt-3 flex flex-wrap gap-1 w-[93%] mx-auto">
       <ToastContainer /> {/* Include ToastContainer for notifications */}
-      {newcard.map((data, i) => (
+      {filterLoopData.map((data, i) => (
         <div key={i} className="m-0 text-white md:w-[32%] w-[48.4%] lg:h-[42vh] h-[37vh] relative rounded-2xl">
           <img
             src={data.eventCoverUrl ? data.eventCoverUrl : "/loading.jpg"}

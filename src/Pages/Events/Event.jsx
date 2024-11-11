@@ -30,6 +30,7 @@ const CardComponent = ({ title, imgSrc, onSave }) => (
 
 function Event() {
   const [newcard, setNewCard] = useState([]);
+  const [filterLoopData, setFilterLoopData] = useState([]);
 const location = useLocation()
 const filteredData = location.state?.filteredData
 console.log("filter from state",filteredData)
@@ -38,7 +39,8 @@ useEffect(() => {
     try {
       const result = await fetchEvent();
       console.log("events results", result);
-      setNewCard(result.data);
+      // setNewCard(result.data);
+      setFilterLoopData(result.data);
     } catch (error) {
       console.error("Fetching data error", error);
     }
@@ -77,9 +79,9 @@ useEffect(() => {
 
   return (
     <div className="h-full w-full">
-      <ToastContainer /> {/* Include ToastContainer for notifications */}
+      <ToastContainer /> 
       <div className="w-full h-[10%]">
-        <EventFilters />
+        <EventFilters data={{newcard ,setFilterLoopData}}/>
       </div>
       <div className="h-[89%] bg-white mt-1 w-full overflow-y-scroll Podcast_Top_Videos">
         <h3 className="text-xl font-bold my-3 w-[95%] mx-auto">
@@ -87,19 +89,19 @@ useEffect(() => {
         </h3>
         <div className="h-full w-[95%] mx-auto">
           <div className="flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos">
-         {newcard.length > 0 ?    (newcard.map((data, i) => (
+         {filterLoopData.length > 0 ?    (filterLoopData.map((data, i) => (
               <CardComponent
                 key={i}
                 title={data.eventTitle}
                 imgSrc={data.eventCoverUrl || "loading.jpg"}
                 onSave={(e) => {
-                  e.stopPropagation(); // Prevent triggering on parent elements
-                  handleSaveToWishlist(data._id); // Pass the event ID
+                  e.stopPropagation(); 
+                  handleSaveToWishlist(data._id); 
                 }}
               />
             ))) : "No Filter Result Match"}
           </div>
-          <RelatedEvent />
+          <RelatedEvent data={{setNewCard,setFilterLoopData,filterLoopData}}/>
           <br />
         </div>
       </div>

@@ -1,77 +1,102 @@
 // All Videos Header Filters
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 let categData = [
-  "Tech & Enterpreneurship",
-  "Finance",
+  "All",
+  "Tech & Entrepreneurship",
+  "Networking",
   "Tech & Investor",
   "Teamwork",
 ];
 let locData = ["Local", "My country", "International"];
-let JobTypeData = [
-  "Full-time",
-  "Part-time",
-  "Contract",
-  "Temporary",
-  "Internship",
-  "Other (Please Specify)",
+let date = [
+"All Upcoming",
+"Starting Soon",
+"Today",
+"This Week",
+  "This Weekend",
+  "Next Week",
+  "Choose a Date",
+  
 ];
-let expData = [
-  "Entry-Level",
-  "Mid-Level",
-  "Senior",
-  "Executive",
-  "Internship",
-  "No Experience required",
-  "Other (Please Specify)",
+let eventFormat = [
+  "All",
+ "In Person",
+ "Virtual",
+  "Hybrid",
+  "Pre-Recorded-content",
+  "Other",
 ];
-let salRangeData = [
-  "$30,000 - $50,000",
-  "$50,000 - $50,000",
-  "$50,000 - $120,000",
-  "$120,000 and above",
-  "Other (Please Specify)",
+let noOfPeople = [
+ "less than 20",
+ "Less than 50",
+ "Above 50",
+ "Other",
 ];
-let eduData = [
-  "High School",
-  "Bachelor's Degree",
-  "Associate Degree",
-  "Master's Degree",
-  "Ph.D or Doctorate",
-  "Professional Certification",
-  "Other (Please Specify)",
+let durData = [
+"Half-Day",
+ "Full-Day",
+ "Multiple Days",
+ "Morning Events",
+ "Afternoon Events",
+ "Evening Events",
+ "Quick Sessions (1-2 hours)",
 ];
-let compData = ["English", "Hindi", "French", "Spanish"];
 
-function JobFilters() {
-  // States for Selected Filter Data
-
+function JobFilters({data}) {
+  const {newcard, setFilterLoopData} = data;
+  
+console.log("new card",newcard);
   const [catSelectData, setCatSelectData] = useState("Select Categories");
   const [locSelectData, setLocSelectData] = useState("Select Location");
-  const [JobTypeSelectData, setJobTypeSelectData] = useState("Select JobType");
-  const [expSelectData, setexpSelectData] = useState("Select Experience");
+  const [JobTypeSelectData, setJobTypeSelectData] = useState("Select Date");
+  const [expSelectData, setexpSelectData] = useState("Select Format");
   const [salRangeSelectData, setsalRangeSelectData] = useState(
-    "Select Salary Range"
+    "Select No of People"
   );
-  const [eduSelectData, setEduSelectData] = useState("Select Education");
-  const [compSelectData, setCompSelectData] = useState("Select Company");
+  const [compSelectData, setCompSelectData] = useState("Select Duration");
 
-  // States for Open Filter
+  
 
   const [catDrop, setCatDrop] = useState(false);
   const [locDrop, setLocDrop] = useState(false);
   const [JobTypeDrop, setJobTypeDrop] = useState(false);
   const [expDrop, setexpDrop] = useState(false);
   const [salRangeDrop, setsalRangeDrop] = useState(false);
-  const [eduDrop, setEduDrop] = useState(false);
   const [compDrop, setCompDrop] = useState(false);
 
-  // All Videos Header Filters
+  useEffect(() => {
+    if (catSelectData!== "Select Categories") {
+      let filtered = newcard.filter((item) => item.eventCatagory === catSelectData);
+      setFilterLoopData(filtered);
+      console.log("event filtered",filtered);
+    }
+     if(catSelectData === "All"){
+      setFilterLoopData(newcard);
+    }
+    if (expSelectData !== "Select Format") {
+      let filtered = newcard.filter((item) => item.eventFormat === expSelectData);
+      setFilterLoopData(filtered);
+      console.log("event filtered",filtered);
+    }
+    if (salRangeSelectData !== "Select No of People") {
+      let filtered = newcard.filter((item) =>(item.eventNO_of_People < 20 
+        ? "less than 20" 
+        : item.eventNO_of_People < 50 
+        ? "Less than 50" 
+        : "Above 50" ) === salRangeSelectData);
+      setFilterLoopData(filtered);
+      console.log("event filter by persons",filtered);
+    }
 
+  }, [catSelectData,expSelectData]);
+  const handleFilterClick = (e) => {
+    setCatSelectData(e);
+  };
   return (
     <Fragment>
       <div className="flex items-center  overflow-y-visible JobFilScr bg-white w-full h-full px-3 ">
@@ -103,7 +128,9 @@ function JobFilters() {
                   <p
                     key={ind}
                     className="py-2"
-                    onClick={(e) => setCatSelectData(e.target.textContent)}
+                    onClick={() => {
+                      handleFilterClick(elm);
+                    }}
                   >
                     {elm}
                   </p>
@@ -145,7 +172,7 @@ function JobFilters() {
           onMouseOver={() => setJobTypeDrop(true)}
           onMouseLeave={() => setJobTypeDrop(false)}
         >
-          Job Type <RiArrowDropDownLine />
+          Date <RiArrowDropDownLine />
           {JobTypeDrop && (
             <div className="absolute w-[40vh] top-6 z-10 ">
               <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
@@ -155,7 +182,7 @@ function JobFilters() {
                 className="bg-white p-3 shadow-lg rounded-lg mt-2"
                 onClick={() => setJobTypeDrop(false)}
               >
-                {JobTypeData.map((elm, ind) => (
+                {date.map((elm, ind) => (
                   <p
                     key={ind}
                     className="py-2"
@@ -173,7 +200,7 @@ function JobFilters() {
           onMouseOver={() => setexpDrop(true)}
           onMouseLeave={() => setexpDrop(false)}
         >
-          Experience <RiArrowDropDownLine />
+          Event Format <RiArrowDropDownLine />
           {expDrop && (
             <div className="absolute w-[40vh] top-6 z-[110] ">
               <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
@@ -183,7 +210,7 @@ function JobFilters() {
                 className="bg-white p-3 shadow-lg rounded-lg mt-2"
                 onClick={() => setexpDrop(false)}
               >
-                {expData.map((elm, ind) => (
+                {eventFormat.map((elm, ind) => (
                   <p
                     key={ind}
                     className="py-2"
@@ -201,7 +228,7 @@ function JobFilters() {
           onMouseOver={() => setsalRangeDrop(true)}
           onMouseLeave={() => setsalRangeDrop(false)}
         >
-          Salary Range <RiArrowDropDownLine />
+          Total Attendees <RiArrowDropDownLine />
           {salRangeDrop && (
             <div className="absolute w-[40vh] top-6 z-10 ">
               <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
@@ -211,7 +238,7 @@ function JobFilters() {
                 className="bg-white p-3 shadow-lg rounded-lg mt-2"
                 onClick={() => setsalRangeDrop(false)}
               >
-                {salRangeData.map((elm, ind) => (
+                {noOfPeople.map((elm, ind) => (
                   <p
                     key={ind}
                     className="py-2"
@@ -225,41 +252,14 @@ function JobFilters() {
           )}
         </p>
 
-        <p
-          className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
-          onMouseOver={() => setEduDrop(true)}
-          onMouseLeave={() => setEduDrop(false)}
-        >
-          Education <RiArrowDropDownLine />
-          {eduDrop && (
-            <div className="absolute w-[40vh] top-6 z-10 ">
-              <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
-                {eduSelectData} <RiArrowDropUpLine />
-              </p>
-              <div
-                className="bg-white p-3 shadow-lg rounded-lg mt-2"
-                onClick={() => setEduDrop(false)}
-              >
-                {eduData.map((elm, ind) => (
-                  <p
-                    key={ind}
-                    className="py-2"
-                    onClick={(e) => setEduSelectData(e.target.textContent)}
-                  >
-                    {elm}
-                  </p>
-                ))}
-              </div>
-            </div>
-          )}
-        </p>
+       
 
         <p
           className="px-4 py-1 flex-shrink-0 w-auto ms-2 m-0 rounded-3xl flex items-center relative cursor-pointer Video_Nav_Filters text-sm"
           onMouseOver={() => setCompDrop(true)}
           onMouseLeave={() => setCompDrop(false)}
         >
-          Company <RiArrowDropDownLine />
+          Duration <RiArrowDropDownLine />
           {compDrop && (
             <div className="absolute w-[40vh] top-6 z-10 right-1 ">
               <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
@@ -269,7 +269,7 @@ function JobFilters() {
                 className="bg-white p-3 shadow-lg rounded-lg mt-2"
                 onClick={() => setCompDrop(false)}
               >
-                {compData.map((elm, ind) => (
+                {durData.map((elm, ind) => (
                   <p
                     key={ind}
                     className="py-2"

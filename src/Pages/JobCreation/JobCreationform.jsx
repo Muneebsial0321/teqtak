@@ -236,8 +236,8 @@ const JobCreationForm = () => {
             <option value="Bachelor's-Degree">Bachelor's Degree</option>
             <option value="Associate-Degree">Associate Degree</option>
             <option value="Master-Degree">Master Degree</option>
-            <option value="Ph.D.-or-Doctorate-Degree">Ph.D. or Doctorate</option>
-            <option value="Professional-Certification">Professional Certification</option>
+            <option value="Ph.D.or Doctorate-Degree">Ph.D. or Doctorate</option>
+            <option value="Professional Certification">Professional Certification</option>
             <option value="Other">Other</option>
           </select>
         </div>
@@ -430,9 +430,9 @@ const JobCreationForm = () => {
           >
             <option value="">Select Salary Range</option>
             <option value="$300000 - below">$300000 - below</option>
-            <option value="$50000 - $80000">$50000 - $80000</option>
-            <option value="$80000 - $120000">$80000 - $120000</option>
-            <option value="$120000 and above">$120000 and above</option>
+            <option value="$50,000 - $80,000">$50000 - $80000</option>
+            <option value="$80,000 - $120,000">$80000 - $120000</option>
+            <option value="$120,000 and above">$120000 and above</option>
           </select>
         </div>
 
