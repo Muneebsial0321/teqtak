@@ -182,8 +182,7 @@ const Filters = () => {
     };
     getData();
   }, []);
-  console.log("recentvideo data", recentdata);
-  console.log("selected index", selectedValues);
+ 
   const applyFilter = () => {
     const filteredData = [];
 

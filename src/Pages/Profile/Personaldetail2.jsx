@@ -7,46 +7,102 @@ import MoreInfo from "./MoreInfo";
 function Personaldetail2() {
   const [user, setUser] = useState({});
   const [subscriber, setSubscriber] = useState([]);
-const location = useLocation()
-const userID = location.state?.id
-const role = location.state?.role
-console.log("role ", role)
-// console.log("state id ",userId)
-  const getUserId = () => {
-    const str = document.cookie
-    const userKey = str.split('=')[1];
-    return userKey
-  }
-const navigate = useNavigate()
-  const handleSubmit = async () => {
-    try {
-      const req = await fetch(`${REACT_APP_API_BASE_URL}/users/update/${getUserId()}`, {
-        credentials: 'include',
-        method: "POST",
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(user)
-      });
-      const d = await req.json();
-  
+  const [selectedAnswers, setSelectedAnswers] = useState({});
 
-    } catch (error) {
-      console.error("Error submitting data:", error);
-    }
-    navigate('/personaldetails')
+  const location = useLocation();
+  const userID = location.state?.id;
+  const role = location.state?.role;
+  console.log("role ", role);
+
+  const getUserId = () => {
+    const str = document.cookie;
+    const userKey = str.split("=")[1];
+    return userKey;
   };
+
+  const navigate = useNavigate();
 
   const _onChange_ = (e) => {
     setUser((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await submitUserDetails();
+
+      await submitAnswers();
+
+      navigate("/personaldetails");
+    } catch (error) {
+      console.error("Error during data submission:", error);
+    }
+  };
+
+  const submitUserDetails = async () => {
+    try {
+      const reqData = {
+        userID: getUserId(),
+        userDetails: user,
+      };
+
+      const req = await fetch(
+        `${REACT_APP_API_BASE_URL}/users/update/${getUserId()}`,
+        {
+          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(reqData),
+        }
+      );
+
+      const d = await req.json();
+      console.log("User details updated:", d);
+    } catch (error) {
+      console.error("Error submitting user details:", error);
+      throw error;
+    }
+  };
+
+  const submitAnswers = async () => {
+    try {
+      const answersToSubmit = Object.keys(selectedAnswers).map(
+        (questionId) => ({
+          questionId,
+          answer: selectedAnswers[questionId],
+        })
+      );
+
+
+      const req = await fetch(`${REACT_APP_API_BASE_URL}/qna/answers`, {
+        credentials: "include",
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          userID: getUserId(),
+          answers: answersToSubmit,
+        }),
+      });
+
+      const d = await req.json();
+      console.log("Answers submitted:", d);
+    } catch (error) {
+      console.error("Error submitting answers:", error);
+      throw error;
+    }
   };
 
   const fetchSubscribers = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`);
+      const response = await fetch(
+        `${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`
+      );
       const data = await response.json();
       console.log("Fetched subscribers:", data);
       setSubscriber(data);
@@ -54,27 +110,36 @@ const navigate = useNavigate()
       console.error("Error fetching subscribers:", error);
     }
   };
-  console.log("subs",subscriber)
+
   useEffect(() => {
-    console.log("fetching user pernsal userId")
+    console.log("fetching user personal userId");
     fetchSubscribers();
-    
   }, []);
 
   return (
     <Fragment>
-      <div className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto lg:h-[99%] 
-      overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
+      <div
+        className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto lg:h-[99%] 
+      overflow-y-auto"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          WebkitScrollbar: { display: "none" },
+          "-msOverflowStyle": "none",
+          scrollbarWidth: "none",
+        }}
+      >
         <div className="flex items-center gap-4 pt-2">
-          <Link to='/personaldetails' state={{id:userID}}>
-            <FaArrowLeftLong size={30} className='border-2 border-black p-1 rounded-md' />
+          <Link to="/personaldetails" state={{ id: userID }}>
+            <FaArrowLeftLong
+              size={30}
+              className="border-2 border-black p-1 rounded-md"
+            />
           </Link>
           <p className="text-2xl font-semibold pl-4">Personal Details</p>
         </div>
-        {/* <Link className="text-[#9595f5] mb-5 block">Edit Detail</Link> */}
 
         <p className="text-lg font-semibold mt-5">Total Subscriber</p>
-        <p className="text-[gray]">{subscriber.length } Subscribers</p>
+        <p className="text-[gray]">{subscriber.length} Subscribers</p>
 
         <p className="text-xl font-semibold mt-5">Description</p>
         <input
@@ -91,7 +156,7 @@ const navigate = useNavigate()
         <div className="flex flex-wrap mt-5">
           <div className="w-full md:w-[50%]">
             <label htmlFor="name" className="block text-base font-medium">
-               Name
+              Name
             </label>
             <input
               type="text"
@@ -100,7 +165,7 @@ const navigate = useNavigate()
               placeholder="Enter Your  Name"
               className="border mt-2 mb-3 w-full md:w-[80%] p-2 rounded-lg"
               onChange={_onChange_}
-            /> 
+            />
             <label htmlFor="work" className="block text-base font-medium">
               Work Experience
             </label>
@@ -112,12 +177,9 @@ const navigate = useNavigate()
               className="border mt-2 mb-5 w-full md:w-[80%] p-2 rounded-lg"
               onChange={_onChange_}
             />
-
-           
           </div>
 
-          <div className="w-full md:w-[50%] ">
-          
+          <div className="w-full md:w-[50%]">
             <label htmlFor="study" className="block text-base font-medium">
               Education
             </label>
@@ -129,7 +191,7 @@ const navigate = useNavigate()
               className="border mt-2 mb-5 w-full md:w-[80%] p-2 rounded-lg"
               onChange={_onChange_}
             />
-             <label htmlFor="location" className="block text-base font-medium">
+            <label htmlFor="location" className="block text-base font-medium">
               Location
             </label>
             <input
@@ -140,19 +202,24 @@ const navigate = useNavigate()
               className="border mt-2 mb-5 w-full md:w-[80%] p-2 rounded-lg"
               onChange={_onChange_}
             />
-              
           </div>
+
           <p className="text-xl font-semibold mt-5">More info</p>
-          <MoreInfo userPk={userID} role={role}/>
-           <div className="my-8">
-           <button
+          <MoreInfo
+            userPk={userID}
+            role={role}
+            setSelectedAnswers={setSelectedAnswers}
+          />
+
+          <div className="my-8">
+            <button
               type="button"
               className="text-white w-[100px] rounded-md linear_gradient p-1"
               onClick={handleSubmit}
             >
               Save
             </button>
-           </div>
+          </div>
         </div>
       </div>
     </Fragment>
