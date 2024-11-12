@@ -125,7 +125,7 @@ const Signup = () => {
             />
             <h2 className="font-semibold text-center">Select your Role</h2>
             <section className="flex justify-center gap-4">
-              {["entrepreneur", "invester", "viewer"].map(role => (
+              {["entrepreneur", "investor", "viewer"].map(role => (
                 <button
                   key={role}
                   type="button"

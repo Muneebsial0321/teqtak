@@ -66,42 +66,40 @@ function JobFilters({ jobFilter }) {
   const [salRangeDrop, setsalRangeDrop] = useState(false);
   const [eduDrop, setEduDrop] = useState(false);
   useEffect(() => {
-    console.log("job data", data);
-    console.log("catSelectData", catSelectData);
-    if (catSelectData !== "Select Categories") {
-      let filtered = data.filter((item) => item.jobCategory === catSelectData);
-      setFilterLoopData(filtered);
-      console.log("job filtered", filtered);
+    // Start with all the data and apply filters one by one
+    let filteredData = data;
+
+    if (catSelectData !== "All" && catSelectData !== "Select Categories") {
+      filteredData = data.filter(
+        (item) => item.jobCategory === catSelectData
+      );
     }
-    if (catSelectData == "All") {
-      setFilterLoopData(data);
-    }
+
     if (JobTypeSelectData !== "Select JobType") {
-      const filtered = data.filter(
+      filteredData = data.filter(
         (item) => item.jobType === JobTypeSelectData
       );
-      setFilterLoopData(filtered);
-      console.log("job filtered hello", filtered);
     }
+
     if (expSelectData !== "Select Experience") {
-      const filtered = data.filter(
+      filteredData = data.filter(
         (item) => item.experienceLevel === expSelectData
       );
-      setFilterLoopData(filtered);
     }
-    
+
     if (salRangeSelectData !== "Select Salary Range") {
-      const filtered = data.filter(
+      filteredData = data.filter(
         (item) => item.salaryRange === salRangeSelectData
       );
-      setFilterLoopData(filtered);
     }
+
     if (eduSelectData !== "Select Education") {
-      const filtered = data.filter(
+      filteredData = data.filter(
         (item) => item.educationLevel === eduSelectData
       );
-      setFilterLoopData(filtered);
     }
+
+    setFilterLoopData(filteredData);
   }, [
     catSelectData,
     locSelectData,
@@ -111,15 +109,15 @@ function JobFilters({ jobFilter }) {
     eduSelectData,
   ]);
 
-  const handleFilterClick = (e) => {
-    setCatSelectData(e);
-    setexpSelectData(e);
-    setsalRangeSelectData(e);
-    setEduSelectData(e);
-    setLocSelectData(e);
-    setJobTypeSelectData(e);
-    
-  };
+  // const handleFilterClick = (e) => {
+  //   setCatSelectData(e);
+  //   setexpSelectData(e);
+  //   setsalRangeSelectData(e);
+  //   setEduSelectData(e);
+  //   setLocSelectData(e);
+  //   setJobTypeSelectData(e);
+
+  // };
 
   return (
     <Fragment>
@@ -153,7 +151,9 @@ function JobFilters({ jobFilter }) {
                     key={ind}
                     className="py-2"
                     onClick={() => {
-                      handleFilterClick(elm);
+                      setCatSelectData(elm);
+
+                      // handleFilterClick(elm);
                     }}
                   >
                     {elm}
@@ -183,7 +183,8 @@ function JobFilters({ jobFilter }) {
                     key={ind}
                     className="py-2"
                     onClick={() => {
-                      handleFilterClick(elm);
+                      // handleFilterClick(elm);
+                      setLocSelectData(elm);
                     }}
                   >
                     {elm}
@@ -213,7 +214,8 @@ function JobFilters({ jobFilter }) {
                     key={ind}
                     className="py-2"
                     onClick={() => {
-                      handleFilterClick(elm);
+                      // handleFilterClick(elm);
+                      setJobTypeSelectData(elm);
                     }}
                   >
                     {elm}
@@ -243,7 +245,8 @@ function JobFilters({ jobFilter }) {
                     key={ind}
                     className="py-2"
                     onClick={() => {
-                      handleFilterClick(elm);
+                      // handleFilterClick(elm);
+                      setexpSelectData(elm);
                     }}
                   >
                     {elm}
@@ -273,7 +276,8 @@ function JobFilters({ jobFilter }) {
                     key={ind}
                     className="py-2"
                     onClick={() => {
-                      handleFilterClick(elm);
+                      // handleFilterClick(elm);
+                      setsalRangeSelectData(elm);
                     }}
                   >
                     {elm}
@@ -304,7 +308,8 @@ function JobFilters({ jobFilter }) {
                     key={ind}
                     className="py-2"
                     onClick={() => {
-                      handleFilterClick(elm);
+                      // handleFilterClick(elm);
+                      setEduSelectData(elm);
                     }}
                   >
                     {elm}
