@@ -10,6 +10,7 @@ function Personaldetail2() {
 const location = useLocation()
 const userID = location.state?.id
 const role = location.state?.role
+console.log("role ", role)
 // console.log("state id ",userId)
   const getUserId = () => {
     const str = document.cookie
@@ -142,7 +143,7 @@ const navigate = useNavigate()
               
           </div>
           <p className="text-xl font-semibold mt-5">More info</p>
-          <MoreInfo userPk={userID} />
+          <MoreInfo userPk={userID} role={role}/>
            <div className="my-8">
            <button
               type="button"
