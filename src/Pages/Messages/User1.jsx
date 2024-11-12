@@ -11,6 +11,7 @@ import FileUploadModal from './FileUploadModel.jsx';
 import io from 'socket.io-client';
 import { deleteChatroom } from '../../DeleteAPI.js'
 import { REACT_APP_API_BASE_URL } from "../../ENV";
+import MeetingCall from "./MeetingCall.jsx";
 
 function Message2() {
   const socket = io(REACT_APP_API_BASE_URL);
@@ -188,35 +189,6 @@ function Message2() {
     }
   };
 
-
-
-  // Zoom authentication function
-  // const zoomAUth = () => {
-  //   socket.emit('zoomAuth');
-  //   socket.on('receiveAuthUrl', (url) => {
-  //     window.location.href = url;
-  //   });
-  // };
-
-  const Meeting_Pipline= async ()=>{
-   console.log( "meeting pipline")
-    // on zoom auth take roomId(opt)
-    socket.emit("zoomAuth")
-      socket.on("receiveAuthUrl",(url)=>{
-        console.log({url})
-      })
-    // emits receiveAuthUrl have to catch it
-  }
-
-  const meeting_ = () => {
-    socket.emit('sendMeetingUrl', acessToken);
-    socket.on('receive_url', (data) => {
-      if (data.sender) {
-        window.location.href = data.sender; // Redirect to Zoom meeting
-      }
-    });
-  };
-
   const handleSchedule = () => {
     console.log("seeeting a meeting") 
     // zoomAUth();
@@ -266,6 +238,8 @@ function Message2() {
   };
 
   return (
+  <>
+  <MeetingCall/>
     <div className="main h-full w-[100%] ">
 
       <div className="div h-full w-[100%]  bg-[#f5f3f3] p-5 relative">
@@ -430,6 +404,7 @@ function Message2() {
 
       </div>
     </div>
+    </>
   );
 }
 
