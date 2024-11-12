@@ -7,9 +7,9 @@ import { FaCamera, FaPaperclip, FaSmile } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import FileUploadModal from './FileUploadModel.jsx'; 
+import FileUploadModal from './FileUploadModel.jsx';
 import io from 'socket.io-client';
-import {deleteChatroom} from '../../DeleteAPI.js' 
+import { deleteChatroom } from '../../DeleteAPI.js'
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 function Message2() {
@@ -34,7 +34,7 @@ function Message2() {
 
 
   const cardRef = useRef(null);
- const token = localStorage.getItem('authtoken')
+  const token = localStorage.getItem('authtoken')
   const navigate = useNavigate()
   const messagesEndRef = useRef(null); // Reference for scrolling to bottom
 
@@ -44,20 +44,20 @@ function Message2() {
     let hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12 || 12; 
-    return `${hours}:${minutes} ${ampm}`; 
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes} ${ampm}`;
   };
 
   // Handle click outside the card to close it
   const handleClickOutside = (event) => {
-    
+
     if (cardRef.current && !cardRef.current.contains(event.target)) {
 
       setShowCard(false);
       setAble(false)
       setSchedule(false);
-    setMeeting(false); 
-    setShowCalendar(false);
+      setMeeting(false);
+      setShowCalendar(false);
     }
   };
 
@@ -79,13 +79,13 @@ function Message2() {
   // Fetch chatroom data based on ID
   const fetchChatroom = async (id) => {
     let url = `${REACT_APP_API_BASE_URL}/chatrooms/room/${id}`;
-    const req = await fetch(url,{
-      headers:{
-        Authorization:`Bearer ${token}`
+    const req = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
     });
     const d = await req.json();
-    console.log("schma",d)
+    console.log("schma", d)
     let sender = d.users.filter((e) => e !== getUserId());
     getSenderName(sender[0]);
     setRoomId(id);
@@ -93,9 +93,9 @@ function Message2() {
 
   // Get sender's name
   const getSenderName = async (id) => {
-    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${id}`,{
-      headers:{
-        Authorization:`Bearer ${token}`
+    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
     });
     const d = await req.json();
@@ -105,9 +105,9 @@ function Message2() {
 
   // Get receiver's details
   const getReceiver = async () => {
-    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`,{
-      headers:{
-        Authorization:`Bearer ${token}`
+    const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
     });
     const d = await req.json();
@@ -147,24 +147,24 @@ function Message2() {
   // const deleteMessage = (id) => {
   //     console.log("deleting message")
   //     socket.emit('sendMessage', { roomId, sender: getUserId(), messageId:id });
-    
+
   //   }
-  
+
 
   useEffect(() => {
     fetchChatroom(loc.state.id); // Fetch chatroom on mount
     joinRoom(loc.state.id); // Join the chat room
     socket.on('receiveMessage', (message) => {
-      console.log("receive msg ",message)
+      console.log("receive msg ", message)
       setChatroom((prevMessages) => [...prevMessages, message]); // Update chatroom with new messages
     });
 
-   
+
 
     socket.on('previousMessages', (previousMessages) => {
       setChatroom(previousMessages); // Load previous messages
     });
-console.log("pre msg",chatroom)
+    console.log("pre msg", chatroom)
     return () => {
       socket.off('receiveMessage');
       socket.off('previousMessages');
@@ -198,6 +198,16 @@ console.log("pre msg",chatroom)
   //   });
   // };
 
+  const Meeting_Pipline= async ()=>{
+   console.log( "meeting pipline")
+    // on zoom auth take roomId(opt)
+    socket.emit("zoomAuth")
+      socket.on("receiveAuthUrl",(url)=>{
+        console.log({url})
+      })
+    // emits receiveAuthUrl have to catch it
+  }
+
   const meeting_ = () => {
     socket.emit('sendMeetingUrl', acessToken);
     socket.on('receive_url', (data) => {
@@ -208,6 +218,7 @@ console.log("pre msg",chatroom)
   };
 
   const handleSchedule = () => {
+    console.log("seeeting a meeting") 
     // zoomAUth();
     setSchedule(!schedule);
     setMeeting(false); // Reset meeting state when schedule is toggled
@@ -226,9 +237,9 @@ console.log("pre msg",chatroom)
   const toggleCard = () => {
     setShowCard(!showCard);
   };
-  const handleDelete =async () => {
-   await deleteChatroom(roomId);
-    window.location.href='https://teqtak.vercel.app/messages'
+  const handleDelete = async () => {
+    await deleteChatroom(roomId);
+    window.location.href = 'https://teqtak.vercel.app/messages'
   };
 
   const handleFileClick = () => {
@@ -239,14 +250,14 @@ console.log("pre msg",chatroom)
     const file = e.target.files[0];
     if (file) {
       setSelectedFile(file);
-      setShowFileUploadModal(true); 
-      setShowCard(false); 
-     
+      setShowFileUploadModal(true);
+      setShowCard(false);
+
     }
   };
   const handleEmojiSelect = (emoji) => {
     setSelectedEmoji(emoji);
-    setShowCard(false); 
+    setShowCard(false);
   };
 
   const closeModal = () => {
@@ -256,17 +267,17 @@ console.log("pre msg",chatroom)
 
   return (
     <div className="main h-full w-[100%] ">
-      
+
       <div className="div h-full w-[100%]  bg-[#f5f3f3] p-5 relative">
-     
+
         <div className="flex justify-between items-center mb-8">
-        
+
           <div className="flex gap-2">
-          <FaAngleLeft
-            className="cursor-pointer mt-1"
-            onClick={() => navigate("/messages")}
-        />
-          {/* <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/> */}
+            <FaAngleLeft
+              className="cursor-pointer mt-1"
+              onClick={() => navigate("/messages")}
+            />
+            {/* <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/> */}
             <p className="text-xl font-medium whitespace-nowrap">{sender.name || "Unknown"}</p>
           </div>
           <div className="flex gap-5">
@@ -275,7 +286,7 @@ console.log("pre msg",chatroom)
               onClick={() => setAble((prevAble) => !prevAble)}
             />
             {able && (
-              <div ref={cardRef} 
+              <div ref={cardRef}
                 className="absolute w-[200px] cursor-pointer right-4 top-14 px-3 py-2 z-30 bg-white shadow-lg border"
                 onClick={() => setAble(false)}
               >
@@ -290,17 +301,17 @@ console.log("pre msg",chatroom)
             {schedule && (
               <div
                 className="absolute w-[200px] cursor-pointer right-4 top-14 px-3 py-1 z-30 bg-white shadow-lg border"
-                onClick={(e) =>{
+                onClick={(e) => {
                   e.stopPropagation();
-                  
+
                 }
                 }
               >
-                <p ref={cardRef}  className="text-lg opacity-75" onClick={handleMeeting}>
+                <p ref={cardRef} className="text-lg opacity-75" onClick={()=>navigate("/zoom")}>
                   Schedule a meeting
                 </p>
                 {meeting && (
-                  <div ref={cardRef} 
+                  <div ref={cardRef}
                     className="absolute w-[200px] cursor-pointer right-0 top-12 px-3 py-1 text-md z-30 bg-white shadow-lg border"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -308,7 +319,7 @@ console.log("pre msg",chatroom)
                     }}
                   >
                     <Link to="/createmeeting" >Create Zoom Meeting</Link>
-                    <p ref={cardRef}  onClick={handleCalendar}>Schedule Zoom Meeting</p>
+                    <p ref={cardRef} onClick={handleCalendar}>Schedule Zoom Meeting</p>
                     <p onClick={meeting_}>Dial into Zoom Meeting</p>
                   </div>
                 )}
@@ -333,11 +344,11 @@ console.log("pre msg",chatroom)
           {chatroom && chatroom.map((e, i) => (
             <div key={i} className="flex items-end justify-between py-2">
               <div className="flex gap-2">
-              <img
-  src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : '/placeholder.jpg'}
-  alt="profile"
-  className="h-[40px] w-[40px] rounded-full"
-/>
+                <img
+                  src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : '/placeholder.jpg'}
+                  alt="profile"
+                  className="h-[40px] w-[40px] rounded-full"
+                />
 
                 <div className="flex">
                   <div className="max-w-[70%]">
@@ -353,11 +364,11 @@ console.log("pre msg",chatroom)
           {/* Scroll reference */}
           <div ref={messagesEndRef} />
         </div>
-    
 
-<div className="flex items-center justify-center w-[95%] relative top-4">
-          <GrGallery className="text-[#7979ec] text-xl mr-3 cursor-pointer"  onClick={toggleCard} />
-          
+
+        <div className="flex items-center justify-center w-[95%] relative top-4">
+          <GrGallery className="text-[#7979ec] text-xl mr-3 cursor-pointer" onClick={toggleCard} />
+
           <div className="flex-grow">
             <input
               type="text"
@@ -365,14 +376,14 @@ console.log("pre msg",chatroom)
               onChange={handleInputChange}
               onKeyDown={handleKeyDown} // Add onKeyDown handler
               placeholder="Write a message"
-             className="h-[5vh] w-full outline-none rounded p-4 bg-transparent border"
+              className="h-[5vh] w-full outline-none rounded p-4 bg-transparent border"
             />
           </div>
 
           {message.trim() || selectedFile || selectedEmoji ? (
             <FaPaperPlane
               onClick={sendMessage}
-              className="text-xl text-[gray] ml-3 cursor-pointer" 
+              className="text-xl text-[gray] ml-3 cursor-pointer"
             />
           ) : (
             <FaMicrophone className="text-xl text-[gray] ml-3" />
@@ -380,9 +391,9 @@ console.log("pre msg",chatroom)
         </div>
 
         {showCard && (
-          <div ref={cardRef}  className="absolute bottom-[8vh] left-5 w-[10vw] p-3 bg-white shadow-lg rounded">
+          <div ref={cardRef} className="absolute bottom-[8vh] left-5 w-[10vw] p-3 bg-white shadow-lg rounded">
             <ul className="space-y-3">
-            <li className="flex items-center">
+              <li className="flex items-center">
                 <span className=""><FaCamera className="text-[gray] cursor-pointer" /></span>
               </li>
               <li className="flex items-center">

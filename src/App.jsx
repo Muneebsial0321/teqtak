@@ -62,6 +62,7 @@ import MyCreatedJob from './Pages/Profile/MyCreatedJob.jsx';
 import WatchSingle from './Pages/SingleVideo/WatchSingle.jsx';
 import OnBoarding from './OnBoarding.jsx';
 import MyCreatedPodcast from './Pages/Profile/MyCreatedPodcast.jsx';
+import ZoomSocket from './Pages/Messages/ZoomSocket.jsx';
 
 
 const App = () => {
@@ -144,6 +145,7 @@ const App = () => {
           <Route path="/terms" element={<Term />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/wishlist" element={<WishList />}/>
+          <Route path="/zoom" element={<ZoomSocket/>}/>
         </Route>
 
    
