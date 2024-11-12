@@ -58,7 +58,7 @@ function JobFilters({ jobFilter }) {
     "Select Salary Range"
   );
   const [eduSelectData, setEduSelectData] = useState("Select Education");
-  // States for Open Filter
+
   const [catDrop, setCatDrop] = useState(false);
   const [locDrop, setLocDrop] = useState(false);
   const [JobTypeDrop, setJobTypeDrop] = useState(false);
@@ -104,6 +104,7 @@ function JobFilters({ jobFilter }) {
     }
   }, [
     catSelectData,
+    locSelectData,
     JobTypeSelectData,
     expSelectData,
     salRangeSelectData,

@@ -2,13 +2,15 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
+import MoreInfo from "./MoreInfo";
 
 function Personaldetail2() {
   const [user, setUser] = useState({});
   const [subscriber, setSubscriber] = useState([]);
 const location = useLocation()
-const info = location.state?.id
-// console.log("state id ",info)
+const userID = location.state?.id
+const role = location.state?.role
+// console.log("state id ",userId)
   const getUserId = () => {
     const str = document.cookie
     const userKey = str.split('=')[1];
@@ -53,16 +55,17 @@ const navigate = useNavigate()
   };
   console.log("subs",subscriber)
   useEffect(() => {
-    console.log("fetching user pernsal info")
+    console.log("fetching user pernsal userId")
     fetchSubscribers();
     
   }, []);
 
   return (
     <Fragment>
-      <div className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto lg:h-[99%]">
+      <div className="h-full bg-white w-full px-6 md:h-auto max-[425px]:h-auto lg:h-[99%] 
+      overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch', WebkitScrollbar: { display: 'none' }, '-msOverflowStyle': 'none', scrollbarWidth: 'none' }}>
         <div className="flex items-center gap-4 pt-2">
-          <Link to='/personaldetails' state={{id:info}}>
+          <Link to='/personaldetails' state={{id:userID}}>
             <FaArrowLeftLong size={30} className='border-2 border-black p-1 rounded-md' />
           </Link>
           <p className="text-2xl font-semibold pl-4">Personal Details</p>
@@ -136,6 +139,10 @@ const navigate = useNavigate()
               className="border mt-2 mb-5 w-full md:w-[80%] p-2 rounded-lg"
               onChange={_onChange_}
             />
+              
+          </div>
+          <p className="text-xl font-semibold mt-5">More info</p>
+          <MoreInfo userPk={userID} />
            <div className="my-8">
            <button
               type="button"
@@ -145,7 +152,6 @@ const navigate = useNavigate()
               Save
             </button>
            </div>
-          </div>
         </div>
       </div>
     </Fragment>
