@@ -6,37 +6,37 @@ function Third() {
         <div className="relative h-auto lg:h-screen lg:top-[-5rem] ">
           <div className="flex lg:flex-nowrap flex-wrap   lg:w-[95%] w-[90%] mx-auto">
 
-            <div className="w-full px-3 mx-auto lg:w-1/2 xl:w-1/2 md:w-2/3 sm:w-full">
-              <h3 className="text-2xl xl:text-3xl lg:text-3xl font-sans leading-[44px] font-medium md:text-2xl sm:text-xl text-[#142746] w-full xl:w-4/5 lg:w-4/5 md:w-3/4 sm:w-full">
+            <div className="w-full relative lg:top-10 px-3 mx-auto lg:w-1/2 xl:w-1/2 md:w-2/3 sm:w-full">
+              <h3 className="text-2xl xl:text-3xl lg:text-3xl font-sans leading-[44px] font-semibold md:text-2xl sm:text-xl text-[#193766] w-full xl:w-4/5 lg:w-4/5 md:w-3/4 sm:w-full">
                 Effortless Event Creation. Streamline Your Job Hunt.
               </h3>
-              <p className="my-2 font-sans text-sm font-normal leading-7 text-gray-500 xl:text-lg lg:text-sm md:text-xs sm:text-xs">
+              <p className="my-6 font-sans text-[15px] font-normal leading-7 text-gray-500">
                 Network and Land Your Dream Job: Host Exclusive Events &
                 Discover Curated Openings on Your Phone. Our Platform Connects
                 You with Cutting-Edge Startups and Uses Smart Filters to Match
                 Your Skills and Aspirations with the Perfect Role.
               </p>
               <div className="flex gap-3 my-[1.5rem] text-lg text-gray-800 xl:text-base lg:text-base md:text-sm sm:text-xs">
-                <div className="h-4 w-8 bg-[#3B82F6] mt-1"></div>
-                <p className=''>
-                  <span className="text-[#3B82F6] font-sans font-bold text-[18px]">Connect with Startups: </span>
+                <div className="h-[1rem] w-[2.4rem] bg-[#3B82F6] mt-1"></div>
+                <p className='text-[13px]'>
+                  <span className="text-[#3B82F6] font-sans font-bold text-[16px]">Connect with Startups: </span>
                   Attend exclusive events and network directly with industry
                   leaders, fostering valuable connections for your future.
                 </p>
               </div>
               <div className="flex gap-3 my-[1.5rem] text-sm text-gray-800 xl:text-base lg:text-base md:text-sm sm:text-xs">
-                <div className="h-4 w-8 bg-[#3B82F6] mt-1"></div>
-                <p>
-                  <span className="text-[#3B82F6] font-sans font-bold text-[18px]">Smart Job Matching: </span>Our
+                <div className="h-[1rem] w-[3rem] bg-[#3B82F6] mt-1"></div>
+                <p className="text-[13px]">
+                  <span className="text-[#3B82F6] font-sans font-bold text-[16px]">Smart Job Matching: </span>Our
                   platform takes the guesswork out of your job search. Smart
                   filters match your skills and aspirations with curated
                   openings at the most innovative startups.
                 </p>
               </div>
               <div className="flex gap-3 my-[1.5rem] text-sm text-gray-800 xl:text-base lg:text-lg md:text-xs sm:text-xs">
-                <div className="h-4 w-8 bg-[#3B82F6] mt-1"></div>
-                <p>
-                  <span className="text-[#3B82F6] font-sans font-bold text-[18px]">Land Your Dream Role: </span>
+                <div className="h-[1rem] w-[3rem] bg-[#3B82F6] mt-1"></div>
+                <p className="text-[13px]">
+                  <span className="text-[#3B82F6] font-sans font-bold text-[16px]">Land Your Dream Role: </span>
                   Never miss a perfect opportunity again. Discover
                   high-potential jobs that align with your passions and career
                   goals, all accessible through your phone.
@@ -50,7 +50,7 @@ function Third() {
                 className="
             object-contain
             h-[24rem]
-            lg:h-[75vh]
+            lg:h-[100vh]
             md:h-[60vh]
             my-5"
                 alt="Mobile Mockup"
@@ -70,35 +70,35 @@ function Third() {
               <img src="Images/MobileMock3_v1.png" className="
        object-contain
             h-[24rem]
-            lg:h-[75vh]
+            lg:h-[100vh]
             md:h-[60vh]
             my-5"
-    
-       alt="img"
+
+                alt="img"
               />
             </div>
-            <div className="w-full px-3 mx-auto lg:w-1/2 xl:w-1/2 md:w-2/3 sm:w-full">
-              <h3 className="text-2xl xl:text-4xl lg:text-4xl font-sans leading-[44px] font-medium md:text-2xl sm:text-xl text-[#142746] w-full xl:w-4/5 lg:w-4/5 md:w-3/4 sm:w-full">
+            <div className="w-full px-3 mx-auto lg:w-1/2 xl:w-1/2 md:w-2/3 sm:w-full relative lg:top-16">
+              <h3 className="text-2xl xl:text-3xl lg:text-3xl font-sans leading-[44px] font-semibold md:text-2xl sm:text-xl text-[#193766] w-full xl:w-4/5 lg:w-4/5 md:w-3/4 sm:w-full">
                 Post a Video Easily. Host a Podcast
               </h3>
-              <p className="my-2 font-sans text-sm font-normal leading-7 text-gray-500 xl:text-lg lg:text-sm md:text-xs sm:text-xs">
+              <p className="my-6 font-sans text-[15px] font-normal leading-7 text-gray-500">
                 Ditch the Studios, Ditch the Scripts: Create Professional Brand
                 Videos & Podcasts on Your Phone. Instantly Showcase Your Startup's
                 Passion and Expertise to a Global Network of Investors Seeking the
                 Next Big Thing.
               </p>
               <div className="flex gap-3  my-[1.5rem] text-sm text-gray-800 lg:text-base">
-                <div className="h-4 w-8 bg-[#3B82F6] mt-1"></div>
-                <p>
-                  <span className="text-[#3B82F6] font-sans font-bold text-[18px]">Captivate Investors: </span>No
+                <div className="h-[1rem] w-[3rem] bg-[#3B82F6] mt-1"></div>
+                <p  className="text-[13px]">
+                  <span className="text-[#3B82F6] font-sans font-bold text-[16px]">Captivate Investors: </span>No
                   expensive equipment needed. Produce polished videos and clear
                   podcasts that showcase your brand story and expertise.
                 </p>
               </div>
               <div className="flex gap-3  my-[1.5rem] text-sm text-gray-800 lg:text-base">
-                <div className="h-4 w-8 bg-[#3B82F6] mt-1"></div>
-                <p>
-                  <span className="text-[#3B82F6] font-sans font-bold text-[18px]">
+                <div className="h-[1rem] w-[3rem] bg-[#3B82F6] mt-1"></div>
+                <p  className="text-[13px]">
+                  <span className="text-[#3B82F6] font-sans font-bold text-[16px]">
                     Share Your Passion & Authenticity:{" "}
                   </span>
                   Speak directly to investors with the intimacy and immediacy of
@@ -106,9 +106,9 @@ function Third() {
                 </p>
               </div>
               <div className="flex gap-3  my-[1.5rem] text-sm text-gray-800 lg:text-base">
-                <div className="h-4 w-8 bg-[#3B82F6] mt-1"></div>
-                <p>
-                  <span className="text-[#3B82F6] font-sans font-bold text-[18px]">
+                <div className="h-[1rem] w-[3rem] bg-[#3B82F6] mt-1"></div>
+                <p  className="text-[13px]">
+                  <span className="text-[#3B82F6] font-sans font-bold text-[16px]">
                     Reach a Global Audience:{" "}
                   </span>
                   Distribute your videos and podcasts with ease, connecting with a

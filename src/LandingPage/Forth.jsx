@@ -12,7 +12,7 @@ const Forth = () => {
 
 
         <div className="relative mt-9 ">
-          <h1 className="text-[45px] leading-[50px] text-center font-sans  font-bold">More than a Social App</h1>
+          <h1 className="text-[40px] leading-[50px] text-center font-sans  font-bold">More than a Social App</h1>
           <p className="text-center font-sans font-normal px-3  mt-3 text-[20px]">Beyond Profiles: Building the Future of Startups</p>
           <img src="Images/Lines1.png" className="absolute top-[30%] right-0  z-10 h-[80vh] w-[20%]" alt="" />
           <div className="lg:w-[80%] w-[90%] py-10 flex lg:flex-nowrap bg-gradient-to-b lg:bg-gradient-to-r from-[#e4efff] to-[#ffffff] flex-wrap mx-auto relative items-center rounded-2xl mt-10 AvailableSect">

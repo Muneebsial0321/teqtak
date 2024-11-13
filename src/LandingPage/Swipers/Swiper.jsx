@@ -106,7 +106,7 @@ export default function PropertyCards() {
                         className="mySwiper"
                     >
                         {
-                            swiperData.map((elm, idx)=> <SwiperSlide className="swiper-slide" key={idx}>
+                            swiperData.map((elm, idx)=> <SwiperSlide className="swiper-slide cursor-grab" key={idx}>
                                  <div className="my-card">
                                     <div className='w-[100%] bg-[#66666685] h-[.1px] my-10'></div>
                                      <img src={elm.img} alt="" style={{height:'40vh'}} className='rounded-t-xl'  />

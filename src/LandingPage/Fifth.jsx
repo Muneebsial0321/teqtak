@@ -23,7 +23,41 @@ function Fifth() {
     setActiveKey(key);
   };
 
+
   const items = [
+    {
+      key: "1",
+      label: "What is the purpose of this App?",
+      children: <div style={{ color: "#786F77" }}>This app is designed to revolutionize the relationship between investors and entrepreneurs. It provides a platform for networking, sharing educational content, and exploring job opportunities in the investment and entrepreneurial space.</div>,
+    },
+    {
+      key: "2",
+      label: "How can this app help me get a Job?",
+      children: <div style={{ color: "#786F77" }}>The app features a dedicated job section where users can explore job listings specifically related to the fields of investment and entrepreneurship, helping you connect with companies and opportunities that match your skills and interests.</div>,
+    },
+    {
+      key: "3",
+      label: "Can I find Investors in this App?",
+      children: <div style={{ color: "#786F77" }}>Yes, the app is designed to help entrepreneurs connect with potential investors. By engaging with educational content, sharing insights, and networking, you can discover investors interested in supporting innovative ideas.</div>,
+    },
+    {
+      key: "4",
+      label: "Is this App free to use?",
+      children: <div style={{ color: "#786F77" }}>Yes, this app is completely free to use! We believe in making valuable content and connections accessible to everyone.</div>,
+    },
+    {
+      key: "5",
+      label: "What kind of videos can I post?",
+      children: <div style={{ color: "#786F77" }}>Users can post only informational and educational content. Videos should focus on topics related to investment, entrepreneurship, and business growth to benefit the community.</div>,
+    },
+    {
+      key: "6",
+      label: "Can I share my videos on other platforms?",
+      children: <div style={{ color: "#786F77" }}>Yes, you are free to share your videos on other platforms! Our goal is to help you spread valuable insights and connect with a broader audience.</div>,
+    }
+];
+
+  const items_ = [
     {
       key: "1",
       label: "What is the purpose of this App?",
@@ -73,7 +107,7 @@ function Fifth() {
       <section>
         <div className="flex lg:flex-nowrap flex-wrap lg:w-[95%] w-[90%] mx-auto mt-[20px]">
           <div className="lg:w-[50%] w-[90%] mx-auto px-2">
-            <h1 className="text-[44px]  leading-10 font-medium w-full font-sans text-[#193766] lg:w-[80%]">
+            <h1 className="text-[40px]  leading-[3rem] font-medium w-full font-sans text-[#193766] lg:w-[80%]">
               What we are offering is Outside the world.
             </h1>
             <p className="text-[20px] font-normal leading-7 font-sans text-[#697B98] my-5">
@@ -135,7 +169,7 @@ function Fifth() {
         </div>
 
         <div className="mt-5">
-          <h1 className="text-[44px] px-0 xl:px-[450px] lg:px-60 md:px-40 font-bold leading-[50px] mt-16 text-[#193766] text-center">
+          <h1 className="text-[40px]  px-4 lg:px-60 md:px-40 font-bold leading-[50px] mt-16 text-[#193766] text-center">
             What we are offering is Outside the world.
           </h1>
           <p className="lg:w-[45%] w-[80%] font-sans font-normal text-[20px] mt-5 text-[#697B98] mx-auto text-center pb-[20px]">
