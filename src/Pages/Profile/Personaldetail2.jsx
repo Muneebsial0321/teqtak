@@ -43,11 +43,7 @@ function Personaldetail2() {
 
   const submitUserDetails = async () => {
     try {
-      const reqData = {
-        userID: getUserId(),
-        userDetails: user,
-      };
-
+      
       const req = await fetch(
         `${REACT_APP_API_BASE_URL}/users/update/${getUserId()}`,
         {
@@ -56,7 +52,7 @@ function Personaldetail2() {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify(reqData),
+          body: JSON.stringify(user),
         }
       );
 
@@ -91,7 +87,7 @@ const userPk = getUserId()
       });
 
       const d = await req.json();
-      // console.log("Answers submitted:", d);
+      console.log("Answers submitted:", d);
     } catch (error) {
       console.error("Error submitting answers:", error);
       throw error;
@@ -218,10 +214,10 @@ const userPk = getUserId()
           <div className="my-8">
             <button
               type="button"
-              className="text-white w-[100px] rounded-md linear_gradient p-1"
+              className="text-white w-[100px]  rounded-md linear_gradient p-1"
               onClick={handleSubmit}
             >
-              Save
+              Save 
             </button>
           </div>
         </div>
