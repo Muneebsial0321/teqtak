@@ -14,20 +14,20 @@ function Personaldetail() {
 
 const location = useLocation()
 const userID = location.state?.id
-// console.log("id from userprofile",userID )
+
 
 
   const getprofileDetail = async () => {
       try {
         const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${userID}`) 
         const data = await req.json() 
-        // console.log("personal data is",data)
+       
         setDetail(data.user);
       } catch (error) {
         console.error("Fetching data error", error);
       }
     };
-    // console.log("consoele",detail)
+ 
     const getUserId = () => {
     const str = document.cookie
     const userKey = str.split('=')[1];
@@ -38,15 +38,14 @@ const userID = location.state?.id
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${userID}`);
       const data = await response.json();
-      // console.log("Fetched subscribers:", data);
+   
       setSubscriber(data);
     } catch (error) {
       console.error("Error fetching subscribers:", error);
     }
   };
-// console.log("subs",subscriber)
+
   useEffect(() => {
-    // console.log("fetching user pernsal info")
     fetchSubscribers();
       getprofileDetail();
   }, []);

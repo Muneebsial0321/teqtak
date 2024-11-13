@@ -6,7 +6,7 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
   const [selectedindex, setSelectedindex] = useState(null);
   const [selectedAnswersState, setSelectedAnswersState] = useState({});
   const [data, setData] = useState([]);
-// console.log("userspk", userPk)
+
   const handleAnswerChange = (questionId, answer) => {
     setSelectedAnswersState((prev) => ({
       ...prev,
@@ -17,6 +17,8 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
       [questionId]: answer, 
     }));
   };
+
+  
 
   const handleShow = (index) => {
     setSelectedindex(selectedindex === index ? null : index);
