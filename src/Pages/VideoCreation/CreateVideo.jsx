@@ -9,7 +9,7 @@ import { PiEyeClosed } from "react-icons/pi";
 import { IoIosLink } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import CSS for toast notifications
+import "react-toastify/dist/ReactToastify.css"; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 
@@ -76,12 +76,12 @@ const Video = () => {
           },
         }
       );
-      console.log({ response });
+     
       setVidPostSucc(true);
-      toast.success("Video uploaded successfully!"); // Show success toast
+      toast.success("Video uploaded successfully!"); 
     } catch (error) {
       setErrorMessage("Failed to upload video.");
-      toast.error("Failed to upload video."); // Show toast
+      toast.error("Failed to upload video."); 
       console.error("Error uploading video:", error);
     } finally {
       setLoading(false);
@@ -111,7 +111,7 @@ const Video = () => {
       toast.error("You can add a maximum of 6 tags."); // Show toast
     }
   };
-console.log("tag console",)
+
   const shareContent = async () => {
     if (navigator.share) {
       try {

@@ -23,7 +23,7 @@ function Payment() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Fetched ticketPayment:", data);
+      // console.log("Fetched ticketPayment:", data);
       setTickets(data.event);
     } catch (error) {
       console.error("Error fetching tickets:", error);
@@ -44,7 +44,7 @@ function Payment() {
       buyerId: getUserId(),
       eventTicketArray: loc.state.selectedTickets,
     };
-    console.log("this is payload ", { payload });
+    // console.log("this is payload ", { payload });
   
     try {
       const req = await fetch(`${REACT_APP_API_BASE_URL}/payment/stripe/`, {
@@ -62,7 +62,7 @@ function Payment() {
   
       const response = await req.json();
       const data = response.sessionId
-      console.log("this is session ..",  data);
+      // console.log("this is session ..",  data);
   
       // Redirect to the URL returned from the API
       if (data.url) {
@@ -78,7 +78,7 @@ function Payment() {
   };
   
   useEffect(() => {
-    console.log("Component mounted. loc.state:", loc.state);
+    // console.log("Component mounted. loc.state:", loc.state);
     if (loc.state) {
       fetchTickets(loc.state.id);
     } else {

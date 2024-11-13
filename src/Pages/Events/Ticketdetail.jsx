@@ -27,7 +27,7 @@ function Ticketdetail() {
       console.error("Fetching profile data error:", error);
     }
   };
-console.log("user",user)
+// console.log("user",user)
   const fetchTickets = async (eventId) => {
     try {
       const response = await fetch(
@@ -37,7 +37,7 @@ console.log("user",user)
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Fetched ticketPayment:", data);
+      // console.log("Fetched ticketPayment:", data);
       setTickets(data.event);
       
     } catch (error) {
@@ -53,7 +53,7 @@ console.log("user",user)
     const eventId = queryParams.get("eventid");
     const buyerId = queryParams.get("buyerid"); // If you need to use buyerId later
 
-    console.log("Event ID:", eventId, "Buyer ID:", buyerId);
+    // console.log("Event ID:", eventId, "Buyer ID:", buyerId);
 
     if (eventId) {
       fetchTickets(eventId);

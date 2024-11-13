@@ -42,7 +42,7 @@ function WatchHistory() {
       try {
         const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`);
         const data = await response.json();
-        console.log("response data",data.podcast)
+       
         setVideos(data.video);
         setRecentData(data.podcast);
       } catch (error) {

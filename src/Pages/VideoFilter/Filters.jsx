@@ -170,7 +170,7 @@ const Filters = () => {
         });
 
         const info = result.data.data;
-        console.log("resulted", info);
+       
         const tag = info.map((item) => ({
           id: item.data._id,
           videoTag: item.data.videoTags,
@@ -209,7 +209,7 @@ const Filters = () => {
 
   const handleSearch = () => {
     const result = applyFilter();
-    console.log("Filtered Video IDs:", result);
+ 
     navigate("/videos", { state: { id: result } });
   };
   const resetFilter = () => {

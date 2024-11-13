@@ -10,7 +10,7 @@ const CalendarSearch = ({job}) => {
 
   useEffect(()=>{
 
-    console.log('Dataaaaaaaaaaa Amannnnnn: ', filterLoopData)
+    // console.log('Dataaaaaaaaaaa Amannnnnn: ', filterLoopData)
 
   },[filterLoopData])
   // console.log('Amannnnnn',filterLoopData)
@@ -26,7 +26,7 @@ const CalendarSearch = ({job}) => {
   const getData = async () => {
     try {
       const result = await fetchData();
-      console.log(result);
+      // console.log(result);
       setData(result.data);
       setFilterLoopData(result.data);
     } catch (error) {

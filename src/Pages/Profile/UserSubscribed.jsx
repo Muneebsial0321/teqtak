@@ -11,7 +11,7 @@ function UserSubscribed() {
 
   // Get userId from location state
   const userId = location.state?.id;
-  console.log("User ID:", userId);
+ 
 
   const getUserId = () => {
     const str = document.cookie;
@@ -26,7 +26,7 @@ function UserSubscribed() {
         `${REACT_APP_API_BASE_URL}/subscribe/${userId}`
       );
       const data = await response.json();
-      console.log("Fetched subscribers for user:", data);
+     
       setSubscriber(data);
     } catch (error) {
       console.error("Error fetching subscribers:", error);
@@ -39,7 +39,7 @@ function UserSubscribed() {
         `${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`
       );
       const data = await response.json();
-      console.log("Blocked users:", data);
+     
       setBlockedUsers(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Error fetching blocked users:", error);
@@ -61,7 +61,7 @@ function UserSubscribed() {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Post for block:", result);
+        // console.log("Post for block:", result);
         setBlockedUsers((prev) => [...prev, { blockedId }]);
       } else {
         console.error("Failed to block user");
@@ -76,7 +76,7 @@ function UserSubscribed() {
   };
 
   const deleteSubscriber = async (subscriberId) => {
-    console.log("Delete subscriber ID:", subscriberId);
+   
     try {
       const response = await fetch(
         `${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`,

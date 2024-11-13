@@ -41,17 +41,17 @@ function PodcastFilters({ data }) {
         (item) => item.podcastType === catSelectData
       );
       setFilterLoopData(filtered);
-      console.log(filtered);
+      // console.log(filtered);
     }
     if (catSelectData == "All") {
       setFilterLoopData(recentdata);
     }
     if (durSelectData !== "Select Duration") {
-      console.log("durSelectData", durSelectData);
-      console.log("fetch from api", recentdata);
+      // console.log("durSelectData", durSelectData);
+      // console.log("fetch from api", recentdata);
       let filtered = recentdata.filter((item) => {
         const durationInMinutes = item.podcastDuration / 60000;
-        console.log("durationInMinutes", durationInMinutes);
+        // console.log("durationInMinutes", durationInMinutes);
         const durationLabel =
           durationInMinutes < 15
             ? "15 min"
@@ -60,11 +60,11 @@ function PodcastFilters({ data }) {
             : durationInMinutes < 60
             ? "1 hour"
             : "+1 hour";
-        console.log("labelduration", durationLabel);
+        // console.log("labelduration", durationLabel);
         return durationLabel === durSelectData;
       });
       setFilterLoopData(filtered);
-      console.log("filteredByDuration", filtered);
+      // console.log("filteredByDuration", filtered);
     }
   }, [catSelectData, durSelectData]);
 

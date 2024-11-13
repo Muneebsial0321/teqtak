@@ -1,14 +1,14 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { IoTrashOutline } from "react-icons/io5"; // Import the delete icon
-import { deleteJob } from '../../DeleteAPI'; // Import deleteJob function
+import { IoTrashOutline } from "react-icons/io5"; 
+import { deleteJob } from '../../DeleteAPI'; 
 import { Link } from "react-router-dom";
 
 const CalendarSearch = (props) => {
-  const [jobs, setJobs] = useState([]); // State to hold jobs
+  const [jobs, setJobs] = useState([]); 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
   const [visibleId, setVisibleId] = useState(null);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true); 
 
   const handleDeleteClick = (id) => {
     setDeleteItemId(id);
@@ -24,9 +24,9 @@ const currentUser = getUserId()
 
   const handleDeleteConfirm = async () => {
     try {
-      await deleteJob(deleteItemId); // Call the deleteJob API with the selected job ID
-      console.log(`Deleted job with id: ${deleteItemId}`);
-      setJobs((prevJobs) => prevJobs.filter((job) => job._id !== deleteItemId)); // Remove job from local state
+      await deleteJob(deleteItemId); 
+      // console.log(`Deleted job with id: ${deleteItemId}`);
+      setJobs((prevJobs) => prevJobs.filter((job) => job._id !== deleteItemId)); 
     } catch (error) {
       console.error("Error deleting job:", error);
     }
@@ -40,15 +40,15 @@ const currentUser = getUserId()
   };
 
   useEffect(() => {
-    setLoading(true); // Start loading
-    console.log("in single job component");
-    console.log(props.jobs);
-    setJobs(props.jobs); // Set jobs from props
-    setLoading(false); // Stop loading after setting jobs
+    setLoading(true); 
+    // console.log("in single job component");
+    // console.log(props.jobs);
+    setJobs(props.jobs); 
+    setLoading(false); 
   }, [props.jobs]);
 
   const formatDate = (dateString) => {
-    if (!dateString) return "Invalid date"; // Return a message for undefined dates
+    if (!dateString) return "Invalid date"; 
 
     const normalizedDateString = dateString.replace(/[-]/g, "/");
     const dateParts = normalizedDateString.split("/");

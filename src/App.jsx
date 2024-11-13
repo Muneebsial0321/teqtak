@@ -49,7 +49,7 @@ import FilterJob from './Pages/JobsFilter/FilterJob.jsx';
 import Personaldetail from './Pages/Profile/Personaldetail.jsx';
 import DevicePermissions from './Pages/Settings/DevicePermissions.jsx';
 import Personaldetail2 from './Pages/Profile/Personaldetail2.jsx';
-import Search from './Components/Navbar/Saerch.jsx';
+// import Search from './Components/Navbar/Saerch.jsx';
 import JobAppliedSuccess from './Pages/Jobs/JobAppliedSuccess.jsx';
 import Header from './LandingPage/Header.jsx'
 import NotFound from './Components/PageNotFound.jsx';
@@ -81,7 +81,7 @@ const App = () => {
         {/* Routes with Layout */}
         <Route element={<Layout />}>
       
-        <Route path='/search'element={<Search/>} />
+        {/* <Route path='/search'element={<Search/>} /> */}
           <Route path="/videos" element={<Feed />} />
           <Route path="/video/:src" element={<SingleVideo />} />
           <Route path="/profilevideos/:src" element={<ProfileVideos />} />

@@ -41,18 +41,18 @@ const WatchSingle = () => {
     setVideo(data);
   };
 
-  console.log(" watch video array:",location.state.id);
+  
 
   useEffect(() => {
-    console.log("Current location state:", location.state.id); // Log the state
+    
     if (location.state && location.state.id) {
-      setVideos(location.state.id); // Set the videos array from state
+      setVideos(location.state.id); 
       const info = location.state.id.map((elm)=> elm.data )
-      console.log("info from watch history",info)
+  
       setWatch(info)
      
       const currentVideo = info.find(v => v._id === videoId);
-      console.log("single video current",currentVideo)
+   
       if (currentVideo) {
         setVideo(currentVideo);
         setVideoIndex(info.findIndex(v => v._id === videoId));
@@ -154,7 +154,7 @@ const WatchSingle = () => {
       if (response.ok) {
         const result = await response.json();
         setIsSubscribed(true);
-        console.log("user subscribed", result.message);
+      
       } else {
         const error = await response.json();
         console.error('Error subscribing:', error.message);
@@ -171,7 +171,7 @@ const WatchSingle = () => {
       });
       if (response.ok) {
         setIsSubscribed(false);
-        console.log('Unsubscribed successfully');
+      
       } else {
         const error = await response.json();
         console.error('Error unsubscribing:', error.message);

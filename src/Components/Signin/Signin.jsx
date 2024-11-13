@@ -22,7 +22,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("Submitting data:", state);
+    // console.log("Submitting data:", state);
   
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/users/login`, {
@@ -33,15 +33,15 @@ const Signin = () => {
         body: JSON.stringify(state),
       });
   
-      console.log({ response });
+      // console.log({ response });
   
       if (response.ok) {
         const data = await response.json();
-        console.log("Login successful:", data);
+        // console.log("Login successful:", data);
         localStorage.setItem('authtoken', data.authtoken); 
 
         
-        console.log("authToken", data.authtoken);
+        // console.log("authToken", data.authtoken);
         localStorage.setItem('userId', data.user.Users_PK);
         // Store any tokens or user info as needed
         // navigate('/bording');

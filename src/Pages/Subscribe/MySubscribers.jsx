@@ -19,7 +19,7 @@ function MySubscribers() {
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`);
       const data = await response.json();
-      console.log("Fetched subscribers:", data); 
+     
       setSubscribers(data);
     } catch (error) {
       console.error("Error fetching subscribers:", error);
@@ -31,7 +31,7 @@ function MySubscribers() {
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`);
       const data = await response.json();
-      console.log("Blocked users", data);
+   
 
       setBlockedUsers(Array.isArray(data) ? data : []);
     } catch (error) {
@@ -55,7 +55,7 @@ function MySubscribers() {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Block post req", result);
+      
         
         
         setSubscribers(prevSubscribers => 
@@ -86,7 +86,7 @@ function MySubscribers() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Subscriber removed:", result);
+  
         
         setSubscribers(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
       } else {

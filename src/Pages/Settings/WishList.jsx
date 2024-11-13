@@ -29,7 +29,7 @@ const Wishlist = () => {
           `${API_BASE_URL}/wishlist/${getUserId()}`
         );
         const info = response.data;
-        // console.log("wishlist result",result)
+    
 
         setWishlistJob(info.job);
         setWishlistEvent(info.event);

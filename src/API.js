@@ -54,7 +54,7 @@ export const fetchDetail = async () => {
 export const fetchPodcast = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/podcasts/`);
-    console.log("responsed data",response.data)
+   
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);

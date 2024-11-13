@@ -6,8 +6,8 @@ import { CiStar } from "react-icons/ci";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import Model from "../ModalReport/Model";
 import Review from "../Podcast/Review";
-import { ToastContainer, toast } from 'react-toastify'; // Importing Toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import CSS for Toastify
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const ProfileVideos = () => {
@@ -34,12 +34,12 @@ const ProfileVideos = () => {
     setVideo(data);
   };
 
-  console.log("Single video details:", video);
+ 
 
   useEffect(() => {
-    console.log("Current location state:", location.state); // Log the state
+    
     if (location.state && location.state.videos) {
-      setVideos(location.state.videos); // Set the videos array from state
+      setVideos(location.state.videos); 
       const currentVideo = location.state.videos.find(v => v.data._id === videoId);
       if (currentVideo) {
         setVideo(currentVideo);
@@ -48,7 +48,7 @@ const ProfileVideos = () => {
     }
     getVideo();
   }, [videoId, location.state]);
-console.log("single video id array",)
+
   const useDebounce = (callback, delay) => {
     const timerRef = useRef(null);
   

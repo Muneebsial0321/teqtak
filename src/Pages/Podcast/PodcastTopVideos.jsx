@@ -18,10 +18,10 @@ function PodcastTopVideos({data}) {
 const [recentview,setRecentView] = useState([])
 const location = useLocation()
 const filteredData = location.state?.filteredData;
-console.log("podcast filter state",filteredData)
+// console.log("podcast filter state",filteredData)
 
 const token = localStorage.getItem('authtoken'); 
-console.log("podcast token",token)
+// console.log("podcast token",token)
 
   useEffect(() => {
     const fetchViews = async () => {
@@ -29,7 +29,7 @@ console.log("podcast token",token)
       try {
         const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`);
         const data = await response.json();
-        console.log("response data",data.podcast)
+        // console.log("response data",data.podcast)
        
         setRecentView(data.podcast);
       } catch (error) {
@@ -39,7 +39,7 @@ console.log("podcast token",token)
     const getData = async () => {
       try {
         const result = await fetchPodcast();
-        console.log("fetch podcast result",{ result });
+        // console.log("fetch podcast result",{ result });
         setRecentData(result.data);
         setFilterLoopData(result.data);
       } catch (error) {
@@ -88,7 +88,7 @@ console.log("podcast token",token)
         wishItemId: podcastId,
         userId: user_id,
       });
-      console.log('Wishlist item saved:', response.data);
+      // console.log('Wishlist item saved:', response.data);
       toast.success('Podcast saved to wishlist!'); // Show success toast
     } catch (error) {
       console.error('Error saving to wishlist:', error);

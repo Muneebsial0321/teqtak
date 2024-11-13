@@ -78,11 +78,11 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
     };
 
     const updatedSpeakers = [...speakers, newSpeaker];
-    console.log("updated speaker", updatedSpeakers);
-    console.log("speakers are", speakers);
+    // console.log("updated speaker", updatedSpeakers);
+    // console.log("speakers are", speakers);
 
     setSpeakers(updatedSpeakers);
-    console.log("speakers are", speakers);
+    // console.log("speakers are", speakers);
     setInputValue("");
     setFilteredUsers([]);
     setShowAdditionalForms(false);

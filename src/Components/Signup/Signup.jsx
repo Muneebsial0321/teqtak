@@ -18,7 +18,7 @@ const Signup = () => {
   
     try {
       const requestBody = { ...state, role: selectedRole };
-      console.log("Request body:", requestBody);
+      // console.log("Request body:", requestBody);
       
       const req = await fetch(`${REACT_APP_API_BASE_URL}/users/`, {
         credentials: "include",
@@ -30,8 +30,8 @@ const Signup = () => {
       });
   
       const data = await req.json();
-      console.log("Response status:", req.status);
-      console.log("Response data:", data);
+      // console.log("Response status:", req.status);
+      // console.log("Response data:", data);
   
       if (req.ok) {
         if (data.user.Users_PK) {

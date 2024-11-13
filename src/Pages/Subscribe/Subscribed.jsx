@@ -18,7 +18,7 @@ function Subscribed() {
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${getUserId()}`);
       const data = await response.json();
-      console.log("Fetched subscribers:", data);
+     
       setSubscriber(data);
     } catch (error) {
       console.error("Error fetching subscribers:", error);
@@ -30,10 +30,10 @@ function Subscribed() {
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`);
       const data = await response.json();
-      console.log("Blocked users", data);
+     
       
       setBlockedUsers(Array.isArray(data) ? data : []);
-      console.log("Blocked Users:", blockedUsers);
+     
     } catch (error) {
       console.error("Error fetching blocked users:", error);
       setBlockedUsers([]);
@@ -54,9 +54,9 @@ function Subscribed() {
       });
       if (response.ok) {
         const result = await response.json();
-        console.log("Post for block", result);
+       
         
-        // Update the UI immediately by removing the blocked user
+       
         setSubscriber(prevSubscribers => 
           prevSubscribers.filter(sub => sub.subscribedToId !== blockedId)
         );
@@ -82,8 +82,8 @@ function Subscribed() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Subscriber deleted:", result);
-        // Update the subscribers list
+        
+        
         setSubscriber(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
       } else {
         console.error('Failed to delete subscriber');

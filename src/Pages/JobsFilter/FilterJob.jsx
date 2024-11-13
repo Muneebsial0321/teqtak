@@ -115,7 +115,7 @@ useEffect(() => {
   const getData = async () => {
     try {
       const result = await fetchData(); 
-      console.log(result);
+      // console.log(result);
       setData(result.data);
     } catch (error) {
       console.error("Fetching data error", error);
@@ -129,7 +129,7 @@ const applyFilters = () => {
 
 const handleSearch = () => {
   const filteredData = applyFilters();
-  console.log("filteredjobs", filteredData);
+  // console.log("filteredjobs", filteredData);
   navigate('/jobs', { state: { filteredData } });
 }
 

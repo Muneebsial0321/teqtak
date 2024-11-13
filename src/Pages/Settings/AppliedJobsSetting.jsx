@@ -19,7 +19,7 @@ const [appliedjobs ,setAppliedJobs] = useState([])
         const response = await axios.get(`${API_BASE_URL}/appliedjobs/my/${getUserId()}`);
         const result = response.data;
         const info = result.data
-        console.log("appleid job data ",info)
+        // console.log("appleid job data ",info)
 
         setAppliedJobs(info)
       }catch (error) {

@@ -106,13 +106,13 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
 
 
     const speakerIds = speakerState.map((speaker) => speaker.id);
-    console.log("speaker idd", speakerIds);
-    console.log("speaker state", speakerState);
+    // console.log("speaker idd", speakerIds);
+    // console.log("speaker state", speakerState);
 
     formData.append("eventArray", JSON.stringify(speakerState));
     // Log the FormData to see its contents
     for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
+      // console.log(`${pair[0]}: ${pair[1]}`);
     }
 
     try {
@@ -122,7 +122,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
         formData
       );
 
-      console.log("Event Created Successfully:", response.data);
+      // console.log("Event Created Successfully:", response.data);
 
       // Update context state
       EventStates.setEventSubmitted(!EventStates.eventSubmitted);
@@ -195,7 +195,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
   };
 
   const handleTicketChange = (e) => {
-    console.log({ticketTypes})
+    // console.log({ticketTypes})
     const { value } = e.target;
     if (value && ticketPrice && ticketQuantity) {
       const existingTicket = ticketTypes.find(
@@ -223,11 +223,11 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
     setTicketTypes((prev) => prev.filter((_, i) => i !== index));
   };
 
-  console.log("Submitting speakers:", speakerState);
+  // console.log("Submitting speakers:", speakerState);
 
   const updateSpeakerData = (speakers) => {
     setSpeakerState(speakers);
-    console.log("Updated Speakers:", speakers);
+    // console.log("Updated Speakers:", speakers);
   };
 
   return (
