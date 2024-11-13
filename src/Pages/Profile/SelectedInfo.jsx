@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
+const SelectedInfo = ({ userPk, role, setSelectedAnswers }) => {
   const [selectedindex, setSelectedindex] = useState(null);
   const [selectedAnswersState, setSelectedAnswersState] = useState({});
   const [data, setData] = useState([]);
-// console.log("userspk", userPk)
+
   const handleAnswerChange = (questionId, answer) => {
     setSelectedAnswersState((prev) => ({
       ...prev,
@@ -81,4 +81,4 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
   );
 };
 
-export default MoreInfo;
+export default SelectedInfo;

@@ -9,13 +9,13 @@ function Participants () {
   let navigate =useNavigate()
   const loc = useLocation();
   useEffect(() => {
-    console.log("single event detail");
-    console.log(loc.state);
+    // console.log("single event detail");
+    // console.log(loc.state);
     const getData = async () => {
       try {
         if (loc.state) {
           const result_ = await getEvent(loc.state.id);
-          console.log("result of single event is ",{ result_ });
+          // console.log("result of single event is ",{ result_ });
           setParticipants(result_.participants);
           setEvent(result_.event)
          
@@ -38,7 +38,7 @@ function Participants () {
     setParticipants(d);
     return d;
   };
-console.log("event details",event)
+// console.log("event details",event)
   return (
     <>
     

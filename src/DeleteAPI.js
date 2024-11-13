@@ -20,7 +20,7 @@ const deleteEvent = async (eventId) => {
         },
     })
     const data = await req.json()
-    console.log({ data })
+   
 }
 const deleteJob = async (jobId) => {
     const req = await fetch(`${API_BASE_URL}/jobs/${jobId}`, {
@@ -32,7 +32,7 @@ const deleteJob = async (jobId) => {
         },
     })
     const data = await req.json()
-    console.log({ data })
+  
 }
 const deletePodcast = async (podcastId) => {
     const req = await fetch(`${API_BASE_URL}/podcasts/${podcastId}`, {
@@ -44,10 +44,10 @@ const deletePodcast = async (podcastId) => {
         },
     })
     const data = await req.json()
-    console.log({ data })
+    // console.log({ data })
 }
 const deleteVideo = async (vidId) => {
-    console.log("deleting video")
+  
     const req = await fetch(`${API_BASE_URL}/upload/delete/${vidId}`, {
         method: "POST",
         credentials: 'include',
@@ -57,7 +57,7 @@ const deleteVideo = async (vidId) => {
         },
     })
     const data = await req.json()
-    console.log({ data })
+    // console.log({ data })
 }
 const deleteReview = async (id) => {
     const req = await fetch(`${API_BASE_URL}/reviews/delete/${id}`, {
@@ -68,9 +68,9 @@ const deleteReview = async (id) => {
             'Content-Type': "application/json"
         },
     })
-    console.log("deleting comment")
+    // console.log("deleting comment")
     const data = await req.json()
-    console.log({ data })
+    // console.log({ data })
 }
 const deleteChatroom = async (id) => {
     const req = await fetch(`${API_BASE_URL}/chatrooms/delete/${id}`, {
@@ -82,7 +82,7 @@ const deleteChatroom = async (id) => {
         },
     })
     const data = await req.json()
-    console.log({ data })
+    // console.log({ data })
 }
 const deleteNotification = async (id) => {
     const req = await fetch(`${API_BASE_URL}/notifications/${id}`, {
@@ -94,7 +94,7 @@ const deleteNotification = async (id) => {
         },
     })
     const data = await req.json()
-    console.log({ data })
+    // console.log({ data })
 }
 const deleteMessage_BETA = async () => {
     const req = await fetch(`${API_BASE_URL}`, {
@@ -106,6 +106,6 @@ const deleteMessage_BETA = async () => {
         },
     })
     const data = await req.json()
-    console.log({ data })
+    // console.log({ data })
 }
 export { deleteNotification, deleteChatroom, deleteEvent, deleteReview, deleteJob, deletePodcast, deleteVideo }

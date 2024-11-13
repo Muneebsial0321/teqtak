@@ -20,7 +20,7 @@ const filteredData = location.state?.filteredData
     const getData = async () => {
       try {
         const result = await fetchEvent(); // Use the function from api.js
-        console.log(result);
+        // console.log(result);
         setNewCard(result.data);
         setFilterLoopData(result.data);
       } catch (error) {
@@ -61,7 +61,7 @@ const filteredData = location.state?.filteredData
         wishItemId: eventId,
         userId: user_id,
       });
-      console.log('Wishlist item saved:', response.data);
+      // console.log('Wishlist item saved:', response.data);
       toast.success('Event saved to wishlist!'); // Notify on success
     } catch (error) {
       console.error('Error saving to wishlist:', error);

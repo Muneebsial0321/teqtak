@@ -20,7 +20,7 @@ const UserProfile = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const userId = location.state?.id; 
-  console.log('subscriber  ID from state:', userId);
+ 
   // Get userId from location state
 
   const [data_, setDATA] = useState({});
@@ -48,7 +48,7 @@ const UserProfile = () => {
       if (response.ok) {
         const result = await response.json();
         setIsSubscribed(true);
-        console.log("user subscribed",result.message);
+ 
       } else {
         const error = await response.json();
         console.error('Error subscribing:', error.message);
@@ -65,7 +65,7 @@ const UserProfile = () => {
       });
       if (response.ok) {
         setIsSubscribed(false);
-        console.log('Unsubscribed successfully');
+       
       } else {
         const error = await response.json();
         console.error('Error unsubscribing:', error.message);
@@ -81,8 +81,7 @@ const UserProfile = () => {
         const response = await fetch(`${API_BASE_URL}/subscribe/my/${userId}`);
         if (response.ok) {
           const subscriptions = await response.json();
-          console.log("resoonse ",response)
-          // Check if current user is in the subscription list
+        
           const isSubscribed = subscriptions.some(sub => sub.subscriberId === getUserId());
           setIsSubscribed(isSubscribed);
         }
@@ -105,7 +104,7 @@ const UserProfile = () => {
       const result = await fetchProfile(id); // Use the userId passed in
       setProfile(result.user);
       setDATA(result.data);
-      console.log("single user data", result);
+   
     } catch (error) {
       console.error("Fetching profile data error:", error);
     }
@@ -138,7 +137,7 @@ const UserProfile = () => {
 
   const isCurrentUser = getUserId() === userId; // Check if the current user is the same as the profile being viewed
   const __message__ = async (id) => {
-    console.log("texting", id);
+   
     const req = await fetch(
       `${REACT_APP_API_BASE_URL}/chatrooms/${getUserId()}`,
       {
@@ -150,7 +149,7 @@ const UserProfile = () => {
       }
     );
     const data = await req.json();
-    console.log("mess resp",data)
+
     if (data) { 
       navigate('/messages/user1',{state:{id:data._id}});
   } else {
@@ -199,7 +198,7 @@ const UserProfile = () => {
                       {loading ? 'Uploading...' : 'Save Changes'}
                     </button>
                     <button
-                      onClick={() => console.log(profile)}
+                      // onClick={() => console.log(profile)}
                       className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
                     >
                       Edit Profile 

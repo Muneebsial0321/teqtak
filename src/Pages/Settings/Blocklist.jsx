@@ -20,7 +20,7 @@ function Blocklist() {
     try {
       const response = await fetch(`${API_BASE_URL}/block/${getUserId()}`);
       const data = await response.json();
-      console.log("Blocked users fetched:", data.data);
+      // console.log("Blocked users fetched:", data.data);
       setBlockedUsers(data.data);
     } catch (error) {
       console.error('Error fetching blocked users:', error);
@@ -30,7 +30,7 @@ function Blocklist() {
   // Unblock a user
   const unblockUser = async (userId) => {
     try {
-      console.log('Attempting to unblock user with ID:', userId);
+     
   
       const response = await fetch(`${API_BASE_URL}/block/${userId}`, {
         method: 'DELETE',
@@ -48,7 +48,7 @@ function Blocklist() {
         setBlockedUsers(prevBlockedUsers => 
           prevBlockedUsers.filter(user => user._id !== userId)
         );
-        console.log('User unblocked successfully');
+       
       } else {
         const responseData = await response.json();
         console.error('Failed to unblock user:', responseData);

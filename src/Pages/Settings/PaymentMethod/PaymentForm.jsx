@@ -31,7 +31,7 @@ function PaymentForm() {
       cardTown: cardTown,
     };
     cardArray.push(data);
-    console.log(cardArray);
+    // console.log(cardArray);
 
     setCardNumber("**** **** **** ****");
     setCardPostal("*****");

@@ -33,7 +33,7 @@ const ProfilePublic = ({ userId }) => {
     const userKey = str.split('=')[1];
     return userKey;
   };
-  console.log(getUserId())
+  
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -48,8 +48,8 @@ const ProfilePublic = ({ userId }) => {
         body: formData,
       });
       const data = await response.json();
-      console.log('Profile updated:', data);
-      await fetchProfileData(); // Refresh profile data after upload
+      // console.log('Profile updated:', data);
+      await fetchProfileData(); 
     } catch (error) {
       console.error('Error updating profile:', error);
     } finally {
@@ -57,14 +57,14 @@ const ProfilePublic = ({ userId }) => {
     }
   };
 
-  const createChatRoom = () => { console.log("creating chatroom"); };
+  
 
   const fetchProfileData = async () => {
     try {
       const result = await fetchProfile(getUserId());
       setProfile(result.user);
       setDATA(result.data || { rating: {} })
-      console.log("single user data", result);
+      // console.log("single user data", result);
     } catch (error) {
       console.error("Fetching profile data error:", error);
     }
@@ -96,7 +96,7 @@ const ProfilePublic = ({ userId }) => {
 
   const isCurrentUser =  getUserId();
 
-console.log("user id is ", isCurrentUser)
+
   return (
     <Fragment>
       <div className="bg-white h-[90vh] w-full " >

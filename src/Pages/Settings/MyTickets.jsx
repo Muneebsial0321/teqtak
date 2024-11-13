@@ -58,7 +58,7 @@ function MyTickets() {
         wishItemId: eventId,
         userId: user_id,
       });
-      console.log('Wishlist item saved:', response.data);
+      
       toast.success('Event saved to wishlist!'); // Notify on success
     } catch (error) {
       console.error('Error saving to wishlist:', error);

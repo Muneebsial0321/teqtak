@@ -50,7 +50,7 @@ let durData = [
 function JobFilters({data}) {
   const {newcard, setFilterLoopData} = data;
   
-console.log("new card",newcard);
+// console.log("new card",newcard);
   const [catSelectData, setCatSelectData] = useState("Select Categories");
   const [locSelectData, setLocSelectData] = useState("Select Location");
   const [JobTypeSelectData, setJobTypeSelectData] = useState("Select Date");
@@ -73,7 +73,7 @@ console.log("new card",newcard);
     if (catSelectData!== "Select Categories") {
       let filtered = newcard.filter((item) => item.eventCatagory === catSelectData);
       setFilterLoopData(filtered);
-      console.log("event filtered",filtered);
+      // console.log("event filtered",filtered);
     }
      if(catSelectData === "All"){
       setFilterLoopData(newcard);
@@ -81,7 +81,7 @@ console.log("new card",newcard);
     if (expSelectData !== "Select Format") {
       let filtered = newcard.filter((item) => item.eventFormat === expSelectData);
       setFilterLoopData(filtered);
-      console.log("event filtered",filtered);
+      // console.log("event filtered",filtered);
     }
     if (salRangeSelectData !== "Select No of People") {
       let filtered = newcard.filter((item) =>(item.eventNO_of_People < 20 
@@ -90,7 +90,7 @@ console.log("new card",newcard);
         ? "Less than 50" 
         : "Above 50" ) === salRangeSelectData);
       setFilterLoopData(filtered);
-      console.log("event filter by persons",filtered);
+      // console.log("event filter by persons",filtered);
     }
 
   }, [catSelectData,expSelectData]);

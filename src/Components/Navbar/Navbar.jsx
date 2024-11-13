@@ -37,7 +37,7 @@ const Navbar = ({ state }) => {
         try {
           const response = await axios.get(`${API_BASE_URL}/users?search=${searchTerm}`);
           setData(response.data.data || []);
-          console.log("Fetched users:", response.data.data); // Log fetched users
+          // console.log("Fetched users:", response.data.data); 
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -56,7 +56,7 @@ const Navbar = ({ state }) => {
         (user.name && user.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
         (user.userName && user.userName.toLowerCase().includes(searchTerm.toLowerCase()))
       );
-      console.log("Filtered suggestions:", filteredSuggestions); // Log filtered suggestions
+      // console.log("Filtered suggestions:", filteredSuggestions); // Log filtered suggestions
       setSuggestions(filteredSuggestions);
       setShowSuggestions(true);
     } else {
@@ -91,12 +91,12 @@ const Navbar = ({ state }) => {
     recognition.maxAlternatives = 1;
 
     recognition.onstart = () => {
-      console.log('Voice recognition started.');
+      // console.log('Voice recognition started.');
     };
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      console.log('Transcript:', transcript);
+      // console.log('Transcript:', transcript);
       setSearchTerm(transcript); // Set the recognized speech to the search bar
     };
 

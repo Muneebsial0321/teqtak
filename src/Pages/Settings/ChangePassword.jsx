@@ -19,7 +19,7 @@ function Changepassword() {
 const token = localStorage.getItem('authtoken')
   const getUserId = () => {
     const str = document.cookie;
-    console.log("cookies",str)
+
     const userKey = str.split("=")[1];
     return userKey;
   };

@@ -54,16 +54,15 @@ const Video = () => {
         viewerId: userId,
       };
   
-      // Log the data being sent
-      console.log('Posting view data:', viewData);
+    
   
       await axios.post(`${API_BASE_URL}/views`, viewData);
-      console.log('View recorded successfully');
+   
     } catch (error) {
       console.error('Error recording view:', error);
     }
   };
-  console.log("location state",location.state)
+  
   useEffect(() => {
     if (location.state && location.state.videos) {
       setVideos(location.state.videos);
@@ -170,7 +169,7 @@ const Video = () => {
       if (response.ok) {
         const result = await response.json();
         setIsSubscribed(true);
-        console.log("user subscribed", result.message);
+        
       } else {
         const error = await response.json();
         console.error('Error subscribing:', error.message);
@@ -187,7 +186,7 @@ const Video = () => {
       });
       if (response.ok) {
         setIsSubscribed(false);
-        console.log('Unsubscribed successfully');
+       
       } else {
         const error = await response.json();
         console.error('Error unsubscribing:', error.message);

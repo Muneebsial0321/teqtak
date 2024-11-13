@@ -57,7 +57,7 @@ function Apply() {
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Result from server:", result); // Log the server response
+        // console.log("Result from server:", result);
         JobAppliedStates.setJobAppliedSuccess(true);
         navigate("/jobapplysuccess");
       } else {

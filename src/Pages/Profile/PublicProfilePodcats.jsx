@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { CiPlay1, CiTrash } from "react-icons/ci";
-import { FaRegShareFromSquare } from "react-icons/fa6";
+// import { FaRegShareFromSquare } from "react-icons/fa6";
 import { IoBookmarkOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { deletePodcast } from "../../DeleteAPI";
@@ -34,7 +34,7 @@ const ApplePodcast = (props) => {
   const handleDeleteConfirm = async () => {
     if (deleteItemId) {
       try {
-        console.log(`Attempting to delete podcast with id: ${deleteItemId}`);
+        // console.log(`Attempting to delete podcast with id: ${deleteItemId}`);
         await deletePodcast(deleteItemId);
         toast.success('Podcast deleted successfully!');
         setPodcast(podcast.filter((item) => item._id !== deleteItemId));
@@ -54,16 +54,14 @@ const ApplePodcast = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("podcasts single user section");
-    console.log(props.podcast);
-console.log("user prop",props.user)
+   
 
     const fetchedPodcasts = Array.isArray(props.podcast) ? props.podcast : [];
     setLoading(true);
     setTimeout(() => {
       setPodcast(fetchedPodcasts);
       setLoading(false);
-      console.log({ fetchedPodcasts });
+      // console.log({ fetchedPodcasts });
     }, 1000);
   }, [props.podcast]);
 
@@ -104,7 +102,7 @@ console.log("user prop",props.user)
         wishItemId: podcastId,
         userId: user_id, 
       });
-      console.log('Wishlist item saved:', response.data);
+      // console.log('Wishlist item saved:', response.data);
       toast.success('Podcast saved to wishlist!');
     } catch (error) {
       console.error('Error saving to wishlist:', error);

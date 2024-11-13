@@ -18,7 +18,7 @@ function Fifth() {
   const [activeKey, setActiveKey] = useState(["5"]);
 
   const onChange = (key) => {
-    console.log(key);
+    // console.log(key);
     setActiveKey([]);
     setActiveKey(key);
   };

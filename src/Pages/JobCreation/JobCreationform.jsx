@@ -83,7 +83,7 @@ const JobCreationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
     setLoading(true);
-    console.log("submitting");
+    // console.log("submitting");
 
     const skills = state.skills.length > 0 ? convertStringToArray(state.skills) : [];
     const formData = new FormData();
@@ -103,8 +103,8 @@ const JobCreationForm = () => {
       });
 
       const d = await req.json();
-      console.log(d);
-      console.log(formData);
+      // console.log(d);
+      // console.log(formData);
       JobStates.setJobSubmitted(!JobStates.jobSubmitted);
       // Optionally navigate to another page
       // navigate("/jobs");
