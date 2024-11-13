@@ -31,11 +31,12 @@ const SelectedInfo = ({ userPk, role, setSelectedAnswers }) => {
 
   const profileFilters = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/qna/ans/${userId}`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/qna/ans/86b69239-aa2a-41c4-994e-a0dc111c0cb7`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
+       
       });
       const d = await response.json();
       setData(d);

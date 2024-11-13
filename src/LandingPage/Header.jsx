@@ -109,12 +109,12 @@ const Header = () => {
       )}
     </div>
   
-    {/* <HeaderComponent/> */}
-    {/* <Second/> */}
-     {/* <Third/> */}
+    <HeaderComponent/>
+    <Second/>
+     <Third/>
     <Forth/> 
     {/* <ThreeAfter/> don't 😥😣 uncomment*/}
-    {/* <Fifth/>  */}
+    <Fifth/> 
 </div>
   );
 };
