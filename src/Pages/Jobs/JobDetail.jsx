@@ -56,11 +56,11 @@ function Jobdetail() {
   const { JobAppliedStates } = useContext(myContext);
 
   if (loading) {
-    return <div>Loading...</div>; // Simple loading state
+    return <div>Loading...</div>; 
   }
 
   if (!job) {
-    return <div>No job found</div>; // Handle case when job is not found
+    return <div>No job found</div>; 
   }
 
   const formatDate = (dateString) => {
@@ -111,11 +111,11 @@ function Jobdetail() {
         userId: user_id,
       });
 
-      console.log("Wishlist item saved:", response.data);
-      toast.success("Job saved to wishlist!"); // Use toast for success notification
+      // console.log("Wishlist item saved:", response.data);
+      toast.success("Job saved to wishlist!"); 
     } catch (error) {
       console.error("Error saving to wishlist:", error);
-      toast.error("Could not save to wishlist. Please try again."); // Use toast for error notification
+      toast.error("Could not save to wishlist. Please try again."); 
     }
   };
 

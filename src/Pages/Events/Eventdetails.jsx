@@ -22,13 +22,13 @@ function Eventdetails() {
   const [event, setEvent] = useState({});
 
   useEffect(() => {
-    console.log("single event detail");
-    console.log(loc.state);
+    // console.log("single event detail");
+    // console.log(loc.state);
     const getData = async () => {
       try {
         if (loc.state) {
           const result_ = await getEvent(loc.state.id);
-          console.log("result of single event is ", { result_ });
+          // console.log("result of single event is ", { result_ });
           setResult(result_);
 
           setEvent(() => {

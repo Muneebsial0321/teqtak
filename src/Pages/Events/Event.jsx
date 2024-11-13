@@ -33,12 +33,12 @@ function Event() {
   const [filterLoopData, setFilterLoopData] = useState([]);
 const location = useLocation()
 const filteredData = location.state?.filteredData
-console.log("filter from state",filteredData)
+// console.log("filter from state",filteredData)
 useEffect(() => {
   const getData = async () => {
     try {
       const result = await fetchEvent();
-      console.log("events results", result);
+      // console.log("events results", result);
       // setNewCard(result.data);
       setFilterLoopData(result.data);
     } catch (error) {
@@ -63,7 +63,7 @@ useEffect(() => {
         wishItemId: eventId,
         userId: user_id,
       });
-      console.log('Wishlist item saved:', response.data);
+      // console.log('Wishlist item saved:', response.data);
       toast.success('Event saved to wishlist!'); // Notify on success
     } catch (error) {
       console.error('Error saving to wishlist:', error);

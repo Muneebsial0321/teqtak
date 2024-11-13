@@ -23,7 +23,7 @@ const AllVideos = () => {
         params: { page, limit: 20 },
       });
 
-      console.log("All videos data user:", response.data.data);
+      // console.log("All videos data user:", response.data.data);
 
       // Extract the videos from the response
       const updatedData = response.data.data.map((item) => ({

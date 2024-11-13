@@ -4,8 +4,8 @@ import { IoBookmarkOutline, IoTrashOutline } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteEvent } from '../../DeleteAPI';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify'; // Importing Toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import CSS for Toastify
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const API_BASE_URL = REACT_APP_API_BASE_URL;
@@ -32,7 +32,7 @@ const user_Id = getUserId()
   const handleDeleteConfirm = async () => {
     if (deleteItemId) {
       try {
-        console.log(`Deleting event with id: ${deleteItemId}`);
+        // console.log(`Deleting event with id: ${deleteItemId}`);
         await deleteEvent(deleteItemId);
         setEvents(events.filter((item) => item._id !== deleteItemId));
         toast.success('Event deleted successfully!'); // Using toast for success
@@ -51,7 +51,7 @@ const user_Id = getUserId()
 
   useEffect(() => {
     setLoading(true);
-    console.log("single event user comp", props.events);
+    // console.log("single event user comp", props.events);
     setEvents(props.events);
     setLoading(false);
   }, [props.events]);
@@ -63,13 +63,13 @@ const user_Id = getUserId()
           title: "Check out this event",
           url: window.location.href,
         });
-        toast.success('Share successful!'); // Using toast for success
+        toast.success('Share successful!'); 
       } catch (error) {
         console.error('Error sharing:', error);
-        toast.error('Error sharing event.'); // Using toast for error
+        toast.error('Error sharing event.'); 
       }
     } else {
-      toast.warn('Web Share API is not supported in your browser.'); // Using toast for warning
+      toast.warn('Web Share API is not supported in your browser.'); 
     }
   };
 
@@ -82,11 +82,11 @@ const user_Id = getUserId()
         wishItemId: eventId,
         userId: user_id,
       });
-      console.log('Wishlist item saved:', response.data);
-      toast.success('Event saved to wishlist!'); // Using toast for success
+      // console.log('Wishlist item saved:', response.data);
+      toast.success('Event saved to wishlist!'); 
     } catch (error) {
       console.error('Error saving to wishlist:', error);
-      toast.error('Could not save to wishlist. Please try again.'); // Using toast for error
+      toast.error('Could not save to wishlist. Please try again.'); 
     }
   };
 

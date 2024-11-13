@@ -12,7 +12,7 @@ function Personaldetail2() {
   const location = useLocation();
   const userID = location.state?.id;
   const role = location.state?.role;
-  console.log("role ", role);
+  // console.log("role ", role);
 
   const getUserId = () => {
     const str = document.cookie;
@@ -35,7 +35,7 @@ function Personaldetail2() {
 
       await submitAnswers();
 
-      navigate("/personaldetails");
+      navigate("/personaldetails",{state:{id:userID, role:role}});
     } catch (error) {
       console.error("Error during data submission:", error);
     }
@@ -61,37 +61,37 @@ function Personaldetail2() {
       );
 
       const d = await req.json();
-      console.log("User details updated:", d);
+      console.log("user submit success:", d);
     } catch (error) {
       console.error("Error submitting user details:", error);
       throw error;
     }
   };
-
+const userPk = getUserId()
   const submitAnswers = async () => {
     try {
       const answersToSubmit = Object.keys(selectedAnswers).map(
         (questionId) => ({
           questionId,
+          userId: userPk,
           answer: selectedAnswers[questionId],
         })
       );
 
 
-      const req = await fetch(`${REACT_APP_API_BASE_URL}/qna/answers`, {
+      const req = await fetch(`${REACT_APP_API_BASE_URL}/qna/ans`, {
         credentials: "include",
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          userID: getUserId(),
-          answers: answersToSubmit,
+        answers: answersToSubmit,
         }),
       });
 
       const d = await req.json();
-      console.log("Answers submitted:", d);
+      // console.log("Answers submitted:", d);
     } catch (error) {
       console.error("Error submitting answers:", error);
       throw error;
@@ -104,7 +104,7 @@ function Personaldetail2() {
         `${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`
       );
       const data = await response.json();
-      console.log("Fetched subscribers:", data);
+     
       setSubscriber(data);
     } catch (error) {
       console.error("Error fetching subscribers:", error);
@@ -112,7 +112,7 @@ function Personaldetail2() {
   };
 
   useEffect(() => {
-    console.log("fetching user personal userId");
+    
     fetchSubscribers();
   }, []);
 

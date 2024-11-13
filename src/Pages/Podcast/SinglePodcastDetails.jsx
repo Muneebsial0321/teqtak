@@ -28,7 +28,7 @@ function SinglePodcastDetails() {
         if (loc.state) {
           const result = await getPodcast(loc.state.id);
           setResult(result);
-          console.log("single podcast details data is ", result);
+          // console.log("single podcast details data is ", result);
           setRecentData([result]);
 
           
@@ -83,7 +83,7 @@ function SinglePodcastDetails() {
         },
         body: JSON.stringify(viewData),
       });
-      console.log("View recorded successfully", viewData);
+      // console.log("View recorded successfully", viewData);
     } catch (error) {
       console.error("Error recording view:", error);
     }
@@ -103,7 +103,7 @@ function SinglePodcastDetails() {
             result.episodeDescription || "Listen to this interesting podcast.",
           url: window.location.href,
         });
-        console.log("Share successful!");
+        // console.log("Share successful!");
       } catch (error) {
         console.error("Error sharing:", error);
       }

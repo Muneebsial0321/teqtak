@@ -70,7 +70,7 @@ const Model = (props) => {
       reportMessage: reportMessage,
     };
     
-    console.log("Sending report data:", reportData);
+    // console.log("Sending report data:", reportData);
   
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/reports`, {
@@ -82,7 +82,7 @@ const Model = (props) => {
       });
   
       const result = await response.json();
-      console.log("report msg",result);
+      // console.log("report msg",result);
       if (result.message === "success") {
         toast.success("Report submitted successfully!"); // Show success toast
         setIsReportModalOpen(false);

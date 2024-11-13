@@ -86,7 +86,7 @@ function Message2() {
       }
     });
     const d = await req.json();
-    console.log("schma", d)
+    // console.log("schma", d)
     let sender = d.users.filter((e) => e !== getUserId());
     getSenderName(sender[0]);
     setRoomId(id);
@@ -118,9 +118,9 @@ function Message2() {
   // Join the chat room
   const joinRoom = (id) => {
     socket.off('connection', '');
-    socket.on('connection', (socket_) => { console.log("probably working"); });
+    socket.on('connection', (socket_) => {  });
     socket.emit('joinRoom', { roomId: id, userId: getUserId() });
-    socket.on('pos', (socket) => { console.log("room joined", socket); });
+    socket.on('pos', (socket) => {  });
   };
 
   // Send a message to the chat room
@@ -133,15 +133,15 @@ function Message2() {
   const sendMessage = () => {
     if (message.trim()) {
       socket.emit('sendMessage', { roomId, sender: getUserId(), message });
-      console.log('Sending message:', message);
+      // console.log('Sending message:', message);
       setMessage(''); // Clear message input
     } else if (selectedFile) {
       // Send the selected file (image/video)
-      console.log('Sending file:', selectedFile);
+      // console.log('Sending file:', selectedFile);
       setSelectedFile(null); // Clear selected file after sending
     } else if (selectedEmoji) {
       // Send emoji if selected
-      console.log('Sending emoji:', selectedEmoji);
+      // console.log('Sending emoji:', selectedEmoji);
       setSelectedEmoji(''); // Clear emoji after sending
     }
   };
@@ -156,7 +156,7 @@ function Message2() {
     fetchChatroom(loc.state.id); // Fetch chatroom on mount
     joinRoom(loc.state.id); // Join the chat room
     socket.on('receiveMessage', (message) => {
-      console.log("receive msg ", message)
+      // console.log("receive msg ", message)
       setChatroom((prevMessages) => [...prevMessages, message]); // Update chatroom with new messages
     });
 
@@ -165,7 +165,7 @@ function Message2() {
     socket.on('previousMessages', (previousMessages) => {
       setChatroom(previousMessages); // Load previous messages
     });
-    console.log("pre msg", chatroom)
+    // console.log("pre msg", chatroom)
     return () => {
       socket.off('receiveMessage');
       socket.off('previousMessages');
@@ -190,7 +190,7 @@ function Message2() {
   };
 
   const handleSchedule = () => {
-    console.log("seeeting a meeting") 
+    // console.log("seeeting a meeting") 
     // zoomAUth();
     setSchedule(!schedule);
     setMeeting(false); // Reset meeting state when schedule is toggled

@@ -10,11 +10,11 @@ const socket = io.connect(REACT_APP_API_BASE_URL); // Adjust to your server URL
 const ZoomSocket = () => {
     
     const location = useLocation()
-    console.log({location})
+    // console.log({location})
     const [authUrl, setAuthUrl] = useState(null);
     const [meetingUrls, setMeetingUrls] = useState({ startUrl: '', joinUrl: '' });
     const [accessToken, setAccessToken] = useState(''); // Retrieve and set this token as needed
-    console.log({lco:location.search.split("=")[1]})
+    // console.log({lco:location.search.split("=")[1]})
     // setAccessToken(location.search.split("=")[1])`
   const roomId = "location.state"
 // console.log({roomId})
@@ -22,14 +22,14 @@ const ZoomSocket = () => {
     socket.emit('zoomAuth', { roomId });
     socket.on('receiveAuthUrl', (url) => {
       setAuthUrl(url);
-      console.log("Received Auth URL:", {url});
+      // console.log("Received Auth URL:", {url});
       location.search.split("=")[1] &&  requestMeeting()
     });
 
     // Listen for the meeting URLs sent by the server
     socket.on('receive_url', (data) => {
       setMeetingUrls({ startUrl: data.sender, joinUrl: data.joiner });
-      console.log("Received Meeting URLs:", {data});
+      // console.log("Received Meeting URLs:", {data});
       window.location.href = data.sender
     });
 
@@ -41,7 +41,7 @@ const ZoomSocket = () => {
 
   // Function to request a new meeting URL
   const requestMeeting = () => {
-    console.log("req meeting",location.search.split("=")[1])
+    // console.log("req meeting",location.search.split("=")[1])
     socket.emit('sendMeetingUrl', location.search.split("=")[1]);
     // socket.emit('sendMeetingUrl', location.search.split("=")[1],roomId);
     // socket.emit('sendMeetingUrl', accessToken);

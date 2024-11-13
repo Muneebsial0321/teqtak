@@ -44,7 +44,7 @@ const Review = (props) => {
   const calculateRatingsPercentage = () => {
     const totalReviews = comments.length;
     const ratingCounts = [0, 0, 0, 0, 0]; // Counts for 1-5 stars
-console.log("coment",comments)
+// console.log("coment",comments)
     comments?.forEach(comment => {
       if (comment.reviewRatings >= 1 && comment.reviewRatings <= 5) {
         ratingCounts[5 - comment.reviewRatings ]++;
@@ -57,12 +57,12 @@ console.log("coment",comments)
   };
 
   const postReview = async () => {
-    console.log({
-      reviewItemId:videoId,
-      reviewRatings: rating,
-      reviewMessage: reviewText,
-      userId: loggedInUserId,
-    })
+    // console.log({
+    //   reviewItemId:videoId,
+    //   reviewRatings: rating,
+    //   reviewMessage: reviewText,
+    //   userId: loggedInUserId,
+    // })
     try {
       const req = await fetch(`${REACT_APP_API_BASE_URL}/reviews`, {
         method: "POST",
@@ -103,7 +103,7 @@ console.log("coment",comments)
       );
 
       const data = await response.json();
-      console.log("data for comments",response)
+      // console.log("data for comments",response)
       setComments(data.reviews);
     } catch (error) {
       console.error("Error fetching comments:", error);

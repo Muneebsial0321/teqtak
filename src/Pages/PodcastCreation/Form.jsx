@@ -64,7 +64,7 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("Submitting podcast...");
+    // console.log("Submitting podcast...");
 
     const formData = new FormData();
 
@@ -86,8 +86,8 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
 
   // Create an array of speaker IDs
   const speakerIds = speakerState.map(speaker => speaker.id);
-  console.log("speaker idd", speakerIds)
-  console.log("speaker state", speakerState)
+  // console.log("speaker idd", speakerIds)
+  // console.log("speaker state", speakerState)
 
   formData.append('speakerArray', JSON.stringify(speakerState));
 
@@ -97,11 +97,11 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
     formData.append('podcastType', selectedType);
 
     // Log FormData entries to the console
-    console.log("FormData Entries:");
-    console.log("Speaker State Before Submission:", speakerState);
+    // console.log("FormData Entries:");
+    // console.log("Speaker State Before Submission:", speakerState);
 
     formData.forEach((value, key) => {
-      console.log(key, value);
+      // console.log(key, value);
     });
 
     try {
@@ -113,7 +113,7 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Response:", result);
+        // console.log("Response:", result);
         if (PodcastStates && PodcastStates.setPodcastSubmitted) {
           PodcastStates.setPodcastSubmitted(true);
         }
@@ -141,7 +141,7 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
 
   const updateSpeakerData = (speakers) => {
     setSpeakerState(speakers);
-    console.log("Updated Speakers:", speakers); // Log to verify
+    // console.log("Updated Speakers:", speakers); // Log to verify
   };
   return (
     <>

@@ -70,7 +70,7 @@ const FilterPodcast = () => {
     const getData = async () => {
       try {
         const result = await fetchPodcast();
-        console.log({ result });
+        
         setRecentData(result.data);
       } catch (error) {
         console.error("Fetching data error", error);
@@ -98,8 +98,8 @@ const FilterPodcast = () => {
 
   const handleSearch = () => {
     const filteredData = applyFilters();
-    console.log("filetered", filteredData);
-    console.log("apply filters", applyFilters());
+    // console.log("filetered", filteredData);
+    // console.log("apply filters", applyFilters());
     navigate("/podcast", { state: { filteredData } });
   };
 

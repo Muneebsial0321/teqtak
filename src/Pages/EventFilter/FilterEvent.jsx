@@ -115,7 +115,7 @@ const FilterEvent = () => {
     const getData = async () => {
       try {
         const result = await fetchEvent(); 
-        console.log("events results", result);
+        // console.log("events results", result);
         setNewCard(result.data);
       } catch (error) {
         console.error("Fetching data error", error);
@@ -141,8 +141,8 @@ const FilterEvent = () => {
 
   const handleSearch = () => {
     const filteredData = applyFilters();
-    console.log("filetered", filteredData);
-    console.log("apply filters", applyFilters());
+    // console.log("filetered", filteredData);
+    // console.log("apply filters", applyFilters());
     navigate('/events', { state: { filteredData } });
   };
 

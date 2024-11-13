@@ -9,7 +9,7 @@ import { myContext } from "../../Context/CreateContext";
 import Success from "../PodcastCreation/Success";
 import EventSuccess from "../EventsCreation/EventSuccess";
 import JobSuccess from "../JobCreation/JobSuccess";
-import Search from "../../Components/Navbar/Saerch";
+// import Search from "../../Components/Navbar/Saerch";
 
 const Layout = () => {
   let { CreationStates, PodcastStates, EventStates, JobStates } =
