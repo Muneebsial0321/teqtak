@@ -332,7 +332,7 @@ function Message2() {
               </div>
               {/* <button onClick={()=>deleteMessage(e.messageId)} >Delete</button> */}
               <p className="text-[gray] text-[10px] break-words">{__Time__(e.timestamp)}</p>
-              {/* <MeetingCall/> */}
+              <MeetingCall/>
             </div>
             
           ))}
