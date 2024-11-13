@@ -204,12 +204,16 @@ const userPk = getUserId()
             />
           </div>
 
-          <p className="text-xl font-semibold mt-5">More info</p>
-          <MoreInfo
-            userPk={userID}
-            role={role}
-            setSelectedAnswers={setSelectedAnswers}
-          />
+     {role !== "viewer" && (
+          <>
+           <p className="text-xl font-semibold mt-5">More info</p>
+           <MoreInfo
+             userPk={userID}
+             role={role}
+             setSelectedAnswers={setSelectedAnswers}
+           />
+          </>
+     ) }
 
           <div className="my-8">
             <button
