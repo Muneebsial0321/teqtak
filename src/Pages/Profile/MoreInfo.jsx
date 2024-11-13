@@ -26,13 +26,14 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
 
   const profileFilters = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/qna/${role}`, {
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/qna/ques/${role}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const d = await response.json();
+      console.log("questions by role ",d);
       setData(d);
     } catch (error) {
       console.error("Error fetching data:", error);

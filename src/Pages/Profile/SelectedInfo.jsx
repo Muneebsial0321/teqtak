@@ -63,7 +63,7 @@ const SelectedInfo = ({ userPk, role, setSelectedAnswers }) => {
             onClick={() => handleShow(index)}
           >
             <p className="text-sm md:text-lg font-semibold mb- md:mb-3 mt-2 md:mt-3 whitespace-nowrap w-[99%] overflow-hidden text-ellipsis">
-              {entrepreneur.questionId}
+              {entrepreneur.question}
             </p>
             <FaAngleDown style={{ fontSize: "20px" }} />
           </div>
@@ -75,8 +75,8 @@ const SelectedInfo = ({ userPk, role, setSelectedAnswers }) => {
               <input
                 type="checkbox"
                 name={`question-${entrepreneur._id}`}
-                
-                className="me-"
+                className="me-2"
+                checked
               />
               <p className="text-sm md:text-base whitespace-nowrap">{entrepreneur.answer}</p>  
             </div>
