@@ -239,7 +239,6 @@ function Message2() {
 
   return (
   <>
-  <MeetingCall/>
     <div className="main h-full w-[100%] ">
 
       <div className="div h-full w-[100%]  bg-[#f5f3f3] p-5 relative">
@@ -281,7 +280,7 @@ function Message2() {
                 }
                 }
               >
-                <p ref={cardRef} className="text-lg opacity-75" onClick={()=>navigate("/zoom")}>
+                <p ref={cardRef} className="text-lg opacity-75" onClick={()=>navigate("/zoom",{state:{roomId}})}>
                   Schedule a meeting
                 </p>
                 {meeting && (
@@ -294,7 +293,7 @@ function Message2() {
                   >
                     <Link to="/createmeeting" >Create Zoom Meeting</Link>
                     <p ref={cardRef} onClick={handleCalendar}>Schedule Zoom Meeting</p>
-                    <p onClick={meeting_}>Dial into Zoom Meeting</p>
+                    <p >Dial into Zoom Meeting</p>
                   </div>
                 )}
               </div>
@@ -316,7 +315,7 @@ function Message2() {
         </div>
         <div className="lg:h-[70%] h-[50vh] overflow-y-scroll Podcast_Top_Videos">
           {chatroom && chatroom.map((e, i) => (
-            <div key={i} className="flex items-end justify-between py-2">
+            <div key={i} className="flex items-start my-2 flex-col justify-between py-2">
               <div className="flex gap-2">
                 <img
                   src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : '/placeholder.jpg'}
@@ -333,7 +332,9 @@ function Message2() {
               </div>
               {/* <button onClick={()=>deleteMessage(e.messageId)} >Delete</button> */}
               <p className="text-[gray] text-[10px] break-words">{__Time__(e.timestamp)}</p>
+              {/* <MeetingCall/> */}
             </div>
+            
           ))}
           {/* Scroll reference */}
           <div ref={messagesEndRef} />

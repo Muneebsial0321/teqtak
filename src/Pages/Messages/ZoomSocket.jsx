@@ -10,13 +10,14 @@ const socket = io.connect(REACT_APP_API_BASE_URL); // Adjust to your server URL
 const ZoomSocket = () => {
     
     const location = useLocation()
+    console.log({location})
     const [authUrl, setAuthUrl] = useState(null);
     const [meetingUrls, setMeetingUrls] = useState({ startUrl: '', joinUrl: '' });
     const [accessToken, setAccessToken] = useState(''); // Retrieve and set this token as needed
     console.log({lco:location.search.split("=")[1]})
     // setAccessToken(location.search.split("=")[1])`
-  const roomId = 'your-room-id'; // Set your room ID here or retrieve dynamically
-
+  const roomId = "location.state"
+// console.log({roomId})
   useEffect(() => {
     socket.emit('zoomAuth', { roomId });
     socket.on('receiveAuthUrl', (url) => {
@@ -42,12 +43,13 @@ const ZoomSocket = () => {
   const requestMeeting = () => {
     console.log("req meeting",location.search.split("=")[1])
     socket.emit('sendMeetingUrl', location.search.split("=")[1]);
+    // socket.emit('sendMeetingUrl', location.search.split("=")[1],roomId);
     // socket.emit('sendMeetingUrl', accessToken);
   };
 
   return (
     <div className='w-full h-full flex flex-col justify-center items-center'>
-      {/* <h1>Zoom Authorization and Meeting {accessToken && accessToken}</h1> */}
+      <h1>Zoom Authorization and Meeting {roomId}</h1>
 
       {authUrl ? (
         <div className='px-8 py-3 rounded-3xl bg-blue-600 hover:bg-blue-900 text-white '>
@@ -66,8 +68,8 @@ const ZoomSocket = () => {
       {meetingUrls.startUrl  ||  meetingUrls.joinUrl && (
         <div>
           <h2>Meeting Links</h2>
-          <p><strong>Host Link:</strong> <a href={meetingUrls.startUrl} target="_blank" rel="noopener noreferrer">{meetingUrls.startUrl}</a></p>
-          <p><strong>Participant Link:</strong> <a href={meetingUrls.joinUrl} target="_blank" rel="noopener noreferrer">{meetingUrls.joinUrl}</a></p>
+          {/* <p><strong>Host Link:</strong> <a href={meetingUrls.startUrl} target="_blank" rel="noopener noreferrer">{meetingUrls.startUrl}</a></p>
+          <p><strong>Participant Link:</strong> <a href={meetingUrls.joinUrl} target="_blank" rel="noopener noreferrer">{meetingUrls.joinUrl}</a></p> */}
         </div>
       )}
     </div>
