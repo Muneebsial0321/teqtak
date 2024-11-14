@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IoBookmarkOutline } from "react-icons/io5";
-// import Image from './Img2.png';
+
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { fetchEvent } from "../../API";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify'; // Import toast components
-import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const API_BASE_URL = REACT_APP_API_BASE_URL;

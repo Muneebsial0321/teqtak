@@ -354,7 +354,7 @@ console.log("sender", sender)
         </div>
         <div className="lg:h-[70%] h-[50vh] overflow-y-scroll Podcast_Top_Videos">
           {chatroom && chatroom.map((e, i) => (
-            <div key={i} className="flex items-sta my-2 flex-col w-full justify-between py-2">
+            <div key={i} className="flex  items-end    justify-between py-2">
               <div className="flex gap-2">
                 <img
                   src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : '/placeholder.jpg'}
