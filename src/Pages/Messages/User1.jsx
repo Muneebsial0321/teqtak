@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 import { deleteChatroom } from '../../DeleteAPI.js'
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 import MeetingCall from "./MeetingCall.jsx";
+import CameraCapture from "./CameraCapture.jsx";
 
 function Message2() {
   const socket = io(REACT_APP_API_BASE_URL);
@@ -29,58 +30,21 @@ function Message2() {
   const [roomId, setRoomId] = useState({}); // Chat room ID state
   // const [acessToken, setToken] = useState('');
   const [isCameraOpen, setIsCameraOpen] = useState(false);
-  const [hasError, setHasError] = useState(false); 
+ 
   const [selectedFile, setSelectedFile] = useState(null); 
   const [selectedEmoji, setSelectedEmoji] = useState(''); 
   const [showFileUploadModal, setShowFileUploadModal] = useState(false);
   // const fileInputRef = useRef(null);
-  const videoRef = useRef(null);  
-  const streamRef = useRef(null);
+  
 
   const cardRef = useRef(null);
   const token = localStorage.getItem('authtoken')
   const navigate = useNavigate()
   const messagesEndRef = useRef(null); 
 
-  const openCamera = async () => {
-    try {
-     
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user" }, 
-      });
-
-     
-      streamRef.current = stream;
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-
-      setIsCameraOpen(true);
-    } catch (err) {
-      console.error('Error accessing the camera: ', err);
-      setHasError(true); 
-    }
+  const toggleCamera = () => {
+    setIsCameraOpen((prev) => !prev);
   };
-
-  
-  const closeCamera = () => {
-    if (streamRef.current) {
-      const tracks = streamRef.current.getTracks();
-      tracks.forEach((track) => track.stop()); 
-    }
-    setIsCameraOpen(false);
-  };
-
-  
-  useEffect(() => {
-    return () => {
-      if (streamRef.current) {
-        const tracks = streamRef.current.getTracks();
-        tracks.forEach((track) => track.stop()); 
-      }
-    };
-  }, []);
 
   
   const __Time__ = (isoString) => {
@@ -283,7 +247,7 @@ console.log("sender", sender)
   return (
   <>
     <div className="main h-full w-[100%] ">
-
+    {isCameraOpen && <CameraCapture closeCameraCapture={() => setIsCameraOpen(false)} />}
       <div className="div h-full w-[100%]  bg-[#f5f3f3] p-5 relative">
 
         <div className="flex justify-between items-center mb-8">
@@ -407,13 +371,11 @@ console.log("sender", sender)
           <div ref={cardRef} className="absolute bottom-[8vh] left-5 w-[10vw] p-3 bg-white shadow-lg rounded">
             <ul className="space-y-3">
               <li className="flex items-center">
-                <span className="">
-                 
-                  <button onClick={isCameraOpen ? closeCamera : openCamera}>
-          <FaCamera className="text-[gray] cursor-pointer" />
-        </button>
-       
-                </span>
+              <FaCamera
+            className="text-[gray] cursor-pointer"
+            onClick={toggleCamera}
+      />
+      
               </li>
               <li className="flex items-center">
                 <span onClick={() => handleEmojiSelect('😊')}>
@@ -446,23 +408,10 @@ console.log("sender", sender)
             selectedFiles={[selectedFile]}
           />
         )}
-          {hasError && (
-        <div>
-          <p style={{ color: 'red' }}>Error: Unable to access the camera. Please grant permission.</p>
-        </div>
-      )}
-   {isCameraOpen && (
-    <div className="absolute bottom-[10vh] left-5 w-[20vw] h-[auto]">
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        width="100%" 
-        height="auto"
-      />
-    </div>
-  )}
+      
+ 
       </div>
+     
     </div>
     </>
   );
