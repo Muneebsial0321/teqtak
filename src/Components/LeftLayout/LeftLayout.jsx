@@ -1,6 +1,3 @@
-    // Left Side Bar Section
-
-
 import  { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CiLocationOn, CiSettings, CiSquarePlus } from 'react-icons/ci';
@@ -26,17 +23,13 @@ const LeftLayout = () => {
 
 
 const getProfilePic = async()=>{
-  // console.log(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`)
+  
   const req= await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`,{
     method:"GET",
     credentials:'include'
   })
 
   const data = await req.json()
-//  console.log("profile pic data") 
-//  console.log(data)
-
-  // console.log({datapic:data.user.picUrl})
   setProfilePic(()=> data.user.picUrl && data.user.picUrl)
 }
 useEffect(() => {
@@ -50,7 +43,7 @@ getProfilePic()
         <li className="mb-2">
           <Link to="/profile" className={`flex items-center  ${locationPath === '/profile' ? 'Left_Side_Selected' : ''} py-2 px-2 rounded-lg  transition-all duration-200 transform` }
           >
-            <img src={profilePic || "/placeholder.jpg" } className='rounded-full h-[25px] w-[25px] md:mr-2' alt="" />
+            <img src={profilePic ? profilePic : "/placeholder.jpg" } className='rounded-full h-[25px] w-[25px] md:mr-2' alt="" />
             <span className='text-sm opacity-70 md:block hidden'>Profile</span>
           </Link>
         </li>

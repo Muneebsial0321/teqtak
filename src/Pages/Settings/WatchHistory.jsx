@@ -26,7 +26,7 @@ function WatchHistory() {
   const navigate = useNavigate();
   const [videos, setVideos] = useState([]);
   const [recentdata, setRecentData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true); 
 
   const getUserId = () => {
     const str = document.cookie;
@@ -38,7 +38,7 @@ function WatchHistory() {
 
   useEffect(() => {
     const fetchViews = async () => {
-      setLoading(true); // Set loading to true before the fetch
+      setLoading(true); 
       try {
         const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`);
         const data = await response.json();
@@ -48,7 +48,7 @@ function WatchHistory() {
       } catch (error) {
         console.error("Error fetching views:", error);
       } finally {
-        setLoading(false); // Set loading to false after the fetch
+        setLoading(false); 
       }
     };
 

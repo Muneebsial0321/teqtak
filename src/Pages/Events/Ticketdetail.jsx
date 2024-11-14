@@ -51,9 +51,9 @@ function Ticketdetail() {
     // Extract event ID and buyer ID from the URL query parameters
     const queryParams = new URLSearchParams(loc.search);
     const eventId = queryParams.get("eventid");
-    const buyerId = queryParams.get("buyerid"); // If you need to use buyerId later
+    const buyerId = queryParams.get("buyerid"); 
 
-    // console.log("Event ID:", eventId, "Buyer ID:", buyerId);
+    console.log("Event ID:", eventId, "Buyer ID:", buyerId);
 
     if (eventId) {
       fetchTickets(eventId);

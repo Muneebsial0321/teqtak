@@ -279,7 +279,7 @@ function Message2() {
     setShowFileUploadModal(false);
     setSelectedFile(null);
   };
-
+console.log("sender", sender)
   return (
   <>
     <div className="main h-full w-[100%] ">
@@ -294,7 +294,7 @@ function Message2() {
               onClick={() => navigate("/messages")}
             />
             {/* <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/> */}
-            <p className="text-xl font-medium whitespace-nowrap">{sender.name || "Unknown"}</p>
+            <p className="text-xl font-medium whitespace-nowrap">{sender ? sender.name : "Unknown"}</p>
           </div>
           <div className="flex gap-5">
             <CiMenuKebab
@@ -306,8 +306,7 @@ function Message2() {
                 className="absolute w-[200px] cursor-pointer right-4 top-14 px-3 py-2 z-30 bg-white shadow-lg border"
                 onClick={() => setAble(false)}
               >
-                {/* <p className="text-[15px] opacity-75 mb-5">Details</p>
-                <p className="text-[15px] opacity-75 mb-5">Hide</p> */}
+               
                 <p className="text-[15px] opacity-75 mb-5">Block and report</p>
                 <p className="text-[15px] opacity-75 text-[red]" onClick={handleDelete}>Delete</p>
               </div>
@@ -341,10 +340,7 @@ function Message2() {
                 )}
               </div>
             )}
-            {/* <CiCalendar ref={cardRef} 
-              className="text-2xl cursor-pointer"
-              onClick={handleCalendar}
-            /> */}
+          
             {showCalendar && (
               <div ref={cardRef} className="absolute right-4 top-14 z-30 bg-white shadow-lg border p-2">
                 <DatePicker
@@ -358,7 +354,7 @@ function Message2() {
         </div>
         <div className="lg:h-[70%] h-[50vh] overflow-y-scroll Podcast_Top_Videos">
           {chatroom && chatroom.map((e, i) => (
-            <div key={i} className="flex items-start my-2 flex-col justify-between py-2">
+            <div key={i} className="flex items-sta my-2 flex-col w-full justify-between py-2">
               <div className="flex gap-2">
                 <img
                   src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : '/placeholder.jpg'}
@@ -367,15 +363,14 @@ function Message2() {
                 />
 
                 <div className="flex">
-                  <div className="max-w-[70%]">
+                  <div className="max-w-[70%] ">
                     <p className="text-sm font-medium">{e.sender !== getUserId() ? sender.name : "You"}</p>
                     <p className="text-[#686868] text-xs mt-3">{e.message}</p>
                   </div>
                 </div>
               </div>
-              {/* <button onClick={()=>deleteMessage(e.messageId)} >Delete</button> */}
-              <p className="text-[gray] text-[10px] break-words">{__Time__(e.timestamp)}</p>
-              {/* <MeetingCall/> */}
+              <p className="text-[gray] text-[10px] break-words">{__Time__(e.timestamp)}</p> 
+              
             </div>
             
           ))}
@@ -392,7 +387,7 @@ function Message2() {
               type="text"
               value={message}
               onChange={handleInputChange}
-              onKeyDown={handleKeyDown} // Add onKeyDown handler
+              onKeyDown={handleKeyDown} 
               placeholder="Write a message"
               className="h-[5vh] w-full outline-none rounded p-4 bg-transparent border"
             />

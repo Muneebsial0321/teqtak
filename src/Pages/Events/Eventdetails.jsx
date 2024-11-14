@@ -10,9 +10,7 @@ import { FaAngleLeft } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CiLocationOn } from "react-icons/ci";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
-
-
-import RelatedEvent from "./RelatedEvent";
+import SuggestedEvents from "./SuggestedEvents";
 
 function Eventdetails() {
   const loc = useLocation();
@@ -254,7 +252,7 @@ function Eventdetails() {
             ></iframe>
           </div>
 
-          <RelatedEvent />
+          <SuggestedEvents />
           <br />
         </div>
         {/* ))} */}
