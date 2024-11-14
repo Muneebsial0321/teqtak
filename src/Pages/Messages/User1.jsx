@@ -25,21 +25,64 @@ function Message2() {
   const [showCard, setShowCard] = useState(false);
   const [chatroom, setChatroom] = useState([]); // Chat messages state
   const [receiver, setReceiver] = useState(); // Receiver user state
-  const [sender, setSender] = useState({}); // Sender user state
+  const [sender, setSender] = useState({}); 
   const [roomId, setRoomId] = useState({}); // Chat room ID state
-  const [acessToken, setToken] = useState(''); // Access token for Zoom
-  const [selectedFile, setSelectedFile] = useState(null); // Store selected file (image/video)
-  const [selectedEmoji, setSelectedEmoji] = useState(''); // Store selected emoji
+  // const [acessToken, setToken] = useState('');
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [hasError, setHasError] = useState(false); 
+  const [selectedFile, setSelectedFile] = useState(null); 
+  const [selectedEmoji, setSelectedEmoji] = useState(''); 
   const [showFileUploadModal, setShowFileUploadModal] = useState(false);
-  const fileInputRef = useRef(null);
-
+  // const fileInputRef = useRef(null);
+  const videoRef = useRef(null);  
+  const streamRef = useRef(null);
 
   const cardRef = useRef(null);
   const token = localStorage.getItem('authtoken')
   const navigate = useNavigate()
-  const messagesEndRef = useRef(null); // Reference for scrolling to bottom
+  const messagesEndRef = useRef(null); 
 
-  // Function to format timestamp
+  const openCamera = async () => {
+    try {
+     
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user" }, 
+      });
+
+     
+      streamRef.current = stream;
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+
+      setIsCameraOpen(true);
+    } catch (err) {
+      console.error('Error accessing the camera: ', err);
+      setHasError(true); 
+    }
+  };
+
+  
+  const closeCamera = () => {
+    if (streamRef.current) {
+      const tracks = streamRef.current.getTracks();
+      tracks.forEach((track) => track.stop()); 
+    }
+    setIsCameraOpen(false);
+  };
+
+  
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        const tracks = streamRef.current.getTracks();
+        tracks.forEach((track) => track.stop()); 
+      }
+    };
+  }, []);
+
+  
   const __Time__ = (isoString) => {
     const date = new Date(isoString);
     let hours = date.getHours();
@@ -369,7 +412,13 @@ function Message2() {
           <div ref={cardRef} className="absolute bottom-[8vh] left-5 w-[10vw] p-3 bg-white shadow-lg rounded">
             <ul className="space-y-3">
               <li className="flex items-center">
-                <span className=""><FaCamera className="text-[gray] cursor-pointer" /></span>
+                <span className="">
+                 
+                  <button onClick={isCameraOpen ? closeCamera : openCamera}>
+          <FaCamera className="text-[gray] cursor-pointer" />
+        </button>
+       
+                </span>
               </li>
               <li className="flex items-center">
                 <span onClick={() => handleEmojiSelect('😊')}>
@@ -402,7 +451,22 @@ function Message2() {
             selectedFiles={[selectedFile]}
           />
         )}
-
+          {hasError && (
+        <div>
+          <p style={{ color: 'red' }}>Error: Unable to access the camera. Please grant permission.</p>
+        </div>
+      )}
+   {isCameraOpen && (
+    <div className="absolute bottom-[10vh] left-5 w-[20vw] h-[auto]">
+      <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        width="100%" 
+        height="auto"
+      />
+    </div>
+  )}
       </div>
     </div>
     </>
