@@ -12,7 +12,7 @@ function Personaldetail2() {
   const location = useLocation();
   const userID = location.state?.id;
   const role = location.state?.role;
-  // console.log("role ", role);
+ 
 
   const getUserId = () => {
     const str = document.cookie;
@@ -57,7 +57,7 @@ function Personaldetail2() {
       );
 
       const d = await req.json();
-      console.log("user submit success:", d);
+    
     } catch (error) {
       console.error("Error submitting user details:", error);
       throw error;
@@ -87,7 +87,7 @@ const userPk = getUserId()
       });
 
       const d = await req.json();
-      console.log("Answers submitted:", d);
+     
     } catch (error) {
       console.error("Error submitting answers:", error);
       throw error;

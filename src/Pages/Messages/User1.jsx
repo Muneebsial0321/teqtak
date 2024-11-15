@@ -243,7 +243,7 @@ function Message2() {
     setShowFileUploadModal(false);
     setSelectedFile(null);
   };
-console.log("sender", sender)
+
   return (
   <>
     <div className="main h-full w-[100%] ">

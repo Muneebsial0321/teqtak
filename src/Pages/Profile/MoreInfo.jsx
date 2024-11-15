@@ -33,7 +33,7 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
         },
       });
       const d = await response.json();
-      console.log("questions by role ",d);
+     
       setData(d);
     } catch (error) {
       console.error("Error fetching data:", error);

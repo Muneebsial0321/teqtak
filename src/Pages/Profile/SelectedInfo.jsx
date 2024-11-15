@@ -40,7 +40,7 @@ const SelectedInfo = ({ userPk, role, setSelectedAnswers }) => {
       });
       const d = await response.json();
       setData(d);
-      console.log("selected answers by user ",d);
+     
     } catch (error) {
       console.error("Error fetching data:", error);
     }

@@ -23,7 +23,7 @@ function Notification() {
           `${API_URL}/notifications/${getUserId()}`
         );
         setNotifications(response.data.data);
-        // console.log("notifications is ", response.data.data);
+       
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }
