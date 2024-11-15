@@ -52,7 +52,7 @@ const Second = () => {
           alt="Responsive Image"
         />
       </div>
-      <div className="flex flex-wrap justify-center w-11/12 h-auto gap-5 gap-y-[4rem] py-8 mx-auto mt-3 mb-8 md:flex-wrap lg:justify-arround lg:gap-0 lg:w-4/5 lg:py-0 lg:px-0 DivScrollRemove">
+      <div className="flex flex-wrap justify-center w-11/12 h-auto gap-5 gap-y-[4rem] pt-8 mx-auto mt-3 mb-8 md:flex-wrap lg:justify-arround lg:gap-0 lg:w-4/5 lg:py-0 lg:px-0 DivScrollRemove">
         {goThroughData.map((elm, ind) => (
           <div
             key={ind}
