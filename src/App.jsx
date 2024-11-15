@@ -75,73 +75,73 @@ console.log("Authent", token);
         <Route path="/signup" element={<Signup />} />
         <Route path="/bording" element={<OnBoarding/>} />
         <Route path="/signin" element={<Signin />} />
-        <Route path='/notfound' element={token ?<NotFound />: <Navigate to="/signup"/> } />
+        <Route path='/notfound' element={<NotFound /> } />
 
         {/* Routes with Layout private routes */}
         <Route element={token ? <Layout /> : <Navigate to="/signup"/> }>
       
         {/* <Route path='/search'element={<Search/>} /> */}
-          <Route path="/videos" element={token ?<Feed /> : <Navigate to="/signup"/>} />
-          <Route path="/video/:src" element={token ?<SingleVideo /> :<Navigate to="/signup"/>} />
-          <Route path="/profilevideos/:src" element={token ?<ProfileVideos /> :<Navigate to="/signup"/>} />
-          <Route path='/watchhistory/:src' element={token ?<WatchSingle /> :<Navigate to="/signup"/> } />
+          <Route path="/videos" element={<Feed /> } />
+          <Route path="/video/:src" element={<SingleVideo /> } />
+          <Route path="/profilevideos/:src" element={<ProfileVideos /> } />
+          <Route path='/watchhistory/:src' element={<WatchSingle />  } />
           {/* <Route path="/ProfileVideo/:src" element={<ProfileVideo />} /> */}
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-          <Route path="/profile" element={token ?<ProfilePublic /> :<Navigate to="/signup"/>} />
-          <Route path="/userprofile" element={token ?<UserProfile /> :<Navigate to="/signup"/>} />
-          <Route path="/personaldetails" element={token ?<Personaldetail /> :<Navigate to="/signup"/>} />
-          <Route path="/personaldetail2" element={token ?<Personaldetail2 /> :<Navigate to="/signup"/>} />
-          <Route path="/notifications" element={token ?<Notifications /> :<Navigate to="/signup"/>} />
+          <Route path="/profile" element={<ProfilePublic /> } />
+          <Route path="/userprofile" element={<UserProfile /> } />
+          <Route path="/personaldetails" element={<Personaldetail /> } />
+          <Route path="/personaldetail2" element={<Personaldetail2 /> } />
+          <Route path="/notifications" element={<Notifications />} />
 
-          <Route path="/messages/" element={token ?<Messages /> :<Navigate to="/signup"/>}>
-            <Route path="user1" element={token ? <User1 /> :<Navigate to="/signup"/>} />
+          <Route path="/messages/" element={<Messages /> }>
+            <Route path="user1" element={ <User1 /> } />
           </Route>
-          <Route path="/createmeeting" element={token ?<Zoommeeting /> :<Navigate to="/signup"/>} />
-          <Route path="/map" element={token ?<Map /> :<Navigate to="/signup"/>} />
-          <Route path="/subscribe" element={token ?<Subscribe /> :<Navigate to="/signup"/>} />
-          <Route path="/settings" element={token ?<Settings /> :<Navigate to="/signup"/>} />
-          <Route path="/podcast" element={token ?<Podcast /> :<Navigate to="/signup"/>} />
-          <Route path="/podcastdetails/" element={token ?<SinglePodcastDetails /> :<Navigate to="/signup"/>} />
-          <Route path="/mypodcasts/" element={token ?<MyCreatedPodcast /> :<Navigate to="/signup"/>} />
-          <Route path="/events" element={token ?<Event /> :<Navigate to="/signup"/>} />
-          <Route path="/eventdetail" element={token ?<Eventdetail /> :<Navigate to="/signup"/>} />
-          <Route path='/participants' element={token ?<Participants /> :<Navigate to="/signup"/>} />
-          <Route path="/ticket" element={token ?<Ticket /> :<Navigate to="/signup"/>} />
-          <Route path="/createpodcast" element={token ?<PodcastForm /> :<Navigate to="/signup"/>} />
-          <Route path="/createevent" element={token ?<EventForm /> :<Navigate to="/signup"/>} />
-          <Route path="/ticketbuyer" element={token ?<TicketBuyerInfo /> :<Navigate to="/signup"/>} />
-          <Route path="/ticketpayment" element={token ?<TicketPayment /> :<Navigate to="/signup"/>} />
-          <Route path="/ticketdetails" element={token ?<Ticketdetails /> :<Navigate to="/signup"/>} />
-          <Route path="/createjob" element={token ?<JobCreationform /> :<Navigate to="/signup"/>} />
-          <Route path="/singlecategory" element={token ?<SingleCategory /> :<Navigate to="/signup"/>} />
-          <Route path="/jobdetail" element={token ?<JobDetail /> :<Navigate to="/signup"/>} />
-          <Route  path='/mycreatedjob' element={token ?<MyCreatedJob /> :<Navigate to="/signup"/>}/>
-          <Route path="/jobapply" element={token ?<JobApply /> :<Navigate to="/signup"/>} />
-          <Route path='/jobapplysuccess' element={token ?<JobAppliedSuccess /> :<Navigate to="/signup"/>}/>
-          <Route path="/createVideo" element={ token ?<CreateVideo /> :<Navigate to="/signup"/>} />
-          <Route path="/filters" element={token ?<Filters /> :<Navigate to="/signup"/>} />
-          <Route path="/filterpodcast" element={token ?<FilterPodcast /> :<Navigate to="/signup"/>} />
-          <Route path="/filterevent" element={ token ?<FilterEvent /> :<Navigate to="/signup"/>} />
-          <Route path="/filterjob" element={token ?<FilterJob /> :<Navigate to="/signup"/>} />
-          <Route path="/jobs" element={token ?<Jobs /> :<Navigate to="/signup"/>} />
+          <Route path="/createmeeting" element={<Zoommeeting /> } />
+          <Route path="/map" element={<Map /> } />
+          <Route path="/subscribe" element={<Subscribe /> } />
+          <Route path="/settings" element={<Settings /> } />
+          <Route path="/podcast" element={<Podcast /> } />
+          <Route path="/podcastdetails/" element={<SinglePodcastDetails /> } />
+          <Route path="/mypodcasts/" element={<MyCreatedPodcast /> } />
+          <Route path="/events" element={<Event /> } />
+          <Route path="/eventdetail" element={<Eventdetail /> } />
+          <Route path='/participants' element={<Participants /> } />
+          <Route path="/ticket" element={<Ticket /> } />
+          <Route path="/createpodcast" element={<PodcastForm /> } />
+          <Route path="/createevent" element={<EventForm /> } />
+          <Route path="/ticketbuyer" element={<TicketBuyerInfo /> } />
+          <Route path="/ticketpayment" element={<TicketPayment /> } />
+          <Route path="/ticketdetails" element={<Ticketdetails /> } />
+          <Route path="/createjob" element={<JobCreationform /> } />
+          <Route path="/singlecategory" element={<SingleCategory /> } />
+          <Route path="/jobdetail" element={<JobDetail /> } />
+          <Route  path='/mycreatedjob' element={<MyCreatedJob /> }/>
+          <Route path="/jobapply" element={<JobApply /> } />
+          <Route path='/jobapplysuccess' element={<JobAppliedSuccess /> }/>
+          <Route path="/createVideo" element={ <CreateVideo /> } />
+          <Route path="/filters" element={<Filters /> } />
+          <Route path="/filterpodcast" element={<FilterPodcast /> } />
+          <Route path="/filterevent" element={ <FilterEvent /> } />
+          <Route path="/filterjob" element={<FilterJob /> } />
+          <Route path="/jobs" element={<Jobs /> } />
     {/* Redirect to 404 Page if no matching route is found */}
-    <Route path="*" element={token ?<PageNotFound /> :<Navigate to="/signup"/>} />
+    <Route path="*" element={<PageNotFound /> } />
 
           {/* SETTINGS ROUTES private routes*/}
-          <Route path="/appliedjobs" element={token ?<AppliedJobs /> :<Navigate to="/signup"/>} />
-          <Route path="/devicepermission" element={token ? <DevicePermissions /> :<Navigate to="/signup"/>} />
-          <Route path="/mytickets" element={token ?<MyTickets /> :<Navigate to="/signup"/>} />
-          <Route path="/watchhistory" element={token ?<WatchHistory /> :<Navigate to="/signup"/>} />
-          <Route path="/paymentmethod" element={ token ? <PaymentMethod /> :<Navigate to="/signup"/>} />
-          <Route path="/paymentform" element={ token ? <PaymentForm /> :<Navigate to="/signup"/>} />
-          <Route path="/mycards" element={ token ? <MyCards /> :<Navigate to="/signup"/>} />
-          <Route path="/contactaccess" element={token ? <Contactaccess /> :<Navigate to="/signup"/>} />
-          <Route path="/changepassword" element={token ?<Changepassword /> :<Navigate to="/signup"/>} />
-          <Route path="/blocklist" element={token ? <Blocklist /> :<Navigate to="/signup"/>} />
-          <Route path="/terms" element={token ? <Term /> :<Navigate to="/signup"/>} />
-          <Route path="/privacy" element={token ? <Privacy /> :<Navigate to="/signup"/>} />
-          <Route path="/wishlist" element={token ? <WishList /> :<Navigate to="/signup"/>}/>
-          <Route path="/zoom" element={token ? <ZoomSocket/> :<Navigate to="/signup"/>}/>
+          <Route path="/appliedjobs" element={<AppliedJobs /> } />
+          <Route path="/devicepermission" element={<DevicePermissions /> } />
+          <Route path="/mytickets" element={<MyTickets /> } />
+          <Route path="/watchhistory" element={<WatchHistory /> } />
+          <Route path="/paymentmethod" element={  <PaymentMethod /> } />
+          <Route path="/paymentform" element={  <PaymentForm /> } />
+          <Route path="/mycards" element={  <MyCards /> } />
+          <Route path="/contactaccess" element={ <Contactaccess />} />
+          <Route path="/changepassword" element={<Changepassword /> } />
+          <Route path="/blocklist" element={ <Blocklist /> } />
+          <Route path="/terms" element={ <Term /> } />
+          <Route path="/privacy" element={<Privacy /> } />
+          <Route path="/wishlist" element={ <WishList /> }/>
+          <Route path="/zoom" element={ <ZoomSocket/> }/>
         </Route>
 
    
