@@ -118,6 +118,7 @@ const Signup = () => {
               type="password"
               placeholder="Password"
               name="password"
+              minLength="8"
               value={state.password || ""}
               onChange={_onChange_}
               required

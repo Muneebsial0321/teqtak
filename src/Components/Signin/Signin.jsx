@@ -95,6 +95,7 @@ const Signin = () => {
               placeholder="Password"
               name="password"
               id="password"
+              minLength="8"
               value={state.password}
               onChange={handleChange}
               className="py-2 px-4 rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:w-[90%]"
@@ -106,7 +107,7 @@ const Signin = () => {
                  className="w-full mb-4 bg-purple-800 py-3 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[100%] max-[425px]:py-1 max-[425px]:font-normal"
                  disabled={loading}
               >
-                {loading ? "Loading..." : "Sign In"}
+                {loading ? "Loading..." : "Login"}
               </button>
             </section>
           </form>

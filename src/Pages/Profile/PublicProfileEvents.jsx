@@ -80,7 +80,7 @@ const user_Id = getUserId()
       const response = await axios.post(`${API_BASE_URL}/wishlist`, {
         wishItemType: 'event',
         wishItemId: eventId,
-        userId: user_id,
+        userId: user_Id,
       });
       // console.log('Wishlist item saved:', response.data);
       toast.success('Event saved to wishlist!'); 
