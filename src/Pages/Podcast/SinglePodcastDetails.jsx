@@ -5,7 +5,8 @@ import { CiSquareInfo, CiStar } from "react-icons/ci";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import Model from "../ModalReport/Model";
-import PodcastFilters from "./PodcastFilters"
+
+// import PodcastFilters from "./PodcastFilters"
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 import SuggestedPodcast from "./SuggestedPodcast";
 
@@ -125,10 +126,10 @@ function SinglePodcastDetails() {
 
   return (
     <Fragment>
-<div className="">
+{/* <div className="">
 <PodcastFilters />
 
-</div>
+</div> */}
       <section className="bg-white h-[88%] w-full relative px- overflow-y-scroll Podcast_Top_Videos mt-1">
         {revModOpen && (
           <div className="h-full  left-0 w-full absolute top-0 z-20 flex justify-center items-center">

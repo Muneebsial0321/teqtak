@@ -7,9 +7,9 @@ import { IoBookmarkOutline } from "react-icons/io5";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify"; // Import toast components
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
-
+import { REACT_APP_API_BASE_URL } from "../../ENV";
 const SuggestedPodcast = () => {
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const API_BASE_URL = REACT_APP_API_BASE_URL;
   const [recentdata, setRecentData] = useState([]);
   const navigate = useNavigate();
 const location = useLocation()
