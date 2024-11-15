@@ -63,11 +63,11 @@ const filteredData = location.state?.filteredData
   return (
     <>
       <ToastContainer /> {/* Include the ToastContainer here */}
-      <div className="flex justify-start ps-5 gap-2 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2">
+      <div className="flex justify-start ps-5 gap-1 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 text-white max-[425px]:mb-3">
         {recentdata.map((elm, ind) => (
           <div
             key={ind}
-            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[22.33vw] md:w-[33.33vw] sm:w-[33.33vw] w-[33.33vw] flex-shrink-0 rounded-lg relative"
+            className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] md:w-[31.33vw]  max-[425px]:w-[43vw] w-[45.33vw] flex-shrink-0 rounded-lg relative"
             onClick={() =>
               navigate(`/podcastdetails`, { state: { id: elm._id } })
             } // Navigate on click
@@ -80,16 +80,16 @@ const filteredData = location.state?.filteredData
                   handleSaveToWishlist(elm._id); // Save to wishlist
                 }}
               />
-              <div className="absolute bottom-1 left-1">
-                <p className="text-sm">{elm.episodeTitle}</p>
+              <div className="absolute bottom-1 left-1 w-[93%] SVTBottom rounded-lg ps-3">
+                <p className="text-xl lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
                 <Link
                   to="/userprofile"
                   state={{ id: elm.userID ? elm.userID : "unknown" }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <p className="text-sm">{elm.user ? elm.user.name : ""}</p>
+                  <p className="text-sm text-[#B4B6B7] whitespace-nowrap overflow-hidden text-ellipsis">{elm.user ? elm.user.name : ""}</p>
                 </Link>
-                <p className="text-xs flex gap-1 items-center">
+                <p className="text-xs lg:text-xl  flex gap-1 items-center">
                   <CiPlay1 /> {formatDuration(elm.podcastDuration)}
                 </p>
               </div>
@@ -97,7 +97,7 @@ const filteredData = location.state?.filteredData
             <img
               src={elm.picUrl ? elm.picUrl : "/loading.jpg"}
               alt={`Img-${ind}`}
-              className="h-full w-full rounded-lg"
+              className="h-full w-full rounded-lg object-cover"
             />
           </div>
         ))}

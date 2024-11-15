@@ -130,7 +130,7 @@ function SinglePodcastDetails() {
 <PodcastFilters />
 
 </div> */}
-      <section className="bg-white h-[88%] w-full relative px- overflow-y-scroll Podcast_Top_Videos mt-1">
+      <section className="bg-white h-[88%] w-full relative lg:h-[90vh] overflow-y-scroll Podcast_Top_Videos mt-1">
         {revModOpen && (
           <div className="h-full  left-0 w-full absolute top-0 z-20 flex justify-center items-center">
             <Review
