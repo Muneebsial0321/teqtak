@@ -3,29 +3,58 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import MessageDefault from "./MessageDefault";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
+// Helper functions to interact with localStorage
+const setCache = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+const getCache = (key) => {
+  const cachedData = localStorage.getItem(key);
+  return cachedData ? JSON.parse(cachedData) : null;
+};
+
+const removeCache = (key) => {
+  localStorage.removeItem(key);
+};
+
 const getUserId = () => {
   const str = document.cookie;
   const userKey = str.split("=")[1];
   return userKey;
 };
- const token = localStorage.getItem('authtoken')
+
+const token = localStorage.getItem('authtoken');
+
 function Message() {
   const [chats, setChats] = useState([]);
   const [rooms, setRooms] = useState([]);
 
   const fetchAllChatrooms = async () => {
-    const req = await fetch(
-      `${REACT_APP_API_BASE_URL}/chatrooms/${getUserId()}`,{
-        headers:{
-          Authorization:`Bearer ${token}`
+    // Check if chatrooms are cached
+    const cachedChats = getCache(`chatrooms_${getUserId()}`);
+    if (cachedChats) {
+      setRooms(cachedChats.roomIds);
+      setChats(cachedChats.chatData);
+    } else {
+      // Fetch from the API if not cached
+      const req = await fetch(
+        `${REACT_APP_API_BASE_URL}/chatrooms/${getUserId()}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
-      }
-    );
-    const info = await req.json();
+      );
+      const info = await req.json();
+      const roomIds = info.data.map((e) => e?._id);
+      setRooms(roomIds);
+      setChats(info.data);
 
-    const roomIds = info.data.map((e) => e && e._id);
-    setRooms(roomIds);
-    setChats(info.data);
+      // Cache the chatrooms and their data
+      setCache(`chatrooms_${getUserId()}`, {
+        roomIds,
+        chatData: info.data
+      });
+    }
   };
 
   const __Time__ = (isoString) => {

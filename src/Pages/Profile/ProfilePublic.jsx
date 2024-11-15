@@ -16,9 +16,8 @@ import { REACT_APP_API_BASE_URL } from "../../ENV";
 const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 const ProfilePublic = ({ userId }) => {
-
-  const navigate = useNavigate()
-  const [data_, setDATA] = useState({ rating: {} })
+  const navigate = useNavigate();
+  const [data_, setDATA] = useState({ rating: {} });
   const [activeTab, setActiveTab] = useState("Video");
   const [profile, setProfile] = useState({});
   const [file, setFile] = useState(null);
@@ -33,7 +32,6 @@ const ProfilePublic = ({ userId }) => {
     const userKey = str.split('=')[1];
     return userKey;
   };
-  
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -57,14 +55,29 @@ const ProfilePublic = ({ userId }) => {
     }
   };
 
-  
-
+  // Function to fetch profile data with caching
   const fetchProfileData = async () => {
     try {
-      const result = await fetchProfile(getUserId());
-      setProfile(result.user);
-      setDATA(result.data || { rating: {} })
-      // console.log("single user data", result);
+      const cachedProfile = localStorage.getItem("profileData");
+      const cachedTimestamp = localStorage.getItem("profileTimestamp");
+      const cacheExpirationTime = 24 * 60 * 60 * 1000; // Cache expires after 1 day
+
+      // Check if cached data is still valid
+      if (cachedProfile && cachedTimestamp && Date.now() - cachedTimestamp < cacheExpirationTime) {
+        // Use cached data if it's still valid
+        const cachedData = JSON.parse(cachedProfile);
+        setProfile(cachedData.user);
+        setDATA(cachedData.data || { rating: {} });
+      } else {
+        // Fetch fresh data from the API
+        const result = await fetchProfile(getUserId());
+        setProfile(result.user);
+        setDATA(result.data || { rating: {} });
+
+        // Cache the data and timestamp
+        localStorage.setItem("profileData", JSON.stringify(result));
+        localStorage.setItem("profileTimestamp", Date.now());
+      }
     } catch (error) {
       console.error("Fetching profile data error:", error);
     }
@@ -75,7 +88,7 @@ const ProfilePublic = ({ userId }) => {
     const filledStars = Math.floor(rating); // Whole filled stars
     const hasHalfStar = rating % 1 !== 0; // Check if there is a half star
     const starsArray = [];
-  
+
     for (let i = 0; i < totalStars; i++) {
       if (i < filledStars) {
         starsArray.push(<FaStar key={i} className="text-[#FFDD55] text-sm md:text-lg" />);
@@ -85,27 +98,25 @@ const ProfilePublic = ({ userId }) => {
         starsArray.push(<FaStar key={i} className="text-gray-400 text-sm md:text-lg" />);
       }
     }
-  
+
     return starsArray;
   };
-  
 
   useEffect(() => {
     fetchProfileData();
   }, []);
 
-  const isCurrentUser =  getUserId();
-
+  const isCurrentUser = getUserId();
 
   return (
     <Fragment>
-      <div className="bg-white h-[90vh] w-full " >
-        <div className="w-full md:w-[25%] h-auto md:h-[6%] flex items-center gap-3 ps-3" >
+      <div className="bg-white h-[90vh] w-full">
+        <div className="w-full md:w-[25%] h-auto md:h-[6%] flex items-center gap-3 ps-3">
           <p className="text-lg flex items-center px-3">Profile</p>
         </div>
-        <div className="flex flex-col md:flex-row justify-center h-auto  mt-4 md:mt-0">
-          <div className="flex  md:flex-row gap-4 w-full md:w-[75%] items-center md:items-center xl:items-center justify-center">
-            <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative ">
+        <div className="flex flex-col md:flex-row justify-center h-auto mt-4 md:mt-0">
+          <div className="flex md:flex-row gap-4 w-full md:w-[75%] items-center md:items-center xl:items-center justify-center">
+            <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative">
               <input
                 type="file"
                 onChange={handleFileChange}
@@ -121,18 +132,18 @@ const ProfilePublic = ({ userId }) => {
                 <FaPlus className="absolute lg:bottom-2 bottom-2 md:bottom-1 text-white text-xl p-1 bg-blue-700 rounded-full" />
               </label>
             </div>
-            <div className="py-3 px-4 md:px-6  w-[50%] ">
+            <div className="py-3 px-4 md:px-6 w-[50%]">
               <h1 className="text-lg md:text-xl">{profile.name || profile.userName}</h1>
               <div className="flex py-1 space-x-2">
-              {renderStars(data_.rating?.globalrating || 0)} {/* Render the stars */}
-                <h1 className="text-xs md:text-sm">{data_.rating?.globalrating?.toFixed(1) || '0.00'}out of 5</h1>
+                {renderStars(data_.rating?.globalrating || 0)} {/* Render the stars */}
+                <h1 className="text-xs md:text-sm">{data_.rating?.globalrating?.toFixed(1) || '0.00'} out of 5</h1>
               </div>
               <p className="text-xs md:text-sm opacity-65">{data_.rating?.totalRatings || 0} global ratings</p>
               <div className="flex text-blue-600 text-xs md:text-sm py-2">
-                <Link to='/personaldetails'state={{id:profile.Users_PK}}>view personal info</Link>
+                <Link to='/personaldetails' state={{ id: profile.Users_PK }}>view personal info</Link>
                 <MdKeyboardArrowRight className="text-xl md:text-2xl" />
               </div>
-              <div className="flex  gap-2   sm:flex-nowrap text-nowrap max-[600px]:hidden">
+              <div className="flex gap-2 sm:flex-nowrap text-nowrap max-[600px]:hidden">
                 {isCurrentUser ? (
                   <>
                     <button
@@ -167,39 +178,39 @@ const ProfilePublic = ({ userId }) => {
               </div>
             </div>
           </div>
-            <div className="hidden mt-5 mb-2 gap-2   sm:flex-nowrap text-nowrap max-[600px]:flex justify-center">
-                {isCurrentUser ? (
-                  <>
-                    <button
-                      className={`px-5 py-2 rounded-2xl text-[16px] ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
-                      onClick={handleSubmit}
-                      disabled={loading}
-                    >
-                      {loading ? 'Uploading...' : 'Save Changes'}
-                    </button>
-                    <button
-                      onClick={() => navigate('/personaldetail2')}
-                      className="px-5 py-2 rounded-2xl text-[16px] text-white bg-[#6165F3]"
-                    >
-                      Edit Profile 
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className="px-6 py-2 rounded-2xl text-lg bg-[#F6F6FF]"
-                      onClick={createChatRoom}
-                    >
-                      Message
-                    </button>
-                    <button
-                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
-                    >
-                      Subscribe
-                    </button>
-                  </>
-                )}
-              </div>
+          <div className="hidden mt-5 mb-2 gap-2 sm:flex-nowrap text-nowrap max-[600px]:flex justify-center">
+            {isCurrentUser ? (
+              <>
+                <button
+                  className={`px-5 py-2 rounded-2xl text-[16px] ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
+                  onClick={handleSubmit}
+                  disabled={loading}
+                >
+                  {loading ? 'Uploading...' : 'Save Changes'}
+                </button>
+                <button
+                  onClick={() => navigate('/personaldetail2')}
+                  className="px-5 py-2 rounded-2xl text-[16px] text-white bg-[#6165F3]"
+                >
+                  Edit Profile 
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="px-6 py-2 rounded-2xl text-lg bg-[#F6F6FF]"
+                  onClick={createChatRoom}
+                >
+                  Message
+                </button>
+                <button
+                  className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                >
+                  Subscribe
+                </button>
+              </>
+            )}
+          </div>
         </div>
         <div className="flex text-[25px] items-center justify-center border-t-[2px] h-[13%]">
           <div className="w-[50%] flex justify-between py-2 max-[425px]:w-[80%]">
@@ -227,7 +238,7 @@ const ProfilePublic = ({ userId }) => {
         </div>
         <section className="h-[50%] w-full overflow-y-scroll Podcast_Top_Videos mb-4">
           {activeTab === "Video" && <PublicProfileVideos videos={data_.videos} />}
-          {activeTab === "Podcast" && <PublicProfilePodcats podcast={data_.podcast} user ={profile} />}
+          {activeTab === "Podcast" && <PublicProfilePodcats podcast={data_.podcast} user={profile} />}
           {activeTab === "Event" && <PublicProfileEvents events={data_.events} />}
           {activeTab === "Job" && <PublicProfileJobs jobs={data_.jobs} />}
         </section>

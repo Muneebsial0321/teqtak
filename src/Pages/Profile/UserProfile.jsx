@@ -19,8 +19,8 @@ const API_BASE_URL = REACT_APP_API_BASE_URL;
 const UserProfile = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const userId = location.state?.id; 
- 
+  const userId = location.state?.id;
+
   // Get userId from location state
 
   const [data_, setDATA] = useState({});
@@ -30,81 +30,78 @@ const UserProfile = () => {
 
   const [loading, setLoading] = useState(false);
 
- 
-
   const getUserId = () => {
     const str = document.cookie;
-    const userKey = str.split('=')[1];
+    const userKey = str.split("=")[1];
     return userKey;
   };
 
   const subscribeUser = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subscriberId: getUserId(), subscribedToId: userId }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subscriberId: getUserId(),
+          subscribedToId: userId,
+        }),
       });
       if (response.ok) {
         const result = await response.json();
         setIsSubscribed(true);
- 
       } else {
         const error = await response.json();
-        console.error('Error subscribing:', error.message);
+        console.error("Error subscribing:", error.message);
       }
     } catch (error) {
-      console.error('Error subscribing:', error);
+      console.error("Error subscribing:", error);
     }
   };
-  
+
   const unsubscribeUser = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe/${userId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       if (response.ok) {
         setIsSubscribed(false);
-       
       } else {
         const error = await response.json();
-        console.error('Error unsubscribing:', error.message);
+        console.error("Error unsubscribing:", error.message);
       }
     } catch (error) {
-      console.error('Error unsubscribing:', error);
+      console.error("Error unsubscribing:", error);
     }
   };
-  
+
   useEffect(() => {
     const checkSubscriptionStatus = async () => {
       try {
         const response = await fetch(`${API_BASE_URL}/subscribe/my/${userId}`);
         if (response.ok) {
           const subscriptions = await response.json();
-        
-          const isSubscribed = subscriptions.some(sub => sub.subscriberId === getUserId());
+
+          const isSubscribed = subscriptions.some(
+            (sub) => sub.subscriberId === getUserId()
+          );
           setIsSubscribed(isSubscribed);
         }
       } catch (error) {
-        console.error('Error fetching subscription status:', error);
+        console.error("Error fetching subscription status:", error);
       }
     };
-  
+
     if (userId) {
       fetchProfileData(userId);
       checkSubscriptionStatus(); // Check subscription status on mount
     }
   }, [userId]);
-  
-  
-  
 
   const fetchProfileData = async (id) => {
     try {
       const result = await fetchProfile(id); // Use the userId passed in
       setProfile(result.user);
       setDATA(result.data);
-   
     } catch (error) {
       console.error("Fetching profile data error:", error);
     }
@@ -118,11 +115,17 @@ const UserProfile = () => {
 
     for (let i = 0; i < totalStars; i++) {
       if (i < filledStars) {
-        starsArray.push(<FaStar key={i} className="text-[#FFDD55] text-sm md:text-lg" />);
+        starsArray.push(
+          <FaStar key={i} className="text-[#FFDD55] text-sm md:text-lg" />
+        );
       } else if (i === filledStars && hasHalfStar) {
-        starsArray.push(<FaStarHalf key={i} className="text-[#FFDD55] text-sm md:text-lg" />);
+        starsArray.push(
+          <FaStarHalf key={i} className="text-[#FFDD55] text-sm md:text-lg" />
+        );
       } else {
-        starsArray.push(<FaStar key={i} className="text-gray-400 text-sm md:text-lg" />);
+        starsArray.push(
+          <FaStar key={i} className="text-gray-400 text-sm md:text-lg" />
+        );
       }
     }
 
@@ -137,7 +140,6 @@ const UserProfile = () => {
 
   const isCurrentUser = getUserId() === userId; // Check if the current user is the same as the profile being viewed
   const __message__ = async (id) => {
-   
     const req = await fetch(
       `${REACT_APP_API_BASE_URL}/chatrooms/${getUserId()}`,
       {
@@ -150,58 +152,69 @@ const UserProfile = () => {
     );
     const data = await req.json();
 
-    if (data) { 
-      navigate('/messages/user1',{state:{id:data._id}});
-  } else {
+    if (data) {
+      navigate("/messages/user1", { state: { id: data._id } });
+    } else {
       console.error("Failed to create chat room:", data.error);
-  }
+    }
   };
   return (
     <Fragment>
       <div className="bg-white h-full w-full overflow-y-hidden">
         <div className="w-full md:w-[25%] h-auto md:h-[6%] flex items-center gap- ps-3">
-        <FaChevronLeft className="text-ms cursor-pointer"onClick={() => navigate(-1)}  />
+          <FaChevronLeft
+            className="text-ms cursor-pointer"
+            onClick={() => navigate(-1)}
+          />
           <p className="text-lg flex items-center px-1">Profile</p>
         </div>
         <div className="flex flex-col md:flex-row justify-center h-auto  mt-4 md:mt-0">
           <div className="flex  md:flex-row gap-4 w-full md:w-[75%] items-center md:items-center xl:items-center justify-center">
             <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative ">
-             
-              <label htmlFor="fileInput"  aria-label="Upload Profile Picture">
+              <label htmlFor="fileInput" aria-label="Upload Profile Picture">
                 <img
                   className="rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover"
-                  src={profile.picUrl || '/placeholder.jpg'} // Fallback URL
+                  src={profile.picUrl || "/placeholder.jpg"} // Fallback URL
                   alt="Profile"
                 />
-               
               </label>
             </div>
             <div className="py-3 px-4 md:px-6  w-[50%] ">
-              <h1 className="text-lg md:text-xl">{profile.name || profile.userName}</h1>
+              <h1 className="text-lg md:text-xl">
+                {profile.name || profile.userName}
+              </h1>
               <div className="flex py-1 space-x-2">
-                {renderStars(data_.rating?.globalrating || 0)} {/* Render the stars */}
-                <h1 className="text-xs md:text-sm">{data_.rating?.globalrating.toFixed(1) || '0.00'} out of 5</h1>
+                {renderStars(data_.rating?.globalrating || 0)}{" "}
+                {/* Render the stars */}
+                <h1 className="text-xs md:text-sm">
+                  {data_.rating?.globalrating.toFixed(1) || "0.00"} out of 5
+                </h1>
               </div>
-              <p className="text-xs md:text-sm opacity-65">{data_.rating?.totalRatings || 0} global ratings</p>
+              <p className="text-xs md:text-sm opacity-65">
+                {data_.rating?.totalRatings || 0} global ratings
+              </p>
               <div className="flex text-blue-600 text-xs md:text-sm py-2">
-                <Link to='/personaldetails' state={{id:profile.Users_PK}}>view personal info</Link>
+                <Link to="/personaldetails" state={{ id: profile.Users_PK }}>
+                  view personal info
+                </Link>
                 <MdKeyboardArrowRight className="text-xl md:text-2xl" />
               </div>
               <div className="flex  gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[600px]:hidden">
                 {isCurrentUser ? (
                   <>
                     <button
-                      className={`px-6 py-2 rounded-2xl text-lg ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
-                    
+                      className={`px-6 py-2 rounded-2xl text-lg ${
+                        loading ? "bg-gray-400" : "bg-[#F6F6FF]"
+                      }`}
                       disabled={loading}
                     >
-                      {loading ? 'Uploading...' : 'Save Changes'}
+                      {loading ? "Uploading..." : "Save Changes"}
                     </button>
                     <button
                       // onClick={() => console.log(profile)}
                       className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
                     >
-                      Edit Profile 
+                      Edit Profile
                     </button>
                   </>
                 ) : (
@@ -213,50 +226,49 @@ const UserProfile = () => {
                       Message
                     </button>
                     <button
-  className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
-  onClick={isSubscribed ? unsubscribeUser : subscribeUser}
->
-  {isSubscribed ? 'Unsubscribe' : 'Subscribe'}
-</button>
-
+                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                      onClick={isSubscribed ? unsubscribeUser : subscribeUser}
+                    >
+                      {isSubscribed ? "Unsubscribe" : "Subscribe"}
+                    </button>
                   </>
                 )}
               </div>
             </div>
           </div>
           <div className="hidden mt-5 mb-2 gap-2 lg:flex-wrap  sm:flex-nowrap text-nowrap max-[600px]:flex justify-center">
-                {isCurrentUser ? (
-                  <>
-                    <button
-                      className={`px-6 py-2 rounded-2xl text-lg ${loading ? 'bg-gray-400' : 'bg-[#F6F6FF]'}`}
-                      onClick={handleSubmit}
-                      disabled={loading}
-                    >
-                      {loading ? 'Uploading...' : 'Save Changes'}
-                    </button>
-                    <button
-                      onClick={() => navigate('/personaldetail2')}
-                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
-                    >
-                      Edit Profile 
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className="px-6 py-2 rounded-2xl text-lg bg-[#F6F6FF]"
-                      onClick={() => __message__(profile.Users_PK)}
-                    >
-                      Message
-                    </button>
-                    <button
-                      className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
-                    >
-                      Subscribe
-                    </button>
-                  </>
-                )}
-              </div>
+            {isCurrentUser ? (
+              <>
+                <button
+                  className={`px-6 py-2 rounded-2xl text-lg ${
+                    loading ? "bg-gray-400" : "bg-[#F6F6FF]"
+                  }`}
+                  onClick={handleSubmit}
+                  disabled={loading}
+                >
+                  {loading ? "Uploading..." : "Save Changes"}
+                </button>
+                <button
+                  onClick={() => navigate("/personaldetail2")}
+                  className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]"
+                >
+                  Edit Profile
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="px-6 py-2 rounded-2xl text-lg bg-[#F6F6FF]"
+                  onClick={() => __message__(profile.Users_PK)}
+                >
+                  Message
+                </button>
+                <button className="px-6 py-2 rounded-2xl text-lg text-white bg-[#6165F3]">
+                  Subscribe
+                </button>
+              </>
+            )}
+          </div>
         </div>
         <div className="flex text-[25px] items-center justify-center border-t-[2px] h-[8%]">
           <div className="w-[50%] flex justify-between py-2 max-[425px]:w-[80%]">
@@ -277,15 +289,23 @@ const UserProfile = () => {
               className="cursor-pointer opacity-70"
               onClick={() => setActiveTab("Job")}
             />
-             <IoPeopleOutline size={30} className="cursor-pointer opacity-70"
-            onClick={() => setActiveTab("Subscribers")}
+            <IoPeopleOutline
+              size={30}
+              className="cursor-pointer opacity-70"
+              onClick={() => setActiveTab("Subscribers")}
             />
           </div>
         </div>
         <section className="h-[54%] w-full overflow-y-scroll Podcast_Top_Videos">
-          {activeTab === "Video" && <PublicProfileVideos videos={data_.videos} />}
-          {activeTab === "Podcast" && <PublicProfilePodcats podcast={data_.podcast} user={profile}/>}
-          {activeTab === "Event" && <PublicProfileEvents events={data_.events} />}
+          {activeTab === "Video" && (
+            <PublicProfileVideos videos={data_.videos} />
+          )}
+          {activeTab === "Podcast" && (
+            <PublicProfilePodcats podcast={data_.podcast} user={profile} />
+          )}
+          {activeTab === "Event" && (
+            <PublicProfileEvents events={data_.events} />
+          )}
           {activeTab === "Job" && <PublicProfileJobs jobs={data_.jobs} />}
           {activeTab === "Subscribers" && <UserSub />}
         </section>

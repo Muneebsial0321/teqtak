@@ -9,59 +9,62 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-function PodcastTopVideos({data}) {
-
-  let {recentdata, setRecentData,filterLoopData, setFilterLoopData} = data;
+function PodcastTopVideos({ data }) {
+  let { recentdata, setRecentData, filterLoopData, setFilterLoopData } = data;
   const API_BASE_URL = REACT_APP_API_BASE_URL;
-  // const [recentdata, setRecentData] = useState([]);
+  const [recentview, setRecentView] = useState([]);
+  const location = useLocation();
+  const filteredData = location.state?.filteredData;
 
-const [recentview,setRecentView] = useState([])
-const location = useLocation()
-const filteredData = location.state?.filteredData;
-// console.log("podcast filter state",filteredData)
-
-const token = localStorage.getItem('authtoken'); 
-// console.log("podcast token",token)
+  const token = localStorage.getItem('authtoken');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchViews = async () => {
-   
       try {
         const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`);
         const data = await response.json();
-        // console.log("response data",data.podcast)
-       
         setRecentView(data.podcast);
       } catch (error) {
         console.error("Error fetching views:", error);
       }
     };
+
     const getData = async () => {
       try {
-        const result = await fetchPodcast();
-        // console.log("fetch podcast result",{ result });
-        setRecentData(result.data);
-        setFilterLoopData(result.data);
+        const cachedData = localStorage.getItem('filterLoopData');
+        if (cachedData) {
+          setFilterLoopData(JSON.parse(cachedData));  // Use cached filter loop data
+        } else {
+          const result = await fetchPodcast();
+          setRecentData(result.data);
+          setFilterLoopData(result.data);
+          localStorage.setItem('filterLoopData', JSON.stringify(result.data));  // Cache the filter loop data
+        }
       } catch (error) {
         console.error("Fetching data error", error);
       }
     };
-    if(filteredData && filteredData.length > 0){
-      setRecentData(filteredData)
-      
-    }else{
-      fetchViews();
-      getData()
-     
-    }
-    
-  }, [filteredData]);
 
-  const navigate = useNavigate();
+    if (filteredData && filteredData.length > 0) {
+      setRecentData(filteredData);
+    } else {
+      // Check if recent view data is already in localStorage
+      const cachedRecentView = localStorage.getItem('recentView');
+      if (cachedRecentView) {
+        setRecentView(JSON.parse(cachedRecentView)); // Use cached recent views
+      } else {
+        fetchViews(); // Fetch from API if not cached
+      }
+
+      // Fetch or load podcast data
+      getData();
+    }
+
+  }, [filteredData, setRecentData, setFilterLoopData]);
 
   const formatDuration = (duration) => {
     const seconds = Math.floor(duration / 1000);
-    
     if (seconds < 60) {
       return `${seconds} seconds`;
     } else {
@@ -78,9 +81,6 @@ const token = localStorage.getItem('authtoken');
 
   const user_id = getUserId();
 
-
- 
-
   const handleSaveToWishlist = async (podcastId) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/wishlist`, {
@@ -88,7 +88,6 @@ const token = localStorage.getItem('authtoken');
         wishItemId: podcastId,
         userId: user_id,
       });
-      // console.log('Wishlist item saved:', response.data);
       toast.success('Podcast saved to wishlist!'); // Show success toast
     } catch (error) {
       console.error('Error saving to wishlist:', error);
@@ -121,9 +120,8 @@ const token = localStorage.getItem('authtoken');
                   </div>
                   <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                     <p className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
-                  
                     <p className="text-xs flex gap-1 items-center lg:text-[20px]">
-                      <CiPlay1 size={15}/> {formatDuration(elm.podcastDuration)}
+                      <CiPlay1 size={15} /> {formatDuration(elm.podcastDuration)}
                     </p>
                   </div>
                 </div>
@@ -131,29 +129,30 @@ const token = localStorage.getItem('authtoken');
               </div>
             ))}
           </div>
-<h1 className="ps-3 text-xl font-bold my-3 text-black">Related Podcasts</h1>
-          
-          <div className="flex justify-start ps-5 gap-1 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2 ">
+
+          <h1 className="ps-3 text-xl font-bold my-3 text-black">Related Podcasts</h1>
+          <div className="flex justify-start ps-5 gap-1 flex-wrap w-full overflow-x-auto Podcast_Top_Videos mt-2">
             {filterLoopData.slice(0, 3).map((elm, ind) => (
               <div
                 key={ind}
                 className="cursor-pointer lg:h-[42vh] h-[25vh] lg:w-[23vw] max-[998px]:w-[23vw] max-[425px]:w-[45.33vw] w-[45.33vw] flex-shrink-0 rounded-2xl relative max-[766px]:h-[26.3vh]"
-                onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })} // Handle navigation
+                onClick={() => navigate(`/podcastdetails`, { state: { id: elm._id } })}
               >
                 <div className="absolute h-full w-full ShadedBG rounded-lg">
                   <IoBookmarkOutline
                     className="absolute right-1 top-1 text-2xl cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation(); // Prevent triggering onClick of parent div
-                      handleSaveToWishlist(elm._id); // Save to wishlist
+                      handleSaveToWishlist(elm._id);
                     }}
                   />
                   <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                     <p className="text-lg lg:py-1 whitespace-nowrap overflow-hidden text-ellipsis">{elm.episodeTitle}</p>
-                    <Link to="/userprofile" state={{id:elm.userID ? elm.userID :""}}   onClick={(e) => {
-                      e.stopPropagation()}}  ><p className="text-[16px] text-[#B4B6B7] whitespace-nowrap text-ellipsis overflow-hidden">{elm.user ? elm.user.name : ""}</p></Link>
+                    <Link to="/userprofile" state={{ id: elm.userID ? elm.userID : "" }} onClick={(e) => { e.stopPropagation() }}>
+                      <p className="text-[16px] text-[#B4B6B7] whitespace-nowrap text-ellipsis overflow-hidden">{elm.user ? elm.user.name : ""}</p>
+                    </Link>
                     <p className="text-xs flex gap-1 items-center lg:text-lg whitespace-nowrap text-ellipsis">
-                      <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}
+                      <CiPlay1 size={20} /> {formatDuration(elm.podcastDuration)}
                     </p>
                   </div>
                 </div>
@@ -163,7 +162,6 @@ const token = localStorage.getItem('authtoken');
           </div>
 
           <h1 className="ps-3 text-xl font-bold my-3 text-black">Suggested Podcast</h1>
-
           <div className="flex gap-1 w-full overflow-x-scroll Podcast_Top_Videos ps-5">
             {filterLoopData.map((elm, ind) => (
               <div
@@ -181,12 +179,6 @@ const token = localStorage.getItem('authtoken');
                   />
                   <div className="absolute bottom-1 left-1 SVTBottom w-[93%] rounded-lg ps-3">
                     <p className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis lg:py-1">{elm.episodeTitle}</p>
-                    {/* <Link to="/userprofile" state={{id:elm.userID ? elm.userID :""}}  onClick={(e) => {
-                      e.stopPropagation(); // Prevent triggering onClick of parent div
-                    }}><p className="text-sm text-[#B4B6B7]">{elm.user ? elm.user.name : ""}</p></Link>
-                    <p className="text-xs  lg:text-lg flex gap-1 items-center">
-                      <CiPlay1 size={20}/> {formatDuration(elm.podcastDuration)}
-                    </p> */}
                   </div>
                 </div>
                 <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg" />
@@ -194,7 +186,7 @@ const token = localStorage.getItem('authtoken');
             ))}
           </div>
 
-          <RelatedPodcast data={{recentdata,setRecentData,filterLoopData,setFilterLoopData}}/>
+          <RelatedPodcast data={{ recentdata, setRecentData, filterLoopData, setFilterLoopData }} />
         </section>
       </section>
     </Fragment>

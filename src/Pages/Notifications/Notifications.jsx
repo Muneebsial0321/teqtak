@@ -4,6 +4,20 @@ import { CiMenuKebab } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
+// Helper functions for cache management
+const setCache = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+const getCache = (key) => {
+  const cachedData = localStorage.getItem(key);
+  return cachedData ? JSON.parse(cachedData) : null;
+};
+
+const removeCache = (key) => {
+  localStorage.removeItem(key);
+};
+
 const getUserId = () => {
   const str = document.cookie;
   const userKey = str.split("=")[1];
@@ -16,21 +30,26 @@ function Notification() {
   const [notifications, setNotifications] = useState([]);
   const [visibleId, setVisibleId] = useState(null);
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
+  // Function to fetch notifications with caching
+  const fetchNotifications = async () => {
+    // Check if notifications are cached
+    const cachedNotifications = getCache(`notifications_${getUserId()}`);
+    if (cachedNotifications) {
+      setNotifications(cachedNotifications);
+    } else {
       try {
         const response = await axios.get(
           `${API_URL}/notifications/${getUserId()}`
         );
         setNotifications(response.data.data);
-       
+
+        // Cache the fetched notifications
+        setCache(`notifications_${getUserId()}`, response.data.data);
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }
-    };
-
-    fetchNotifications();
-  }, []);
+    }
+  };
 
   const handleToggleMenu = (id) => {
     setVisibleId(visibleId === id ? null : id);
@@ -38,14 +57,21 @@ function Notification() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API_URL}/notifications/${id}`); // Ensure you delete the specific notification
+      await axios.delete(`${API_URL}/notifications/${id}`); // Delete specific notification
       setNotifications((prevNotifications) =>
         prevNotifications.filter((notification) => notification._id !== id)
       );
+
+      // Optionally, remove from cache
+      setCache(`notifications_${getUserId()}`, notifications.filter((notification) => notification._id !== id));
     } catch (error) {
       console.error("Error deleting notification:", error);
     }
   };
+
+  useEffect(() => {
+    fetchNotifications(); // Fetch notifications on component mount
+  }, []);
 
   return (
     <Fragment>
