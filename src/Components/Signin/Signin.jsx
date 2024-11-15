@@ -73,7 +73,7 @@ const Signin = () => {
               onClick={() => navigate("/signin")}
               className="linear_gradient text-white w-full py-[10px] text-[16px] font-semibold rounded max-[425px]:font-normal max-[425px]:py-1"
             >
-              Sign in
+              Login
             </button>
           </div>
 
