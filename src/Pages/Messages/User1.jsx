@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 import { deleteChatroom } from '../../DeleteAPI.js'
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 import MeetingCall from "./MeetingCall.jsx";
+import CameraCapture from "./CameraCapture.jsx";
 
 function Message2() {
   const socket = io(REACT_APP_API_BASE_URL);
@@ -29,58 +30,21 @@ function Message2() {
   const [roomId, setRoomId] = useState({}); // Chat room ID state
   // const [acessToken, setToken] = useState('');
   const [isCameraOpen, setIsCameraOpen] = useState(false);
-  const [hasError, setHasError] = useState(false); 
+ 
   const [selectedFile, setSelectedFile] = useState(null); 
   const [selectedEmoji, setSelectedEmoji] = useState(''); 
   const [showFileUploadModal, setShowFileUploadModal] = useState(false);
   // const fileInputRef = useRef(null);
-  const videoRef = useRef(null);  
-  const streamRef = useRef(null);
+  
 
   const cardRef = useRef(null);
   const token = localStorage.getItem('authtoken')
   const navigate = useNavigate()
   const messagesEndRef = useRef(null); 
 
-  const openCamera = async () => {
-    try {
-     
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user" }, 
-      });
-
-     
-      streamRef.current = stream;
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-
-      setIsCameraOpen(true);
-    } catch (err) {
-      console.error('Error accessing the camera: ', err);
-      setHasError(true); 
-    }
+  const toggleCamera = () => {
+    setIsCameraOpen((prev) => !prev);
   };
-
-  
-  const closeCamera = () => {
-    if (streamRef.current) {
-      const tracks = streamRef.current.getTracks();
-      tracks.forEach((track) => track.stop()); 
-    }
-    setIsCameraOpen(false);
-  };
-
-  
-  useEffect(() => {
-    return () => {
-      if (streamRef.current) {
-        const tracks = streamRef.current.getTracks();
-        tracks.forEach((track) => track.stop()); 
-      }
-    };
-  }, []);
 
   
   const __Time__ = (isoString) => {
@@ -279,11 +243,11 @@ function Message2() {
     setShowFileUploadModal(false);
     setSelectedFile(null);
   };
-
+console.log("sender", sender)
   return (
   <>
     <div className="main h-full w-[100%] ">
-
+    {isCameraOpen && <CameraCapture closeCameraCapture={() => setIsCameraOpen(false)} />}
       <div className="div h-full w-[100%]  bg-[#f5f3f3] p-5 relative">
 
         <div className="flex justify-between items-center mb-8">
@@ -294,7 +258,7 @@ function Message2() {
               onClick={() => navigate("/messages")}
             />
             {/* <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/> */}
-            <p className="text-xl font-medium whitespace-nowrap">{sender.name || "Unknown"}</p>
+            <p className="text-xl font-medium whitespace-nowrap">{sender ? sender.name : "Unknown"}</p>
           </div>
           <div className="flex gap-5">
             <CiMenuKebab
@@ -306,8 +270,7 @@ function Message2() {
                 className="absolute w-[200px] cursor-pointer right-4 top-14 px-3 py-2 z-30 bg-white shadow-lg border"
                 onClick={() => setAble(false)}
               >
-                {/* <p className="text-[15px] opacity-75 mb-5">Details</p>
-                <p className="text-[15px] opacity-75 mb-5">Hide</p> */}
+               
                 <p className="text-[15px] opacity-75 mb-5">Block and report</p>
                 <p className="text-[15px] opacity-75 text-[red]" onClick={handleDelete}>Delete</p>
               </div>
@@ -341,10 +304,7 @@ function Message2() {
                 )}
               </div>
             )}
-            {/* <CiCalendar ref={cardRef} 
-              className="text-2xl cursor-pointer"
-              onClick={handleCalendar}
-            /> */}
+          
             {showCalendar && (
               <div ref={cardRef} className="absolute right-4 top-14 z-30 bg-white shadow-lg border p-2">
                 <DatePicker
@@ -358,7 +318,7 @@ function Message2() {
         </div>
         <div className="lg:h-[70%] h-[50vh] overflow-y-scroll Podcast_Top_Videos">
           {chatroom && chatroom.map((e, i) => (
-            <div key={i} className="flex items-start my-2 flex-col justify-between py-2">
+            <div key={i} className="flex  items-end    justify-between py-2">
               <div className="flex gap-2">
                 <img
                   src={getUserId() !== e.sender ? sender.picUrl || '/placeholder.jpg' : receiver ? receiver.picUrl || 'placeholder.jpg' : '/placeholder.jpg'}
@@ -367,15 +327,14 @@ function Message2() {
                 />
 
                 <div className="flex">
-                  <div className="max-w-[70%]">
+                  <div className="max-w-[70%] ">
                     <p className="text-sm font-medium">{e.sender !== getUserId() ? sender.name : "You"}</p>
                     <p className="text-[#686868] text-xs mt-3">{e.message}</p>
                   </div>
                 </div>
               </div>
-              {/* <button onClick={()=>deleteMessage(e.messageId)} >Delete</button> */}
-              <p className="text-[gray] text-[10px] break-words">{__Time__(e.timestamp)}</p>
-              <MeetingCall/>
+              <p className="text-[gray] text-[10px] break-words">{__Time__(e.timestamp)}</p> 
+              
             </div>
             
           ))}
@@ -392,7 +351,7 @@ function Message2() {
               type="text"
               value={message}
               onChange={handleInputChange}
-              onKeyDown={handleKeyDown} // Add onKeyDown handler
+              onKeyDown={handleKeyDown} 
               placeholder="Write a message"
               className="h-[5vh] w-full outline-none rounded p-4 bg-transparent border"
             />
@@ -412,13 +371,11 @@ function Message2() {
           <div ref={cardRef} className="absolute bottom-[8vh] left-5 w-[10vw] p-3 bg-white shadow-lg rounded">
             <ul className="space-y-3">
               <li className="flex items-center">
-                <span className="">
-                 
-                  <button onClick={isCameraOpen ? closeCamera : openCamera}>
-          <FaCamera className="text-[gray] cursor-pointer" />
-        </button>
-       
-                </span>
+              <FaCamera
+            className="text-[gray] cursor-pointer"
+            onClick={toggleCamera}
+      />
+      
               </li>
               <li className="flex items-center">
                 <span onClick={() => handleEmojiSelect('😊')}>
@@ -451,23 +408,10 @@ function Message2() {
             selectedFiles={[selectedFile]}
           />
         )}
-          {hasError && (
-        <div>
-          <p style={{ color: 'red' }}>Error: Unable to access the camera. Please grant permission.</p>
-        </div>
-      )}
-   {isCameraOpen && (
-    <div className="absolute bottom-[10vh] left-5 w-[20vw] h-[auto]">
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        width="100%" 
-        height="auto"
-      />
-    </div>
-  )}
+      
+ 
       </div>
+     
     </div>
     </>
   );

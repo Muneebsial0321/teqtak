@@ -1,15 +1,17 @@
 import { faCalendar, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { FaAngleLeft, FaCcVisa, FaCcMastercard, FaPaypal } from "react-icons/fa";
+import { FaAngleLeft, FaCcVisa, FaCcMastercard, FaPaypal, FaStripeS } from "react-icons/fa";
 import { SiPayoneer } from "react-icons/si";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
-// import img from './Img1.png';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function Payment() {
   const [tickets, setTickets] = useState({});
   const [loading, setLoading] = useState(true);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const loc = useLocation();
   const navigate = useNavigate();
 
@@ -76,7 +78,42 @@ function Payment() {
       alert("An error occurred while processing your payment. Please try again.");
     }
   };
+  const payPALPaymentCheckout = async (id) => {
+    const payload = {
+      eventId: loc.state.id,
+      buyerId: getUserId(),
+      eventTicketArray: loc.state.selectedTickets,
+    };
+    // console.log("this is payload ", { payload });
   
+    try {
+      const req = await fetch(`${REACT_APP_API_BASE_URL}/payment/paypal/`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      // Check if the response is OK
+      if (!req.ok) {
+        throw new Error(`HTTP error! status: ${req.status}`);
+      }
+  
+      const response = await req.json();
+      const data = response.sessionId
+    
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("No URL found in response data.");
+      }
+    } catch (error) {
+      console.error("Error during payment checkout:", error);
+      
+      toast.error("An error occurred while processing your payment. Please try again.");
+    }
+  };
   useEffect(() => {
     // console.log("Component mounted. loc.state:", loc.state);
     if (loc.state) {
@@ -86,7 +123,7 @@ function Payment() {
     }
   }, [loc.state]);
 
- // Calculate total tickets and price
+
  const totalTickets = selectedTickets.basicTicket + selectedTickets.premiumTicket + selectedTickets.standardTicket;
  const basicTicketPrice = tickets.eventTicketArray?.find(ticket => ticket.ticketType === 'basicTicket')?.price || 0;
  const premiumTicketPrice = tickets.eventTicketArray?.find(ticket => ticket.ticketType === 'premiumTicket')?.price || 0;
@@ -95,8 +132,18 @@ function Payment() {
                     (selectedTickets.premiumTicket * premiumTicketPrice) +
                     (selectedTickets.standardTicket * standardTicketPrice);
 
+                    const handleContinueClick = () => {
+                      if (selectedPaymentMethod === "stripe") {
+                        stripePaymentCheckout();
+                      } else if (selectedPaymentMethod === "paypal") {
+                        payPALPaymentCheckout();
+                      } else {
+                        alert("Please select a payment method.");
+                      }
+                    };
   return (
     <div className="bg-white h-full w-full">
+       <ToastContainer />
       <div className="main h-full p-4">
         <h4 className="flex items-center gap-3 ms-4 h-[10%]">
           <FaAngleLeft
@@ -116,8 +163,8 @@ function Payment() {
                   <p className="text-sm">Credit/Debit Card</p>
                 </div>
                 <div className="flex gap-5 items-center">
-                  <FaCcVisa className="text-3xl" />
-                  <FaCcMastercard className="text-3xl" />
+                  <FaCcVisa className="text-3xl text-blue-500" />
+                  <FaCcMastercard className=" text-red-600 text-3xl" />
                 </div>
               </label>
             </div>
@@ -129,11 +176,13 @@ function Payment() {
             className="debit h-[7vh] w-[100%] border rounded p-2 cursor-pointer mt-2 mb-4">
               <label className="flex justify-between cursor-pointer" htmlFor="AP">
                 <div className="flex gap-5 items-center">
-                  <input type="radio" id="AP" name="paymentMethod" />
-                  <label className="text-sm">Apple Pay</label>
+                  <input type="radio" id="AP" name="paymentMethod" 
+                   onChange={() => setSelectedPaymentMethod("stripe")}
+                  />
+                  <label className="text-sm">Stripe</label>
                 </div>
                 <div className="flex gap-5 items-center">
-                  <FaPaypal className="text-3xl" />
+                <FaStripeS className="text-3xl text-[#646EDE]"/>
                 </div>
               </label>
             </div>
@@ -141,11 +190,13 @@ function Payment() {
             <div className="debit h-[7vh] cursor-pointer w-[100%] border rounded p-2 mt-2 mb-4">
               <label className="flex justify-between cursor-pointer" htmlFor="PP">
                 <div className="flex gap-5 items-center">
-                  <input type="radio" id="PP" name="paymentMethod" />
+                  <input type="radio" id="PP" name="paymentMethod" 
+                  onChange={() => setSelectedPaymentMethod("paypal")}
+                  />
                   <p className="text-sm">Paypal</p>
                 </div>
                 <div className="flex gap-5 items-center">
-                  <FaPaypal className="text-3xl" />
+                  <FaPaypal className="text-3xl text-[#003087] " />
                 </div>
               </label>
             </div>
@@ -157,7 +208,7 @@ function Payment() {
                   <p className="text-sm">Payoneer</p>
                 </div>
                 <div className="flex gap-5 items-center">
-                  <SiPayoneer className="text-3xl" />
+                  <SiPayoneer className="text-[#F74600] text-3xl" />
                 </div>
               </label>
             </div>
@@ -210,7 +261,7 @@ function Payment() {
                 <h6 className="font-semibold text-sm opacity-65">$ {totalPrice.toLocaleString()}</h6>
               </div>
             </div>
-            <Link onClick={()=>stripePaymentCheckout(555)}
+            <Link  onClick={handleContinueClick}
               state={{ id: tickets._id ,selectedTickets}}
               className="buyticket text-center px-4 py-2 block rounded-xl mx-auto mt-2 w-[53%]">Continue</Link>
           </div>

@@ -37,7 +37,7 @@ const HeaderComponent = () => {
       </div>
 
 <div className='relative -z-0'>
-  <img src="Images/HeroFigma.png" className='h-[50rem] max-lg:hidden -z-20 relative top-[-10rem] right-[-1.5rem]' alt="" />
+  <img src="Images/HeroFigma.png" className='lg:h-[50rem]  lg:-z-20 lg:relative lg:top-[-10rem] lg:right-[-1.5rem] h-auto relative left-3 ' alt="" />
 </div>
     </div>
   );
