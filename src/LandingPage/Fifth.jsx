@@ -106,7 +106,7 @@ function Fifth() {
     <>
       <section>
         <div className="flex lg:flex-nowrap flex-wrap lg:w-[95%] w-[90%] mx-auto mt-[20px]">
-          <div className="lg:w-[50%] w-[90%] mx-auto px-2">
+          <div className="lg:w-[50%] w-[90%] mx-auto px-2 flex flex-col justify-center">
             <h1 className="text-[40px]  leading-[3rem] font-medium w-full font-sans text-[#193766] lg:w-[80%]">
               What we are offering is Outside the world.
             </h1>
@@ -155,14 +155,13 @@ function Fifth() {
           </div>
           <div className="lg:w-[50%] w-[90%] mx-auto lg:ml-[10rem] lg:mt-0 mt-[40px]">
             <img
-              src="Images/MobileMock5.png"
+              src="Images/MobileMock5_v1.png"
               className="   w-full 
               object-contain
-      h-auto 
-      sm:h-[60vh] 
-      md:h-[70vh] 
-      lg:h-[700px] 
-      lg:w-[600px] "
+              h-[24rem] 
+              md:h-[60vh] 
+              lg:h-[50rem] 
+      "
               alt=""
             />
           </div>
@@ -266,11 +265,12 @@ function Fifth() {
             </div>
           </div>
           <div className=" lg:w-[18%] w-[90%] text-white lg:mb-0 mb-5">
-            <h1 className=" text-[25px] font-bold pb-5">Address</h1>
+            {/* <h1 className=" text-[25px] font-bold pb-5">Address</h1> */}
             <div className="flex flex-col ">
-              <Link className='text-[#FFFFFF] text-[15px]'>101 Marlow Street. #12-05 Clife Parkview. NYC 059020. <br /> <span className="text-yellow-300 ">View on Maps </span>  </Link>
-              <Link className='text-[#FFFFFF] text-[17px] py-4'>Inquiries</Link>
-              <Link className='text-[#FFFFFF] text-[15px]py-4'>+12 1214 1211 <br />
+                <Link className='text-[#FFFFFF] text-[15px]'>
+                 <span className="text-yellow-300 ">View on Maps </span>  </Link>
+                <Link className='text-[#FFFFFF] text-[17px] py-4'>Inquiries</Link>
+                <Link className='text-[#FFFFFF] text-[15px]py-4'>+12 1214 1211 <br />
               hello@azitadarvishi.com</Link>
               <div className="flex items-center gap-3 mt-5 mb-3 text-xl">
                 <FaTwitter className="cursor-pointer"/> <FaFacebook className="cursor-pointer"/> <FaLinkedin className="cursor-pointer"/> <FaYoutube className="cursor-pointer"/> <FaInstagram className="cursor-pointer"/>

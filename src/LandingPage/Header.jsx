@@ -110,9 +110,9 @@ const Header = () => {
     </div>
   
     <HeaderComponent/>
-    <Second/>
+    {/* <Second/> */}
      <Third/>
-    <Forth/> 
+    {/* <Forth/>  */}
     {/* <ThreeAfter/> don't 😥😣 uncomment*/}
     <Fifth/> 
 </div>
