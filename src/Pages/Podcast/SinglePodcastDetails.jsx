@@ -5,9 +5,9 @@ import { CiSquareInfo, CiStar } from "react-icons/ci";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import Model from "../ModalReport/Model";
-import RelatedPodcast from "./RelatedPodcast";
 import PodcastFilters from "./PodcastFilters"
 import { REACT_APP_API_BASE_URL } from "../../ENV";
+import SuggestedPodcast from "./SuggestedPodcast";
 
 
 function SinglePodcastDetails() {
@@ -242,7 +242,7 @@ function SinglePodcastDetails() {
         </div>
 
         <p className="md:ps-6 text-xl font-semibold ps-6">Similar podcasts</p>
-        <RelatedPodcast />
+        <SuggestedPodcast />
       </section>
     </Fragment>
   );
