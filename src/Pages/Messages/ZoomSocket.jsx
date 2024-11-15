@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
+import { FaAngleLeft } from "react-icons/fa";
 import { useLocation, useNavigate, } from 'react-router-dom';
 import {REACT_APP_API_BASE_URL} from '../../ENV'
 
-// const socket = io.connect('http://localhost:5000'); // Adjust to your server URL
+ // Adjust to your server URL
 const socket = io.connect(REACT_APP_API_BASE_URL); // Adjust to your server URL
 
 const ZoomSocket = () => {
     
     const location = useLocation()
-    // console.log({location})
+    const navigate = useNavigate()
     const [authUrl, setAuthUrl] = useState(null);
     const [meetingUrls, setMeetingUrls] = useState({ startUrl: '', joinUrl: '' });
     const [accessToken, setAccessToken] = useState(''); // Retrieve and set this token as needed
@@ -48,7 +49,17 @@ const ZoomSocket = () => {
   };
 
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center'>
+   <Fragment>
+    <div className='w-full h-[90vh] bg-white'>
+    <div>
+    <FaAngleLeft
+                className="cursor-pointer absolute top-2 mx-5"
+                size={20}
+                onClick={() => navigate("/messages")}
+              />
+             <h1 className='ml-9 pt-2 px-1'>Messages</h1>
+    </div>
+     <div className='w-full h-[80vh] flex flex-col justify-center items-center '>
       <h1>Zoom Authorization and Meeting {roomId}</h1>
 
       {authUrl ? (
@@ -73,6 +84,8 @@ const ZoomSocket = () => {
         </div>
       )}
     </div>
+    </div>
+   </Fragment>
   );
 };
 
