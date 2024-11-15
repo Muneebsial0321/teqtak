@@ -38,7 +38,7 @@ const Signin = () => {
       if (response.ok) {
         const data = await response.json();
         // console.log("Login successful:", data);
-        localStorage.setItem('authtoken', data.authtoken); 
+        localStorage.setItem('jwt', data.authtoken); 
 
         
         // console.log("authToken", data.authtoken);

@@ -36,7 +36,7 @@ const Signup = () => {
       if (req.ok) {
         if (data.user.Users_PK) {
           document.cookie = `userId=${data.user.Users_PK}`
-          localStorage.setItem('authtoken', data.authtoken); 
+          localStorage.setItem('jwt', data.authtoken); 
           setState({});
           setSelectedRole("viewer");
           toast.success("Sign up successful! Navigating to videos...");
