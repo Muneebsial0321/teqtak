@@ -16,7 +16,7 @@ function PodcastTopVideos({ data }) {
   const location = useLocation();
   const filteredData = location.state?.filteredData;
 
-  const token = localStorage.getItem('authtoken');
+  const token = localStorage.getItem('jwt');
   const navigate = useNavigate();
 
   useEffect(() => {

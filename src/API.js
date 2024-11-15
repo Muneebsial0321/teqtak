@@ -8,7 +8,7 @@ export const getUserId = () => {
   const userKey = str.split("=")[1];
   return userKey;
 };
-const token = localStorage.getItem('authtoken')
+const token = localStorage.getItem('jwt')
 axios.defaults.headers.common['Authorization'] =`Bearer ${token}`
 // Function to fetch data (if needed)
 export const fetchData = async () => {
