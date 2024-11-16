@@ -84,7 +84,7 @@ function Payment() {
       buyerId: getUserId(),
       eventTicketArray: loc.state.selectedTickets,
     };
-    // console.log("this is payload ", { payload });
+    console.log({ payload });
   
     try {
       const req = await fetch(`${REACT_APP_API_BASE_URL}/payment/paypal/`, {
@@ -101,10 +101,11 @@ function Payment() {
       }
   
       const response = await req.json();
-      const data = response.sessionId
+      console.log({response})
+      const data = response
     
-      if (data.url) {
-        window.location.href = data.url;
+      if (data.approvalUrl) {
+        window.location.href = data.approvalUrl;
       } else {
         console.error("No URL found in response data.");
       }
