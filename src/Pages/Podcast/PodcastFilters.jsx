@@ -13,7 +13,7 @@ let categData = [
   "Tech & Investor",
   "Teamwork",
 ];
-let durData = ["15 min", "30 min", "1 hour"];
+let durData = ["15 min", "30 min", "1 hour","+1 hour"];
 let revData = ["All", "Top Revies", "Other"];
 let subData = ["All", "Popular Podcast", "Subscribed", "Others"];
 
