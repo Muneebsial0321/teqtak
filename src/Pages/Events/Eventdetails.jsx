@@ -216,7 +216,7 @@ function Eventdetails() {
             </div>
           </div>
 
-          <h4 className="text-xl font-bold mt-6">Description</h4>
+          <h4 className="text-xl font-bold mt-6">About Event</h4>
           <p className="opacity-80 text-[16px] mt-4">
             {event.eventDescription}
           </p>

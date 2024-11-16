@@ -127,6 +127,7 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
         Add Speaker*
       </label>
       <input
+       required
         value={inputValue}
         onChange={handleInputChange}
         className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"
@@ -158,6 +159,7 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
           <label className="block my-2 text-gray-600 text-sm font-bold">
             Name*
             <input
+              required
               value={speakerData.speakerName}
               className="w-full border py-2 ps-3 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"
               name="speakerName"
@@ -169,6 +171,7 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
           <label className="block text-gray-600 text-sm font-bold">
             Family Name*
             <input
+              required
               value={speakerData.familyName}
               placeholder="Family Name"
               name="familyName"
@@ -179,6 +182,7 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
           <label className="block my-2 text-gray-600 text-sm font-bold">
             Share their Business Profile Link
             <input
+              required
               value={speakerData.speakerBusinessLink}
               placeholder="Business Profile Link"
               name="speakerBusinessLink"
