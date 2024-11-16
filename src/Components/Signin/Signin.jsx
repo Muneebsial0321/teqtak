@@ -38,7 +38,7 @@ const Signin = () => {
       if (response.ok) {
         const data = await response.json();
         // console.log("Login successful:", data);
-        localStorage.setItem('authtoken', data.authtoken); 
+        localStorage.setItem('jwt', data.authtoken); 
 
         
         // console.log("authToken", data.authtoken);
@@ -95,7 +95,7 @@ const Signin = () => {
               placeholder="Password"
               name="password"
               id="password"
-              minLength="8"
+              
               value={state.password}
               onChange={handleChange}
               className="py-2 px-4 rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:w-[90%]"

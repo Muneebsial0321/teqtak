@@ -284,6 +284,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
                 className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
                 onChange={onChange}
                 name="eventTitle"
+                required
                 type="text"
                 placeholder="Enter Title"
               />
@@ -295,6 +296,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
               <input
                 className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
                 onChange={onChange}
+                required
                 name="eventDescription"
                 type="text"
                 placeholder="Enter description"

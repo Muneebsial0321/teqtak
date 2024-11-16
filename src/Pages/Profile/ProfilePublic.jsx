@@ -107,7 +107,7 @@ const ProfilePublic = ({ userId }) => {
   }, []);
 
   const isCurrentUser = getUserId();
-
+const isViewer = profile.role === 'viewer';
   return (
     <Fragment>
       <div className="bg-white h-[90vh] w-full">
@@ -214,11 +214,12 @@ const ProfilePublic = ({ userId }) => {
         </div>
         <div className="flex text-[25px] items-center justify-center border-t-[2px] h-[13%]">
           <div className="w-[50%] flex justify-between py-2 max-[425px]:w-[80%]">
+          {isViewer ? null :
             <CiVideoOn
-              className="cursor-pointer opacity-70"
-              onClick={() => setActiveTab("Video")}
-              size={35}
-            />
+            className="cursor-pointer opacity-70"
+            onClick={() => setActiveTab("Video")}
+            size={35}
+          />}
             <PiApplePodcastsLogoThin
               size={39}
               className="cursor-pointer opacity-90"
