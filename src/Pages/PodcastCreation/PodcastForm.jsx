@@ -97,6 +97,7 @@ const PodcastForm = () => {
           <div className="flex justify-between items-center">
             <div className="sm:w-[35%] w-[45%] h-[25vh] border-gray-500 rounded border-[3px] flex justify-center relative items-center border-dashed">
               <input
+                required
                 type="file"
                 id="audioes"
                 name="audioName"
@@ -124,6 +125,7 @@ const PodcastForm = () => {
               <h1 className="text-xs">Customize Cover</h1>
               <div className="bg-[#f0f0fe] flex items-center justify-center w-[100%] rounded-xl h-[90%] relative overflow-hidden">
                 <input
+                  required
                   type="file"
                   id="custom"
                   name="customizeCover"

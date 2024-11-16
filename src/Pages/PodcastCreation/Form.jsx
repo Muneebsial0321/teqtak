@@ -202,6 +202,7 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
                   Season#
                 </label>
                 <input
+                  required
                   className="w-full border py-2 ps-3 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"
                   id="seasonNumber"
                   name="seasonNumber"
@@ -215,6 +216,7 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
                   Episode#
                 </label>
                 <input
+                  required
                   className="w-full border py-2 ps-3 rounded-lg text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"
                   id="episodeNumber"
                   name="episodeNumber"

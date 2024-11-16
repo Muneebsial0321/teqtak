@@ -92,15 +92,15 @@ const EventForm = () => {
     formData.append("eventCreatedBy", getUserId());
     formData.append("eventCatagory", selectedType);
 
-    
-const ticketArray = ticketTypes.map(ticket => ({
-  ticketType: ticket.ticketType,
-  price: ticket.price,
-  quantity: ticket.quantity,
-}));
+
+    const ticketArray = ticketTypes.map(ticket => ({
+      ticketType: ticket.ticketType,
+      price: ticket.price,
+      quantity: ticket.quantity,
+    }));
 
 
-formData.append("eventTicketArray",JSON.stringify(ticketArray));
+    formData.append("eventTicketArray", JSON.stringify(ticketArray));
 
 
 
@@ -116,7 +116,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
     }
 
     try {
-      
+
       const response = await axios.post(
         `${REACT_APP_API_BASE_URL}/events/`,
         formData
@@ -136,26 +136,26 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
   };
 
   const formatDate = (dateString) => {
-    const options = { weekday: 'short',  month: 'short', day: 'numeric' };
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
-  
+
     if (name === "startTime" || name === "endTime") {
       const [hours, minutes] = value.split(':');
       const date = new Date();
       date.setHours(hours);
       date.setMinutes(minutes);
-  
+
       // Format the time to 12-hour format with AM/PM
       const formattedTime = date.toLocaleString('en-US', {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true
       });
-  
+
       setState((prev) => ({
         ...prev,
         [name]: formattedTime,
@@ -173,7 +173,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
       }));
     }
   };
-  
+
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -259,6 +259,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
               <h1>Customize Cover</h1>
               <div className="bg-[#f0f0fe] w-full h-[25vh] rounded-lg flex items-center justify-center relative overflow-hidden">
                 <input
+                  required
                   type="file"
                   accept="image/*"
                   className="absolute w-full h-full opacity-0 cursor-pointer"
@@ -326,6 +327,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
                 Select Date
               </label>
               <input
+                required
                 className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none text-xs focus:shadow-outline"
                 type="date"
                 onChange={onChange}
@@ -337,6 +339,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
                 Select Location
               </label>
               <input
+                required
                 className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
                 onChange={onChange}
                 name="eventLocation"
@@ -356,10 +359,11 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
                 min={0}
                 onChange={(e) => setTicketPrice(e.target.value)}
                 placeholder="Enter price $35.00"
+
               />
               <input
                 type="number"
-                   className="w-full border py-2 ps-3 my-2 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
+                className="w-full border py-2 ps-3 my-2 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
                 value={ticketQuantity}
                 onChange={(e) => setTicketQuantity(e.target.value)}
                 placeholder="Enter Ticket Quantity"
@@ -431,6 +435,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
                 Start Time
               </label>
               <input
+                required
                 className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
                 type="time"
                 onChange={onChange}
@@ -443,6 +448,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
                 End Time
               </label>
               <input
+                required
                 className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
                 type="time"
                 onChange={onChange}
@@ -529,6 +535,7 @@ formData.append("eventTicketArray",JSON.stringify(ticketArray));
                 Number of People
               </label>
               <input
+                required
                 className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
                 type="number"
                 onChange={onChange}

@@ -50,7 +50,7 @@ import Personaldetail from './Pages/Profile/Personaldetail.jsx';
 import DevicePermissions from './Pages/Settings/DevicePermissions.jsx';
 import Personaldetail2 from './Pages/Profile/Personaldetail2.jsx';
 import JobAppliedSuccess from './Pages/Jobs/JobAppliedSuccess.jsx';
-import Header from './LandingPage/Header.jsx'
+import Header from './LandingPage__/Header.jsx'
 import NotFound from './Components/PageNotFound.jsx';
 import PageNotFound from './Components/PageNotFound.jsx';
 import WishList from './Pages/Settings/WishList.jsx';

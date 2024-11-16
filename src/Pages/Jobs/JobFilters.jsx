@@ -5,13 +5,65 @@ import { LuSettings2 } from "react-icons/lu";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-let categData = [
+let categData__ = [
   "All",
   "Tech Entrepreneur",
   "Finance",
   "Tech & Investor",
   "Teamwork",
 ];
+const categData = [
+  "All",
+  "Tech Entrepreneur",
+  "Art",
+  "Tech & Investor",
+  "Teamwork",
+  "Finance",
+  "Networking",
+  "Government",
+  "Charity",
+  "Investors",
+  "Language learning",
+  "Politics",
+  "Fashion",
+  "History",
+  "Hobbies",
+  "Career ,& Business",
+  "Travel & Outdoor",
+  "News",
+  "Technology",
+  "True Crime",
+  "Comedy",
+  "Music & dancing",
+  "Sports",
+  "Science",
+  "Leadership",
+  "Education",
+  "Sustainability",
+  "Fiction",
+  "Interviews",
+  "Business and Finance ",
+  "Health ,and Wellness",
+  "Self - Imporvement",
+  "Music",
+  "Religion & Spirituality",
+  "Pop Culture",
+  "Environment",
+  "Parenting",
+  "Gaming",
+  "Food and Cooking",
+  "Pet & Animal",
+  "Relationship & Books",
+  "Personal Stories",
+  "TV & Film",
+  "Social Activities",
+  "Subscribes",
+  "Language",
+  "Others",
+];
+
+
+
 let locData = ["Local", "My country", "International"];
 let JobTypeData = [
   "Full-time",
@@ -145,7 +197,7 @@ function JobFilters({ jobFilter }) {
               <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
                 {catSelectData} <RiArrowDropUpLine />
               </p>
-              <div className="bg-white p-3 shadow-lg rounded-lg mt-2">
+              <div className="bg-white p-3 h-[26rem] overflow-scroll scrollbar-hide shadow-lg rounded-lg mt-2">
                 {categData.map((elm, ind) => (
                   <p
                     key={ind}

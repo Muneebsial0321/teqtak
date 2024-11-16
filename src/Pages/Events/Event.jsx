@@ -19,7 +19,7 @@ const CardComponent = ({ title, imgSrc, onSave }) => (
       alt="Card Img"
     />
     <div className="absolute inset-0 flex justify-between ShadedBG rounded-lg">
-      <h5 className="text-sm ps-2 absolute bottom-2 w-[93%] overflow-hidden whitespace-nowrap text-ellipsis">{title}</h5>
+      <h5 className="text-sm ps-2 absolute bottom-2 w-[93%] backdrop-blur-sm py-2 rounded-2xl overflow-hidden whitespace-nowrap text-ellipsis">{title}</h5>
       <IoBookmarkOutline 
         className="absolute lg:right-2 lg:top-4 lg:text-2xl cursor-pointer top-2 right-1" 
         onClick={onSave} // Call the save function passed as prop
@@ -81,16 +81,17 @@ function Event() {
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-[95%] ">
       <ToastContainer />
-      <div className="w-full h-[10%]">
+      <div className="w-full h-[10%] ">
         <EventFilters data={{newcard ,setFilterLoopData}} />
       </div>
       <div className="h-[89%] bg-white mt-1 w-full overflow-y-scroll Podcast_Top_Videos">
         <h3 className="text-xl font-bold my-3 w-[95%] mx-auto">
           Suggested Events
         </h3>
-        <div className="h-full w-[95%] mx-auto">
+        <div className="h-full w-full mx-auto">
+          
           <div className="flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos">
             {filterLoopData.length > 0 ? (
               filterLoopData.map((data, i) => (
@@ -106,6 +107,9 @@ function Event() {
               ))
             ) : "No Filter Result Match"}
           </div>
+          <h3 className="text-xl font-bold my-3 w-[95%] mx-auto">
+          Related Events
+        </h3>
           <RelatedEvent data={{setNewCard, setFilterLoopData, filterLoopData}} />
           <br />
         </div>

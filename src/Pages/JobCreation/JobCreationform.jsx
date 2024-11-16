@@ -183,6 +183,7 @@ const JobCreationForm = () => {
           <h1>Customize Cover</h1>
           <div className="bg-[#f0f0fe] w-full h-[25vh] rounded-lg flex items-center justify-center relative overflow-hidden">
             <input
+              required
               type="file"
               accept="image/*"
               className="absolute w-full h-full opacity-0 cursor-pointer"

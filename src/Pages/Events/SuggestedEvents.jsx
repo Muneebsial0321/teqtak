@@ -72,7 +72,12 @@ const filteredData = location.state?.filteredData
   };
 
   return (
-    <div className="mt-3 flex flex-wrap gap-1 w-[93%] mx-auto">
+<>
+    <h3 className="text-xl font-bold my-6 mx-auto">
+    Related Events
+  </h3>
+    <div className="mt-3 flex flex-wrap gap-1 w-full mx-auto">
+  
       <ToastContainer /> {/* Include ToastContainer for notifications */}
       {newcard.map((data, i) => (
         <div key={i} className="m-0 text-white md:w-[32%] w-[48.4%] lg:h-[42vh] h-[37vh] relative rounded-2xl">
@@ -113,6 +118,7 @@ const filteredData = location.state?.filteredData
         </div>
       ))}
     </div>
+    </>
   );
 }
 

@@ -6,12 +6,63 @@ import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 // import { fetchPodcast } from "../../API";
 
-let categData = [
+let categData__ = [
   "All",
   "Tech & Entrepreneurship",
   "Finance",
   "Tech & Investor",
   "Teamwork",
+];
+
+
+const categData = [
+  "All",
+  "Tech Entrepreneur",
+  "Art",
+  "Tech & Investor",
+  "Teamwork",
+  "Finance",
+  "Networking",
+  "Government",
+  "Charity",
+  "Investors",
+  "Language learning",
+  "Politics",
+  "Fashion",
+  "History",
+  "Hobbies",
+  "Career ,& Business",
+  "Travel & Outdoor",
+  "News",
+  "Technology",
+  "True Crime",
+  "Comedy",
+  "Music & dancing",
+  "Sports",
+  "Science",
+  "Leadership",
+  "Education",
+  "Sustainability",
+  "Fiction",
+  "Interviews",
+  "Business and Finance ",
+  "Health ,and Wellness",
+  "Self - Imporvement",
+  "Music",
+  "Religion & Spirituality",
+  "Pop Culture",
+  "Environment",
+  "Parenting",
+  "Gaming",
+  "Food and Cooking",
+  "Pet & Animal",
+  "Relationship & Books",
+  "Personal Stories",
+  "TV & Film",
+  "Social Activities",
+  "Subscribes",
+  "Language",
+  "Others",
 ];
 let durData = ["15 min", "30 min", "1 hour","+1 hour"];
 let revData = ["All", "Top Revies", "Other"];
@@ -101,7 +152,7 @@ function PodcastFilters({ data }) {
               <p className="bg-white p-3 shadow-lg rounded-lg flex justify-between items-center">
                 {catSelectData} <RiArrowDropUpLine />
               </p>
-              <div className="bg-white p-3 shadow-lg rounded-lg mt-2">
+              <div className="bg-white p-3 shadow-lg h-[26rem] scrollbar-hide scrollbar-hide overflow-scroll rounded-lg mt-2">
                 {categData.map((elm, ind) => (
                   <p
                     key={ind}
