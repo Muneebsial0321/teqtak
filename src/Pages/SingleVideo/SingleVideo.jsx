@@ -309,6 +309,7 @@ const Video = () => {
             </div>
           </div>
           <video
+          controls
             src={video?.data?.videoUrl || ''}
             autoPlay
             className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover"

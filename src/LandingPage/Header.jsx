@@ -8,25 +8,8 @@ import Forth from './Forth';
 import Fifth from './Fifth';
 
 const Header = () => {
-  const menuRef = useRef(null);
-  const [navToggle, setNavToggle] = useState(false);
-
-  const handleClickOutside = (event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setNavToggle(false);
-    }
-  };
-
-  useEffect(() => {
-    if (navToggle) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [navToggle]);
+  // const menuRef = useRef(null);
+  // const [navToggle, setNavToggle] = useState(false);
 
   const scrollToSection = (id) => {
     // Use this function to scroll to the respective section
@@ -39,81 +22,43 @@ const Header = () => {
   return (
     <>
       <div className='overflow-x-hidden bg-[#e4efff]'>
-        <div className="flex z-20 justify-between h-36 w-full px-6 sm:px-6 md:px-12 lg:px-28 pt-4 relative items-center">
+
+        <div className="flex  z-20 justify-between lg:h-[9rem] md:h-[7rem] sm:h-[4rem] w-full px-6 sm:px-6 md:px-12 lg:px-28 py-4 relative items-center ">
+
           {/* Logo */}
           <div className="Logo">
-            <NavLink to="/" className="text-[#6165f3] font-sans text-2xl sm:text-2xl font-extrabold">
-              Investor App
+            <NavLink to="/" className="text-[#6165f3] font-sans text-[14px] sm:text-2xl font-extrabold">
+              Investor&nbsp;App
             </NavLink>
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex justify-evenly w-3/5 lg:w-2/5 text-lg text-center">
-            <li>
-              <a
-                href="#home"
-                className="text-gray-800 font-bold"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection('home'); // Scroll to the Home section
-                }}
-              >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="#about"
-                className="text-gray-400"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection('about'); // Scroll to the About section
-                }}
-              >
-                About App
-              </a>
-            </li>
-            <li>
-              <a
-                href="#faqs"
-                className="text-gray-400"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection('faqs'); // Scroll to the FAQs section
-                }}
-              >
-                FAQs
-              </a>
-            </li>
-            <li>
-              <a
-                href="#preview"
-                className="text-gray-400"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection('preview'); // Scroll to the Preview section
-                }}
-              >
-                Preview
-              </a>
-            </li>
+
+          <ul className="flex sm:justify-evenly max-sm:gap-4 justify-center w-3/5 lg:w-2/5 text-lg max-md:text-[16px] max-sm:text-[9px] text-center">
+            <NavLink to="/" className="text-gray-800 font-bold">
+              Home
+            </NavLink>
+            <NavLink to="/about" className="text-gray-400">
+              About App
+            </NavLink>
+            <NavLink to="/faqs" className="text-gray-400">
+              FAQs
+            </NavLink>
+            <NavLink to="/preview" className="text-gray-400">
+              Preview
+            </NavLink>
+
           </ul>
 
           {/* Download Button */}
-          <button className="hidden md:block bg-white rounded h-10 w-28 px-4 py-2 text-[#6165F3] border-2 z-10">
+          <button className="block bg-white max-md:text-[16px] max-sm:text-[9px] rounded px-2 py-1 sm:px-4 sm:py-2 text-[#6165F3] border-2 z-10">
             Download
           </button>
 
           {/* Toggle Button for Mobile */}
-          <button
-            className="md:hidden text-2xl"
-            onClick={() => setNavToggle(!navToggle)}
-          >
-            <IoMenu />
-          </button>
 
           {/* Toggle Menu for Mobile */}
-          {navToggle && (
+          {/* {navToggle && (
             <div
               ref={menuRef}
               className="absolute top-16 right-0 w-48 bg-white shadow-lg z-20 md:hidden"
@@ -169,23 +114,18 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-          )}
-        </div>
+
+          )} */}
+        </div> 
       </div>
 
-      {/* Sections of the page that you want to scroll to */}
-      <div id="home">
-        <HeaderComponent />
-      </div>
-      <div id="about">
-        <Second />
-      </div>
-      <div id="faqs">
-        <Third />
-      </div>
-      <div id="preview">
-        <Fifth />
-      </div>
+      <HeaderComponent />
+      <Second />
+      {/* <Third /> */}
+      {/* <Forth /> */}
+      {/* <ThreeAfter/> don't 😥😣 uncomment*/}
+      {/* <Fifth /> */}
+
     </>
   );
 };
