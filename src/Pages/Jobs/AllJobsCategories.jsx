@@ -18,16 +18,9 @@ const CalendarSearch = ({ job }) => {
   // Function to fetch and cache data
   const getData = async () => {
     try {
-      const cachedData = localStorage.getItem("jobData");
-      if (cachedData) {
-        setData(JSON.parse(cachedData)); // Use cached data
-        setFilterLoopData(JSON.parse(cachedData)); // Use cached data for filtering
-      } else {
-        const result = await fetchData(); // Fetch data from API
-        setData(result.data);
-        setFilterLoopData(result.data);
-        localStorage.setItem("jobData", JSON.stringify(result.data)); // Cache data in localStorage
-      }
+      const result = await fetchData(); // Fetch data from API
+      setData(result.data);
+      setFilterLoopData(result.data);
     } catch (error) {
       console.error("Fetching data error", error);
     }
