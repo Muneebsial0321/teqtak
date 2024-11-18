@@ -174,7 +174,7 @@ const Model = (props) => {
           <section className="flex md:flex-nowrap flex-wrap md:items-center w-full h-[100%] font-[450] text-xs">
           {props.comp =='podcast' && <img
           className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[765px]:w-[100%]"
-          src={picUrl ||  "/loading.jpg"}
+          src={props.picUrl ||  "/loading.jpg"}
           alt="Video Thumbnail"
         />}
      { props.comp =='video' &&   <video
