@@ -127,7 +127,8 @@ function Subscribed() {
                     <img
                       src={subsc.user?.picUrl ? subsc.user.picUrl : 'placeholder.jpg'}
                       alt=""
-                      className="h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] rounded-full"
+                      className={`h-[40px] w-[40px] lg:h-[50px] lg:w-[50px] rounded-full ${subsc.user.role === 'investor' ? 'border-2 border-red-600' : 
+                        subsc.user.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                     />
                   </Link>
                   <div>

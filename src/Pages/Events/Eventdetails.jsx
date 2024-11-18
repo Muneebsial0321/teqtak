@@ -66,13 +66,18 @@ function Eventdetails() {
             Event Detail
           </h4>
           {result.user && (
+           <Link to="/userprofile"
+           state={{id:result.user.Users_PK}}
+           >
             <img
               src={
                 result.user.picUrl ? result.user.picUrl : "./placeholder.jpg"
               }
               alt={result.user ? result.user.name : "Profile"}
-              className="rounded-full w-[70px] h-[70px] mt-2 mx-3 object-cover"
+              className={`rounded-full w-[70px] h-[70px] mt-2 mx-3 object-cover ${result.user.role === 'investor' ? 'border-4 border-red-600' : 
+                          result.user.role === 'entrepreneur' ? 'border-4 border-blue-600' : ''}`}
             />
+           </Link>
           )}
         </div>
         {/* {newcard.map(( data,index)=>( */}
@@ -174,7 +179,7 @@ function Eventdetails() {
               <h5 className="text-sm font-bold">Participants</h5>
               <div className="flex items-center">
                 {result.participants &&
-                  result.participants.slice(0, 2).map((elm, ind) => (
+                  result.participants.slice(0, 4).map((elm, ind) => (
                     <Link
                       to="/userprofile"
                       state={{ id: elm.Users_PK }}
@@ -183,20 +188,21 @@ function Eventdetails() {
                       <img
                         src={elm.picUrl ? elm.picUrl : "/placeholder.jpg"}
                         alt=""
-                        className="partiimg1 rounded-full border border-black"
+                        className={`partiimg1 rounded-full border border-black ${elm.role === 'investor' ? 'border-2 border-red-600 ' : 
+                          elm.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                       />
                     </Link>
                   ))}
 
                 {/* Repeat for other participant images */}
-                {result.participants && result.participants.length > 2 && (
+                {result.participants && result.participants.length > 4 && (
                   <Link
                     to="/participants"
                     state={{ id: event._id }}
                     className="parti2 flex items-center justify-center -ml-[10px] border border-black text-white text-xl cursor-pointer"
                   >
                     <small className="text-gray-500">
-                      +{result.participants.length - 2}
+                      +{result.participants.length - 4}
                     </small>
                   </Link>
                 )}
@@ -233,10 +239,11 @@ function Eventdetails() {
                 >
                   <img
                     src={elm.picUrl ? elm.picUrl : "/placeholder.jpg"}
-                    className="rounded-full h-[35px] w-[35px]"
+                    className={`rounded-full h-[35px] w-[35px] ${elm.role === 'investor' ? 'border-2 border-red-600' : 
+                          elm.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                     alt=""
                   />
-                  <h1 className="text-md">{elm.name || elm.userName}</h1>
+                  <h1 className="text-md">{elm.name || elm.userName || "guest"}</h1>
                 </Link>
               ))}
           </div>

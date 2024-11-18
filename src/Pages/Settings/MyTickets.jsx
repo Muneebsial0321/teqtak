@@ -84,7 +84,7 @@ function MyTickets() {
             {tickets.length > 0 ? ( tickets.map((ticket) => (
               <div key={ticket._id} className="m-0 text-white md:w-[32.4%] w-[48.4%] sm:h-[45vh] h-[37vh] relative">
                 <img
-                  src={ticket.event.eventCoverUrl}
+                  src={ticket.event.eventCoverUrl || '/loading.jpg'}
                   alt="Event Cover"
                   className="h-full w-full rounded-lg cursor-pointer object-cover"
                   // onClick={() => navigate("/eventdetail", { state: { ticket } })}

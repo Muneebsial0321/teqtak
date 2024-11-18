@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchPodcast } from "../../API";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import img from "./img2.jpeg";
 import { CiPlay1 } from "react-icons/ci";
 import { IoBookmarkOutline } from "react-icons/io5";
 import axios from "axios";

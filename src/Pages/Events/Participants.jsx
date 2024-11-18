@@ -61,7 +61,8 @@ function Participants () {
             <img
               src={user.picUrl}
               alt=""
-              className='h-[50px] w-[50px] rounded-full'
+              className={`h-[50px] w-[50px] rounded-full ${user.role === 'investor' ? 'border-2 border-red-600' : 
+                          user.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
             />
             <div>
               <p className='text-base font-medium'>{user.name}</p>

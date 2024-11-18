@@ -187,7 +187,8 @@ function MyCreatedPodcast() {
               >
                 <img
                   src={elm.picUrl ? elm.picUrl : "/placeholder.jpg"}
-                  className="rounded-full h-[35px] w-[35px]"
+                  className={`rounded-full h-[35px] w-[35px] ${elm.role === 'investor' ? 'border-2 border-red-600' : 
+                          elm.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                   alt=""
                 />
                 <h1 className="text-md">{elm.name || elm.userName}</h1>

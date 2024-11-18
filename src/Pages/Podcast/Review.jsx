@@ -305,7 +305,8 @@ const Review = (props) => {
                         <img
                           src={value.sender.picUrl || "/placeholder.jpg"}
                           alt="Profile"
-                          className="rounded-full w-5 h-5"
+                          className={`rounded-full w-5 h-5 ${value.sender.role === 'investor' ? 'border-2 border-red-600' : 
+                          value.sender.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                         />
                         <h1>{value.sender.name}</h1>
                       </Link>

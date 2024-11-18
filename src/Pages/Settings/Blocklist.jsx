@@ -80,7 +80,8 @@ function Blocklist() {
                   <img
                     src={block.user.picUrl || "/placeholder.jpg"}
                     alt=""
-                    className='h-[50px] w-[50px] rounded-full'
+                    className={`h-[50px] w-[50px] rounded-full ${block.user.role === 'investor' ? 'border-2 border-red-600' : 
+                          block.user.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                   />
                   <div>
                     <p className='text-base font-medium'>{block.user.name || block.user.userName || "unknown"}</p>

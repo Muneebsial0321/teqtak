@@ -180,7 +180,8 @@ const ProfileVideos = () => {
                <img
                   src={video && video.user ? video.user.picUrl : "/placeholder.jpg"}
                   style={{ height: "40px", width: "40px" }}
-                  className="rounded-full"
+                  className={`rounded-full ${video.user.role === 'investor' ? 'border-2 border-red-600' : 
+                          video.user.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                   alt="User Profile "
                 />
                </Link>
