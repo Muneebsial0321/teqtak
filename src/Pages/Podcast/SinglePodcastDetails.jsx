@@ -144,9 +144,10 @@ function SinglePodcastDetails() {
         {repModOpen && (
           <div className="h-full w-full absolute top-0 left-0 z-20 flex justify-center items-center">
             <Model
+            comp={'podcast'}
               setRepModOpen={setRepModOpen}
               videoId={result._id}
-              picUrl={result.picUrl}
+              picUrl={result?.picUrl}
             />
           </div>
         )}

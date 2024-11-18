@@ -99,7 +99,7 @@ const Model = (props) => {
       toast.error("Error submitting report."); // Show error toast
     }
   };
-  
+
 
   return (
     <React.Fragment>
@@ -120,7 +120,7 @@ const Model = (props) => {
           <section className="flex md:flex-nowrap flex-wrap relative items-center w-full h-[100%] font-[450] text-xs ">
           {props.comp =='podcast' && <img
           className="md:w-[45%] w-[40%] md:h-full h-[40%] object-cover max-[765px]:w-[100%]"
-          src={picUrl ||  "/loading.jpg"}
+          src={props.picUrl ? props.picUrl :  "/loading.jpg"}
           alt="Video Thumbnail"
         />}
      { props.comp =='video' &&   <video
@@ -195,9 +195,9 @@ const Model = (props) => {
               <h1 className="text-center font-semibold pt-2 pb-6">
                 Please specify why you are reporting this.
               </h1>
-              <div className="px-4 flex flex-col justify-between h-full">
+              <div className="px-4 flex flex-col justify-between h-ful">
                 <textarea
-                  className="w-full outline-none h-[300px] max-[425px]:h-[150px] p-2 border-none bg-gray-100 rounded"
+                  className="w-full outline-none h-20  p-2 border-none bg-gray-100 rounded"
                   placeholder="The person is..."
                   value={reportMessage}
                   onChange={(e) => setReportMessage(e.target.value)}
