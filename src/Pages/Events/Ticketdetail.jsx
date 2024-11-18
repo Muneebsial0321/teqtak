@@ -168,9 +168,10 @@ function Ticketdetail() {
 
   return (
     <>
-      <div className="main h-full w-full ">
-        <button  onClick={captureScreenshotAndDownload}  >Downlaod</button>
-        <h4 className="flex items-center gap-3 ms-4 h-[10%]">
+      <div className="main h-full w-full bg-white ">
+        
+      <div className="flex justify-between">
+      <h4 className="flex items-center gap-3 ms-4 h-[10%]">
           <FaAngleLeft
             className="cursor-pointer"
             onClick={() =>
@@ -181,6 +182,8 @@ function Ticketdetail() {
           />{" "}
           Ticket Details
         </h4>
+        <button  onClick={captureScreenshotAndDownload}  >Downlaod</button>
+      </div>
         <div ref={ticketRef} className="w-[90%] this_is_ref overflow-y-scroll Podcast_Top_Videos h-[90%] mx-auto">
           <div className="lg:h-[70%] w-[100%] bg-[#f3f2f2] rounded-xl lg:pb-0 pb-3">
             <div className="flex justify-evenly flex-wrap lg:flex-nowrap">
