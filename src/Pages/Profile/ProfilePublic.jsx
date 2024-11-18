@@ -55,29 +55,12 @@ const ProfilePublic = ({ userId }) => {
     }
   };
 
-  // Function to fetch profile data with caching
+  // Fetch fresh profile data directly from the API (without cache)
   const fetchProfileData = async () => {
     try {
-      const cachedProfile = localStorage.getItem("profileData");
-      const cachedTimestamp = localStorage.getItem("profileTimestamp");
-      const cacheExpirationTime = 24 * 60 * 60 * 1000; // Cache expires after 1 day
-
-      // Check if cached data is still valid
-      if (cachedProfile && cachedTimestamp && Date.now() - cachedTimestamp < cacheExpirationTime) {
-        // Use cached data if it's still valid
-        const cachedData = JSON.parse(cachedProfile);
-        setProfile(cachedData.user);
-        setDATA(cachedData.data || { rating: {} });
-      } else {
-        // Fetch fresh data from the API
-        const result = await fetchProfile(getUserId());
-        setProfile(result.user);
-        setDATA(result.data || { rating: {} });
-
-        // Cache the data and timestamp
-        localStorage.setItem("profileData", JSON.stringify(result));
-        localStorage.setItem("profileTimestamp", Date.now());
-      }
+      const result = await fetchProfile(getUserId());
+      setProfile(result.user);
+      setDATA(result.data || { rating: {} });
     } catch (error) {
       console.error("Fetching profile data error:", error);
     }
@@ -107,7 +90,8 @@ const ProfilePublic = ({ userId }) => {
   }, []);
 
   const isCurrentUser = getUserId();
-const isViewer = profile.role === 'viewer';
+  console.log(`isCurrentUser`, isCurrentUser);
+  const isViewer = profile.role === 'viewer';
   return (
     <Fragment>
       <div className="bg-white h-[90vh] w-full">

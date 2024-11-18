@@ -1,15 +1,37 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiVideoOn } from "react-icons/ci";
 import { LuPodcast } from "react-icons/lu";
 import { BsCalendar4Event, BsSuitcaseLg } from "react-icons/bs";
 import { myContext } from "../../Context/CreateContext";
 import { RxCross2 } from "react-icons/rx";
-
+import { fetchProfile } from "../../API";
 const Podcastitems = () => {
   let navigate = useNavigate();
   let { CreationStates } = useContext(myContext);
+const [profile ,setProfile ] = useState({})
+   const getUserId = () => {
+    const str = document.cookie;
+    const userKey = str.split('=')[1];
+    return userKey;
+  };
 
+
+  const fetchProfileData = async () => {
+    try {
+      const result = await fetchProfile(getUserId());
+      setProfile(result.user);
+     
+    } catch (error) {
+      console.error("Fetching profile data error:", error);
+    }
+  };
+  console.log("profile data loaded",profile)
+  useEffect(() => {
+    fetchProfileData();
+  }, []);
+ 
+  const isViewer = profile.role === 'viewer';
   // Navigation Handlers
   const handleInputFile = () => {
     CreationStates.setCreationPodcast(false);
@@ -59,13 +81,13 @@ const Podcastitems = () => {
         {/* List of items */}
         <div>
           <hr className="text-[#dddddd]" />
-          <div
+        {isViewer ? null :   <div
             className="flex py-5 items-center cursor-pointer hover:bg-gray-100 transition-all"
             onClick={handleInputFile}
           >
             <CiVideoOn className="text-[20px] ms-3 me-2" />
             <p className="text-[17px]">Videos</p>
-          </div>
+          </div>}
           <hr className="text-[#dddddd]" />
 
           <div

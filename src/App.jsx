@@ -65,8 +65,7 @@ import ZoomSocket from './Pages/Messages/ZoomSocket.jsx';
 
 
 const App = () => {
-  const token = localStorage.getItem('jwt');
-console.log("Authent", token);
+
   return (
     <Fragment>
       <Routes>
@@ -78,7 +77,7 @@ console.log("Authent", token);
         <Route path='/notfound' element={<NotFound /> } />
 
         {/* Routes with Layout private routes */}
-        <Route element={token ? <Layout /> : <Navigate to="/signup"/> }>
+        <Route element={ <Layout />  }>
       
         {/* <Route path='/search'element={<Search/>} /> */}
           <Route path="/videos" element={<Feed /> } />
