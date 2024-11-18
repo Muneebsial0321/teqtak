@@ -62,6 +62,7 @@ import WatchSingle from './Pages/SingleVideo/WatchSingle.jsx';
 import OnBoarding from './OnBoarding.jsx';
 import MyCreatedPodcast from './Pages/Profile/MyCreatedPodcast.jsx';
 import ZoomSocket from './Pages/Messages/ZoomSocket.jsx';
+import Recipt from './Components/Recipt.jsx';
 
 
 const App = () => {
