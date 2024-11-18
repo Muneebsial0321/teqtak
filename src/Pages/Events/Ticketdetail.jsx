@@ -182,7 +182,7 @@ function Ticketdetail() {
           />{" "}
           Ticket Details
         </h4>
-        <button  onClick={captureScreenshotAndDownload} className="linear_gradient text-white cursor-pointer " >Downlaod</button>
+        <button  onClick={captureScreenshotAndDownload} className="linear_gradient text-white cursor-pointer px-2 py-1" >Downlaod</button>
       </div>
         <div ref={ticketRef} className="w-[90%] this_is_ref overflow-y-scroll Podcast_Top_Videos h-[90%] mx-auto">
           <div className="lg:h-[70%] w-[100%] bg-[#f3f2f2] rounded-xl lg:pb-0 pb-3">
