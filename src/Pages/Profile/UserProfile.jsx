@@ -173,7 +173,9 @@ const UserProfile = () => {
             <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative ">
               <label htmlFor="fileInput" aria-label="Upload Profile Picture">
                 <img
-                  className="rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover"
+                  className={`rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover
+                    ${profile.role === 'investor' ? 'border-4 border-red-600' : 
+    profile.role === 'entrepreneur' ? 'border-4 border-blue-600' : ''}`}
                   src={profile.picUrl || "/placeholder.jpg"} // Fallback URL
                   alt="Profile"
                 />

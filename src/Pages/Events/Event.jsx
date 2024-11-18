@@ -81,12 +81,12 @@ function Event() {
         <EventFilters data={{newcard ,setFilterLoopData}} />
       </div>
       <div className="h-[89%] bg-white mt-1 w-full overflow-y-scroll Podcast_Top_Videos">
-        <h3 className="text-xl font-bold my-3 w-[95%] mx-auto">
+        <h3 className="text-xl font-bold my-3 w-[95%] mx-auto ml-12">
           Suggested Events
         </h3>
         <div className="h-full w-[95%]  mx-auto">
           
-          <div className="flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos">
+          <div className="flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos ml-2">
             {filterLoopData.length > 0 ? (
               filterLoopData.map((data, i) => (
                 <CardComponent
@@ -101,7 +101,7 @@ function Event() {
               ))
             ) : "No Filter Result Match"}
           </div>
-          <h3 className="text-xl font-bold my-3 w-[95%] mx-auto">
+          <h3 className="text-xl font-bold my-3 w-[95%] mx-auto ">
           Related Events
         </h3>
           <RelatedEvent data={{setNewCard, setFilterLoopData, filterLoopData}} />

@@ -30,7 +30,7 @@ const getProfilePic = async()=>{
   })
 
   const data = await req.json()
-  setProfilePic(()=> data.user.picUrl && data.user.picUrl)
+  setProfilePic(()=> data.user)
 }
 useEffect(() => {
 getProfilePic()
@@ -43,7 +43,10 @@ getProfilePic()
         <li className="mb-2">
           <Link to="/profile" className={`flex items-center  ${locationPath === '/profile' ? 'Left_Side_Selected' : ''} py-2 px-2 rounded-lg  transition-all duration-200 transform` }
           >
-            <img src={profilePic ? profilePic : "/placeholder.jpg" } className='rounded-full h-[25px] w-[25px] md:mr-2' alt="" />
+            <img src={profilePic ? profilePic.picUrl : "/placeholder.jpg" } className={`rounded-full h-[25px] w-[25px] md:mr-2  ${profilePic.role === 'investor' ? 'border-2 border-red-600' : 
+profilePic.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
+            
+            alt="" />
             <span className='text-sm opacity-70 md:block hidden'>Profile</span>
           </Link>
         </li>

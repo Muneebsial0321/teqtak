@@ -100,7 +100,8 @@ const ProfilePublic = ({ userId }) => {
         </div>
         <div className="flex flex-col md:flex-row justify-center h-auto mt-4 md:mt-0">
           <div className="flex md:flex-row gap-4 w-full md:w-[75%] items-center md:items-center xl:items-center justify-center">
-            <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative">
+            <div className="rounded-full flex justify-end items-center md:justify-end w-[30%] relative
+            ">
               <input
                 type="file"
                 onChange={handleFileChange}
@@ -109,7 +110,10 @@ const ProfilePublic = ({ userId }) => {
               />
               <label htmlFor="fileInput" className="cursor-pointer" aria-label="Upload Profile Picture">
                 <img
-                  className="rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover"
+                  className={`rounded-full w-[100px] h-[100px] md:w-[120px] md:h-[120px] object-cover
+                    ${profile.role === 'investor' ? 'border-4 border-red-600' : 
+    profile.role === 'entrepreneur' ? 'border-4 border-blue-600' : ''}`}
+                  
                   src={profile.picUrl ? profile.picUrl : "/placeholder.jpg"} // Fallback URL
                   alt="Profile"
                 />

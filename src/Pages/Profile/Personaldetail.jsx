@@ -136,8 +136,14 @@ function Personaldetail() {
             </div>
           </div>
 
-          <p className="text-xl font-semibold mt-5">More info</p>
-          {detail.role && <SelectedInfo userPk={userID} role={detail.role} />}
+       {detail.role !== 'viewer' && (
+        <>
+           <p className="text-xl font-semibold mt-5">More info</p>
+           {detail.role && <SelectedInfo userPk={userID} role={detail.role} />}
+        </>
+       )
+       
+       } 
         </div>
       </div>
     </Fragment>
