@@ -311,7 +311,8 @@ function Message2() {
                           : "/placeholder.jpg"
                       }
                       alt="profile"
-                      className="h-[40px] w-[40px] rounded-full"
+                      className={`h-[40px] w-[40px] rounded-full       ${sender.role === 'investor' ? 'border-2 border-red-600' : 
+    sender.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                     />
                     <div className="flex">
                       <div className="max-w-[70%] ">

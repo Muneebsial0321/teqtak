@@ -4,73 +4,50 @@ import { CiMenuKebab } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
-// Helper functions for cache management
-const setCache = (key, data) => {
-  localStorage.setItem(key, JSON.stringify(data));
-};
-
-const getCache = (key) => {
-  const cachedData = localStorage.getItem(key);
-  return cachedData ? JSON.parse(cachedData) : null;
-};
-
-const removeCache = (key) => {
-  localStorage.removeItem(key);
-};
-
-const getUserId = () => {
-  const str = document.cookie;
-  const userKey = str.split("=")[1];
-  return userKey;
-};
-
 const API_URL = REACT_APP_API_BASE_URL;
 
 function Notification() {
   const [notifications, setNotifications] = useState([]);
   const [visibleId, setVisibleId] = useState(null);
 
-  // Function to fetch notifications with caching
+  // Function to fetch notifications directly from the API
   const fetchNotifications = async () => {
-    // Check if notifications are cached
-    const cachedNotifications = getCache(`notifications_${getUserId()}`);
-    if (cachedNotifications) {
-      setNotifications(cachedNotifications);
-    } else {
-      try {
-        const response = await axios.get(
-          `${API_URL}/notifications/${getUserId()}`
-        );
-        setNotifications(response.data.data);
-
-        // Cache the fetched notifications
-        setCache(`notifications_${getUserId()}`, response.data.data);
-      } catch (error) {
-        console.error("Error fetching notifications:", error);
-      }
+    try {
+      const response = await axios.get(
+        `${API_URL}/notifications/${getUserId()}`
+      );
+      setNotifications(response.data.data); // Update state with fetched notifications
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
     }
   };
 
+  // Helper function to get the user ID from cookies
+  const getUserId = () => {
+    const str = document.cookie;
+    const userKey = str.split("=")[1];
+    return userKey;
+  };
+
+  // Toggle the visibility of the delete menu for each notification
   const handleToggleMenu = (id) => {
     setVisibleId(visibleId === id ? null : id);
   };
 
+  // Handle the deletion of a notification
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API_URL}/notifications/${id}`); // Delete specific notification
       setNotifications((prevNotifications) =>
         prevNotifications.filter((notification) => notification._id !== id)
-      );
-
-      // Optionally, remove from cache
-      setCache(`notifications_${getUserId()}`, notifications.filter((notification) => notification._id !== id));
+      ); // Update notifications state after delete
     } catch (error) {
       console.error("Error deleting notification:", error);
     }
   };
 
   useEffect(() => {
-    fetchNotifications(); // Fetch notifications on component mount
+    fetchNotifications(); // Fetch notifications when the component mounts
   }, []);
 
   return (
@@ -90,7 +67,8 @@ function Notification() {
                       <img
                         src={notification.imgSrc || "/placeholder.jpg"} // Fallback image URL
                         alt={`Notification from user ${notification._id}`}
-                        className="lg:h-[50px] lg:w-[50px] rounded-full h-[30px] w-[30px]"
+                        className={`lg:h-[50px] lg:w-[50px] rounded-full h-[30px] w-[30px] ${notification.role === 'investor' ? 'border-4 border-red-600' : 
+                          notification.role === 'entrepreneur' ? 'border-4 border-blue-600' : ''}`}
                       />
                     </Link>
                     <div>

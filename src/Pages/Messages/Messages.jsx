@@ -118,7 +118,8 @@ function Message() {
                           e.sender?.picUrl ? e.sender.picUrl : "/placeholder.jpg"
                         }
                         alt="sender"
-                        className="h-[50px] w-[50px] rounded-full"
+                        className={`h-[50px] w-[50px] rounded-full       ${e.sender.role === 'investor' ? 'border-2 border-red-600' : 
+    e.sender.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                       />
                       <div>
                         <p className="text-md font-medium">
