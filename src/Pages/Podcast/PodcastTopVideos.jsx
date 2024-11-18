@@ -32,15 +32,9 @@ function PodcastTopVideos({ data }) {
 
     const getData = async () => {
       try {
-        const cachedData = localStorage.getItem('filterLoopData');
-        if (cachedData) {
-          setFilterLoopData(JSON.parse(cachedData));  // Use cached filter loop data
-        } else {
-          const result = await fetchPodcast();
-          setRecentData(result.data);
-          setFilterLoopData(result.data);
-          localStorage.setItem('filterLoopData', JSON.stringify(result.data));  // Cache the filter loop data
-        }
+        const result = await fetchPodcast();
+        setRecentData(result.data);
+        setFilterLoopData(result.data);
       } catch (error) {
         console.error("Fetching data error", error);
       }
@@ -49,15 +43,10 @@ function PodcastTopVideos({ data }) {
     if (filteredData && filteredData.length > 0) {
       setRecentData(filteredData);
     } else {
-      // Check if recent view data is already in localStorage
-      const cachedRecentView = localStorage.getItem('recentView');
-      if (cachedRecentView) {
-        setRecentView(JSON.parse(cachedRecentView)); // Use cached recent views
-      } else {
-        fetchViews(); // Fetch from API if not cached
-      }
+      // Fetch recent views from API
+      fetchViews();
 
-      // Fetch or load podcast data
+      // Fetch podcast data from API
       getData();
     }
 
