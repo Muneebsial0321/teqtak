@@ -11,6 +11,7 @@ import React, { useState, useEffect } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { deleteReview } from "../../DeleteAPI";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
+import { Link } from "react-router-dom";
 
 const Review = (props) => {
   const { videoId, picUrl } = props;
@@ -298,14 +299,16 @@ const Review = (props) => {
                 ) : (
                   comments.map((value, i) => (
                     <div key={i} className="flex flex-col gap-3 mb-4">
-                      <div className="flex gap-1 items-center">
+                      <Link 
+                      to="/userprofile"
+                      state={{ id: value.sender.Users_PK }} className="flex gap-1 items-center">
                         <img
                           src={value.sender.picUrl || "/placeholder.jpg"}
                           alt="Profile"
                           className="rounded-full w-5 h-5"
                         />
                         <h1>{value.sender.name}</h1>
-                      </div>
+                      </Link>
                       <div className="flex gap-1 items-center">
                         <div>
                           {[1, 2, 3, 4, 5].map((star) => (

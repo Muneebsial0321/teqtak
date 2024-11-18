@@ -26,9 +26,7 @@ const Video = () => {
   
   const API_BASE_URL = REACT_APP_API_BASE_URL;
 
-  const handleProfile = (userId) => {
-    navigate(`/profile/${userId}`);
-  };
+ 
 
   const videoId = decodeURIComponent(src);
 

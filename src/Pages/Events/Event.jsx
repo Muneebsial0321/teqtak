@@ -12,7 +12,7 @@ import { REACT_APP_API_BASE_URL } from "../../ENV";
 const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 const CardComponent = ({ title, imgSrc, onSave }) => (
-  <div className="lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[15vw] sm:w-[20vw] w-[50%] relative cursor-pointer m-0 text-white  max-[375px]:w-[48.4%] max-[320px]:w-[65.4%]">
+  <div className="lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[20vw] sm:w-[25vw] w-[80%] relative cursor-pointer m-0 text-white  max-[375px]:w-[98rem] max-[320px]:w-[65.4%]">
     <img
       className="h-full w-full rounded-lg object-cover"
       src={imgSrc ? imgSrc : "/loading.jpg"}
@@ -75,7 +75,7 @@ function Event() {
   };
 
   return (
-    <div className="h-full w-[95%] ">
+    <div className="h-full w-[100%] ">
       <ToastContainer />
       <div className="w-full h-[10%] ">
         <EventFilters data={{newcard ,setFilterLoopData}} />
@@ -84,7 +84,7 @@ function Event() {
         <h3 className="text-xl font-bold my-3 w-[95%] mx-auto">
           Suggested Events
         </h3>
-        <div className="h-full w-full mx-auto">
+        <div className="h-full w-[95%]  mx-auto">
           
           <div className="flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos">
             {filterLoopData.length > 0 ? (

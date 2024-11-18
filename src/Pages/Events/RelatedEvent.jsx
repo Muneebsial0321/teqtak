@@ -77,7 +77,7 @@ const RelatedEvent = ({ data }) => {
   };
 
   return (
-    <div className="mt-3 flex flex-wrap gap-1 w-[93%] mx-auto">
+    <div className="mt-3 flex flex-wrap gap-1 lg:gap-2 w-full mx-auto">
       <ToastContainer /> {/* Include ToastContainer for notifications */}
       {filterLoopData.length > 0 ? (
         filterLoopData.map((data, i) => (

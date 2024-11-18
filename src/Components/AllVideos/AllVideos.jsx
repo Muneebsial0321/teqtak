@@ -138,7 +138,7 @@ const AllVideos = () => {
             onClick={() => handleVideoClick(i)}
           >
             <video
-              src={video.videoUrl}
+              src={video.videoUrl || '/loading.jpg'}
               className="w-[100%] h-[100%] overflow-y-hidden object-cover"
               muted
             ></video>

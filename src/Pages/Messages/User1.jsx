@@ -215,9 +215,13 @@ function Message2() {
                 onClick={() => navigate("/messages")}
               />
               {/* <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/> */}
-              <p className="text-xl font-medium whitespace-nowrap">
+              <Link 
+              to="/userprofile"
+             
+              state={{ id: sender.Users_PK }}
+              className="text-xl font-medium whitespace-nowrap">
                 {sender ? sender.name : "Unknown"}
-              </p>
+              </Link>
             </div>
             <div className="flex gap-5">
               <CiMenuKebab

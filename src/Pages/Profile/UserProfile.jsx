@@ -243,7 +243,7 @@ const UserProfile = () => {
                   className={`px-6 py-2 rounded-2xl text-lg ${
                     loading ? "bg-gray-400" : "bg-[#F6F6FF]"
                   }`}
-                  onClick={handleSubmit}
+                 
                   disabled={loading}
                 >
                   {loading ? "Uploading..." : "Save Changes"}
