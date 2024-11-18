@@ -170,7 +170,7 @@ function Ticketdetail() {
     <>
       <div className="main h-full w-full bg-white ">
         
-      <div className="flex justify-between">
+      <div className="flex justify-between py-2 pe-2">
       <h4 className="flex items-center gap-3 ms-4 h-[10%]">
           <FaAngleLeft
             className="cursor-pointer"
@@ -182,7 +182,7 @@ function Ticketdetail() {
           />{" "}
           Ticket Details
         </h4>
-        <button  onClick={captureScreenshotAndDownload}  >Downlaod</button>
+        <button  onClick={captureScreenshotAndDownload} className="linear_gradient text-white cursor-pointer " >Downlaod</button>
       </div>
         <div ref={ticketRef} className="w-[90%] this_is_ref overflow-y-scroll Podcast_Top_Videos h-[90%] mx-auto">
           <div className="lg:h-[70%] w-[100%] bg-[#f3f2f2] rounded-xl lg:pb-0 pb-3">
