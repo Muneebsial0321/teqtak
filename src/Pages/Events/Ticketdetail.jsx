@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState,useRef } from "react";
 import { FaAngleLeft } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import Barcode from "react-barcode";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 import { fetchProfile } from "../../API";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 function Ticketdetail() {
+  const ticketRef = useRef();
+
   const [tickets, setTickets] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,6 +51,99 @@ function Ticketdetail() {
     }
   };
 
+
+  const downloadAsPDF = async () => {
+    try {
+      console.log("Starting the PDF generation process...");
+      const element = ticketRef.current;
+      console.log("Captured element reference:", element);
+  
+      console.log("Capturing the component as an image using html2canvas...");
+      const canvas = await html2canvas(element, { scale: 2 });
+      console.log("Canvas generated successfully.");
+  
+      const imgData = canvas.toDataURL("image/png");
+      console.log("Converted canvas to image data:", imgData ? "Success" : "Failed");
+  
+      console.log("Creating a new jsPDF instance...");
+      const pdf = new jsPDF("portrait", "mm", "a4");
+  
+      console.log("Adding image data to the PDF...");
+      pdf.addImage(imgData, "PNG", 10, 10, 190, 0);
+  
+      console.log("Saving the PDF as 'ticket-detail.pdf'...");
+      pdf.save("ticket-detail.pdf");
+  
+      console.log("PDF generation and download complete!");
+    } catch (error) {
+      console.error("An error occurred during the PDF generation process:", error);
+    }
+  };
+  const saveAsImage = async () => {
+    try {
+      console.log("Starting the image saving process...");
+      const element = ticketRef.current;
+      console.log("Captured element reference:", element);
+  
+      console.log("Capturing the component as an image using html2canvas...");
+      const canvas = await html2canvas(element, { scale: 2 });
+      console.log("Canvas generated successfully.");
+  
+      console.log("Converting canvas to image data URL...");
+      const imgData = canvas.toDataURL("image/png");
+      console.log("Image data URL created.");
+  
+      console.log("Creating a temporary download link...");
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "ticket-detail.png"; // File name for the downloaded image
+  
+      console.log("Triggering download...");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  
+      console.log("Image download complete!");
+    } catch (error) {
+      console.error("An error occurred during the image saving process:", error);
+    }
+  };
+  const captureScreenshotAndDownload = async () => {
+    try {
+      console.log("Starting screenshot process...");
+      const element = ticketRef.current;
+      console.log("Element to capture:", element);
+  
+      // Use html2canvas to capture the element
+      const canvas = await html2canvas(element, {
+        scale: 2, // Higher scale for better quality
+        useCORS: false, // Enable cross-origin handling for images
+      });
+      console.log("Canvas generated successfully.");
+  
+      // Convert canvas to an image
+      const imgData = canvas.toDataURL("image/png");
+      console.log("Image data generated.");
+  
+      // Create a temporary link to download the image
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = "ticket-screenshot.png";
+      console.log("Initiating download...");
+  
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  
+      console.log("Screenshot download complete!");
+    } catch (error) {
+      console.error("An error occurred while capturing the screenshot:", error);
+    }
+  };
+  
+  
+
   useEffect(() => {
     // Extract event ID and buyer ID from the URL query parameters
     const queryParams = new URLSearchParams(loc.search);
@@ -71,7 +168,8 @@ function Ticketdetail() {
 
   return (
     <>
-      <div className="main h-full w-full bg-white">
+      <div className="main h-full w-full ">
+        <button  onClick={captureScreenshotAndDownload}  >Downlaod</button>
         <h4 className="flex items-center gap-3 ms-4 h-[10%]">
           <FaAngleLeft
             className="cursor-pointer"
@@ -83,7 +181,7 @@ function Ticketdetail() {
           />{" "}
           Ticket Details
         </h4>
-        <div className="w-[90%] overflow-y-scroll Podcast_Top_Videos h-[90%] mx-auto">
+        <div ref={ticketRef} className="w-[90%] this_is_ref overflow-y-scroll Podcast_Top_Videos h-[90%] mx-auto">
           <div className="lg:h-[70%] w-[100%] bg-[#f3f2f2] rounded-xl lg:pb-0 pb-3">
             <div className="flex justify-evenly flex-wrap lg:flex-nowrap">
               <div className="div lg:w-[45%] w-[80%] mx-auto">
@@ -95,6 +193,7 @@ function Ticketdetail() {
                   }
                   alt=""
                   className="h-[40vh] w-full mt-8"
+                  //  crossOrigin="anonymous"
                 />
                 <p className="text-md font-semibold opacity-55 text-center p-2">
                   {tickets.eventTitle}
