@@ -37,14 +37,8 @@ function Event() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const cachedData = localStorage.getItem('eventData');
-        if (cachedData) {
-          setFilterLoopData(JSON.parse(cachedData)); // Use cached event data
-        } else {
-          const result = await fetchEvent();
-          setFilterLoopData(result.data);
-          localStorage.setItem('eventData', JSON.stringify(result.data)); // Cache the event data
-        }
+        const result = await fetchEvent(); // Fetch event data from API
+        setFilterLoopData(result.data); // Set the event data in state
       } catch (error) {
         console.error("Fetching data error", error);
       }

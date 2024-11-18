@@ -15,30 +15,25 @@ const RelatedEvent = ({ data }) => {
   const location = useLocation();
   const filteredData = location.state?.filteredData;
 
+ 
   useEffect(() => {
     const getData = async () => {
       try {
-        const cachedData = localStorage.getItem('eventData');
-        if (cachedData) {
-          setFilterLoopData(JSON.parse(cachedData)); // Use cached event data
-        } else {
-          const result = await fetchEvent(); // Fetch events from the API
-          setFilterLoopData(result.data);
-          localStorage.setItem('eventData', JSON.stringify(result.data)); // Cache the event data
-        }
+        const result = await fetchEvent(); // Fetch event data from API
+        setFilterLoopData(result.data); // Set the event data in state
       } catch (error) {
         console.error("Fetching data error", error);
       }
     };
 
-    // Check if filtered data is provided through location state
+    // Check for filteredData passed from location state
     if (filteredData && filteredData.length > 0) {
       setNewCard(filteredData);
     } else {
-      getData(); // Fetch data if no filtered data is passed
+      getData(); // Fetch event data if no filterData exists
     }
-  }, [filteredData, setFilterLoopData, setNewCard]);
 
+  }, [filteredData,setFilterLoopData, setNewCard]);
   // Handle event sharing
   const handleShare = async (e) => {
     e.stopPropagation();
