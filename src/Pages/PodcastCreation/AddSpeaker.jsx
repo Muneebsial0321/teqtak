@@ -127,7 +127,7 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
         Add Speaker*
       </label>
       <input
-       required
+   
         value={inputValue}
         onChange={handleInputChange}
         className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"

@@ -20,6 +20,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.20.0",
     "axios": "^1.7.3",
+    "country-state-city": "^3.2.1",
     "date-fns": "^3.6.0",
     "geolib": "^3.3.4",
     "html2canvas": "^1.4.1",

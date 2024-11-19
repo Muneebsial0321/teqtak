@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState ,useEffect} from "react";
 import AddSpeaker from "../PodcastCreation/AddSpeaker";
 import { useNavigate } from "react-router-dom";
 import { myContext } from "../../Context/CreateContext";
@@ -6,7 +6,7 @@ import { FaAngleLeft, FaTimes } from "react-icons/fa";
 import { LuImagePlus } from "react-icons/lu";
 import axios from "axios";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
-
+import { Country, City } from "country-state-city";
 const eventCatagory = [
   "Tech & Entrepreneurship",
   "Art",
@@ -66,6 +66,34 @@ const EventForm = () => {
   const [selectedType, setSelectedType] = useState("");
   const [ticketPrice, setTicketPrice] = useState("");
   const [ticketQuantity, setTicketQuantity] = useState("");
+  const [countries, setCountries] = useState(Country.getAllCountries());
+
+  const [cities, setCities] = useState([]);
+
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
+  useEffect(() => {
+    if (selectedCountry) {
+      // Load all cities for the selected country
+      const countryCities = City.getCitiesOfCountry(selectedCountry.isoCode);
+      setCities(countryCities);
+    } else {
+      setCities([]); // Clear cities if no country is selected
+    }
+  }, [selectedCountry]);
+
+  const handleCountryChange = (e) => {
+    const selectedCountry = countries.find((c) => c.isoCode === e.target.value);
+    setSelectedCountry(selectedCountry);
+  };
+  
+  const handleCityChange = (e) => {
+    const selectedCity = e.target.value;
+    setState((prev) => ({
+      ...prev,
+      city: selectedCity,
+    }));
+  };
 
   const getUserId = () => {
     const str = document.cookie;
@@ -78,7 +106,7 @@ const EventForm = () => {
 
     const formData = new FormData();
 
-    // Append cover image if exists
+    
     if (coverImageFile) {
       formData.append("coverImage", coverImageFile);
     }
@@ -87,11 +115,11 @@ const EventForm = () => {
     Object.keys(state).forEach((key) => {
       formData.append(key, state[key]);
     });
-
+    const location = selectedCountry ? `${state.city}, ${selectedCountry.name}` : '';
     // Set event creator ID
     formData.append("eventCreatedBy", getUserId());
     formData.append("eventCatagory", selectedType);
-
+    formData.append("eventLocation",location)
 
     const ticketArray = ticketTypes.map(ticket => ({
       ticketType: ticket.ticketType,
@@ -106,13 +134,12 @@ const EventForm = () => {
 
 
     const speakerIds = speakerState.map((speaker) => speaker.id);
-    // console.log("speaker idd", speakerIds);
-    // console.log("speaker state", speakerState);
+
 
     formData.append("eventArray", JSON.stringify(speakerState));
-    // Log the FormData to see its contents
+   
     for (let pair of formData.entries()) {
-      // console.log(`${pair[0]}: ${pair[1]}`);
+      
     }
 
     try {
@@ -122,9 +149,7 @@ const EventForm = () => {
         formData
       );
 
-      // console.log("Event Created Successfully:", response.data);
-
-      // Update context state
+    
       EventStates.setEventSubmitted(!EventStates.eventSubmitted);
       navigate("/events");
       resetForm();
@@ -149,7 +174,7 @@ const EventForm = () => {
       date.setHours(hours);
       date.setMinutes(minutes);
 
-      // Format the time to 12-hour format with AM/PM
+
       const formattedTime = date.toLocaleString('en-US', {
         hour: 'numeric',
         minute: '2-digit',
@@ -161,7 +186,7 @@ const EventForm = () => {
         [name]: formattedTime,
       }));
     } else if (name === "eventDate") {
-      // Format the date if it's the event date input
+   
       setState((prev) => ({
         ...prev,
         [name]: formatDate(value),
@@ -191,11 +216,11 @@ const EventForm = () => {
     setTicketTypes([]);
     setSelectedType("");
     setTicketPrice("");
-    setTicketQuantity(""); // Reset ticket quantity
+    setTicketQuantity(""); 
   };
 
   const handleTicketChange = (e) => {
-    // console.log({ticketTypes})
+  
     const { value } = e.target;
     if (value && ticketPrice && ticketQuantity) {
       const existingTicket = ticketTypes.find(
@@ -211,8 +236,8 @@ const EventForm = () => {
           },
         ]);
         setSelectedType("");
-        setTicketPrice(""); // Clear the ticket price input after adding
-        setTicketQuantity(""); // Clear the ticket quantity input after adding
+        setTicketPrice(""); 
+        setTicketQuantity(""); 
       } else {
         alert("This ticket type has already been added.");
       }
@@ -223,11 +248,11 @@ const EventForm = () => {
     setTicketTypes((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // console.log("Submitting speakers:", speakerState);
+  
 
   const updateSpeakerData = (speakers) => {
     setSpeakerState(speakers);
-    // console.log("Updated Speakers:", speakers);
+
   };
 
   return (
@@ -338,14 +363,29 @@ const EventForm = () => {
               <label className="block text-gray-600 text-sm font-bold">
                 Select Location
               </label>
-              <input
-                required
-                className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
-                onChange={onChange}
-                name="eventLocation"
-                type="text"
-                placeholder="Enter location"
-              />
+             
+                      <select className="w-full p-2 border outline-none border-gray-300 rounded-lg" onChange={handleCountryChange}>
+  <option value="">Select Country</option>
+  {countries.map((country) => (
+    <option key={country.isoCode} value={country.isoCode}>
+      {country.name}
+    </option>
+  ))}
+</select>
+
+{/* City Select */}
+<select
+  disabled={!selectedCountry}
+  className="w-full p-2 my-1 outline-none border border-gray-300 rounded-lg"
+  onChange={handleCityChange}
+>
+  <option value="">Select City</option>
+  {cities.map((city) => (
+    <option key={city.name} value={city.name}>
+      {city.name}
+    </option>
+  ))}
+</select>
             </div>
 
             <div className="my-4">
@@ -409,13 +449,7 @@ const EventForm = () => {
               <label className="block text-gray-600 text-sm font-bold">
                 Event Type
               </label>
-              {/* <input
-                className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
-                type="text"
-                onChange={onChange}
-                name="eventType"
-                placeholder="Enter event type"
-              /> */}
+              
               <select
                 name="eventType"
                 id="eventType"
@@ -460,13 +494,7 @@ const EventForm = () => {
               <label className="block text-gray-600 text-sm font-bold">
                 Event Format
               </label>
-              {/* <input
-                className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
-                type="text"
-                onChange={onChange}
-                name="eventFormat"
-                placeholder="Enter format"
-              /> */}
+             
 
               <select
                 name="eventFormat"
@@ -486,13 +514,7 @@ const EventForm = () => {
               <label className="block text-gray-600 text-sm font-bold">
                 Network Opportunities
               </label>
-              {/* <input
-                className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
-                type="text"
-                onChange={onChange}
-                name="eventNetworkOps"
-                placeholder="Enter network opportunities"
-              /> */}
+            
 
               <select
                 name="eventNetworkOps"
@@ -518,18 +540,7 @@ const EventForm = () => {
                 initialData={speakerState}
               />
             </div>
-            {/* <div className="my-4">
-              <label className="block text-gray-600 text-sm font-bold">
-                Manage Privacy Settings
-              </label>
-              <input
-                className="w-full border py-2 ps-3 rounded-lg text-gray-600 leading-tight focus:outline-none placeholder:text-xs focus:shadow-outline"
-                type="text"
-                onChange={onChange}
-                name="eventPrivacySettings"
-                placeholder="Enter privacy settings"
-              />
-            </div> */}
+           
             <div className="my-4">
               <label className="block text-gray-600 text-sm font-bold">
                 Number of People
