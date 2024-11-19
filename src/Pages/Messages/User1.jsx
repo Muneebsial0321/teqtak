@@ -13,6 +13,7 @@ import { deleteChatroom } from "../../DeleteAPI.js";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 import CameraCapture from "./CameraCapture.jsx";
+import MeetingCall from "./MeetingCall.jsx";
 
 function Message2() {
   const socket = io(REACT_APP_API_BASE_URL);
@@ -43,6 +44,8 @@ function Message2() {
     setIsCameraOpen((prev) => !prev);
   };
 
+
+
   const __Time__ = (isoString) => {
     const date = new Date(isoString);
     let hours = date.getHours();
@@ -51,6 +54,9 @@ function Message2() {
     hours = hours % 12 || 12;
     return `${hours}:${minutes} ${ampm}`;
   };
+
+
+
 
   const handleClickOutside = (event) => {
     if (cardRef.current && !cardRef.current.contains(event.target)) {
@@ -62,6 +68,9 @@ function Message2() {
     }
   };
 
+
+
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -69,11 +78,17 @@ function Message2() {
     };
   }, []);
 
+
+
+
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split("=")[1];
     return userKey;
   };
+
+
+
 
   const fetchChatroom = async (id) => {
     let url = `${REACT_APP_API_BASE_URL}/chatrooms/room/${id}`;
@@ -89,6 +104,8 @@ function Message2() {
     setRoomId(id);
   };
 
+
+
   const getSenderName = async (id) => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${id}`, {
       headers: {
@@ -100,6 +117,9 @@ function Message2() {
     getReceiver();
   };
 
+
+
+
   const getReceiver = async () => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`, {
       headers: {
@@ -110,11 +130,14 @@ function Message2() {
     setReceiver(d.user);
   };
 
+
+
+
   const joinRoom = (id) => {
     socket.off("connection", "");
-    socket.on("connection", (socket_) => {});
+    socket.on("connection", (socket_) => { });
     socket.emit("joinRoom", { roomId: id, userId: getUserId() });
-    socket.on("pos", (socket) => {});
+    socket.on("pos", (socket) => { });
   };
 
   const sendMessage = () => {
@@ -128,6 +151,9 @@ function Message2() {
       setSelectedEmoji("");
     }
   };
+
+
+
 
   useEffect(() => {
     fetchChatroom(loc.state.id);
@@ -154,12 +180,18 @@ function Message2() {
     setMessage(e.target.value);
   };
 
+
+
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       sendMessage();
     }
   };
+
+
+
 
   const handleSchedule = () => {
     setSchedule(!schedule);
@@ -201,6 +233,9 @@ function Message2() {
     setSelectedFile(null);
   };
 
+
+  const extractUrl = (str) => str.split("<zoom>=")[1]
+
   return (
     <>
       <div className="main h-full w-[100%] ">
@@ -215,11 +250,11 @@ function Message2() {
                 onClick={() => navigate("/messages")}
               />
               {/* <img src={sender.picUrl || '/placeholder.jpg'} alt=""  className="h-[40px] w-[40px] rounded-full"/> */}
-              <Link 
-              to="/userprofile"
-             
-              state={{ id: sender.Users_PK }}
-              className="text-xl font-medium whitespace-nowrap">
+              <Link
+                to="/userprofile"
+
+                state={{ id: sender.Users_PK }}
+                className="text-xl font-medium whitespace-nowrap">
                 {sender ? sender.name : "Unknown"}
               </Link>
             </div>
@@ -259,7 +294,7 @@ function Message2() {
                   <p
                     ref={cardRef}
                     className="text-lg opacity-75"
-                    onClick={() => navigate("/zoom", { state: { roomId } })}
+                    onClick={() => navigate("/zoom", { state: { roomId, name: "muneeb" } })}
                   >
                     Schedule a meeting
                   </p>
@@ -307,12 +342,12 @@ function Message2() {
                         getUserId() !== e.sender
                           ? sender.picUrl || "/placeholder.jpg"
                           : receiver
-                          ? receiver.picUrl || "placeholder.jpg"
-                          : "/placeholder.jpg"
+                            ? receiver.picUrl || "placeholder.jpg"
+                            : "/placeholder.jpg"
                       }
                       alt="profile"
-                      className={`h-[40px] w-[40px] rounded-full       ${sender.role === 'investor' ? 'border-2 border-red-600' : 
-    sender.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
+                      className={`h-[40px] w-[40px] rounded-full       ${sender.role === 'investor' ? 'border-2 border-red-600' :
+                        sender.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                     />
                     <div className="flex">
                       <div className="max-w-[70%] ">
@@ -320,7 +355,8 @@ function Message2() {
                           {e.sender !== getUserId() ? sender.name : "You"}
                         </p>
                         <p className="text-[#686868] text-xs mt-3">
-                          {e.message}
+                          
+                          {extractUrl(e.message)?<MeetingCall time={__Time__(e.timestamp)} link={extractUrl(e.message)} />:e.message}
                         </p>
                       </div>
                     </div>
