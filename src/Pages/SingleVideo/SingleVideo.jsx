@@ -5,6 +5,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaPlay, FaPause } from 'react-icons/fa';
 import { CiPlay1 } from "react-icons/ci";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Model from "../ModalReport/Model";
@@ -24,8 +25,10 @@ const Video = () => {
   const [videos, setVideos] = useState([]);
   const [videoIndex, setVideoIndex] = useState(0);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false); // State to track video playback
-  const videoRef = useRef(null); // Ref to access the video element
+  const [isPlaying, setIsPlaying] = useState(false); 
+  const [progress, setProgress] = useState(0)
+  const videoRef = useRef(null);
+  const rangeRef = useRef(null);
 
   const API_BASE_URL = REACT_APP_API_BASE_URL;
 
@@ -74,7 +77,7 @@ const Video = () => {
     getVideo();
   }, [videoId, location.state]);
 
-  const handlePlayPause = () => {
+  const togglePlayPause = () => {
     if (videoRef.current.paused) {
       videoRef.current.play();
       setIsPlaying(true); // Update state to playing
@@ -83,28 +86,25 @@ const Video = () => {
       setIsPlaying(false); // Update state to paused
     }
   };
-
-  const handleVideoPlay = () => {
-    setIsPlaying(true); // Update state when video starts playing
+  const handleTimeUpdate = () => {
+    const currentTime = videoRef.current.currentTime;
+    const duration = videoRef.current.duration;
+    setProgress((currentTime / duration) * 100);
+  };
+  const handleSeek = (event) => {
+    const value = event.target.value;
+    const duration = videoRef.current.duration;
+    videoRef.current.currentTime = (value / 100) * duration;
   };
 
-  const handleVideoPause = () => {
-    setIsPlaying(false); // Update state when video is paused
-  };
 
   useEffect(() => {
-    if (videoRef.current) {
-      // Add event listeners for play and pause
-      videoRef.current.addEventListener("play", handleVideoPlay);
-      videoRef.current.addEventListener("pause", handleVideoPause);
-    }
+    const video = videoRef.current;
+    video.addEventListener('timeupdate', handleTimeUpdate);
 
+    // Cleanup event listener on unmount
     return () => {
-      if (videoRef.current) {
-        // Remove event listeners on cleanup
-        videoRef.current.removeEventListener("play", handleVideoPlay);
-        videoRef.current.removeEventListener("pause", handleVideoPause);
-      }
+      video.removeEventListener('timeupdate', handleTimeUpdate);
     };
   }, []);
 
@@ -376,26 +376,30 @@ const Video = () => {
             </div>
           </div>
           <video
-            ref={videoRef}
-            src={video?.data?.videoUrl || ""}
-            autoPlay
-            loop={true}
-            className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover cursor-pointer"
-            onClick={handlePlayPause}
+             ref={videoRef}
+             src={video?.data?.videoUrl || ""}
+             className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover cursor-pointer"
+             onClick={togglePlayPause}
           />
-          {/* Play/Pause Icon */}
-          {!isPlaying && (
-            <CiPlay1
-              className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-              onClick={handlePlayPause}
-            />
-          )}
-          {isPlaying && (
-            <CiStar
-              className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-              onClick={handlePlayPause}
-            />
-          )}
+          <button
+        onClick={togglePlayPause}
+        className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+      >
+        {isPlaying ? <FaPause /> : <FaPlay />}
+      </button>
+         {/* Video Controls */}
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-11/12 flex items-center justify-between p-2 bg-black bg-opacity-60 rounded-md">
+        <input
+          ref={rangeRef}
+          type="range"
+          value={progress}
+          min="0"
+          max="100"
+          step="0.1"
+          onChange={handleSeek}
+          className="w-2 cursor-pointer  rounded-lg h-1"
+        />
+      </div>
         </div>
       </section>
       <ToastContainer />
