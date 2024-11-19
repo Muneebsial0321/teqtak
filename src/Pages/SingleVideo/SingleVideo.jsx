@@ -5,12 +5,13 @@ import { FaChevronLeft } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CiPlay1 } from "react-icons/ci";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Model from "../ModalReport/Model";
 import Review from "../Podcast/Review";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
 
 const Video = () => {
@@ -23,16 +24,16 @@ const Video = () => {
   const [videos, setVideos] = useState([]);
   const [videoIndex, setVideoIndex] = useState(0);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  
-  const API_BASE_URL = REACT_APP_API_BASE_URL;
+  const [isPlaying, setIsPlaying] = useState(false); // State to track video playback
+  const videoRef = useRef(null); // Ref to access the video element
 
- 
+  const API_BASE_URL = REACT_APP_API_BASE_URL;
 
   const videoId = decodeURIComponent(src);
 
   const getVideo = async () => {
     const req = await fetch(`${API_BASE_URL}/upload/${videoId}`, {
-      credentials: 'include'
+      credentials: "include",
     });
     const data = await req.json();
     setVideo(data);
@@ -40,43 +41,76 @@ const Video = () => {
 
   const getUserId = () => {
     const str = document.cookie;
-    return str.split("=")[1]; 
+    return str.split("=")[1];
   };
 
   const recordView = async () => {
     try {
       const userId = getUserId();
       const viewData = {
-        viewItemType: 'video',
+        viewItemType: "video",
         viewItemId: videoId,
         viewerId: userId,
       };
-  
-    
-  
+
       await axios.post(`${API_BASE_URL}/views`, viewData);
-   
     } catch (error) {
-      console.error('Error recording view:', error);
+      console.error("Error recording view:", error);
     }
   };
-  
+
   useEffect(() => {
     if (location.state && location.state.videos) {
       setVideos(location.state.videos);
-      const currentVideo = location.state.videos.find(v => v._id === videoId);
+      const currentVideo = location.state.videos.find((v) => v._id === videoId);
       if (currentVideo) {
         setVideo(currentVideo);
-        setVideoIndex(location.state.videos.findIndex(v => v._id === videoId));
+        setVideoIndex(
+          location.state.videos.findIndex((v) => v._id === videoId)
+        );
         recordView(); // Record the view when the video is loaded
       }
     }
     getVideo();
   }, [videoId, location.state]);
 
+  const handlePlayPause = () => {
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true); // Update state to playing
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false); // Update state to paused
+    }
+  };
+
+  const handleVideoPlay = () => {
+    setIsPlaying(true); // Update state when video starts playing
+  };
+
+  const handleVideoPause = () => {
+    setIsPlaying(false); // Update state when video is paused
+  };
+
+  useEffect(() => {
+    if (videoRef.current) {
+      // Add event listeners for play and pause
+      videoRef.current.addEventListener("play", handleVideoPlay);
+      videoRef.current.addEventListener("pause", handleVideoPause);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        // Remove event listeners on cleanup
+        videoRef.current.removeEventListener("play", handleVideoPlay);
+        videoRef.current.removeEventListener("pause", handleVideoPause);
+      }
+    };
+  }, []);
+
   const useDebounce = (callback, delay) => {
     const timerRef = useRef(null);
-  
+
     const debouncedCallback = (...args) => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -85,13 +119,13 @@ const Video = () => {
         callback(...args);
       }, delay);
     };
-  
+
     useEffect(() => {
       return () => {
         clearTimeout(timerRef.current);
       };
     }, []);
-  
+
     return debouncedCallback;
   };
 
@@ -99,44 +133,46 @@ const Video = () => {
     if (direction === "down") {
       if (videoIndex < videos.length - 1) {
         const nextVideoId = videos[videoIndex + 1]._id;
-        navigate(`/video/${encodeURIComponent(nextVideoId)}`, { state: { videos } });
+        navigate(`/video/${encodeURIComponent(nextVideoId)}`, {
+          state: { videos },
+        });
       }
     } else {
       if (videoIndex > 0) {
         const prevVideoId = videos[videoIndex - 1]._id;
-        navigate(`/video/${encodeURIComponent(prevVideoId)}`, { state: { videos } });
+        navigate(`/video/${encodeURIComponent(prevVideoId)}`, {
+          state: { videos },
+        });
       }
     }
   };
-  
+
   const debouncedHandleScroll = useDebounce(handleScroll, 300);
-  
-  // Event handler for mouse wheel (desktop)
+
   const handleWheel = (e) => {
     debouncedHandleScroll(e.deltaY > 0 ? "down" : "up");
   };
-  
-  // Event handlers for touch (mobile)
+
   let touchStartY = 0;
   const handleTouchStart = (e) => {
     touchStartY = e.touches[0].clientY;
   };
-  
+
   const handleTouchEnd = (e) => {
     const touchEndY = e.changedTouches[0].clientY;
     const direction = touchEndY < touchStartY ? "down" : "up";
     debouncedHandleScroll(direction);
   };
-  
+
   useEffect(() => {
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
-    window.addEventListener('touchend', handleTouchEnd, { passive: false });
-  
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+
     return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [debouncedHandleScroll]);
 
@@ -144,53 +180,58 @@ const Video = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: video?.data?.videoDesc || 'Check this video!',
-          text: 'Watch this video!',
+          title: video?.data?.videoDesc || "Check this video!",
+          text: "Watch this video!",
           url: window.location.href,
         });
-        toast.success('Share successful!');
+        toast.success("Share successful!");
       } catch (error) {
-        console.error('Error sharing:', error);
-        toast.error('Error sharing the video.');
+        console.error("Error sharing:", error);
+        toast.error("Error sharing the video.");
       }
     } else {
-      toast.warn('Web Share API is not supported in your browser.');
+      toast.warn("Web Share API is not supported in your browser.");
     }
   };
+
   const subscribeUser = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subscriberId: getUserId(), subscribedToId: video?.user?.Users_PK }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subscriberId: getUserId(),
+          subscribedToId: video?.user?.Users_PK,
+        }),
       });
       if (response.ok) {
         const result = await response.json();
         setIsSubscribed(true);
-        
       } else {
         const error = await response.json();
-        console.error('Error subscribing:', error.message);
+        console.error("Error subscribing:", error.message);
       }
     } catch (error) {
-      console.error('Error subscribing:', error);
+      console.error("Error subscribing:", error);
     }
   };
 
   const unsubscribeUser = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/subscribe/${video?.user?.Users_PK}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/subscribe/${video?.user?.Users_PK}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         setIsSubscribed(false);
-       
       } else {
         const error = await response.json();
-        console.error('Error unsubscribing:', error.message);
+        console.error("Error unsubscribing:", error.message);
       }
     } catch (error) {
-      console.error('Error unsubscribing:', error);
+      console.error("Error unsubscribing:", error);
     }
   };
 
@@ -206,19 +247,22 @@ const Video = () => {
     getVideo();
   }, [videoId]);
 
-  // Check if the user is already subscribed when the component mounts
   useEffect(() => {
     const checkSubscriptionStatus = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/subscribe/my/${video?.user?.Users_PK}`);
+        const response = await fetch(
+          `${API_BASE_URL}/subscribe/my/${video?.user?.Users_PK}`
+        );
         if (response.ok) {
           const subscriptions = await response.json();
           const currentUserId = getUserId();
-          const isUserSubscribed = subscriptions.some(sub => sub.subscriberId === currentUserId);
+          const isUserSubscribed = subscriptions.some(
+            (sub) => sub.subscriberId === currentUserId
+          );
           setIsSubscribed(isUserSubscribed);
         }
       } catch (error) {
-        console.error('Error fetching subscription status:', error);
+        console.error("Error fetching subscription status:", error);
       }
     };
 
@@ -232,12 +276,21 @@ const Video = () => {
       <section className="h-full w-full relative flex items-center bg-white">
         {revModOpen && (
           <div className="h-[95%] left-0 w-full absolute top-0 z-20 flex justify-center items-center">
-            <Review comp={"video"} videoId={videoId} setRevModOpen={setRevModOpen} videoUrl={video?.data?.videoUrl} />
+            <Review
+              comp={"video"}
+              videoId={videoId}
+              setRevModOpen={setRevModOpen}
+              videoUrl={video?.data?.videoUrl}
+            />
           </div>
         )}
         {repModOpen && (
           <div className="h-full w-full absolute top-0 z-20 flex justify-center items-center">
-            <Model setRepModOpen={setRepModOpen}  comp={"video"}   videoUrl={video?.data?.videoUrl}/>
+            <Model
+              setRepModOpen={setRepModOpen}
+              comp={"video"}
+              videoUrl={video?.data?.videoUrl}
+            />
           </div>
         )}
         <div className="w-[80%] sm:w-[65%] md:w-[55%] lg:h-[95%] h-[90%] mx-auto rounded-xl relative">
@@ -246,36 +299,42 @@ const Video = () => {
               className="absolute cursor-pointer flex gap-2 items-center ps-4 py-2 text-lg text-white left-0 z-10"
               onClick={() => navigate("/videos")}
             >
-              <FaChevronLeft className="text-xs" />
-              Videos
+              <FaChevronLeft className="text-xs" /> Videos
             </div>
             <div className="absolute z-10 bottom-3 w-[60%] sm:w-[43%] p-3 text-white">
-              <Link to="/userprofile"
+              <Link
+                to="/userprofile"
                 state={{ id: video?.user?.Users_PK || " " }}
               >
                 <p className="text-xl font-semibold max-[525px]:font-normal whitespace-nowrap">
-                  {video?.user?.name || video?.user?.userName || 'NO_NAME'}
+                  {video?.user?.name || video?.user?.userName || "NO_NAME"}
                 </p>
               </Link>
               <p className="py-1 w-[80%] text-sm">
-                {video?.data?.videoDesc || 'No Description'}
+                {video?.data?.videoDesc || "No Description"}
               </p>
               <p className="py-1 w-[80%] text-sm">
                 {video?.data?.videoTags
-                  ? video.data.videoTags.map(tag => `#${tag}`).join(' ')
-                  : '#fyp'}
+                  ? video.data.videoTags.map((tag) => `#${tag}`).join(" ")
+                  : "#fyp"}
               </p>
             </div>
             <div className="absolute bottom-3 z-10 right-2 text-white">
               <div className="relative cursor-pointer rounded-full flex justify-center">
-                <Link to="/userprofile"
+                <Link
+                  to="/userprofile"
                   state={{ id: video?.user?.Users_PK || " " }}
                 >
                   <img
                     src={video?.user?.picUrl || "/placeholder.jpg"}
                     style={{ height: "40px", width: "40px" }}
-                    className={`rounded-full ${video?.user?.role === 'investor' ? 'border-2 border-red-600' : 
-                          video?.user?.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
+                    className={`rounded-full ${
+                      video?.user?.role === "investor"
+                        ? "border-2 border-red-600"
+                        : video?.user?.role === "entrepreneur"
+                        ? "border-2 border-blue-600"
+                        : ""
+                    }`}
                     alt="User Profile"
                   />
                 </Link>
@@ -287,19 +346,28 @@ const Video = () => {
                   />
                 )}
               </div>
-              <div className="text-center cursor-pointer mt-5" onClick={() => setRepModOpen(true)}>
+              <div
+                className="text-center cursor-pointer mt-5"
+                onClick={() => setRepModOpen(true)}
+              >
                 <p className="text-xs">
                   <BsInfoSquare className="block text-lg mx-auto" />
                   Report
                 </p>
               </div>
-              <div className="text-center cursor-pointer mt-5" onClick={() => setRevModOpen(true)}>
+              <div
+                className="text-center cursor-pointer mt-5"
+                onClick={() => setRevModOpen(true)}
+              >
                 <p className="text-xs">
                   <CiStar className="block text-2xl mx-auto" />
                   Reviews
                 </p>
               </div>
-              <div className="text-center cursor-pointer mt-5 mb-3" onClick={shareContent}>
+              <div
+                className="text-center cursor-pointer mt-5 mb-3"
+                onClick={shareContent}
+              >
                 <p className="text-xs m-0">
                   <FaRegShareFromSquare className="block text-lg mx-auto" />
                   Share
@@ -308,15 +376,28 @@ const Video = () => {
             </div>
           </div>
           <video
-          controls
-            src={video?.data?.videoUrl || ''}
+            ref={videoRef}
+            src={video?.data?.videoUrl || ""}
             autoPlay
-            className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover"
-            
-          ></video>
+            loop={true}
+            className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover cursor-pointer"
+            onClick={handlePlayPause}
+          />
+          {/* Play/Pause Icon */}
+          {!isPlaying && (
+            <CiPlay1
+              className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+              onClick={handlePlayPause}
+            />
+          )}
+          {isPlaying && (
+            <CiStar
+              className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+              onClick={handlePlayPause}
+            />
+          )}
         </div>
       </section>
-
       <ToastContainer />
     </Fragment>
   );
