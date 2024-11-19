@@ -377,18 +377,20 @@ const Video = () => {
           </div>
           <video
              ref={videoRef}
+             autoPlay
+             loop={true}
              src={video?.data?.videoUrl || ""}
              className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover cursor-pointer"
              onClick={togglePlayPause}
           />
           <button
         onClick={togglePlayPause}
-        className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+        className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 "
       >
         {isPlaying ? <FaPause /> : <FaPlay />}
       </button>
          {/* Video Controls */}
-      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-11/12 flex items-center justify-between p-2 bg-black bg-opacity-60 rounded-md">
+         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-11/12 flex items-center justify-between p-2  bg-opacity-60 rounded-md z-20">
         <input
           ref={rangeRef}
           type="range"
@@ -397,7 +399,7 @@ const Video = () => {
           max="100"
           step="0.1"
           onChange={handleSeek}
-          className="w-2 cursor-pointer  rounded-lg h-1"
+          className="w-4/5 cursor-pointer bg-gray-500 rounded-lg h-1"
         />
       </div>
         </div>
