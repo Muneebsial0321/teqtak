@@ -19,10 +19,11 @@ const ProfileVideos = () => {
   const [video, setVideo] = useState();
   const [videos, setVideos] = useState([]);
   const [videoIndex, setVideoIndex] = useState(0);
-
-  const handleProfile = (userId) => {
-    navigate(`/profile/${userId}`); 
-  };
+  const [isPlaying, setIsPlaying] = useState(false); 
+  const [progress, setProgress] = useState(0)
+  const videoRef = useRef(null);
+  const rangeRef = useRef(null);
+ 
 
   const videoId = decodeURIComponent(src);
 
@@ -48,6 +49,37 @@ const ProfileVideos = () => {
     }
     getVideo();
   }, [videoId, location.state]);
+
+  const togglePlayPause = () => {
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true); // Update state to playing
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false); // Update state to paused
+    }
+  };
+  const handleTimeUpdate = () => {
+    const currentTime = videoRef.current.currentTime;
+    const duration = videoRef.current.duration;
+    setProgress((currentTime / duration) * 100);
+  };
+  const handleSeek = (event) => {
+    const value = event.target.value;
+    const duration = videoRef.current.duration;
+    videoRef.current.currentTime = (value / 100) * duration;
+  };
+
+
+  useEffect(() => {
+    const video = videoRef.current;
+    video.addEventListener('timeupdate', handleTimeUpdate);
+
+    // Cleanup event listener on unmount
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
 
   const useDebounce = (callback, delay) => {
     const timerRef = useRef(null);
@@ -211,8 +243,32 @@ const ProfileVideos = () => {
             src={video && video.data ? video.data.videoUrl : ''}
             autoPlay
             className="h-full relative z-0 rounded-xl w-full bg-slate-300 object-cover"
-            
+            ref={videoRef}
+           
+            loop={true}
+          
+           
+            onClick={togglePlayPause}
           ></video>
+                 <button
+        onClick={togglePlayPause}
+        className="absolute text-4xl text-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 "
+      >
+        {isPlaying ? <FaPause /> : <FaPlay />}
+      </button>
+         {/* Video Controls */}
+         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-11/12 flex items-center justify-between p-2  bg-opacity-60 rounded-md z-20">
+        <input
+          ref={rangeRef}
+          type="range"
+          value={progress}
+          min="0"
+          max="100"
+          step="0.1"
+          onChange={handleSeek}
+          className="w-4/5 cursor-pointer bg-gray-500 rounded-lg h-1"
+        />
+      </div>
         </div>
       </section>
 
