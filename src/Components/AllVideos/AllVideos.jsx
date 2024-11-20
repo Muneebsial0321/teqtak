@@ -141,6 +141,7 @@ const AllVideos = () => {
               src={video.videoUrl || '/loading.jpg'}
               className="w-[100%] h-[100%] overflow-y-hidden object-cover"
               muted
+              preload="metadata"
             ></video>
             <CiPlay1 className="absolute text-2xl text-white" />
           </div>
