@@ -84,7 +84,7 @@ const filteredData = location.state?.filteredData
           <img
             src={data.eventCoverUrl ? data.eventCoverUrl : "/loading.jpg"}
             alt="Card Img2"
-            className="h-full w-full rounded-lg cursor-pointer"
+            className="h-full w-full rounded-lg cursor-pointer object-cover"
           />
           <IoBookmarkOutline 
             className="absolute lg:right-2 lg:top-4 lg:text-2xl cursor-pointer top-2 right-1" 
