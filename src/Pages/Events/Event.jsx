@@ -13,8 +13,9 @@ const API_BASE_URL = REACT_APP_API_BASE_URL;
 
 const CardComponent = ({ title, imgSrc, onSave }) => (
   <div className="lg:h-[30vh] h-[25vh] lg:w-[12vw] md:w-[20vw] sm:w-[25vw] w-[80%] relative cursor-pointer m-0 text-white  max-[375px]:w-[98rem] max-[320px]:w-[65.4%]">
+  {/* // <div className=" md:h-[20rem] md:w-[19rem] h-[15rem] w-[8rem] bg-black relative cursor-pointer m-0 text-white"> */}
     <img
-      className="h-full w-full rounded-lg object-cover"
+      className="h-full md:w-[19rem] w-[12rem] rounded-lg object-cover"
       src={imgSrc ? imgSrc : "/loading.jpg"}
       alt="Card Img"
     />
@@ -85,8 +86,8 @@ function Event() {
           Suggested Events
         </h3>
         <div className="h-full w-[95%]  mx-auto">
-          
-          <div className="flex w-full overflow-x-scroll gap-1 Podcast_Top_Videos ml-2">
+          <div className="py-6 w-full overflow-auto Podcast_Top_Videos ">
+          <div className="flex w-max  gap-1  ml-2">
             {filterLoopData.length > 0 ? (
               filterLoopData.map((data, i) => (
                 <CardComponent
@@ -100,6 +101,7 @@ function Event() {
                 />
               ))
             ) : "No Filter Result Match"}
+          </div>
           </div>
           <h3 className="text-xl font-bold my-3 w-[95%] mx-auto ">
           Related Events
