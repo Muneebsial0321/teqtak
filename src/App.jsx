@@ -62,6 +62,7 @@ import WatchSingle from './Pages/SingleVideo/WatchSingle.jsx';
 import OnBoarding from './OnBoarding.jsx';
 import MyCreatedPodcast from './Pages/Profile/MyCreatedPodcast.jsx';
 import ZoomSocket from './Pages/Messages/ZoomSocket.jsx';
+import Experimental_Video_Feed from './Pages/Feed/Experimental_Video_Feed.jsx';
 
 
 
@@ -70,6 +71,9 @@ const App = () => {
   return (
     <Fragment>
       <Routes>
+
+
+
         {/* Login and Signup Routes  public routes*/}
         <Route path="/" element={<Header/>} />
         <Route path="/signup" element={<Signup />} />
@@ -79,6 +83,11 @@ const App = () => {
 
         {/* Routes with Layout private routes */}
         <Route element={ <Layout />  }>
+
+        {/* ---------------------------------- */}
+{/* Experimental dont use it */}
+<Route path="/experimental123" element={<Experimental_Video_Feed/>} />
+{/* ---------------------------------- */}
       
         {/* <Route path='/search'element={<Search/>} /> */}
           <Route path="/videos" element={<Feed /> } />
