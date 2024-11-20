@@ -170,7 +170,7 @@ function PodcastTopVideos({ data }) {
                     <p className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis lg:py-1">{elm.episodeTitle}</p>
                   </div>
                 </div>
-                <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full rounded-lg" />
+                <img src={elm.picUrl ? elm.picUrl : "/loading.jpg"} alt={`Img-${ind}`} className="h-full w-full object-cover rounded-lg" />
               </div>
             ))}
           </div>

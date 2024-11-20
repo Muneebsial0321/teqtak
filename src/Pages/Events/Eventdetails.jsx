@@ -188,7 +188,7 @@ function Eventdetails() {
                       <img
                         src={elm.picUrl ? elm.picUrl : "/placeholder.jpg"}
                         alt=""
-                        className={`partiimg1 rounded-full border border-black ${elm.role === 'investor' ? 'border-2 border-red-600 ' : 
+                        className={`partiimg1 rounded-full border object-cover border-black ${elm.role === 'investor' ? 'border-2 border-red-600 ' : 
                           elm.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                       />
                     </Link>
@@ -239,7 +239,7 @@ function Eventdetails() {
                 >
                   <img
                     src={elm.picUrl ? elm.picUrl : "/placeholder.jpg"}
-                    className={`rounded-full h-[35px] w-[35px] ${elm.role === 'investor' ? 'border-2 border-red-600' : 
+                    className={`rounded-full object-cover h-[35px] w-[35px] ${elm.role === 'investor' ? 'border-2 border-red-600' : 
                           elm.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                     alt=""
                   />
