@@ -144,12 +144,12 @@ const truncatedDescription = isLong
                 ) : (
                   <div className="text-center flex items-center">
                     <Link
-                      to={"/jobdetail"}
+                      to={"/mycreatedjob"}
                       state={{ id: elm._id }}
-                      
-                      className="w-[90%] mx-auto flex text-xs mt-7 cursor-not-allowed justify-center items-center bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
+
+                      className="w-[90%] mx-auto flex text-xs mt-7 justify-center items-center bg-[#EEEEEE] h-10 rounded-3xl hover:bg-[#6166f331] hover:text-[#6165F3]"
                     >
-                     Applied
+                   View Details
                     </Link>
                   </div>
                 )}

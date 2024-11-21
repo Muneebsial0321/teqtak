@@ -42,19 +42,19 @@ function WatchHistory() {
       try {
         const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`);
         const data = await response.json();
-       
-        setVideos(data.video);
-        setRecentData(data.podcast);
+       console.log("asdfasdfasadfasd",data);
+       setRecentData(data.podcast);
+       setVideos(data.video);
       } catch (error) {
         console.error("Error fetching views:", error);
       } finally {
         setLoading(false); 
       }
     };
-
     fetchViews();
   }, []);
-
+  console.log("this is videos",videos);
+  console.log("asdfasda",recentdata);
   const formatDuration = (duration) => {
     const seconds = Math.floor(duration / 1000);
     return seconds < 60
@@ -107,9 +107,9 @@ function WatchHistory() {
                 {videos.map((elm) => (
                   <div key={elm._id}>
                     <CardComponent
-                      title={elm.data.videoDesc}
-                      videoUrl={elm.data.videoUrl}
-                      videoId={elm.data._id}
+                      title={elm.data?.videoDesc}
+                      videoUrl={elm.data?.videoUrl}
+                      videoId={elm.data?._id}
                       navigate={navigate}
                       videos={videos}
                     />
