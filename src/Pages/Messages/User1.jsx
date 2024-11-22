@@ -298,7 +298,7 @@ function Message2() {
                   >
                     Schedule a meeting
                   </p>
-                  {meeting && (
+                  {true && (
                     <div
                       ref={cardRef}
                       className="absolute w-[200px] cursor-pointer right-0 top-12 px-3 py-1 text-md z-30 bg-white shadow-lg border"
@@ -306,7 +306,7 @@ function Message2() {
                         e.stopPropagation();
                       }}
                     >
-                      <Link to="/createmeeting">Create Zoom Meeting</Link>
+                      <Link to="/createmeeting" state={{roomId,receiver}}>Create Zoom Meeting</Link>
                       <p ref={cardRef} onClick={handleCalendar}>
                         Schedule Zoom Meeting
                       </p>
@@ -346,7 +346,7 @@ function Message2() {
                             : "/placeholder.jpg"
                       }
                       alt="profile"
-                      className={`h-[40px] w-[40px] rounded-full       ${sender.role === 'investor' ? 'border-2 border-red-600' :
+                      className={`h-[40px] w-[40px] rounded-full   object-cover    ${sender.role === 'investor' ? 'border-2 border-red-600' :
                         sender.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
                     />
                     <div className="flex">
@@ -356,7 +356,8 @@ function Message2() {
                         </p>
                         <p className="text-[#686868] text-xs mt-3">
                           
-                          {extractUrl(e.message)?<MeetingCall time={__Time__(e.timestamp)} link={extractUrl(e.message)} />:e.message}
+                          {/* {e.message} */}
+                          {extractUrl(e.message)?<MeetingCall payload={e.message} />:e.message}
                         </p>
                       </div>
                     </div>
