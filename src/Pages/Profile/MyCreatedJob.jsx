@@ -12,7 +12,7 @@ function MyCreatedJob() {
   const loc = useLocation();
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
-
+const [poster , setPoster] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,8 +20,9 @@ function MyCreatedJob() {
       if (loc.state && loc.state.id) {
         try {
           const result_ = await getJob(loc.state.id);
+          console.log("asdasdasd", result_);
           setJob(result_.job);
-          // setPoster(result_.poster);
+          setPoster(result_.poster);
         } catch (error) {
           console.error("Error fetching job data:", error);
         } finally {
@@ -160,7 +161,20 @@ function MyCreatedJob() {
                 <Link
                   to="/userprofile"
                   state={{ id: job.userId ? job.userId : "unkown" }}
-                ></Link>
+                >
+
+<div className="flex items-center gap-1 mt-2">
+                    <img
+                      src={poster.picUrl ? poster.picUrl : "/placeholder.jpg"}
+                      alt=""
+                      className="h-[30px] w-[30px] rounded-full"
+                    />
+                    <p className="text-[gray]">Posted by:</p>
+                    <p className="text-lg font-semibold">
+                      {poster.name ? poster.name : "Unknown"}
+                    </p>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

@@ -33,7 +33,7 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
         },
       });
       const d = await response.json();
-     
+ 
       setData(d);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -45,12 +45,12 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-4 w-auto">
+    <div className="flex flex-wrap gap-4 w-auto overflow-x-hidden">
       {data.map((entrepreneur, index) => (
         <div
           key={entrepreneur._id}
-          className={`relative w-full sm:w-[48%] md:w-[31%] lg:w-[29%]`}
-          style={{ margin: "10px", padding: "10px", cursor: "pointer" }}
+          className={`relative w-full sm:w-[48%] md:w-[31%] lg:w-[29%] mx-2`}
+          style={{ margin: "0px", padding: "0px", cursor: "pointer" }}
         >
           <div
             className="flex items-center gap-3 md:gap-5 justify-between"
