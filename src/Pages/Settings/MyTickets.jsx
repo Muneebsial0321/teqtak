@@ -31,7 +31,7 @@ function MyTickets() {
 
     fetchTickets();
   }, []);
-
+console.log("Done",tickets)
   const handleShare = async (e) => {
     e.stopPropagation();
     if (navigator.share) {
@@ -101,7 +101,9 @@ function MyTickets() {
                     <div className="flex items-center">
                       <button
                         className="me-2 w-[70%] py-2 JobButtonBgBlur text-sm text-white rounded-full"
-                        onClick={() => navigate("/ticketdetails", { state: {id : ticket.event._id} })}
+                        onClick={() => navigate("/ticketdetails", { state: {eventId : ticket.
+                          _id} })}
+
                       >
                         View tickets
                       </button>

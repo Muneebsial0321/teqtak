@@ -7,8 +7,10 @@ import { fetchProfile } from "../../API";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
+
 function Ticketdetail() {
   const ticketRef = useRef();
+
 
   const [tickets, setTickets] = useState([]);
   const [user, setUser] = useState(null);
@@ -16,6 +18,11 @@ function Ticketdetail() {
   const loc = useLocation();
   const navigate = useNavigate();
 
+  const eventIdFromState = loc.state?.eventId;
+  const queryParams = new URLSearchParams(location.search);
+  const eventIdFromParams = queryParams.get("eventid");
+  const eventId = eventIdFromState || eventIdFromParams;
+console.log("eventIdFromParams",eventId);
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split('=')[1];
@@ -34,15 +41,17 @@ function Ticketdetail() {
 // console.log("user",user)
   const fetchTickets = async (eventId) => {
     try {
+      console.log(`${REACT_APP_API_BASE_URL}/tickets/${eventId}`);
+      
       const response = await fetch(
-        `${REACT_APP_API_BASE_URL}/events/${eventId}`
+        `${REACT_APP_API_BASE_URL}/tickets/${eventId}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      // console.log("Fetched ticketPayment:", data);
-      setTickets(data.event);
+      console.log("Fetched ticketPayment:", data);
+      setTickets(data);
       
     } catch (error) {
       console.error("Error fetching tickets:", error);
@@ -143,23 +152,16 @@ function Ticketdetail() {
   };
   
   
-
-  useEffect(() => {
-    // Extract event ID and buyer ID from the URL query parameters
-    const queryParams = new URLSearchParams(loc.search);
-    const eventId = queryParams.get("eventid");
-    const buyerId = queryParams.get("buyerid"); 
-
-    console.log("Event ID:", eventId, "Buyer ID:", buyerId);
-
-    if (eventId) {
-      fetchTickets(eventId);
-      fetchProfileData()
-    } else {
-      console.error("No event ID found in URL.");
-    }
-  }, [loc.search]);
-
+ // Fetch data on component mount
+ useEffect(() => {
+  if (eventId) {
+    fetchTickets(eventId);
+    fetchProfileData();
+  } else {
+    console.error("No event ID found in state or URL.");
+  }
+}, [eventId]);
+console.log("Event",tickets)
   const selectedTickets = loc.state?.selectedTickets || {};
   const paymentId = tickets._id;
   if (loading) {
@@ -190,8 +192,8 @@ function Ticketdetail() {
               <div className="div lg:w-[45%] w-[80%] mx-auto">
                 <img
                   src={
-                    tickets.eventCoverUrl
-                      ? tickets.eventCoverUrl
+                    tickets.event.eventCoverUrl
+                      ? tickets.event.eventCoverUrl
                       : "/loading.jpg"
                   }
                   alt=""
@@ -199,23 +201,23 @@ function Ticketdetail() {
                   //  crossOrigin="anonymous"
                 />
                 <p className="text-md font-semibold opacity-55 text-center p-2">
-                  {tickets.eventTitle}
+                  {tickets.event.eventTitle}
                 </p>
               </div>
               <div className="location lg:w-[50%] w-[80%] mx-auto mt-8">
                 <p className="text-xs font-semibold text-[gray]">Location</p>
-                <p className="text-sm opacity-70">{tickets.eventLocation}</p>
+                <p className="text-sm opacity-70">{tickets.event.eventLocation}</p>
                 <div className="flex justify-between mt-5">
                   <div className="name h-[10vh] w-[20%]">
                     <p className="text-xs font-semibold text-[gray]">Name</p>
                     <p className="text-sm font-medium opacity-70 whitespace-nowrap">
-                      {user ? user.name : "Unknown"}
+                      {tickets ? tickets.buyer.name : "Unknown"}
                     </p>
                   </div>
                   <div className="date h-[10vh] w-[20%]">
                     <p className="text-xs font-semibold text-[gray]">Date</p>
                     <p className="text-sm font-medium opacity-70">
-                      {tickets.eventDate}
+                      {tickets.event?.eventDate}
                     </p>
                   </div>
                 </div>
@@ -225,7 +227,7 @@ function Ticketdetail() {
                       Start Time
                     </p>
                     <p className="text-sm font-medium opacity-70">
-                      {tickets.startTime}
+                      {tickets.event.startTime}
                     </p>
                   </div>
                   <div className="date h-[10vh] w-[20%]">
@@ -233,7 +235,7 @@ function Ticketdetail() {
                       End Time
                     </p>
                     <p className="text-sm font-medium opacity-70">
-                      {tickets.endTime}
+                      {tickets.event.endTime}
                     </p>
                   </div>
                 </div>
