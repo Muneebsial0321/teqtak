@@ -183,7 +183,7 @@ const Wishlist = () => {
             </div>
             <img
               src={elm.picUrl ? elm.picUrl : "loading.jpg"}
-              alt={`Img-${elm.user.name}`}
+              alt={`Img-${elm.user?.name}`}
               className="h-full w-full rounded-lg object-cover"
             />
                     </div>

@@ -158,7 +158,7 @@ const JobCreationForm = () => {
 
   function convertStringToArray(str) {
     return str
-      .split(",")
+      .split(" ")
       .map((item) => item.trim())
       .filter((item) => item !== "");
   }

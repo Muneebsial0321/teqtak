@@ -6,7 +6,7 @@ import { RiMessengerLine } from 'react-icons/ri';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { REACT_APP_API_BASE_URL } from "../../ENV";
-
+import { GoPeople } from "react-icons/go";
 
 const getUserId = () => {
   const str = document.cookie
@@ -83,7 +83,7 @@ profilePic.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
         <li className="mb-2">
           <Link to="/subscribe" className={`flex items-center opacity-70 ${locationPath === '/subscribe' ? 'Left_Side_Selected' : ''} py-2 px-2 rounded-lg  transition-all duration-200 transform` }
          >
-           <IoMdHeartEmpty className="md:mr-2 text-2xl" />
+           <GoPeople  className="md:mr-2 text-2xl" />
             <span className="text-sm md:block hidden">Subscribe</span>
           </Link>
         </li>
