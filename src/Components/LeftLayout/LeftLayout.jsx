@@ -60,7 +60,8 @@ profilePic.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
         <li className="mb-2">
           <Link to="/notifications" className={`flex items-center opacity-70 ${locationPath === '/notifications' ? 'Left_Side_Selected' : ''} py-2 px-2 rounded-lg  transition-all duration-200 transform` }
           >
-            <IoMdHeartEmpty className="md:mr-2 text-2xl" />
+           
+            <IoIosNotificationsOutline className="md:mr-2 text-2xl" />
             <span className="text-sm md:block hidden">Notifications</span>
           </Link>
         </li>
@@ -82,7 +83,7 @@ profilePic.role === 'entrepreneur' ? 'border-2 border-blue-600' : ''}`}
         <li className="mb-2">
           <Link to="/subscribe" className={`flex items-center opacity-70 ${locationPath === '/subscribe' ? 'Left_Side_Selected' : ''} py-2 px-2 rounded-lg  transition-all duration-200 transform` }
          >
-           <IoIosNotificationsOutline className="md:mr-2 text-2xl" />
+           <IoMdHeartEmpty className="md:mr-2 text-2xl" />
             <span className="text-sm md:block hidden">Subscribe</span>
           </Link>
         </li>
