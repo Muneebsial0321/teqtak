@@ -54,7 +54,7 @@ const MeetingCall = (props) => {
 
 
   return (
-    <div className='w-[20rem] rounded-[1rem] z-30  pb-8 gap-5 flex flex-col  items-center shadow-inner border-solid border-[#a5a5a5] border-[1px] ' >
+    <div className='w-[20rem] max-[480px]:w-[13rem] max-[375px]:w-[10rem] rounded-[1rem] z-30  pb-8 gap-5 flex flex-col  items-center shadow-inner border-solid border-[#a5a5a5] border-[1px] ' >
       <div className="bg-blue-600 h-[4rem] w-full rounded-t-[1rem] flex justify-center items-center text-white font-bold">
         Start  {time.date || "data"}
       </div>
@@ -64,9 +64,9 @@ const MeetingCall = (props) => {
         <p className='text-gray-500'>Date: <span className='text-black font-medium'>{time.time}</span></p>
         <p className='text-gray-500'>Type: <span className='text-black font-medium'>Zoom Meeting</span></p>
       </div>
-      <div className="flex flex-row gap-7 justify-center items-center">
-        <a className='px-8 py-2 rounded-xl font-bold bg-white border border-black border-solid'>Reject</a>
-        <a href={data.url || "#"} className='px-8 py-2 rounded-xl font-bold text-white bg-blue-600 border border-black border-solid'>Accept</a>
+      <div className="flex flex-row max-[480px]:gap-2  gap-7 justify-center items-center">
+        <a className='px-8 py-2 rounded-xl max-[480px]:px-4 font-bold bg-white border border-black border-solid cursor-pointer'>Reject</a>
+        <a href={data.url || "#"} className='px-8 py-2 max-[480px]:px-4 rounded-xl font-bold text-white bg-blue-600 border border-black border-solid'>Accept</a>
       </div>
     </div>
   )

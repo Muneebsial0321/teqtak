@@ -38,7 +38,7 @@ function CameraCapture({ closeCameraCapture, onSend }) {
   };
 
   return (
-    <div className="bg-gray-100 flex flex-col items-center p-6 min-h-screen">
+    <div className="bg-gray-100 flex flex-col items-center p-6 max-[425px]:p-[.9rem] min-h-screen">
       <h2 className="text-2xl font-semibold mb-6">Camera Capture</h2>
 
       {capturedImage ? (
@@ -59,7 +59,7 @@ function CameraCapture({ closeCameraCapture, onSend }) {
             </button>
             <button
               onClick={() => onSend(capturedImage)}
-              className="px-6 py-3 linear_gradient text-white rounded-lg hover:linear_gradient"
+              className="px-6 py-3  linear_gradient text-white rounded-lg hover:linear_gradient"
             >
               Send
             </button>
@@ -68,28 +68,30 @@ function CameraCapture({ closeCameraCapture, onSend }) {
       ) : (
         // Show the camera and controls if no image is captured
         <>
-          <div className="camera-container mb-4 w-full max-w-lg h-80 bg-black relative">
-            <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" />
+          <div className="camera-container mb-4 w-full max-w-lg  h-80 bg-black relative">
+            <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" 
+            style={{ height: '250px', width: 'auto' }}
+            />
           </div>
-          <div className="space-x-4">
+          <div className="space-x-4 max-[555px]:space-x-1">
             <button
               onClick={isCameraActive ? stopCamera : startCamera}
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              className="px-6 py-3 max-[555px]:px-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             >
               {isCameraActive ? 'Stop Camera' : 'Start Camera'}
             </button>
             <button
               onClick={captureImage}
-              className={`px-6 py-3 text-white rounded-lg ${
+              className={`px-6 py-3 max-[555px]:px-1 text-white rounded-lg ${
                 isCameraActive ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-400'
               }`}
               disabled={!isCameraActive}
             >
-              Capture Image
+              Capture 
             </button>
             <button
               onClick={closeCameraCapture}
-              className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              className="px-6 py-3 max-[555px]:px-1 bg-red-500 text-white rounded-lg hover:bg-red-600"
             >
               Close
             </button>

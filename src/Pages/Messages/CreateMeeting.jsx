@@ -72,7 +72,7 @@ function Zoommeeting() {
           <p className="text-lg md:text-xl font-semibold">To:</p>
           <div className="h-auto w-full md:w-[60%] bg-gray-100 rounded-xl py-2 px-4 flex items-center">
             <img
-              src={receiver.picUrl || "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"}
+              src={receiver.picUrl || "/placeholder.jpg"}
               alt=""
               className="h-[40px] w-[40px] object-cover rounded-full"
             />
