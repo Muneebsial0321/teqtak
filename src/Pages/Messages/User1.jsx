@@ -189,7 +189,7 @@ function Message2() {
       sendMessage();
     }
   };
-
+const id = loc.state.id
 
 
 
@@ -306,7 +306,7 @@ function Message2() {
                         e.stopPropagation();
                       }}
                     >
-                      <Link to="/createmeeting" state={{roomId,receiver}}>Create Zoom Meeting</Link>
+                      <Link to="/createmeeting" state={{roomId,receiver,id}}>Create Zoom Meeting</Link>
                       <p ref={cardRef} onClick={handleCalendar}>
                         Schedule Zoom Meeting
                       </p>
