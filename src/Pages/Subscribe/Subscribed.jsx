@@ -14,84 +14,89 @@ function Subscribed() {
     return userKey;
   };
 
-  const fetchSubscribers = async () => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${getUserId()}`);
-      const data = await response.json();
-     
-      setSubscriber(data);
-    } catch (error) {
-      console.error("Error fetching subscribers:", error);
-    }
-  };
-  
+const token = localStorage.getItem("jwt");
 
-  const fetchBlockedUsers = async () => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`);
-      const data = await response.json();
-     
-      
-      setBlockedUsers(Array.isArray(data) ? data : []);
-     
-    } catch (error) {
-      console.error("Error fetching blocked users:", error);
-      setBlockedUsers([]);
-    }
-  };
- 
-  const blockSubscriber = async (blockedId) => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/block`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: getUserId(),
-          blockedId,
-        }),
-      });
-      if (response.ok) {
-        const result = await response.json();
-       
-        
-       
-        setSubscriber(prevSubscribers => 
-          prevSubscribers.filter(sub => sub.subscribedToId !== blockedId)
-        );
-
-        setBlockedUsers(prev => [...prev, { blockedId }]);
-      } else {
-        console.error('Failed to block user');
+const fetchSubscribers = async () => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${getUserId()}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Add token in Authorization header
       }
-    } catch (error) {
-      console.error('Error blocking user:', error);
-    }
-  };
+    });
+    const data = await response.json();
+    setSubscriber(data);
+  } catch (error) {
+    console.error("Error fetching subscribers:", error);
+  }
+};
 
-  const isBlocked = (userId) => {
-    return blockedUsers.some((blockedUser) => blockedUser.blockedId === userId);
-  };
-
-  const deleteSubscriber = async (subscriberId) => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        
-        
-        setSubscriber(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
-      } else {
-        console.error('Failed to delete subscriber');
+const fetchBlockedUsers = async () => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`, 
       }
-    } catch (error) {
-      console.error('Error deleting subscriber:', error);
+    });
+    const data = await response.json();
+    setBlockedUsers(Array.isArray(data) ? data : []);
+  } catch (error) {
+    console.error("Error fetching blocked users:", error);
+    setBlockedUsers([]);
+  }
+};
+
+const blockSubscriber = async (blockedId) => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/block`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+      },
+      body: JSON.stringify({
+        userId: getUserId(),
+        blockedId,
+      }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      setSubscriber(prevSubscribers => 
+        prevSubscribers.filter(sub => sub.subscribedToId !== blockedId)
+      );
+      setBlockedUsers(prev => [...prev, { blockedId }]);
+    } else {
+      console.error('Failed to block user');
     }
-  };
+  } catch (error) {
+    console.error('Error blocking user:', error);
+  }
+};
+
+const isBlocked = (userId) => {
+  return blockedUsers.some((blockedUser) => blockedUser.blockedId === userId);
+};
+
+const deleteSubscriber = async (subscriberId) => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+      },
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      setSubscriber(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
+    } else {
+      console.error('Failed to delete subscriber');
+    }
+  } catch (error) {
+    console.error('Error deleting subscriber:', error);
+  }
+};
+
 
   useEffect(() => {
     fetchSubscribers();

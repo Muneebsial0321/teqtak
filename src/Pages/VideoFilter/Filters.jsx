@@ -13,7 +13,7 @@ const Filters = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedValues, setSelectedValues] = useState([]);
   const [recentdata, setRecentData] = useState([]);
-  const token = localStorage.getItem("authtoken");
+  const token = localStorage.getItem("jwt");
   const entrepreneurs = [
     { name: "Tech Entrepreneur" },
     { name: "Biotech Entrepreneur" },

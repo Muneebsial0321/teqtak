@@ -56,6 +56,9 @@ const filteredData = location.state?.filteredData
         wishItemType: 'event',
         wishItemId: eventId,
         userId: user_id,
+        headers:{
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        }
       });
       console.log('Wishlist item saved:', response.data);
       toast.success('Event saved to wishlist!'); // Notify on success

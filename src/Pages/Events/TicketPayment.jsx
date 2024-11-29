@@ -20,7 +20,12 @@ function Payment() {
 
   const fetchTickets = async (id) => {
     try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/events/${id}`);
+      const response = await fetch(`${REACT_APP_API_BASE_URL}/events/${id}`,{
+        method: "GET",
+        headers:{
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        }
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -53,6 +58,7 @@ function Payment() {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
         body: JSON.stringify(payload),
       });
@@ -91,6 +97,7 @@ function Payment() {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         },
         body: JSON.stringify(payload),
       });

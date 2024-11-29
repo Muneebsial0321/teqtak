@@ -31,12 +31,15 @@ const Video = () => {
   const rangeRef = useRef(null);
 
   const API_BASE_URL = REACT_APP_API_BASE_URL;
-
+  const token = localStorage.getItem("jwt");
   const videoId = decodeURIComponent(src);
 
   const getVideo = async () => {
     const req = await fetch(`${API_BASE_URL}/upload/${videoId}`, {
       credentials: "include",
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+      },
     });
     const data = await req.json();
     setVideo(data);
@@ -56,7 +59,11 @@ const Video = () => {
         viewerId: userId,
       };
 
-      await axios.post(`${API_BASE_URL}/views`, viewData);
+      await axios.post(`${API_BASE_URL}/views`, viewData, {
+        headers: {
+          'Authorization': `Bearer ${token}`, 
+        },
+      });
     } catch (error) {
       console.error("Error recording view:", error);
     }
@@ -198,7 +205,10 @@ const Video = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+         },
         body: JSON.stringify({
           subscriberId: getUserId(),
           subscribedToId: video?.user?.Users_PK,
@@ -222,6 +232,10 @@ const Video = () => {
         `${API_BASE_URL}/subscribe/${video?.user?.Users_PK}`,
         {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
       );
       if (response.ok) {
@@ -251,7 +265,13 @@ const Video = () => {
     const checkSubscriptionStatus = async () => {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/subscribe/my/${video?.user?.Users_PK}`
+          `${API_BASE_URL}/subscribe/my/${video?.user?.Users_PK}`,{
+            
+            headers: {
+              Authorization: `Bearer${token}`,
+              "Content-Type": "application/json",
+            },
+          }
         );
         if (response.ok) {
           const subscriptions = await response.json();

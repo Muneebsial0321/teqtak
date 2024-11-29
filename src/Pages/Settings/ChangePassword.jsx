@@ -16,7 +16,7 @@ function Changepassword() {
   const [loading, setLoading] = useState(false);
 
   let navigate = useNavigate();
-const token = localStorage.getItem('authtoken')
+const token = localStorage.getItem('jwt')
   const getUserId = () => {
     const str = document.cookie;
 
@@ -34,7 +34,13 @@ const token = localStorage.getItem('authtoken')
         oldPass: current,
         newPass: newpass,
         userId: userId,
-      });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
       if (response.data.message === "success") {
         setPassChange(true); // Show success component
       } else {

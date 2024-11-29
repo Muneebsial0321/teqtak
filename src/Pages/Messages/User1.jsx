@@ -36,7 +36,7 @@ function Message2() {
   const [showFileUploadModal, setShowFileUploadModal] = useState(false);
 
   const cardRef = useRef(null);
-  const token = localStorage.getItem("authtoken");
+  const token = localStorage.getItem("jwt");
   const navigate = useNavigate();
   const messagesEndRef = useRef(null);
 

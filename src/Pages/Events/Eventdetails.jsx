@@ -47,6 +47,10 @@ function Eventdetails() {
       `${REACT_APP_API_BASE_URL}/events/${id}`,
       {
         method: "GET",
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        }
       }
     );
     const d = await req.json();

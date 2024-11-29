@@ -14,7 +14,12 @@ function Notification() {
   const fetchNotifications = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/notifications/${getUserId()}`
+        `${API_URL}/notifications/${getUserId()}`,{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        }
       );
       setNotifications(response.data.data); // Update state with fetched notifications
     } catch (error) {

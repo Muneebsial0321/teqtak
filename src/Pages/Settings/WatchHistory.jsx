@@ -35,12 +35,18 @@ function WatchHistory() {
   };
 
   const user_id = getUserId();
-
+const token = localStorage.getItem('jwt');
   useEffect(() => {
     const fetchViews = async () => {
       setLoading(true); 
       try {
-        const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`);
+        const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`,
+    {
+        headers:{
+          "Authorization": `Bearer ${token}`,
+        }
+    }
+      );
         const data = await response.json();
        console.log("asdfasdfasadfasd",data);
        setRecentData(data.podcast);
@@ -68,7 +74,14 @@ function WatchHistory() {
         wishItemType: "podcast",
         wishItemId: podcastId,
         userId: user_id,
-      });
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:`Bearer ${token}`,
+        },
+      }
+    );
       toast.success("Podcast saved to wishlist!"); // Show success toast
     } catch (error) {
       console.error("Error saving to wishlist:", error);

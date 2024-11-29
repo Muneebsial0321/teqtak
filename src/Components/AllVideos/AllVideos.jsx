@@ -35,6 +35,10 @@ const AllVideos = () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/upload`, {
         params: { page, limit: 20 },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
       });
 
       const updatedData = response.data.data.map((item) => ({

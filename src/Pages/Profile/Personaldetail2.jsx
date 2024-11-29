@@ -12,7 +12,7 @@ function Personaldetail2() {
   const location = useLocation();
   const userID = location.state?.id;
   const role = location.state?.role;
- 
+ const token = localStorage.getItem(`jwt`)
 
   const getUserId = () => {
     const str = document.cookie;
@@ -51,6 +51,7 @@ function Personaldetail2() {
           method: "POST",
           headers: {
             "Content-type": "application/json",
+            "Authorization":`Bearer${token}`
           },
           body: JSON.stringify(user),
         }
@@ -79,7 +80,9 @@ const userPk = getUserId()
         credentials: "include",
         method: "POST",
         headers: {
-          "Content-type": "application/json",
+          "Content-Type": "application/json",
+          "Authorization":`Bearer${token}`
+          
         },
         body: JSON.stringify({
         answers: answersToSubmit,
@@ -97,7 +100,14 @@ const userPk = getUserId()
   const fetchSubscribers = async () => {
     try {
       const response = await fetch(
-        `${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`
+        `${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`,{
+          credentials: "include",
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization":`Bearer${token}`
+          },
+        }
       );
       const data = await response.json();
      

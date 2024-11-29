@@ -61,6 +61,10 @@ function Event() {
         wishItemType: 'event',
         wishItemId: eventId,
         userId: user_id,
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        }
       });
       toast.success('Event saved to wishlist!'); // Notify on success
     } catch (error) {

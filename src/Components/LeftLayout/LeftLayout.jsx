@@ -26,7 +26,10 @@ const getProfilePic = async()=>{
   
   const req= await fetch(`${REACT_APP_API_BASE_URL}/users/${getUserId()}`,{
     method:"GET",
-    credentials:'include'
+    credentials:'include',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    }
   })
 
   const data = await req.json()

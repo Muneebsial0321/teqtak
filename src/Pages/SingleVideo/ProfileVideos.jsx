@@ -27,13 +27,21 @@ const ProfileVideos = () => {
 
   const videoId = decodeURIComponent(src);
 
+const token = localStorage.getItem("jwt");
   const getVideo = async () => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/upload/${videoId}`, {
-      credentials: 'include'
-    });
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+      },
+      credentials: 'include',  
+    });;
     const data = await req.json();
     setVideo(data);
   };
+
+
+
 
  
 

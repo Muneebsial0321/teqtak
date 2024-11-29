@@ -132,6 +132,9 @@ const JobCreationForm = () => {
     try {
       const req = await fetch(`${REACT_APP_API_BASE_URL}/jobs/`, {
         credentials: "include",
+        headers:{
+          "Authorization":`Bearer ${localStorage.getItem("jwt")}`
+        },
         method: "POST",
         body: formData, 
       });

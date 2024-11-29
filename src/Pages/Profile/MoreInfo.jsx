@@ -19,7 +19,7 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
   };
 
   
-
+const token = localStorage.getItem('jwt');
   const handleShow = (index) => {
     setSelectedindex(selectedindex === index ? null : index);
   };
@@ -30,6 +30,7 @@ const MoreInfo = ({ userPk, role, setSelectedAnswers }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer${token}`
         },
       });
       const d = await response.json();

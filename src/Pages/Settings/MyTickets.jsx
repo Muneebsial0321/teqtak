@@ -12,7 +12,7 @@ const API_BASE_URL = REACT_APP_API_BASE_URL;
 function MyTickets() {
   const navigate = useNavigate();
   const [tickets, setTickets] = useState([]);
-
+const token = localStorage.getItem('jwt');
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split("=")[1];
@@ -22,7 +22,13 @@ function MyTickets() {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/tickets/user/${getUserId()}`); 
+        const response = await axios.get(`${API_BASE_URL}/tickets/user/${getUserId()}`,
+        {
+          headers: {
+            'Authorization': `Bearer${token}`,
+          },
+        }
+      ); 
         setTickets(response.data.data);
       } catch (error) {
         console.error("Error fetching tickets:", error);
@@ -57,7 +63,14 @@ console.log("Done",tickets)
         wishItemType: 'event',
         wishItemId: eventId,
         userId: user_id,
-      });
+      },
+      {
+        headers: {
+          Authorization:`Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
       
       toast.success('Event saved to wishlist!'); // Notify on success
     } catch (error) {

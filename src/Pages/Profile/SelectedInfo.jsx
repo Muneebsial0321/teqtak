@@ -6,7 +6,7 @@ const SelectedInfo = ({ userPk, role, setSelectedAnswers }) => {
   const [selectedindex, setSelectedindex] = useState(null);
   const [selectedAnswersState, setSelectedAnswersState] = useState({});
   const [data, setData] = useState([]);
-
+const token = localStorage.getItem('jwt');
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split("=")[1];
@@ -35,6 +35,7 @@ const SelectedInfo = ({ userPk, role, setSelectedAnswers }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
        
       });

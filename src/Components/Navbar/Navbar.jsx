@@ -19,7 +19,9 @@ const Navbar = ({ state }) => {
   // Fetch notifications count from the backend
   const fetchNotificationCount = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/notifications/count`);
+      const response = await axios.get(`${API_BASE_URL}/notifications/count`,{
+        headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+      });
       setNotificationCount(response.data.count || 0);
     } catch (error) {
       console.error("Error fetching notification count:", error);
@@ -35,7 +37,9 @@ const Navbar = ({ state }) => {
       // Fetch users based on the search term
       const fetchUsers = async () => {
         try {
-          const response = await axios.get(`${API_BASE_URL}/users?search=${searchTerm}`);
+          const response = await axios.get(`${API_BASE_URL}/users?search=${searchTerm}`,{
+            headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` }
+          });
           setData(response.data.data || []);
           // console.log("Fetched users:", response.data.data); 
         } catch (error) {

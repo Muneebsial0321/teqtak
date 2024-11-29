@@ -21,12 +21,16 @@ const Wishlist = () => {
     const userKey = str.split("=")[1];
     return userKey;
   };
-
+const token = localStorage.getItem('jwt');
   useEffect(() => {
     const fetchWishlistItems = async () => {
       try {
         const response = await axios.get(
-          `${API_BASE_URL}/wishlist/${getUserId()}`
+          `${API_BASE_URL}/wishlist/${getUserId()}`,{
+            headers:{
+              'Authorization': `Bearer ${token}`
+            }
+          }
         );
         const info = response.data;
     

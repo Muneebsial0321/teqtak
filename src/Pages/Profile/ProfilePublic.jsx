@@ -26,7 +26,7 @@ const ProfilePublic = ({ userId }) => {
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
-
+const token = localStorage.getItem('jwt');
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split('=')[1];
@@ -42,6 +42,7 @@ const ProfilePublic = ({ userId }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/users/profilepic/${getUserId()}`, {
         credentials: 'include',
+        headers: { 'Authorization': `Bearer ${token}`},
         method: "POST",
         body: formData,
       });

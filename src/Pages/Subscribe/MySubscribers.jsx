@@ -7,95 +7,94 @@ function MySubscribers() {
   const [subscribers, setSubscribers] = useState([]);
   const [blockedUsers, setBlockedUsers] = useState([]);
   const [able, setAble] = useState(null);
-
+  const token = localStorage.getItem("jwt");
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split('=')[1];
     return userKey;
   };
 
-  // Fetch the list of users who have subscribed to you (your followers)
-  const fetchSubscribers = async () => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`);
-      const data = await response.json();
-     
-      setSubscribers(data);
-    } catch (error) {
-      console.error("Error fetching subscribers:", error);
-    }
-  };
 
-  // Fetch the list of blocked users
-  const fetchBlockedUsers = async () => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`);
-      const data = await response.json();
-   
 
-      setBlockedUsers(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error("Error fetching blocked users:", error);
-      setBlockedUsers([]);
-    }
-  };
 
- 
-  const blockSubscriber = async (blockedId) => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/block`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: getUserId(),
-          blockedId,
-        }),
-      });
-      if (response.ok) {
-        const result = await response.json();
-      
-        
-        
-        setSubscribers(prevSubscribers => 
-          prevSubscribers.filter(sub => sub.subscriberId !== blockedId)
-        );
-
-       
-        setBlockedUsers(prev => [...prev, { blockedId }]);
-      } else {
-        console.error('Failed to block user');
+const fetchSubscribers = async () => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${getUserId()}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`, 
       }
-    } catch (error) {
-      console.error('Error blocking user:', error);
-    }
-  };
+    });
+    const data = await response.json();
+    setSubscribers(data);
+  } catch (error) {
+    console.error("Error fetching subscribers:", error);
+  }
+};
 
-  
-  const isBlocked = (userId) => {
-    return blockedUsers.some((blockedUser) => blockedUser.blockedId === userId);
-  };
 
-  
-  const deleteSubscriber = async (subscriberId) => {
-    try {
-      const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-  
-        
-        setSubscribers(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
-      } else {
-        console.error('Failed to remove subscriber');
+const fetchBlockedUsers = async () => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`, 
       }
-    } catch (error) {
-      console.error('Error removing subscriber:', error);
+    });
+    const data = await response.json();
+    setBlockedUsers(Array.isArray(data) ? data : []);
+  } catch (error) {
+    console.error("Error fetching blocked users:", error);
+    setBlockedUsers([]);
+  }
+};
+
+const blockSubscriber = async (blockedId) => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/block`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, 
+      },
+      body: JSON.stringify({
+        userId: getUserId(),
+        blockedId,
+      }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      setSubscribers(prevSubscribers => 
+        prevSubscribers.filter(sub => sub.subscriberId !== blockedId)
+      );
+      setBlockedUsers(prev => [...prev, { blockedId }]);
+    } else {
+      console.error('Failed to block user');
     }
-  };
+  } catch (error) {
+    console.error('Error blocking user:', error);
+  }
+};
+
+const deleteSubscriber = async (subscriberId) => {
+  try {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+      },
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      setSubscribers(prevSubscribers => prevSubscribers.filter(sub => sub._id !== subscriberId));
+    } else {
+      console.error('Failed to remove subscriber');
+    }
+  } catch (error) {
+    console.error('Error removing subscriber:', error);
+  }
+};
+
 
   
   useEffect(() => {

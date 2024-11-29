@@ -12,11 +12,14 @@ const [appliedjobs ,setAppliedJobs] = useState([])
     const userKey = str.split('=')[1];
     return userKey;
   };
-
+const token = localStorage.getItem('jwt');
   useEffect( ()=>{
     const appliedJobs = async () =>{
       try {
-        const response = await axios.get(`${API_BASE_URL}/appliedjobs/my/${getUserId()}`);
+        const response = await axios.get(`${API_BASE_URL}/appliedjobs/my/${getUserId()}`,{
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
         const result = response.data;
         const info = result.data
         // console.log("appleid job data ",info)

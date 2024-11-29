@@ -51,6 +51,9 @@ function Apply() {
         `${REACT_APP_API_BASE_URL}/appliedjobs`,
         {
           method: "POST",
+          headers:{
+            "Authorization": `Bearer${localStorage.getItem("jwt")}`
+          },
           body: formData,
         }
       );

@@ -7,7 +7,7 @@ const API_BASE_URL = REACT_APP_API_BASE_URL;
 function Blocklist() {
   let navigate = useNavigate();
   const [blockedUsers, setBlockedUsers] = useState([]);
-
+const token = localStorage.getItem('jwt')
   // Function to get the logged-in user ID from cookies
   const getUserId = () => {
     const str = document.cookie;
@@ -18,7 +18,12 @@ function Blocklist() {
   // Fetch blocked users from API
   const fetchBlockedUsers = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/block/${getUserId()}`);
+      const response = await fetch(`${API_BASE_URL}/block/${getUserId()}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }  );
       const data = await response.json();
       // console.log("Blocked users fetched:", data.data);
       setBlockedUsers(data.data);
@@ -35,6 +40,7 @@ function Blocklist() {
       const response = await fetch(`${API_BASE_URL}/block/${userId}`, {
         method: 'DELETE',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

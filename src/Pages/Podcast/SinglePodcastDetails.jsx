@@ -22,7 +22,7 @@ function SinglePodcastDetails() {
   const [viewRecorded, setViewRecorded] = useState(false); // Flag for recording view
   const [isPlaying, setIsPlaying] = useState(false); // State to track play/pause
   const [audio] = useState(new Audio());
-
+const token = localStorage.getItem('jwt');
   useEffect(() => {
     const getData = async () => {
       try {
@@ -63,6 +63,9 @@ function SinglePodcastDetails() {
   const getPodcast = async (id) => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/podcasts/${id}`, {
       method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      },
     });
     const d = await req.json();
     return d;
@@ -81,6 +84,7 @@ function SinglePodcastDetails() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(viewData),
       });

@@ -81,6 +81,11 @@ const user_Id = getUserId()
         wishItemType: 'event',
         wishItemId: eventId,
         userId: user_Id,
+      },{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        },
       });
       // console.log('Wishlist item saved:', response.data);
       toast.success('Event saved to wishlist!'); 

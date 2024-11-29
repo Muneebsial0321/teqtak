@@ -16,7 +16,7 @@ function MyCreatedPodcast() {
   const [recentdata, setRecentData] = useState([]);
   const [result, setResult] = useState({});
   const [viewRecorded, setViewRecorded] = useState(false); // Flag for recording view
-
+const token = localStorage.getItem('jwt');
   useEffect(() => {
     const getData = async () => {
       try {
@@ -41,6 +41,10 @@ function MyCreatedPodcast() {
   const getPodcast = async (id) => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/podcasts/${id}`, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
     });
     const d = await req.json();
     return d;
@@ -58,6 +62,7 @@ function MyCreatedPodcast() {
       await fetch(`${REACT_APP_API_BASE_URL}/views`, {
         method: "POST",
         headers: {
+          "Authorization": `Bearer${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(viewData),

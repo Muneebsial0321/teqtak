@@ -14,7 +14,7 @@ function MyCreatedJob() {
   const [job, setJob] = useState(null);
 const [poster , setPoster] = useState(null);
   const [loading, setLoading] = useState(true);
-
+const token = localStorage.getItem('jwt');
   useEffect(() => {
     const getData = async () => {
       if (loc.state && loc.state.id) {
@@ -37,7 +37,13 @@ const [poster , setPoster] = useState(null);
   }, [loc.state]);
 
   const getJob = async (id) => {
-    const req = await fetch(`${API_BASE_URL}/jobs/${id}`, { method: "GET" });
+    const req = await fetch(`${API_BASE_URL}/jobs/${id}`, { method: "GET" ,
+      headers: {
+        "Content-Type": "application/json",
+       "Authorization" :`Bearer${token}`
+      },
+
+    });
 
     if (!req.ok) {
       throw new Error(`HTTP error! status: ${req.status}`);

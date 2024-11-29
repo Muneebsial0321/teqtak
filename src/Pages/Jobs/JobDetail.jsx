@@ -43,6 +43,10 @@ function Jobdetail() {
   const getJob = async (id) => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/jobs/${id}`, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
 
     if (!req.ok) {
@@ -109,6 +113,10 @@ function Jobdetail() {
         wishItemType: "job",
         wishItemId: jobId,
         userId: user_id,
+        headers:{
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        }
       });
 
       // console.log("Wishlist item saved:", response.data);

@@ -101,6 +101,11 @@ const ApplePodcast = (props) => {
         wishItemType: 'podcast',
         wishItemId: podcastId,
         userId: user_id, 
+      },{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer'+ localStorage.getItem('jwt'),
+        },
       });
       // console.log('Wishlist item saved:', response.data);
       toast.success('Podcast saved to wishlist!');

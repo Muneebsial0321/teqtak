@@ -12,7 +12,7 @@ function UserSubscribed() {
   // Get userId from location state
   const userId = location.state?.id;
  
-
+const token = localStorage.getItem('jwt')
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split("=")[1];
@@ -23,7 +23,11 @@ function UserSubscribed() {
     if (!userId) return; // Ensure userId is available
     try {
       const response = await fetch(
-        `${REACT_APP_API_BASE_URL}/subscribe/${userId}`
+        `${REACT_APP_API_BASE_URL}/subscribe/${userId}`,{
+          headers: {
+            "Authorization": `Bearer ${token}` 
+          }
+        }
       );
       const data = await response.json();
      
@@ -36,7 +40,11 @@ function UserSubscribed() {
   const fetchBlockedUsers = async () => {
     try {
       const response = await fetch(
-        `${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`
+        `${REACT_APP_API_BASE_URL}/block?userId=${getUserId()}`,{
+        headers: {
+          "Authorization": `Bearer ${token}` 
+        }
+        }
       );
       const data = await response.json();
      
@@ -53,6 +61,7 @@ function UserSubscribed() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization":`Bearer ${token}`
         },
         body: JSON.stringify({
           userId: getUserId(),
@@ -82,6 +91,10 @@ function UserSubscribed() {
         `${REACT_APP_API_BASE_URL}/subscribe/${subscriberId}`,
         {
           method: "DELETE",
+          headers:{
+            "Content-Type": "application/json",
+            "Authorization":`Bearer${token}`
+          }
         }
       );
 

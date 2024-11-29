@@ -20,7 +20,13 @@ function Contactinfo() {
 
     const fetchTickets = async (id) => {
         try {
-            const response = await fetch(`${REACT_APP_API_BASE_URL}/events/${id}`);
+            const response = await fetch(`${REACT_APP_API_BASE_URL}/events/${id}`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+                },
+            });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

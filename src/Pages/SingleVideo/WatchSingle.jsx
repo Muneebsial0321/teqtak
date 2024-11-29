@@ -24,8 +24,8 @@ const WatchSingle = () => {
   const [videoIndex, setVideoIndex] = useState(0);
   const [isSubscribed, setIsSubscribed] = useState(false);
  const [watch ,setWatch] = useState(null)
-
-
+ 
+const token = localStorage.getItem('jwt')
   const videoId = decodeURIComponent(src);
 
   const getUserId = () => {
@@ -35,6 +35,10 @@ const WatchSingle = () => {
 
   const getVideo = async () => {
     const req = await fetch(`${REACT_APP_API_BASE_URL}/upload/${videoId}`, {
+      headers:{
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
       credentials: 'include'
     });
     const data = await req.json();
@@ -148,7 +152,10 @@ const WatchSingle = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json' ,
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ subscriberId: getUserId(), subscribedToId: video?.user?.Users_PK }),
       });
       if (response.ok) {
@@ -168,6 +175,10 @@ const WatchSingle = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe/${video?.user?.Users_PK}`, {
         method: 'DELETE',
+        headers:{
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        }
       });
       if (response.ok) {
         setIsSubscribed(false);
@@ -197,7 +208,13 @@ const WatchSingle = () => {
   useEffect(() => {
     const checkSubscriptionStatus = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/subscribe/my/${video?.user?.Users_PK}`);
+        const response = await fetch(`${API_BASE_URL}/subscribe/my/${video?.user?.Users_PK}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (response.ok) {
           const subscriptions = await response.json();
           const currentUserId = getUserId();

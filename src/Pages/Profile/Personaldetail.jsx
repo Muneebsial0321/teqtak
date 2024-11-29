@@ -10,7 +10,7 @@ function Personaldetail() {
   const [detail, setDetail] = useState({});
   const location = useLocation();
   const userID = location.state?.id;
-
+const token = localStorage.getItem('jwt');
   // Cache helper functions
   const setCache = (key, data) => {
     localStorage.setItem(key, JSON.stringify(data));
@@ -39,7 +39,11 @@ function Personaldetail() {
       setDetail(cachedDetail);
     } else {
       try {
-        const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${userID}`);
+        const req = await fetch(`${REACT_APP_API_BASE_URL}/users/${userID}`,
+        {  headers: {
+            Authorization: `Bearer ${token}`,
+          },}
+        );
         const data = await req.json();
         setDetail(data.user);
         setCache(`profileDetail_${userID}`, data.user); // Cache profile data
@@ -56,7 +60,13 @@ function Personaldetail() {
       setSubscriber(cachedSubscribers);
     } else {
       try {
-        const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${userID}`);
+        const response = await fetch(`${REACT_APP_API_BASE_URL}/subscribe/my/${userID}`,{
+         
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         const data = await response.json();
         setSubscriber(data);
         setCache(`subscribers_${userID}`, data); // Cache subscriber data

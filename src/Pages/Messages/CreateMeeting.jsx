@@ -18,7 +18,8 @@ function Zoommeeting() {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/meetings`, {
         method: "POST", // Specify the HTTP method
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
         },
         body: JSON.stringify(state)
       });

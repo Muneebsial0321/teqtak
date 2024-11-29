@@ -41,10 +41,16 @@ console.log("eventIdFromParams",eventId);
 // console.log("user",user)
   const fetchTickets = async (eventId) => {
     try {
-      console.log(`${REACT_APP_API_BASE_URL}/tickets/${eventId}`);
+      
       
       const response = await fetch(
-        `${REACT_APP_API_BASE_URL}/tickets/${eventId}`
+        `${REACT_APP_API_BASE_URL}/tickets/${eventId}`,{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        }
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

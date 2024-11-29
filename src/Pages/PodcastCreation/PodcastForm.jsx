@@ -11,7 +11,7 @@ const PodcastForm = () => {
   const [formState, setFormState] = useState({});
   const [audioDuration, setAudioDuration] = useState(0); // State for audio duration
   let navigate = useNavigate();
-
+const token = localStorage.getItem('jwt')
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split("=")[1];
@@ -50,6 +50,9 @@ const PodcastForm = () => {
       formData.append("userID", getUserId());
       const response = await fetch(`${REACT_APP_API_BASE_URL}/podcasts/`, {
         credentials: "include",
+        headers:{
+          "Authorization": `Bearer ${token}`
+        },
         method: "POST",
         body: formData,
       });

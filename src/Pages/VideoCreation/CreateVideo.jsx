@@ -26,7 +26,7 @@ const Video = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [tagInput, setTagInput] = useState("");
- 
+  const token = localStorage.getItem("jwt");
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -72,6 +72,7 @@ const Video = () => {
         formData,
         {
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
           },
         }

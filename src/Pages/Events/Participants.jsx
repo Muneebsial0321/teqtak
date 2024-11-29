@@ -32,6 +32,9 @@ function Participants () {
       `${REACT_APP_API_BASE_URL}/events/${id}`,
       {
         method: "GET",
+        headers:{
+          "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+        }
       }
     );
     const d = await req.json();

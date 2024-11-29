@@ -22,7 +22,11 @@ function PodcastTopVideos({ data }) {
   useEffect(() => {
     const fetchViews = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`);
+        const response = await fetch(`${API_BASE_URL}/views/${getUserId()}`,{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         const data = await response.json();
         setRecentView(data.podcast);
       } catch (error) {
@@ -76,6 +80,10 @@ function PodcastTopVideos({ data }) {
         wishItemType: 'podcast',
         wishItemId: podcastId,
         userId: user_id,
+      },{
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
       toast.success('Podcast saved to wishlist!'); // Show success toast
     } catch (error) {

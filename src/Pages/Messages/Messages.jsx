@@ -23,7 +23,7 @@ const getUserId = () => {
   return userKey;
 };
 
-const token = localStorage.getItem('authtoken');
+const token = localStorage.getItem('jwt');
 
 function Message() {
   const [chats, setChats] = useState([]);

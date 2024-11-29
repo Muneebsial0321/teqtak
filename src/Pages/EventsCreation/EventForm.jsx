@@ -146,7 +146,13 @@ const EventForm = () => {
 
       const response = await axios.post(
         `${REACT_APP_API_BASE_URL}/events/`,
-        formData
+        formData,
+        {
+          headers: {
+            'Content-Type':'multipart/form-data',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          },
+        }
       );
 
     

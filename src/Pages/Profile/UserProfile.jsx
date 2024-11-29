@@ -35,12 +35,14 @@ const UserProfile = () => {
     const userKey = str.split("=")[1];
     return userKey;
   };
-
+const token = localStorage.getItem('jwt');
   const subscribeUser = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" ,
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify({
           subscriberId: getUserId(),
           subscribedToId: userId,
@@ -62,6 +64,9 @@ const UserProfile = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/subscribe/${userId}`, {
         method: "DELETE",
+        headers: { "Content-Type": "application/json" ,
+          "Authorization": `Bearer ${token}`
+        },
       });
       if (response.ok) {
         setIsSubscribed(false);
@@ -77,7 +82,12 @@ const UserProfile = () => {
   useEffect(() => {
     const checkSubscriptionStatus = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/subscribe/my/${userId}`);
+        const response = await fetch(`${API_BASE_URL}/subscribe/my/${userId}`,{
+          method: "GET",
+          headers: { "Content-Type": "application/json" ,
+            "Authorization": `Bearer ${token}`
+          },
+        });
         if (response.ok) {
           const subscriptions = await response.json();
 
@@ -146,6 +156,7 @@ const UserProfile = () => {
         method: "POST",
         headers: {
           "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
         },
         body: JSON.stringify({ user: id }),
       }

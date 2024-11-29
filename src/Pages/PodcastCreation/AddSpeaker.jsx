@@ -22,7 +22,11 @@ const AddSpeaker = ({ updateSpeakerData, initialData }) => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${API_BASE_URL}/users`);
+        const response = await axios.get(`${API_BASE_URL}/users`,{
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          }
+        });
         setAllUsers(response.data.data || []);
       } catch (error) {
         console.error("Error fetching users:", error);

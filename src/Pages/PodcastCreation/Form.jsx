@@ -54,7 +54,7 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
   const [speakerState, setSpeakerState] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedType, setSelectedType] = useState('');
-
+const token = localStorage.getItem('jwt');
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split('=')[1];
@@ -107,6 +107,10 @@ const Form = ({ audioFile, coverImage, formState, setFormState, audioDuration })
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/podcasts/`, {
         credentials: 'include',
+        headers:{
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer${token}`
+        },
         method: 'POST',
         body: formData,
       });

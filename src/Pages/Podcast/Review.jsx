@@ -23,7 +23,7 @@ const Review = (props) => {
   const [replySection, setReplySection] = useState({});
   const [reviewReplies, setReviewReplies] = useState([]);
   const [openbar, setOpenbar] = useState(false);
-
+const token  = localStorage.getItem('jwt');
   const getUserId = () => {
     const str = document.cookie;
     const userKey = str.split("=")[1];
@@ -69,6 +69,7 @@ const Review = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
         credentials: "include",
         body: JSON.stringify({
@@ -100,7 +101,11 @@ const Review = (props) => {
   const fetchComments = async () => {
     try {
       const response = await fetch(
-        `${REACT_APP_API_BASE_URL}/reviews/${props.videoId}`
+        `${REACT_APP_API_BASE_URL}/reviews/${props.videoId}`,{
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        }
       );
 
       const data = await response.json();
@@ -117,6 +122,7 @@ const Review = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
         credentials: "include",
         body: JSON.stringify({
@@ -140,6 +146,7 @@ const Review = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
         credentials: "include",
       });
