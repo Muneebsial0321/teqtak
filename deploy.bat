@@ -1,3 +1,3 @@
 git add . 
-git commit -m "token added in every file"
+git commit -m "some changes"
 git push origin main
