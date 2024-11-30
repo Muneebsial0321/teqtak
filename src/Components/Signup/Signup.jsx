@@ -74,9 +74,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200 overflow-x-hidden scroll-smooth">
+    <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200 max-[767px]:bg-white overflow-x-hidden scroll-smooth">
       <ToastContainer />
-      <div className="w-full h-full md:h-[100vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-2 max-[766px]:h-[100vh] ">
+      <div className="w-full h-full md:h-[100vh] md:w-[27rem] bg-white flex flex-col justify-between items-center md:items-center px-10 py-2 max-[766px]:h-[100vh] pb-[90px] pt-[60px]">
         <section className="flex flex-col gap-2 items-center py-[1px] w-auto">
           <div className="flex justify-center items-center border-[1px] border-gray-300 rounded w-full">
             <button
@@ -95,7 +95,7 @@ const Signup = () => {
 
           <h1 className="text font-bold text-start">Let's get started!</h1>
 
-          <form className="flex flex-col w-auto gap-2 justify-center" onSubmit={handleSubmit}>
+          <form className="flex flex-col w-auto gap-2 justify-center items-center" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Name"
@@ -112,7 +112,7 @@ const Signup = () => {
               value={state.email || ""}
               onChange={_onChange_}
               required
-              className="py-2 px-4 rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:py-1 max-[425px]:w-[90%]"
+              className="py-2 px-4 w-full rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:py-1 max-[425px]:w-[90%]"
             />
             <input
               type="password"
@@ -122,7 +122,7 @@ const Signup = () => {
               value={state.password || ""}
               onChange={_onChange_}
               required
-              className="py-2 px-4 w-auto rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:py-1 max-[425px]:px-1 max-[425px]:w-[90%]"
+              className="py-2 px-4 w-full rounded outline-none border-[1px] border-gray-200 placeholder:text-xs max-[425px]:py-1 max-[425px]:w-[90%]"
             />
             <h2 className="font-semibold text-center">Select your Role</h2>
             <section className="flex justify-center gap-4">
@@ -141,7 +141,7 @@ const Signup = () => {
             <section className="flex items-center mt-1 justify-center">
               <button
                 type="submit"
-                className="w-full mb-4 bg-purple-800 py-3 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[100%] max-[425px]:py-1 max-[425px]:font-normal"
+                className="w-full px-[6rem] max-[335px]:px-[5rem] mb-4 bg-purple-800 py-2 rounded-3xl font-semibold linear_gradient text-white max-[425px]:w-[100%] max-[425px]:py-1 max-[425px]:font-normal"
                 disabled={loading}
               >
                 {loading ? "Loading..." : "Sign up"}
