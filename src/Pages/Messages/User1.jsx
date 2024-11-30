@@ -35,6 +35,9 @@ function Message2() {
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [showFileUploadModal, setShowFileUploadModal] = useState(false);
 
+
+  const [file, setFile] = useState(null);
+
   const cardRef = useRef(null);
   const token = localStorage.getItem("jwt");
   const navigate = useNavigate();
@@ -44,6 +47,31 @@ function Message2() {
     setIsCameraOpen((prev) => !prev);
   };
 
+
+  const uploadFile = async () => {
+    if (!file) {
+      alert("Please select a file first!");
+      return;
+    }
+    console.log("uploading file")
+    console.log({ file })
+    // // Convert file to ArrayBuffer
+    const buffer = await file.arrayBuffer();
+    const fileData = {
+      name: file.name,
+      type: file.type,
+      size: file.size,
+      data: buffer,
+    };
+    const  payload = {
+      roomId:roomId,
+      sender:getUserId(),
+      message: {...fileData,"tag":"image"}
+    } 
+    socket.emit("sendMedia", {...payload});
+    console.log({payload})
+
+  };
 
 
   const __Time__ = (isoString) => {
@@ -216,7 +244,8 @@ const id = loc.state.id
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    console.log("setting file")
+    setFile(e.target.files[0]);
     if (file) {
       setSelectedFile(file);
       setShowFileUploadModal(true);
@@ -238,6 +267,7 @@ const id = loc.state.id
 
   return (
     <>
+    <button onClick={uploadFile}>CLICK me</button>
       <div className="main h-full w-[100%] ">
         {isCameraOpen && (
           <CameraCapture closeCameraCapture={() => setIsCameraOpen(false)} />
@@ -355,9 +385,9 @@ const id = loc.state.id
                           {e.sender !== getUserId() ? sender.name : "You"}
                         </p>
                         <p className="text-[#686868] text-xs mt-3">
-                          
+
                           {/* {e.message} */}
-                          {extractUrl(e.message)?<MeetingCall payload={e.message} />:e.message}
+                          {extractUrl(e.message) ? <MeetingCall payload={e.message} /> : e.message}
                         </p>
                       </div>
                     </div>
@@ -415,10 +445,11 @@ const id = loc.state.id
                     <FaPaperclip className="text-[gray] cursor-pointer" />
                   </span>
                   <input
+                    name="file"
                     id="file-input"
                     type="file"
                     accept="image/*,video/*"
-                    onChange={handleFileChange}
+                    onChange={handleFileChange} 
                     className="hidden"
                   />
                 </li>
