@@ -297,7 +297,7 @@ const Video = () => {
                     onClick={() => setPostPriv("Friends")}
                   >
                     <TiGroupOutline />
-                    <p>Friends</p>
+                    <p>Subscribers</p>
                   </div>
                   <div
                     className="w-full flex justify-between items-center px-4 py-2 cursor-pointer"

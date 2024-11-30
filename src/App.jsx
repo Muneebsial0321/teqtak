@@ -63,6 +63,7 @@ import OnBoarding from './OnBoarding.jsx';
 import MyCreatedPodcast from './Pages/Profile/MyCreatedPodcast.jsx';
 import ZoomSocket from './Pages/Messages/ZoomSocket.jsx';
 import Experimental_Video_Feed from './Pages/Feed/Experimental_Video_Feed.jsx';
+import BlockedMessage from './Components/Signin/BlockedMessage.jsx';
 
 
 
@@ -80,7 +81,7 @@ const App = () => {
         <Route path="/bording" element={<OnBoarding/>} />
         <Route path="/signin" element={<Signin />} />
         <Route path='/notfound' element={<NotFound /> } />
-
+         <Route path='/blocked' element={<BlockedMessage />}/>
         {/* Routes with Layout private routes */}
         <Route element={ <Layout />  }>
 

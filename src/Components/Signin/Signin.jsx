@@ -37,16 +37,21 @@ const Signin = () => {
   
       if (response.ok) {
         const data = await response.json();
-        // console.log("Login successful:", data);
+        console.log("Login successful:", data);
         localStorage.setItem('jwt', data.authtoken); 
-
+  
         
-        // console.log("authToken", data.authtoken);
         localStorage.setItem('userId', data.user.Users_PK);
-        // Store any tokens or user info as needed
-        // navigate('/bording');
-        navigate(`/bording?authtoken=${data.authtoken}&user=${data.user.Users_PK}`);
-
+  
+       console.log(data.user.isBlocked);
+        if (data.user.isBlocked === "false") {
+          
+          navigate(`/bording?authtoken=${data.authtoken}&user=${data.user.Users_PK}`);
+        } else {
+         
+          navigate('/blocked');
+        }
+  
       } else {
         const errorData = await response.json();
         console.error("Login failed:", errorData);
@@ -54,9 +59,10 @@ const Signin = () => {
     } catch (error) {
       console.error("Login error:", error);
     } finally {
-      setLoading(false); // Reset loading state here
+      setLoading(false);
     }
   };
+  
   
   return (
     <div className="w-[100vw] h-[100vh] grid place-items-center bg-blue-200 max-[767px]:bg-white overflow-x-hidden scroll-smooth">
