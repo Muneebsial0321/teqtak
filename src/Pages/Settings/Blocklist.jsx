@@ -25,13 +25,14 @@ const token = localStorage.getItem('jwt')
       }
     }  );
       const data = await response.json();
-      // console.log("Blocked users fetched:", data.data);
+      console.log("Blocked users fetched:", data)
       setBlockedUsers(data.data);
+
     } catch (error) {
       console.error('Error fetching blocked users:', error);
     }
   };
-
+console.log("blocekit",blockedUsers)
   // Unblock a user
   const unblockUser = async (userId) => {
     try {

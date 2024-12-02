@@ -12,25 +12,11 @@ const AllVideos = () => {
   const API_BASE_URL = REACT_APP_API_BASE_URL;
   const location = useLocation();
 
-  
-  const filteredVideoIds = location.state?.id || []; 
+  const filteredVideoIds = location.state?.id || [];
 
-  
+  // Function to fetch data
   const getData = async (page) => {
     setLoading(true);
-    const cacheKey = `videos_page_${page}_${filteredVideoIds.join("_")}`; 
-    const cachedData = localStorage.getItem(cacheKey);
-
-    if (cachedData) {
-      
-      console.log("Using cached data");
-      setVideos((prevVideos) => {
-        const newVideos = JSON.parse(cachedData);
-        return [...prevVideos, ...newVideos];
-      });
-      setLoading(false);
-      return;
-    }
 
     try {
       const response = await axios.get(`${API_BASE_URL}/upload`, {
@@ -61,9 +47,6 @@ const AllVideos = () => {
         );
         return [...prevVideos, ...newVideos];
       });
-
-      
-      localStorage.setItem(cacheKey, JSON.stringify(updatedData));
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -71,13 +54,12 @@ const AllVideos = () => {
     }
   };
 
-  
+ 
   useEffect(() => {
     if (filteredVideoIds && filteredVideoIds.length > 0) {
-      
       getData(page);
     } else {
-      getData(page); 
+      getData(page);
     }
   }, [page, filteredVideoIds]);
 
@@ -89,6 +71,7 @@ const AllVideos = () => {
   const observer = useRef();
   const lastVideoRef = useRef();
 
+ 
   useEffect(() => {
     if (loading) return;
 
@@ -122,6 +105,7 @@ const AllVideos = () => {
     };
   }, [loading, lastVideoRef, filteredVideos]);
 
+  
   const handleVideoClick = (index) => {
     navigate(`/video/${encodeURIComponent(filteredVideos[index]._id)}`, {
       state: { videos: filteredVideos },
@@ -136,7 +120,7 @@ const AllVideos = () => {
       <div className="flex flex-wrap justify-start gap-1 sm:w-[90%] lg:w-[90%] mx-auto">
         {filteredVideos.slice(0, Math.min(filteredVideos.length, page * 20)).map((video, i) => (
           <div
-            key={video._id} 
+            key={video._id}
             ref={i === filteredVideos.length - 1 ? lastVideoRef : null}
             className="w-[32%] lg:w-[21vw] cursor-pointer grid place-items-center relative lg:h-[48vh] sm:h-[34vh]"
             onClick={() => handleVideoClick(i)}
