@@ -101,15 +101,15 @@ const token = localStorage.getItem('jwt');
     // console.log("Speaker State Before Submission:", speakerState);
 
     formData.forEach((value, key) => {
-      // console.log(key, value);
+      console.log({key, value});
     });
 
     try {
       const response = await fetch(`${REACT_APP_API_BASE_URL}/podcasts/`, {
         credentials: 'include',
         headers:{
-          'Content-Type': 'application/json',
-          "Authorization": `Bearer${token}`
+          // 'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`
         },
         method: 'POST',
         body: formData,
