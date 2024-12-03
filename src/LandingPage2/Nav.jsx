@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import './Page.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import img1 from "./Media/Group 261.png";
 import img2 from "./Media/Group 264.png";
 import img3 from "./Media/30shots_so 1.png";
@@ -7,6 +10,7 @@ import img5 from "./Media/253shots_so 1.png";
 import img6 from "./Media/Group 1321314675.png";
 import img7 from "./Media/iPhone 14.png";
 import img8 from "./Media/Group 1.png";
+import img9 from "./Media/image 14.png"
 import slide1 from "./Media/Rectangle 393.png";
 import slide2 from "./Media/Rectangle 393 (1).png";
 import slide3 from "./Media/Rectangle 393 (2).png";
@@ -32,10 +36,7 @@ import { PiAppleLogoFill } from "react-icons/pi";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-import './Page.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
-
+import { Link } from "react-router-dom";
 export default function Nav() {
   const [activeIndex, setActiveIndex] = useState(null);
   const faqs = [
@@ -156,10 +157,10 @@ export default function Nav() {
                 <a href="/" className="btn1">
                   <MdOutlineFileDownload /> Download Now
                 </a>
-                <a href="/" className="btn2">
+                <Link to="/signup" target="_self" className="btn2">
                   {" "}
                   <MdSlowMotionVideo /> See in Action
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -286,6 +287,7 @@ export default function Nav() {
       </div>
       <div className="Glob-Sect">
         <div className="Glob">
+        <img src={img9} alt="" />
           <div className="innerGlob">
             <p className="appName">TeqTak App</p>
             <h1>Join the Worldwide Community of Entrepreneurs and Investors</h1>

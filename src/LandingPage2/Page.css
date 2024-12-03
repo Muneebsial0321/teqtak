@@ -556,17 +556,19 @@ li.active {
   color: #ffffff;
 }
 .Glob {
-  height: 100%;
-  width: 104%;
-  margin-top: -3%;
-  background: url(./Media/image\ 14.png);
+  margin-top: -6%;
   padding: 80px 0px;
-  background-size: cover;
+}
+.Glob img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .innerGlob {
   width: 80%;
   margin: auto;
+  position: relative;
 }
 .innerGlob h1 {
   width: 30%;
@@ -886,6 +888,331 @@ li.active {
   .Glob {
     width: 103%;
   }
+}
+@media (max-width: 600px) {
+  .data .firsth1 {
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0px;
+  }
+  .data .secondh1 {
+    font-weight: 300px;
+    font-size: 20px;
+    line-height: 20px;
+    margin-top: -14px;
+  }
+  .navdiv header nav ul li a {
+    padding: 0px 5px;
+  }
+  .navdiv header nav button {
+    font-size: 10px;
+    padding: 4px 11px;
+  }
+  .data p {
+    font-size: 8px;
+    margin-top: -10px;
+  }
+  .btns {
+    margin-top: -10px;
+  }
+  .btns .btn1 {
+    font-size: 8px;
+    padding: 0px 8px 0px 8px;
+  }
+  .btns .btn2 {
+    font-size: 8px;
+    padding: 0px 8px 0px 8px;
+  }
+  .mainnav .dataimg .img1 {
+    height: 0vh;
+    flex-basis: 0%;
+    margin-top: 0%;
+    display: none;
+  }
+  .mainnav .dataimg .img2 {
+    height: 50vh;
+    flex-basis: 100%;
+    margin-top: -0%;
+    margin-left: 0%;
+  }
+  .data p {
+    font-size: 8px;
+    margin-top: -10px;
+  }
+  .navdiv header nav ul li a {
+    padding: 0px 5px;
+    font-size: 10px;
+  }
+  .navdiv header nav {
+    justify-content: start;
+    margin-top: 15px;
+    gap: 6%;
+  }
+  .mainnav .dataimg {
+    height: 50vh;
+  }
+  .mainnav {
+    height: 47vh;
+  }
+  .power p {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .main2 img {
+    height: 150px;
+    width: 50%;
+    margin: -1% 23%;
+  }
+  .vision .vision-a h3 {
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 12px;
+    margin-top: 1%;
+  }
+  .vision .vision-a p {
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 12px;
+    margin-top: -2%;
+  }
+  .icon {
+    margin-top: -20%;
+  }
+  .contentpost p {
+    font-size: 6px;
+  }
+  .post img {
+    width: 40%;
+    height: 50%;
+  }
+  .post {
+    height: 44vh;
+    margin-top: 7px;
+  }
+  .innerGlob h1 {
+    width: 40%;
+    font-size: 9px;
+    font-weight: 100;
+    margin-top: 0px;
+  }
+  .appPara {
+    width: 50%;
+    margin-top: 6px;
+    line-height: 16px;
+    font-size: 8px;
+  }
+  .Counters {
+    width: 80%;
+    margin-top: 15px;
+  }
+  .Counters h4 {
+    font-size: 10px;
+    margin: 0px;
+    padding-left: 4px;
+  }
+  .counter p {
+    font-size: 8px;
+  }
+  .Glob {
+    margin-top: -6%;
+    padding: 55px 0px;
+  }
+  .Glob img {
+    position: absolute;
+    height: 55%;
+    width: 100%;
+    margin-top: -8%;
+  }
+  .Glob-Sect {
+    height: 50vh;
+  }
+  .btnslide2 {
+    height: 30px;
+    width: 30px;
+  }
+  .btnslide1 {
+    height: 30px;
+    width: 30px;
+  }
+  .slider-navigation {
+    width: 16%;
+  }
+  .swiper-slide {
+    padding: 2px;
+    margin-top: 4px;
+  }
+  .imgslide {
+    height: 20vh;
+    width: 100%;
+  }
+  .swiper-slide h3 {
+    font-size: 10px;
+    height: 4vh;
+  }
+  .swiper-slide p {
+    font-size: 8px;
+    font-weight: 400;
+    color: #adbdccd1;
+  }
+  .slider {
+    height: 60vh;
+    margin-top: 1%;
+    padding: 9px 0px;
+  }
+  .more .cont h1 {
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .more .cont p {
+    font-size: 10px;
+    line-height: 11px;
+  }
+  .morecont h1 {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 15px;
+    margin: 5px 0px;
+  }
+  .morecont p {
+    margin: 3px 0px;
+    font-size: 8px;
+  }
+  .moreimg {
+    height: 35vh;
+    gap: 5%;
+  }
+  .iconshere {
+    margin-top: -12px;
+  }
+  .iphone {
+    height: 15px;
+    width: 20px;
+    margin: 2px 0px 0px 0px;
+    padding: 0px;
+  }
+  .more {
+    height: 52vh;
+    width: 100%;
+  }
+  .post img {
+    width: 60%;
+    height: 114%;
+  }
+  .dot {
+    margin-top: -10px;
+  }
+  .contentpost li {
+    height: 1vh;
+    padding: 10px 18px;
+    margin: 0px 0px;
+    font-size: 7px;
+    border-radius: 6px;
+  }
+  .faqs .cont h1 {
+    font-size: 15px;
+  }
+  .faqs .cont p {
+    margin: 8px 0px;
+    line-height: 5px;
+    font-size: 8px;
+  }
+  .faq-sect {
+    padding: 2px;
+    width: 95%;
+    margin: auto;
+}
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 8px;
+  font-size: 13px;
+}
+.faq-question p {
+  font-size: 10px;
+}
+.faq-toggle-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: -12px;
+  font-size: 10px;
+}
+.faq-answer {
+  font-size: 8px;
+  margin-top: -10px;
+}
+.Download-Sect h1 {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 100;
+}
+.Download-Sect p {
+  color: #aec6ee;
+  text-align: center;
+  font-size: 9px;
+  width: 40%;
+}
+.Download-Sect div {
+  gap: 2px;
+  font-size: 10px;
+  padding: 3px 7px;
+  margin-top: 0px;
+  border-radius: 3px;
+}
+.Download-Sect {
+  width: 80%;
+  border-radius: 11px;
+  margin-top: 20px;
+  padding: 8px 0px;
+}
+.logo2 h1 {
+  font-size: 10px;
+}
+.logo p {
+  color: #e4e4e4;
+  font-size: 8px;
+}
+.logo button {
+  font-size: 8px;
+  border-radius: 50px;
+  padding: 1px 10px;
+}
+.logo h3{
+  font-size: 10px;
+  margin: 5px 0px;
+}
+.logo p{
+  font-size: 6px;
+  margin: 0px 0px;
+}
+.logo .p {
+  font-size: 6px;
+}
+.Footer-Inner .social {
+  gap: 5px;
+}
+.Footer-Sect {
+  padding: 0px 0px;
+  padding-top: 20px;
+  margin-top: 30px;
+}
+.hr {
+  border-bottom: 0.4px solid rgba(255, 255, 255, 0.203);
+  margin-top: 6px;
+}
+.Footer-Sect pre {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 7px;
+  color: #f4e9e9;
+}
+.Download-Sect button {
+  padding: 1px 13px;
+  background-color: #3b82f61a;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  font-size: 10px;
+  color: #3b82f6;
+}
 }
 
 @media (max-width: 426px) {
@@ -1301,7 +1628,7 @@ li.active {
   .slider {
     height: 35vh;
     padding: 10px 0px;
-}
+  }
   .Glob {
     height: 100%;
     padding: 22px 0px;
@@ -1469,10 +1796,10 @@ li.active {
   .imgslide {
     height: 7vh;
     width: 100%;
-}
-.slider-navigation {
-  width: 28%;
-}
+  }
+  .slider-navigation {
+    width: 28%;
+  }
   .vision .vision-a p {
     font-size: 5px;
     font-weight: 400;
