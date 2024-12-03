@@ -267,7 +267,7 @@ const id = loc.state.id
 
   return (
     <>
-    <button onClick={uploadFile}>CLICK me</button>
+    {/* <button onClick={uploadFile}>CLICK me</button> */}
       <div className="main h-full w-[100%] ">
         {isCameraOpen && (
           <CameraCapture closeCameraCapture={() => setIsCameraOpen(false)} />
