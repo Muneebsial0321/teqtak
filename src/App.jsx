@@ -1,4 +1,4 @@
-import  { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Signup from './Components/Signup/Signup.jsx';
 import Signin from './Components/Signin/Signin.jsx';
@@ -65,6 +65,8 @@ import ZoomSocket from './Pages/Messages/ZoomSocket.jsx';
 import Experimental_Video_Feed from './Pages/Feed/Experimental_Video_Feed.jsx';
 import BlockedMessage from './Components/Signin/BlockedMessage.jsx';
 
+import Nav from './LandingPage2/Nav.jsx';
+
 
 
 const App = () => {
@@ -72,89 +74,91 @@ const App = () => {
   return (
     <Fragment>
       <Routes>
-
+        {/* Landing Page */}
+        <Route path="/" element={<Nav />} />
 
 
         {/* Login and Signup Routes  public routes*/}
-        <Route path="/" element={<Header/>} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/bording" element={<OnBoarding/>} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path='/notfound' element={<NotFound /> } />
-         <Route path='/blocked' element={<BlockedMessage />}/>
-        {/* Routes with Layout private routes */}
-        <Route element={ <Layout />  }>
 
-        {/* ---------------------------------- */}
-{/* Experimental dont use it */}
-<Route path="/experimental123" element={<Experimental_Video_Feed/>} />
-{/* ---------------------------------- */}
-      
-        {/* <Route path='/search'element={<Search/>} /> */}
-          <Route path="/videos" element={<Feed /> } />
-          <Route path="/video/:src" element={<SingleVideo /> } />
-          <Route path="/profilevideos/:src" element={<ProfileVideos /> } />
-          <Route path='/watchhistory/:src' element={<WatchSingle />  } />
+
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/bording" element={<OnBoarding />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path='/notfound' element={<NotFound />} />
+        <Route path='/blocked' element={<BlockedMessage />} />
+        {/* Routes with Layout private routes */}
+        <Route element={<Layout />}>
+
+          {/* ---------------------------------- */}
+          {/* Experimental dont use it */}
+          <Route path="/experimental123" element={<Experimental_Video_Feed />} />
+          {/* ---------------------------------- */}
+
+          {/* <Route path='/search'element={<Search/>} /> */}
+          <Route path="/videos" element={<Feed />} />
+          <Route path="/video/:src" element={<SingleVideo />} />
+          <Route path="/profilevideos/:src" element={<ProfileVideos />} />
+          <Route path='/watchhistory/:src' element={<WatchSingle />} />
           {/* <Route path="/ProfileVideo/:src" element={<ProfileVideo />} /> */}
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-          <Route path="/profile" element={<ProfilePublic /> } />
-          <Route path="/userprofile" element={<UserProfile /> } />
-          <Route path="/personaldetails" element={<Personaldetail /> } />
-          <Route path="/personaldetail2" element={<Personaldetail2 /> } />
+          <Route path="/profile" element={<ProfilePublic />} />
+          <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/personaldetails" element={<Personaldetail />} />
+          <Route path="/personaldetail2" element={<Personaldetail2 />} />
           <Route path="/notifications" element={<Notifications />} />
 
-          <Route path="/messages/" element={<Messages /> }>
-            <Route path="user1" element={ <User1 /> } />
+          <Route path="/messages/" element={<Messages />}>
+            <Route path="user1" element={<User1 />} />
           </Route>
-          <Route path="/createmeeting" element={<Zoommeeting /> } />
-          <Route path="/map" element={<Map /> } />
-          <Route path="/subscribe" element={<Subscribe /> } />
-          <Route path="/settings" element={<Settings /> } />
-          <Route path="/podcast" element={<Podcast /> } />
-          <Route path="/podcastdetails/" element={<SinglePodcastDetails /> } />
-          <Route path="/mypodcasts/" element={<MyCreatedPodcast /> } />
-          <Route path="/events" element={<Event /> } />
-          <Route path="/eventdetail" element={<Eventdetail /> } />
-          <Route path='/participants' element={<Participants /> } />
-          <Route path="/ticket" element={<Ticket /> } />
-          <Route path="/createpodcast" element={<PodcastForm /> } />
-          <Route path="/createevent" element={<EventForm /> } />
-          <Route path="/ticketbuyer" element={<TicketBuyerInfo /> } />
-          <Route path="/ticketpayment" element={<TicketPayment /> } />
-          <Route path="/ticketdetails" element={<Ticketdetails /> } />
-          <Route path="/createjob" element={<JobCreationform /> } />
-          <Route path="/singlecategory" element={<SingleCategory /> } />
-          <Route path="/jobdetail" element={<JobDetail /> } />
-          <Route  path='/mycreatedjob' element={<MyCreatedJob /> }/>
-          <Route path="/jobapply" element={<JobApply /> } />
-          <Route path='/jobapplysuccess' element={<JobAppliedSuccess /> }/>
-          <Route path="/createVideo" element={ <CreateVideo /> } />
-          <Route path="/filters" element={<Filters /> } />
-          <Route path="/filterpodcast" element={<FilterPodcast /> } />
-          <Route path="/filterevent" element={ <FilterEvent /> } />
-          <Route path="/filterjob" element={<FilterJob /> } />
-          <Route path="/jobs" element={<Jobs /> } />
-    {/* Redirect to 404 Page if no matching route is found */}
-    <Route path="*" element={<PageNotFound /> } />
+          <Route path="/createmeeting" element={<Zoommeeting />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/subscribe" element={<Subscribe />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/podcast" element={<Podcast />} />
+          <Route path="/podcastdetails/" element={<SinglePodcastDetails />} />
+          <Route path="/mypodcasts/" element={<MyCreatedPodcast />} />
+          <Route path="/events" element={<Event />} />
+          <Route path="/eventdetail" element={<Eventdetail />} />
+          <Route path='/participants' element={<Participants />} />
+          <Route path="/ticket" element={<Ticket />} />
+          <Route path="/createpodcast" element={<PodcastForm />} />
+          <Route path="/createevent" element={<EventForm />} />
+          <Route path="/ticketbuyer" element={<TicketBuyerInfo />} />
+          <Route path="/ticketpayment" element={<TicketPayment />} />
+          <Route path="/ticketdetails" element={<Ticketdetails />} />
+          <Route path="/createjob" element={<JobCreationform />} />
+          <Route path="/singlecategory" element={<SingleCategory />} />
+          <Route path="/jobdetail" element={<JobDetail />} />
+          <Route path='/mycreatedjob' element={<MyCreatedJob />} />
+          <Route path="/jobapply" element={<JobApply />} />
+          <Route path='/jobapplysuccess' element={<JobAppliedSuccess />} />
+          <Route path="/createVideo" element={<CreateVideo />} />
+          <Route path="/filters" element={<Filters />} />
+          <Route path="/filterpodcast" element={<FilterPodcast />} />
+          <Route path="/filterevent" element={<FilterEvent />} />
+          <Route path="/filterjob" element={<FilterJob />} />
+          <Route path="/jobs" element={<Jobs />} />
+          {/* Redirect to 404 Page if no matching route is found */}
+          <Route path="*" element={<PageNotFound />} />
 
           {/* SETTINGS ROUTES private routes*/}
-          <Route path="/appliedjobs" element={<AppliedJobs /> } />
-          <Route path="/devicepermission" element={<DevicePermissions /> } />
-          <Route path="/mytickets" element={<MyTickets /> } />
-          <Route path="/watchhistory" element={<WatchHistory /> } />
-          <Route path="/paymentmethod" element={  <PaymentMethod /> } />
-          <Route path="/paymentform" element={  <PaymentForm /> } />
-          <Route path="/mycards" element={  <MyCards /> } />
-          <Route path="/contactaccess" element={ <Contactaccess />} />
-          <Route path="/changepassword" element={<Changepassword /> } />
-          <Route path="/blocklist" element={ <Blocklist /> } />
-          <Route path="/terms" element={ <Term /> } />
-          <Route path="/privacy" element={<Privacy /> } />
-          <Route path="/wishlist" element={ <WishList /> }/>
-          <Route path="/zoom" element={ <ZoomSocket/> }/>
+          <Route path="/appliedjobs" element={<AppliedJobs />} />
+          <Route path="/devicepermission" element={<DevicePermissions />} />
+          <Route path="/mytickets" element={<MyTickets />} />
+          <Route path="/watchhistory" element={<WatchHistory />} />
+          <Route path="/paymentmethod" element={<PaymentMethod />} />
+          <Route path="/paymentform" element={<PaymentForm />} />
+          <Route path="/mycards" element={<MyCards />} />
+          <Route path="/contactaccess" element={<Contactaccess />} />
+          <Route path="/changepassword" element={<Changepassword />} />
+          <Route path="/blocklist" element={<Blocklist />} />
+          <Route path="/terms" element={<Term />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/wishlist" element={<WishList />} />
+          <Route path="/zoom" element={<ZoomSocket />} />
         </Route>
 
-   
+
       </Routes>
 
 
